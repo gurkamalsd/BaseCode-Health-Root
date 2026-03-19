@@ -9,9 +9,56 @@
  */
 {
   "sections": {
-    "rich-text": { "type": "rich-text", "settings": { "heading": "The Science Behind BaseCode", "center": true } },
-    "research": { "type": "research-highlight", "settings": { "subtitle": "Key Studies", "heading": "Three studies. One conclusion.", "button_text": "Download the Free Report", "button_link": "/pages/free-report" }, "blocks": { "s1": { "type": "stat", "settings": { "stat": "01", "title": "HELIUS Study", "text": "2,084 people across 6 ethnic groups. Biology is the strongest predictor of gut microbiome composition.", "source": "Deschasaux et al., 2018 — The BMJ" } }, "s2": { "type": "stat", "settings": { "stat": "02", "title": "Vangay Study", "text": "Immigration causes ancestral microbiome depletion within a single generation.", "source": "Vangay et al., 2018 — Cell Host & Microbe" } }, "s3": { "type": "stat", "settings": { "stat": "03", "title": "Govender Study", "text": "Without acid-protection delivery, up to 96% of probiotic bacteria die before reaching the gut.", "source": "Govender et al., 2014 — Journal of Functional Foods" } } }, "block_order": ["s1", "s2", "s3"] }
+    "rich-text": {
+      "type": "rich-text",
+      "settings": {}
+    },
+    "research": {
+      "type": "research-highlight",
+      "blocks": {
+        "s1": {
+          "type": "stat",
+          "settings": {
+            "stat": "01",
+            "title": "HELIUS Study",
+            "text": "2,084 people across 6 ethnic groups. Biology is the strongest predictor of gut microbiome composition.",
+            "source": "Deschasaux et al., 2018 — The BMJ"
+          }
+        },
+        "s2": {
+          "type": "stat",
+          "settings": {
+            "stat": "02",
+            "title": "Vangay Study",
+            "text": "Immigration causes ancestral microbiome depletion within a single generation.",
+            "source": "Vangay et al., 2018 — Cell Host & Microbe"
+          }
+        },
+        "s3": {
+          "type": "stat",
+          "settings": {
+            "stat": "03",
+            "title": "Govender Study",
+            "text": "Without acid-protection delivery, up to 96% of probiotic bacteria die before reaching the gut.",
+            "source": "Govender et al., 2014 — Journal of Functional Foods"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "settings": {
+        "subtitle": "Key Studies",
+        "heading": "Three studies. One conclusion.",
+        "button_text": "Download the Free Report",
+        "button_link": "/pages/free-report"
+      }
+    }
   },
-  "order": ["rich-text", "research"]
+  "order": [
+    "rich-text",
+    "research"
+  ]
 }
-
