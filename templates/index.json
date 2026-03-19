@@ -10,7 +10,7 @@
 {                                                                                                                     
     "sections": {                                                                                                       
       "hero": {                                                                                                         
-        "type": "hero",                                                                                               
+        "type": "hero",                                                                                                 
         "settings": {                                                                                                   
           "heading": "Your biology is unique.",                                                                         
           "button_text": "Discover Now"                                                                                 
@@ -20,16 +20,58 @@
         "type": "trust-badges",                                                                                         
         "settings": {}                                                                                                  
       },                                                                                                                
+      "image-banner": {                                                                                                 
+        "type": "image-banner",                                                                                         
+        "settings": {                                                                                                   
+          "heading": "Your gut controls more than digestion."                                                           
+        }                                                                                                               
+      },                                                                                                                
+      "featured-product": {                                                                                             
+        "type": "featured-product",                                                                                     
+        "settings": {                                                                                                   
+          "button_text": "Shop Now"                                                                                     
+        }                                                                                                               
+      },                                                                                                              
+      "research": {                                                                                                     
+        "type": "research-highlight",                                                                                   
+        "settings": {                                                                                                   
+          "heading": "The science is clear."                                                                            
+        }                                                                                                               
+      },                                                                                                                
+      "mission": {                                                                                                      
+        "type": "mission",                                                                                              
+        "settings": {                                                                                                   
+          "heading": "Supplements informed by biological diversity research."                                           
+        }                                                                                                               
+      },                                                                                                                
+      "brand-story": {                                                                                                  
+        "type": "brand-story",                                                                                        
+        "settings": {                                                                                                   
+          "heading": "Built for Your Biology."
+        }                                                                                                               
+      },                                                                                                              
+      "testimonials": {                                                                                                 
+        "type": "testimonials",                                                                                         
+        "settings": {
+          "heading": "What our customers say"                                                                           
+        }                                                                                                               
+      },                                                                                                                
       "newsletter": {                                                                                                   
         "type": "newsletter",                                                                                           
-        "settings": {
+        "settings": {                                                                                                   
           "heading": "Stay in the loop"                                                                                 
         }                                                                                                               
-      }
+      }                                                                                                                 
     },                                                                                                                  
-    "order": [                                                                                                        
+    "order": [                                                                                                          
       "hero",
-      "trust-badges",
-      "newsletter"                                                                                                      
+      "trust-badges",                                                                                                   
+      "image-banner",                                                                                                   
+      "featured-product",                                                                                               
+      "research",                                                                                                       
+      "mission",                                                                                                        
+      "brand-story",                                                                                                    
+      "testimonials",                                                                                                   
+      "newsletter"
     ]                                                                                                                   
-  }
+  }  
