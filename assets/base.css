@@ -1454,8 +1454,11 @@ small { font-size: var(--text-sm); }
 .w-full { width: 100%; }
 
 /* --- Responsive Visibility --- */
-.hide-mobile { display: none; }
-@media (min-width: 768px) { .hide-mobile { display: block; } }
+.hide-mobile { display: none !important; }
+@media (min-width: 768px) {
+  .hide-mobile { display: block !important; }
+  .header__icon.hide-mobile { display: flex !important; }
+}
 @media (min-width: 768px) { .hide-desktop { display: none; } }
 
 /* --- Product Badges --- */

@@ -749,7 +749,7 @@
       // SVG ring
       var ring = resultsScreen.querySelector('[data-score-ring]');
       if (ring) {
-        var r = 72;
+        var r = parseFloat(ring.getAttribute('r')) || 80;
         var circ = 2 * Math.PI * r;
         setTimeout(function() {
           ring.style.strokeDashoffset = circ * (1 - totalScore / maxScore);
