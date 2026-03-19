@@ -10,68 +10,88 @@
 {                                                                                                                     
     "sections": {                                                                                                       
       "hero": {                                                                                                         
-        "type": "hero",                                                                                                 
+        "type": "hero",                                                                                               
         "settings": {                                                                                                   
-          "heading": "Your biology is unique.",                                                                         
-          "button_text": "Discover Now"                                                                                 
+          "bg_color": "#F5F2EC",                                                                                        
+          "show_social_proof": true,                                                                                    
+          "social_proof_text": "Backed by biological diversity research",                                               
+          "subtitle": "The Future of Supplements",                                                                      
+          "heading": "Your biology is unique.",                                                                       
+          "button_text": "Discover Now",                                                                                
+          "guarantee_text": "30-Day Money-Back Guarantee"                                                               
         }                                                                                                               
       },                                                                                                                
       "trust-badges": {                                                                                                 
         "type": "trust-badges",                                                                                         
-        "settings": {}                                                                                                  
-      },                                                                                                                
-      "image-banner": {                                                                                                 
-        "type": "image-banner",                                                                                         
         "settings": {                                                                                                   
-          "heading": "Your gut controls more than digestion."                                                           
+          "bg_color": "#F5F2EC"                                                                                         
+        }                                                                                                               
+      },                                                                                                                
+      "image-banner": {                                                                                               
+        "type": "image-banner",                                                                                         
+        "settings": {
+          "heading": "Your gut controls more than digestion.",                                                          
+          "height": 400                                                                                                 
         }                                                                                                               
       },                                                                                                                
       "featured-product": {                                                                                             
-        "type": "featured-product",                                                                                     
+        "type": "featured-product",                                                                                   
         "settings": {                                                                                                   
-          "button_text": "Shop Now"                                                                                     
+          "subtitle": "Biology-First Formula",
+          "button_text": "Shop Now",                                                                                    
+          "bg_color": "#C4783A",                                                                                        
+          "text_color": "#FFFFFF"                                                                                       
         }                                                                                                               
-      },                                                                                                              
+      },                                                                                                                
       "research": {                                                                                                     
-        "type": "research-highlight",                                                                                   
+        "type": "research-highlight",
         "settings": {                                                                                                   
-          "heading": "The science is clear."                                                                            
+          "subtitle": "The Research",                                                                                 
+          "heading": "The science is clear.",                                                                           
+          "button_text": "Read the Science"                                                                             
         }                                                                                                               
       },                                                                                                                
       "mission": {                                                                                                      
         "type": "mission",                                                                                              
         "settings": {                                                                                                   
-          "heading": "Supplements informed by biological diversity research."                                           
+          "subtitle": "Our Mission",                                                                                    
+          "heading": "Supplements informed by biological diversity research.",                                          
+          "button_text": "Read More"                                                                                    
         }                                                                                                               
       },                                                                                                                
       "brand-story": {                                                                                                  
-        "type": "brand-story",                                                                                        
+        "type": "brand-story",
         "settings": {                                                                                                   
-          "heading": "Built for Your Biology."
+          "heading": "Built for Your Biology.",                                                                         
+          "button_text": "About Us",                                                                                    
+          "bg_color": "#F5F2EC"                                                                                         
         }                                                                                                               
-      },                                                                                                              
-      "testimonials": {                                                                                                 
+      },                                                                                                                
+      "testimonials": {                                                                                               
         "type": "testimonials",                                                                                         
-        "settings": {
+        "settings": {                                                                                                 
           "heading": "What our customers say"                                                                           
         }                                                                                                               
       },                                                                                                                
       "newsletter": {                                                                                                   
         "type": "newsletter",                                                                                           
         "settings": {                                                                                                   
-          "heading": "Stay in the loop"                                                                                 
+          "heading": "Stay in the loop",                                                                                
+          "button_text": "Subscribe",                                                                                   
+          "bg_color": "#1C2E23",
+          "text_color": "#F5F2EC"                                                                                       
         }                                                                                                               
       }                                                                                                                 
     },                                                                                                                  
     "order": [                                                                                                          
-      "hero",
+      "hero",                                                                                                         
       "trust-badges",                                                                                                   
-      "image-banner",                                                                                                   
+      "image-banner",
       "featured-product",                                                                                               
       "research",                                                                                                       
       "mission",                                                                                                        
       "brand-story",                                                                                                    
-      "testimonials",                                                                                                   
-      "newsletter"
+      "testimonials",                                                                                                 
+      "newsletter"                                                                                                      
     ]                                                                                                                   
-  }  
+  }
