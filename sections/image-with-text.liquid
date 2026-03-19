@@ -235,7 +235,8 @@
                     data-countdown="{{ block.settings.end_date }}"
                     style="display: flex; gap: var(--space-3, 0.75rem); {% if section.settings.text_align == 'center' %}justify-content: center;{% endif %}"
                   >
-                    {%- for unit in 'days,hours,mins,secs' | split: ',' -%}
+                    {%- assign countdown_units = 'days,hours,mins,secs' | split: ',' -%}
+                    {%- for unit in countdown_units -%}
                       <div style="text-align: center; min-width: 56px;">
                         <div
                           class="countdown-timer__value countdown-timer__{{ unit }}"

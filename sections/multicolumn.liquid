@@ -94,13 +94,13 @@
         {%- assign desktop_img = block.settings.desktop_image -%}
         {%- assign mobile_img = block.settings.mobile_image | default: desktop_img -%}
 
-        {%- comment -%} Heading scale for columns -%}
+        {%- comment -%}Heading scale for columns{%- endcomment -%}
         {%- case block.settings.heading_scale -%}
           {%- when 'small' -%}{%- assign col_h_fs = 'var(--text-base, 1rem)' -%}
           {%- when 'large' -%}{%- assign col_h_fs = 'var(--text-2xl, 1.5rem)' -%}
           {%- else -%}{%- assign col_h_fs = 'var(--text-xl, 1.25rem)' -%}
         {%- endcase -%}
-        {%- comment -%} Image ratio CSS -%}
+        {%- comment -%}Image ratio CSS{%- endcomment -%}
         {%- case section.settings.image_ratio -%}
           {%- when 'portrait' -%}{%- assign img_ratio = '3/4' -%}
           {%- when 'square' -%}{%- assign img_ratio = '1/1' -%}

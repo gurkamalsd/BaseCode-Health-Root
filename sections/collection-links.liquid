@@ -4,8 +4,10 @@
   assign pt          = section.settings.padding_top   | default: 60
   assign pb          = section.settings.padding_bottom | default: 60
   assign enable_anim = section.settings.enable_animation
-  assign text_scale  = section.settings.text_scale  | default: 2.0
-  assign line_h      = section.settings.line_height  | default: 1.4
+  assign text_scale_raw = section.settings.text_scale | default: 20
+  assign text_scale = text_scale_raw | divided_by: 10.0
+  assign line_h_raw  = section.settings.line_height | default: 14
+  assign line_h    = line_h_raw | divided_by: 10.0
   assign heading_lv  = section.settings.heading_level | default: 'h2'
 -%}
 
@@ -336,20 +338,21 @@
       "type": "range",
       "id": "text_scale",
       "label": "Text scale multiplier",
-      "min": 1.0,
-      "max": 3.0,
-      "step": 0.25,
-      "default": 2.0,
-      "info": "Multiplies base 1rem — e.g. 2.0 = 2rem (32px)"
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "default": 20,
+      "info": "Divide by 10 for actual multiplier — e.g. 20 = 2.0rem (32px)"
     },
     {
       "type": "range",
       "id": "line_height",
       "label": "Line height",
-      "min": 1.0,
-      "max": 2.0,
-      "step": 0.1,
-      "default": 1.4
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "default": 14,
+      "info": "Divide by 10 for actual value — e.g. 14 = 1.4"
     },
     {
       "type": "header",
@@ -448,8 +451,8 @@
         "heading": "Shop by Category",
         "heading_level": "h2",
         "heading_size": "h2",
-        "text_scale": 2.0,
-        "line_height": 1.4,
+        "text_scale": 20,
+        "line_height": 14,
         "bg_color": "#F5F2EC",
         "text_color": "#1C2E23",
         "padding_top": 60,

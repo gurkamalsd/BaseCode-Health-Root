@@ -194,7 +194,8 @@
             flex-wrap: nowrap;
           "
         >
-          {%- for unit_item in 'days,hours,mins,secs' | split: ',' -%}
+          {%- assign countdown_units = 'days,hours,mins,secs' | split: ',' -%}
+          {%- for unit_item in countdown_units -%}
             {%- assign unit_label = unit_item -%}
             <div
               class="countdown-banner__unit"

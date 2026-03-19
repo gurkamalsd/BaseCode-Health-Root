@@ -4,7 +4,7 @@
   assign pt           = section.settings.padding_top   | default: 80
   assign pb           = section.settings.padding_bottom | default: 80
   assign enable_anim  = section.settings.enable_animation
-  assign speed        = section.settings.parallax_speed | default: 0.3
+  assign speed        = section.settings.parallax_speed | default: 3 | divided_by: 10.0
   assign rot1         = section.settings.rotation_1 | default: 5
   assign rot2         = section.settings.rotation_2 | default: -5
   assign text_align   = section.settings.text_align | default: 'center'
@@ -366,11 +366,11 @@
       "type": "range",
       "id": "parallax_speed",
       "label": "Parallax speed",
-      "min": 0.1,
-      "max": 0.5,
-      "step": 0.05,
-      "default": 0.3,
-      "info": "Higher = more movement on scroll"
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 3,
+      "info": "1 = subtle, 5 = dramatic. Divided by 10 internally."
     },
     {
       "type": "range",
@@ -513,7 +513,7 @@
         "text_align": "center",
         "rotation_1": 5,
         "rotation_2": -5,
-        "parallax_speed": 0.3,
+        "parallax_speed": 3,
         "bg_color": "#1C2E23",
         "text_color": "#F5F2EC",
         "padding_top": 80,

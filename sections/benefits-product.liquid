@@ -223,7 +223,7 @@
             style="margin-top: var(--space-6, 1.5rem); text-align: center;"
           >
             {%- if section.settings.quick_buy and product != blank -%}
-              {%- comment -%} Quick buy form — posts directly to cart -%}
+              {%- comment -%}Quick buy form — posts directly to cart{%- endcomment -%}
               {%- assign first_variant = product.selected_or_first_available_variant -%}
               <form action="/cart/add" method="post">
                 <input type="hidden" name="id" value="{{ first_variant.id }}">
