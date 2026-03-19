@@ -14,111 +14,24 @@
         "guarantee_text": "30-Day Money-Back Guarantee"
       }
     },
-    "product-carousel": {
-      "type": "product-carousel",
-      "settings": {
-        "heading": "Supplements built for your biology",
-        "limit": 8
-      }
-    },
     "trust-badges": {
       "type": "trust-badges",
       "settings": {
         "bg_color": "#F5F2EC"
       },
       "blocks": {
-        "badge-1": { "type": "badge", "settings": { "icon": "leaf", "title": "Vegan", "text": "HPMC veggie capsules. No gelatin, no animal products." } },
-        "badge-2": { "type": "badge", "settings": { "icon": "award", "title": "cGMP Certified", "text": "Manufactured in a cGMP-certified facility." } },
-        "badge-3": { "type": "badge", "settings": { "icon": "zap", "title": "MAKTREK Delivery", "text": "Acid-protection ensures bacteria arrive alive." } },
-        "badge-4": { "type": "badge", "settings": { "icon": "check-circle", "title": "Third-Party Tested", "text": "Every batch independently verified." } },
-        "badge-5": { "type": "badge", "settings": { "icon": "shield", "title": "No Gelatin", "text": "White HPMC capsules. Clean formula." } },
-        "badge-6": { "type": "badge", "settings": { "icon": "heart", "title": "Made in USA", "text": "Manufactured in a US-based cGMP facility." } }
+        "badge-1": { "type": "badge", "settings": { "icon": "leaf", "title": "Vegan", "text": "HPMC veggie capsules. No gelatin." } },
+        "badge-2": { "type": "badge", "settings": { "icon": "award", "title": "cGMP Certified", "text": "cGMP-certified facility." } },
+        "badge-3": { "type": "badge", "settings": { "icon": "zap", "title": "MAKTREK Delivery", "text": "Acid-protection delivery." } },
+        "badge-4": { "type": "badge", "settings": { "icon": "check-circle", "title": "Third-Party Tested", "text": "Independently verified." } }
       },
-      "block_order": ["badge-1", "badge-2", "badge-3", "badge-4", "badge-5", "badge-6"]
-    },
-    "image-banner": {
-      "type": "image-banner",
-      "settings": {
-        "heading": "Your gut controls more than digestion.",
-        "height": 400
-      }
-    },
-    "featured-product": {
-      "type": "featured-product",
-      "settings": {
-        "subtitle": "Biology-First Formula",
-        "heading": "Origin — The First Ethnobiotic",
-        "text": "40 billion CFU. 4 targeted strains. MAKTREK Bi-Pass delivery. FOS prebiotic. From $34/mo.",
-        "button_text": "Shop Now",
-        "button_link": "/products/origin",
-        "bg_color": "#C4783A",
-        "text_color": "#FFFFFF"
-      }
-    },
-    "research": {
-      "type": "research-highlight",
-      "settings": {
-        "subtitle": "The Research",
-        "heading": "The science is clear.",
-        "button_text": "Read the Science",
-        "button_link": "/pages/science"
-      },
-      "blocks": {
-        "stat-1": { "type": "stat", "settings": { "stat": "01", "title": "HELIUS Study: 2,084 subjects, 6 ethnic groups", "text": "Biology — not diet, age, or lifestyle — is the strongest predictor of gut microbiome composition.", "source": "Deschasaux et al., 2018 — The BMJ" } },
-        "stat-2": { "type": "stat", "settings": { "stat": "02", "title": "Microbiome shifts within one generation", "text": "Immigration and environmental changes cause ancestral microbiome depletion — replacing diverse bacteria with Western strains.", "source": "Vangay et al., 2018 — Cell Host & Microbe" } },
-        "stat-3": { "type": "stat", "settings": { "stat": "03", "title": "Most probiotics don't survive stomach acid", "text": "Without acid-protection delivery, up to 96% of probiotic bacteria die before reaching the gut. MAKTREK Bi-Pass solves this.", "source": "Govender et al., 2014 — Journal of Functional Foods" } }
-      },
-      "block_order": ["stat-1", "stat-2", "stat-3"]
-    },
-    "mission": {
-      "type": "mission",
-      "settings": {
-        "subtitle": "Our Mission",
-        "heading": "Supplements informed by biological diversity research.",
-        "button_text": "Read More",
-        "button_link": "/pages/science"
-      },
-      "blocks": {
-        "item-1": { "type": "item", "settings": { "text": "Informed by the HELIUS study (2,084 subjects, 6 ethnic groups)." } },
-        "item-2": { "type": "item", "settings": { "text": "Strains selected for biological diversity, not generic formulas." } },
-        "item-3": { "type": "item", "settings": { "text": "MAKTREK acid-protection ensures bacteria arrive alive." } }
-      },
-      "block_order": ["item-1", "item-2", "item-3"]
-    },
-    "brand-story": {
-      "type": "brand-story",
-      "settings": {
-        "heading": "Your biology is unique. Your supplements should be too.",
-        "text": "At BaseCode Health, we build supplements informed by biological diversity research. The supplement industry ignores the fact that biology differs from person to person. We do not. Origin is our first product and it will not be the last.",
-        "button_text": "About Us",
-        "button_link": "/pages/about",
-        "bg_color": "#F5F2EC"
-      }
-    },
-    "blog-posts": {
-      "type": "blog-posts",
-      "settings": {
-        "heading": "From the Lab",
-        "limit": 3,
-        "show_view_all": true
-      }
-    },
-    "testimonials": {
-      "type": "testimonials",
-      "settings": {
-        "heading": "What our customers say"
-      },
-      "blocks": {
-        "review-1": { "type": "testimonial", "settings": { "quote": "Finally, a supplement that considers my biology. I noticed a difference within the first week.", "author": "Priya S." } },
-        "review-2": { "type": "testimonial", "settings": { "quote": "I've tried every probiotic out there. Origin is the first one that actually works for my body.", "author": "Marcus T." } }
-      },
-      "block_order": ["review-1", "review-2"]
+      "block_order": ["badge-1", "badge-2", "badge-3", "badge-4"]
     },
     "newsletter": {
       "type": "newsletter",
       "settings": {
         "heading": "Stay in the loop",
-        "text": "Get research updates, product launches, and biology tips. No spam.",
+        "text": "Get research updates, product launches, and biology tips.",
         "button_text": "Subscribe",
         "bg_color": "#1C2E23",
         "text_color": "#F5F2EC"
@@ -127,15 +40,7 @@
   },
   "order": [
     "hero",
-    "product-carousel",
     "trust-badges",
-    "image-banner",
-    "featured-product",
-    "research",
-    "mission",
-    "brand-story",
-    "blog-posts",
-    "testimonials",
     "newsletter"
   ]
 }
