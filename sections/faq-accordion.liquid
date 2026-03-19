@@ -36,7 +36,7 @@
               <svg class="faq-item__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{% if accent != blank %}{{ accent }}{% else %}currentColor{% endif %}" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
             {%- endif -%}
           </button>
-          <div class="faq-item__answer" data-faq-content{% if open_first and forloop.first %} style="display:block;"{% endif %}>
+          <div class="faq-item__answer{% if open_first and forloop.first %} is-open{% endif %}" data-faq-content>
             {{ block.settings.answer }}
           </div>
         </div>
