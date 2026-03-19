@@ -1,46 +1,9 @@
 {
   "sections": {
-    "hero": {
-      "type": "hero",
-      "settings": {
-        "bg_color": "#F5F2EC",
-        "show_social_proof": true,
-        "social_proof_text": "Backed by biological diversity research",
-        "subtitle": "The Future of Supplements",
-        "heading": "Your biology is unique. Your supplements should be too.",
-        "text": "Origin is the first probiotic informed by biological diversity research. 40 billion CFU. 4 targeted strains. MAKTREK delivery.",
-        "button_text": "Discover Now",
-        "button_link": "/products/origin",
-        "guarantee_text": "30-Day Money-Back Guarantee"
-      }
-    },
-    "trust-badges": {
-      "type": "trust-badges",
-      "settings": {
-        "bg_color": "#F5F2EC"
-      },
-      "blocks": {
-        "badge-1": { "type": "badge", "settings": { "icon": "leaf", "title": "Vegan", "text": "HPMC veggie capsules. No gelatin." } },
-        "badge-2": { "type": "badge", "settings": { "icon": "award", "title": "cGMP Certified", "text": "cGMP-certified facility." } },
-        "badge-3": { "type": "badge", "settings": { "icon": "zap", "title": "MAKTREK Delivery", "text": "Acid-protection delivery." } },
-        "badge-4": { "type": "badge", "settings": { "icon": "check-circle", "title": "Third-Party Tested", "text": "Independently verified." } }
-      },
-      "block_order": ["badge-1", "badge-2", "badge-3", "badge-4"]
-    },
-    "newsletter": {
-      "type": "newsletter",
-      "settings": {
-        "heading": "Stay in the loop",
-        "text": "Get research updates, product launches, and biology tips.",
-        "button_text": "Subscribe",
-        "bg_color": "#1C2E23",
-        "text_color": "#F5F2EC"
-      }
+    "test": {
+      "type": "homepage-test",
+      "settings": {}
     }
   },
-  "order": [
-    "hero",
-    "trust-badges",
-    "newsletter"
-  ]
+  "order": ["test"]
 }
