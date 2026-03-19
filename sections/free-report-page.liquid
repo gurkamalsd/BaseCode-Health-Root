@@ -179,6 +179,7 @@
 <!-- ────────────────────────────────────────────────────────────
      WHAT'S INSIDE SECTION
      ──────────────────────────────────────────────────────────── -->
+{%- if card_blocks.size > 0 -%}
 <section style="background: {{ light_color }}; padding: 80px 24px;">
   <div style="max-width: 900px; margin: 0 auto;">
 
@@ -213,10 +214,12 @@
 
   </div>
 </section>
+{%- endif -%}
 
 <!-- ────────────────────────────────────────────────────────────
      PULL QUOTE SECTION
      ──────────────────────────────────────────────────────────── -->
+{%- if section.settings.quote_text != blank -%}
 <section style="background: {{ primary_color }}; padding: 72px 24px;">
   <div style="max-width: 760px; margin: 0 auto; text-align: center;">
     <p class="font-display italic reveal-hidden" style="font-size: clamp(20px, 3vw, 28px); color: {{ light_color }}; line-height: 1.5;">
@@ -227,6 +230,7 @@
     </p>
   </div>
 </section>
+{%- endif -%}
 
 <!-- ────────────────────────────────────────────────────────────
      CITATION STRIP
@@ -263,6 +267,7 @@
 <!-- ────────────────────────────────────────────────────────────
      FOUNDER NOTE
      ──────────────────────────────────────────────────────────── -->
+{%- if section.settings.founder_heading != blank -%}
 <section style="background: {{ light_color }}; padding: 80px 24px;">
   <div class="fr-founder-grid" style="max-width: 1040px; margin: 0 auto;">
 
@@ -300,10 +305,12 @@
 
   </div>
 </section>
+{%- endif -%}
 
 <!-- ────────────────────────────────────────────────────────────
      BOTTOM CTA
      ──────────────────────────────────────────────────────────── -->
+{%- if section.settings.bottom_heading != blank -%}
 <section id="fr-bottom-form" style="background: {{ card_bg_color }}; padding: 64px 24px 80px;">
   <div style="max-width: 680px; margin: 0 auto; text-align: center;">
 
@@ -432,6 +439,7 @@
 
   </div>
 </section>
+{%- endif -%}
 
 </div><!-- end padding wrapper -->
 
