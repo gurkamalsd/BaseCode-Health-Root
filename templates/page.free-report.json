@@ -11,9 +11,30 @@
   "sections": {
     "free-report": {
       "type": "free-report-page",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "hb1": { "type": "hero_bullet", "settings": { "text": "Free research report delivered instantly" } },
+        "hb2": { "type": "hero_bullet", "settings": { "text": "Free report included with every Origin order" } },
+        "hb3": { "type": "hero_bullet", "settings": { "text": "Origin available now — free report included with purchase" } },
+        "st1": { "type": "stat", "settings": { "number": "2084", "label": "HELIUS Subjects" } },
+        "st2": { "type": "stat", "settings": { "number": "6", "label": "Ethnic Groups Studied" } },
+        "st3": { "type": "stat", "settings": { "number": "40", "suffix": "B", "label": "Live CFU Delivered" } },
+        "st4": { "type": "stat", "settings": { "number": "4", "label": "Targeted Strains" } },
+        "cd1": { "type": "card", "settings": { "number": "01", "title": "The Depletion Problem", "text": "The HELIUS study (n=2,084) found ethnicity determines microbiome composition more than diet, age, sex, or medical history — combined. What that means for your biology." } },
+        "cd2": { "type": "card", "settings": { "number": "02", "title": "The Biology Gap", "text": "What happens to your microbiome when traditional diets change — and why depletion compounds across generations rather than stabilising." } },
+        "cd3": { "type": "card", "settings": { "number": "03", "title": "The Delivery Problem", "text": "Most probiotic bacteria are destroyed by stomach acid before reaching where they work. Why the number on the bottle is measured at manufacture — not at delivery." } },
+        "cd4": { "type": "card", "settings": { "number": "04", "title": "The Origin Solution", "text": "Why biological diversity matters for supplementation, and how Origin uses MAKTREK Bi-Pass Technology + FOS prebiotic to solve both the depletion and the delivery problem." } },
+        "cd5": { "type": "card", "settings": { "number": "05", "title": "The Four Strains", "text": "L. acidophilus, B. lactis, L. plantarum, L. paracasei — why these four strains were selected to address the specific systems that depletion hits hardest." } },
+        "ci1": { "type": "citation", "settings": { "journal": "Nature Medicine, 2018", "description": "HELIUS cohort — ethnicity vs. microbiome composition (n=2,084)", "url": "https://doi.org/10.1038/s41591-018-0160-1" } },
+        "ci2": { "type": "citation", "settings": { "journal": "Cell, 2018", "description": "Vangay et al. — immigration-driven microbiome depletion across generations", "url": "https://doi.org/10.1016/j.cell.2018.10.029" } },
+        "ci3": { "type": "citation", "settings": { "journal": "AAPS PharmSciTech, 2014", "description": "Govender et al. — Probiotic survivability and acid-protected delivery", "url": "https://doi.org/10.1208/s12249-013-0027-1" } },
+        "vb1": { "type": "value_bullet", "settings": { "text": "Six-page research report delivered instantly" } },
+        "vb2": { "type": "value_bullet", "settings": { "text": "Peer-reviewed citations from Nature Medicine, Cell, and Gut" } },
+        "vb3": { "type": "value_bullet", "settings": { "text": "Exclusive subscriber pricing on future products" } },
+        "vb4": { "type": "value_bullet", "settings": { "text": "Free report included with every Origin order" } }
+      },
+      "block_order": ["hb1", "hb2", "hb3", "st1", "st2", "st3", "st4", "cd1", "cd2", "cd3", "cd4", "cd5", "ci1", "ci2", "ci3", "vb1", "vb2", "vb3", "vb4"]
     }
   },
   "order": ["free-report"]
 }
-
