@@ -7,7 +7,7 @@
         "show_social_proof": true,
         "social_proof_text": "Backed by biological diversity research",
         "subtitle": "The Future of Supplements",
-        "heading": "Your biology isn't one-size-fits-all.",
+        "heading": "Your biology is unique. Your supplements should be too.",
         "text": "Origin is the first probiotic informed by biological diversity research. 40 billion CFU. 4 targeted strains. MAKTREK delivery.",
         "button_text": "Discover Now",
         "button_link": "/products/origin",
@@ -88,8 +88,8 @@
     "brand-story": {
       "type": "brand-story",
       "settings": {
-        "heading": "Your biology isn't one-size-fits-all.",
-        "text": "At BaseCode Health, we build supplements informed by biological diversity research. The supplement industry ignores the fact that everyone's biology is different. We don't. Origin is our first product — and it won't be the last.",
+        "heading": "Your biology is unique. Your supplements should be too.",
+        "text": "At BaseCode Health, we build supplements informed by biological diversity research. The supplement industry ignores the fact that biology differs from person to person. We do not. Origin is our first product and it will not be the last.",
         "button_text": "About Us",
         "button_link": "/pages/about",
         "bg_color": "#F5F2EC"
