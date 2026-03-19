@@ -1537,6 +1537,125 @@ small { font-size: var(--text-sm); }
 /* --- Payment icon styling --- */
 .payment-icon { height: 28px; width: auto; }
 
+/* --- Animation classes used by new sections --- */
+.animate-fade {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.animate-fade.is-visible,
+.animate-fade.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger animation for grid children */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.stagger-children.in-view > *,
+.stagger-children.is-visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+.stagger-children > *:nth-child(1) { transition-delay: 0.05s; }
+.stagger-children > *:nth-child(2) { transition-delay: 0.1s; }
+.stagger-children > *:nth-child(3) { transition-delay: 0.15s; }
+.stagger-children > *:nth-child(4) { transition-delay: 0.2s; }
+.stagger-children > *:nth-child(5) { transition-delay: 0.25s; }
+.stagger-children > *:nth-child(6) { transition-delay: 0.3s; }
+
+/* --- Container full width --- */
+.container--full {
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* --- Reduced motion: show all content immediately --- */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-hidden, .reveal-left, .reveal-right, .animate-fade, .stagger-children > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* --- Smooth section color transitions --- */
+section + section {
+  position: relative;
+}
+
+/* --- Better button focus states --- */
+.btn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* --- Better form focus --- */
+.form-input:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+  border-color: var(--color-accent);
+}
+
+/* --- Image placeholder styling --- */
+.image-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-cream);
+  color: var(--color-text-light);
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  min-height: 200px;
+  border-radius: var(--radius-lg);
+}
+
+/* --- Sticky ATC bar --- */
+.sticky-atc {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-sticky);
+}
+
+@media (min-width: 768px) {
+  .sticky-atc { display: none !important; }
+}
+
+/* --- Quick add modal overlay --- */
+.quick-add-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: var(--z-modal);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0s 0.2s;
+}
+.quick-add-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.2s, visibility 0s;
+}
+
+/* --- Countdown timer boxes --- */
+.countdown-timer__value {
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
+/* --- FAQ borderless style --- */
+.faq-item--borderless {
+  border-bottom: none;
+}
+
 /* --- Print --- */
 @media print {
   .header, .footer, .announcement-bar, .cart-drawer, .mobile-menu { display: none; }

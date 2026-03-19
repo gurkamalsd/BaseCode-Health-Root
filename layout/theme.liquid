@@ -195,6 +195,15 @@
     </script>
 
     {{ content_for_header }}
+
+    <noscript>
+      <style>
+        .reveal-hidden, .reveal-left, .reveal-right, .animate-fade, .stagger-children > * {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      </style>
+    </noscript>
   </head>
 
   <body class="template-{{ template | replace: '.', '-' }}" data-template="{{ template }}">
