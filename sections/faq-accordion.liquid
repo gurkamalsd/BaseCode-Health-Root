@@ -1,0 +1,67 @@
+<section class="section bg-white">
+  <div class="container container--narrow">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="text-center mb-10">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <div>
+      {%- for block in section.blocks -%}
+        <div class="faq-item" {{ block.shopify_attributes }}>
+          <button class="faq-item__question" aria-expanded="false" data-faq-toggle>
+            <span>{{ block.settings.question }}</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          </button>
+          <div class="faq-item__answer" data-faq-content>
+            {{ block.settings.answer }}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FAQ Accordion",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Frequently Asked Questions"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What is Origin?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Origin is the first ethnobiotic — a probiotic informed by biological diversity research. It contains 40 billion CFU across 4 targeted strains with MAKTREK Bi-Pass delivery and FOS prebiotic.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Accordion",
+      "blocks": [
+        { "type": "question", "settings": { "question": "What is Origin?", "answer": "<p>Origin is the first ethnobiotic — a probiotic informed by biological diversity research. 40 billion CFU, 4 targeted strains, MAKTREK Bi-Pass delivery, FOS prebiotic. 60 veggie capsules per bottle.</p>" } },
+        { "type": "question", "settings": { "question": "How is Origin different from other probiotics?", "answer": "<p>Most probiotics use generic strains selected for an average person. Origin's strains are selected based on biological diversity research — specifically the HELIUS study (2,084 subjects, 6 ethnic groups). Plus MAKTREK acid-protection ensures bacteria actually arrive alive.</p>" } },
+        { "type": "question", "settings": { "question": "How do I take Origin?", "answer": "<p>Take 2 capsules daily with water. Morning or evening, with or without food. Each bottle is a 30-day supply.</p>" } },
+        { "type": "question", "settings": { "question": "Is Origin vegan?", "answer": "<p>Yes. Origin uses HPMC (hypromellose) veggie capsules. No gelatin, no animal products.</p>" } },
+        { "type": "question", "settings": { "question": "What's your return policy?", "answer": "<p>30-day money-back guarantee. If Origin doesn't work for you, email hello@basecodehealth.com for a full refund. No questions asked.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

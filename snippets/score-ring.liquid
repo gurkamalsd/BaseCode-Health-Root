@@ -1,0 +1,41 @@
+{%- comment -%}
+  SVG Score Ring — used in quiz results and hero teaser.
+  Usage: {% render 'score-ring', score: 79, max_score: 100, color: '#C4783A', size: 180 %}
+{%- endcomment -%}
+
+{%- assign ring_size = size | default: 180 -%}
+{%- assign ring_center = ring_size | divided_by: 2 -%}
+{%- assign ring_r = ring_center | minus: 18 -%}
+
+<div class="relative inline-flex items-center justify-center">
+  <svg width="{{ ring_size }}" height="{{ ring_size }}" viewBox="0 0 {{ ring_size }} {{ ring_size }}">
+    <circle
+      cx="{{ ring_center }}"
+      cy="{{ ring_center }}"
+      r="{{ ring_r }}"
+      fill="none"
+      stroke="rgba(0,0,0,0.06)"
+      stroke-width="10"
+    />
+    <circle
+      data-score-ring
+      cx="{{ ring_center }}"
+      cy="{{ ring_center }}"
+      r="{{ ring_r }}"
+      fill="none"
+      stroke="{{ color | default: '#C4783A' }}"
+      stroke-width="10"
+      stroke-linecap="round"
+      transform="rotate(-90 {{ ring_center }} {{ ring_center }})"
+      style="transition: stroke-dashoffset 1.2s ease-out;"
+    />
+  </svg>
+  <div class="absolute inset-0 flex flex-col items-center justify-center">
+    <span data-result-score class="font-heading text-40 font-medium" style="color: #1C2E23; line-height: 1;">
+      {{ score | default: 0 }}
+    </span>
+    <span data-result-max class="font-mono-spec text-11 mt-0" style="color: #8A9490; letter-spacing: 0.1em;">
+      / {{ max_score | default: 100 }}
+    </span>
+  </div>
+</div>

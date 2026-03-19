@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "quiz": {
+      "type": "quiz-page",
+      "settings": {}
+    }
+  },
+  "order": ["quiz"]
+}

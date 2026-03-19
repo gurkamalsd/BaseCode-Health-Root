@@ -1,0 +1,33 @@
+<section class="section bg-white">
+  <div class="container container--narrow">
+    <h1 class="text-center mb-8">{{ 'general.search' | t }}</h1>
+    <form action="/search" method="get" style="max-width: 500px; margin: 0 auto var(--space-10);">
+      <div class="flex gap-3">
+        <input type="search" name="q" value="{{ search.terms }}" class="form-input" placeholder="Search..." autofocus>
+        <button type="submit" class="btn btn--primary">{{ 'general.search' | t }}</button>
+      </div>
+    </form>
+    {%- if search.performed -%}
+      {%- if search.results.size > 0 -%}
+        <div class="collection-grid">
+          {%- for result in search.results -%}
+            {%- if result.object_type == 'product' -%}
+              {% render 'product-card', product: result, show_atc: false %}
+            {%- else -%}
+              <div class="card" style="padding: var(--space-6);">
+                <h3 style="font-size: var(--text-lg); margin-bottom: var(--space-2);"><a href="{{ result.url }}">{{ result.title }}</a></h3>
+                <p style="font-size: var(--text-sm); color: var(--color-text-light);">{{ result.content | strip_html | truncate: 160 }}</p>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- else -%}
+        <p class="text-center" style="color: var(--color-text-light);">{{ 'general.no_results' | t }} "{{ search.terms }}"</p>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Search Page", "settings": [] }
+{% endschema %}

@@ -1,0 +1,52 @@
+{
+  "sections": {
+    "main-product": {
+      "type": "main-product",
+      "settings": {}
+    },
+    "trust-badges": {
+      "type": "trust-badges",
+      "settings": { "bg_color": "#FFFFFF" },
+      "blocks": {
+        "badge-1": { "type": "badge", "settings": { "icon": "leaf", "title": "Vegan", "text": "HPMC veggie capsules." } },
+        "badge-2": { "type": "badge", "settings": { "icon": "award", "title": "cGMP Certified", "text": "cGMP-certified facility." } },
+        "badge-3": { "type": "badge", "settings": { "icon": "zap", "title": "MAKTREK Delivery", "text": "Acid-protection technology." } },
+        "badge-4": { "type": "badge", "settings": { "icon": "check-circle", "title": "Third-Party Tested", "text": "Independently verified." } }
+      },
+      "block_order": ["badge-1", "badge-2", "badge-3", "badge-4"]
+    },
+    "research": {
+      "type": "research-highlight",
+      "settings": {
+        "subtitle": "The Research",
+        "heading": "Why Origin is different.",
+        "button_text": "",
+        "button_link": ""
+      },
+      "blocks": {
+        "stat-1": { "type": "stat", "settings": { "stat": "01", "title": "Biology determines your gut microbiome", "text": "The HELIUS study proved biology is the strongest predictor of microbiome composition.", "source": "Deschasaux et al., 2018" } },
+        "stat-2": { "type": "stat", "settings": { "stat": "02", "title": "Generic probiotics miss the mark", "text": "Most probiotics use strains selected for the average person. That person doesn't exist.", "source": "" } }
+      },
+      "block_order": ["stat-1", "stat-2"]
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": { "heading": "Real results" },
+      "blocks": {
+        "review-1": { "type": "testimonial", "settings": { "quote": "Finally, a supplement that considers my biology. I noticed a difference within the first week.", "author": "Priya S." } },
+        "review-2": { "type": "testimonial", "settings": { "quote": "I've tried every probiotic out there. Origin is the first one that actually works for my body.", "author": "Marcus T." } }
+      },
+      "block_order": ["review-1", "review-2"]
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "Join the biology-first movement",
+        "text": "Get research updates and be first to know about new products.",
+        "bg_color": "#1C2E23",
+        "text_color": "#F5F2EC"
+      }
+    }
+  },
+  "order": ["main-product", "trust-badges", "research", "testimonials", "newsletter"]
+}

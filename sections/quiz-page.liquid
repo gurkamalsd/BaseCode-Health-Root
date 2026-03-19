@@ -1,0 +1,394 @@
+<section class="px-4 md:px-10 py-12 md:py-20" style="background: #F5F2EC; min-height: 100vh;">
+  <div style="max-width: 640px; margin: 0 auto;">
+    <!-- Quiz container -->
+    <div data-quiz-container>
+
+      <!-- ═══════════════════════════════════════
+           INTRO SCREEN
+           ═══════════════════════════════════════ -->
+      <div data-quiz-intro class="text-center">
+        <!-- Incentive pill -->
+        <div class="inline-block rounded-full px-5 py-2 mb-8"
+          style="background: rgba(196,120,58,0.12); border: 1px solid rgba(196,120,58,0.25);">
+          <span class="font-heading text-13 font-medium" style="color: #C4783A;">
+            Complete the quiz for 20% off + free research report
+          </span>
+        </div>
+
+        <!-- Eyebrow -->
+        <p class="font-mono-spec text-11 uppercase mb-6"
+          style="color: #C4783A; letter-spacing: 0.2em;">
+          2-Minute Assessment
+        </p>
+
+        <!-- Heading -->
+        <h1 class="font-heading font-medium mb-6"
+          style="color: #1C2E23; font-size: 32px; line-height: 44px;">
+          What's your<br>Biology Score?
+        </h1>
+
+        <!-- Body -->
+        <p class="font-heading text-17 font-light mb-4 mx-auto"
+          style="color: #4A5550; line-height: 1.7; max-width: 520px;">
+          Find out if your bloating, fatigue, and inflammation are connected
+          to your microbiome. Seven questions backed by published
+          research from Gut, Cell, and PLOS Biology.
+        </p>
+
+        <!-- Sub-body -->
+        <p class="font-heading text-15 font-light mb-10 mx-auto"
+          style="color: #8A9490; line-height: 1.7; max-width: 480px;">
+          Your results are instant, private, and free.
+          Most people score in the Moderate to High Risk band.
+        </p>
+
+        <!-- CTA -->
+        <button data-quiz-start class="btn btn--primary inline-block" data-default-text="Start the Assessment"
+          style="min-width: 240px;">
+          Start the Assessment
+        </button>
+
+        <!-- Privacy -->
+        <p class="font-heading text-13 mt-6" style="color: #8A9490;">
+          No email required to see your score. No spam. Ever.
+        </p>
+
+        <!-- Citation badges -->
+        <div class="flex flex-wrap justify-center gap-4 mt-12">
+          <span class="font-mono-spec text-11 px-4 py-2 rounded-full"
+            style="border: 1px solid #DDD6CC; color: #8A9490;">
+            Gut, 2020
+          </span>
+          <span class="font-mono-spec text-11 px-4 py-2 rounded-full"
+            style="border: 1px solid #DDD6CC; color: #8A9490;">
+            Cell, 2018
+          </span>
+          <span class="font-mono-spec text-11 px-4 py-2 rounded-full"
+            style="border: 1px solid #DDD6CC; color: #8A9490;">
+            PLOS Biology, 2018
+          </span>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════
+           QUESTION SCREEN
+           ═══════════════════════════════════════ -->
+      <div data-quiz-question style="display: none;">
+        <!-- Progress bar -->
+        <div class="mb-8">
+          <div class="flex justify-between items-center mb-2">
+            <p class="font-mono-spec text-11 uppercase" style="color: #C4783A; letter-spacing: 0.15em;">
+              Question <span data-quiz-current>1</span> of 7
+            </p>
+            <p class="font-mono-spec text-11" style="color: #8A9490;">
+              <span data-quiz-progress>0</span>% complete
+            </p>
+          </div>
+          <div class="rounded-full overflow-hidden" style="height: 4px; background: rgba(28,46,35,0.10);">
+            <div data-quiz-bar class="rounded-full" style="height: 100%; background: #C4783A; width: 0%; transition: width 0.5s ease-out;"></div>
+          </div>
+        </div>
+
+        <!-- Question heading -->
+        <h2 data-quiz-question-text class="font-heading font-medium mb-3"
+          style="color: #1C2E23; font-size: 24px; line-height: 1.2;"></h2>
+
+        <!-- Subtext -->
+        <p data-quiz-subtext class="font-heading text-15 font-light mb-8"
+          style="color: #4A5550; line-height: 1.6;"></p>
+
+        <!-- Options -->
+        <div data-quiz-options class="space-y-3"></div>
+
+        <!-- Next / See Results button -->
+        <button data-quiz-next
+          class="w-full mt-8 font-heading text-15 font-semibold py-4 rounded-full transition-all"
+          data-default-text="Next Question"
+          style="background: #C4783A; color: #1C2E23; opacity: 0.4; cursor: not-allowed;"
+          disabled>
+          Next Question
+        </button>
+      </div>
+
+      <!-- ═══════════════════════════════════════
+           RESULTS SCREEN
+           ═══════════════════════════════════════ -->
+      <div data-quiz-results style="display: none;">
+
+        <!-- 1. Score visualization -->
+        <div class="text-center mb-6 reveal-hidden">
+          <p class="font-mono-spec text-11 uppercase mb-6"
+            style="color: #C4783A; letter-spacing: 0.2em;">
+            Your Wellness Risk Score
+          </p>
+
+          <!-- SVG Score Ring (180x180) -->
+          <div class="inline-flex items-center justify-center" style="position: relative;">
+            <svg width="180" height="180" viewBox="0 0 180 180">
+              <circle cx="90" cy="90" r="72" fill="none" stroke="rgba(0,0,0,0.06)" stroke-width="10"/>
+              <circle data-score-ring cx="90" cy="90" r="72" fill="none" stroke="#C4783A" stroke-width="10"
+                stroke-linecap="round"
+                stroke-dasharray="452.39" stroke-dashoffset="452.39"
+                transform="rotate(-90 90 90)"
+                style="transition: stroke-dashoffset 1.2s ease-out;"/>
+            </svg>
+            <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+              <span data-score-number class="font-heading font-medium" style="color: #1C2E23; font-size: 42px; line-height: 1;">0</span>
+              <span class="font-mono-spec text-11" style="color: #8A9490; letter-spacing: 0.1em;">/ 100</span>
+            </div>
+          </div>
+
+          <!-- Risk label pill -->
+          <div class="mt-4">
+            <span data-risk-pill
+              class="inline-block font-mono-spec text-12 font-medium px-5 py-2 rounded-full"
+              style="background: rgba(196,120,58,0.12); color: #C4783A; letter-spacing: 0.1em;">
+            </span>
+          </div>
+        </div>
+
+        <!-- 2. Email capture card (dark bg) -->
+        <div data-quiz-email-capture class="rounded-2xl p-6 mb-6 reveal-hidden" style="background: #1C2E23;">
+          <!-- Pre-submit state -->
+          <div data-email-form-wrapper>
+            <p class="font-heading text-17 font-medium text-center mb-1" style="color: #F5F2EC;">
+              Get 20% off + free research report
+            </p>
+            <p class="font-heading text-13 text-center mb-4" style="color: rgba(245,242,236,0.50);">
+              Enter your details to unlock code FOUNDER20
+            </p>
+
+            <form data-lead-form data-source="quiz-results" class="space-y-2.5">
+              <!-- Honeypot -->
+              <input type="text" name="website" autocomplete="off" tabindex="-1" aria-hidden="true"
+                style="position: absolute; left: -9999px; opacity: 0; height: 0; width: 0;">
+
+              <!-- First name + Email -->
+              <div class="flex flex-col sm:flex-row gap-2">
+                <input type="text" name="firstName" required placeholder="First name" aria-label="First name"
+                  autocomplete="given-name"
+                  class="flex-1 font-heading text-14 px-4 py-3 rounded-full outline-none"
+                  style="background: rgba(255,255,255,0.08); color: #F5F2EC; border: 1px solid rgba(255,255,255,0.15);">
+                <input type="email" name="email" required placeholder="Email" aria-label="Email address"
+                  autocomplete="email"
+                  class="flex-1 font-heading text-14 px-4 py-3 rounded-full outline-none"
+                  style="background: rgba(255,255,255,0.08); color: #F5F2EC; border: 1px solid rgba(255,255,255,0.15);">
+              </div>
+
+              <button type="submit"
+                class="w-full font-heading text-15 font-semibold px-6 py-3.5 rounded-full transition-colors"
+                data-default-text="Unlock 20% Off"
+                style="background: #C4783A; color: #1C2E23;">
+                Unlock 20% Off
+              </button>
+            </form>
+
+            <p class="lead-form-error font-heading text-13 mt-2 text-center" style="color: #C4783A; display: none;">
+              Something went wrong. Please try again.
+            </p>
+
+            <p class="font-heading text-11 text-center mt-3" style="color: rgba(245,242,236,0.30);">
+              No spam. Unsubscribe anytime.
+            </p>
+          </div>
+
+          <!-- Post-submit success state -->
+          <div class="lead-form-success text-center" style="display: none;">
+            <p class="font-mono-spec text-11 uppercase mb-2" style="color: rgba(245,242,236,0.5); letter-spacing: 0.1em;">
+              Your 20% discount code
+            </p>
+            <p class="font-heading text-24 font-medium mb-3" style="color: #C4783A; letter-spacing: 0.1em;">
+              FOUNDER20
+            </p>
+            <p class="font-heading text-13 mb-4" style="color: rgba(245,242,236,0.60);">
+              Auto-applied at checkout. Research report sent to your inbox.
+            </p>
+            <a href="/products/origin"
+              class="inline-block font-heading text-15 font-semibold px-10 py-4 rounded-full transition-all"
+              style="background: #C4783A; color: #1C2E23; box-shadow: 0 4px 20px rgba(196,120,58,0.25);">
+              Shop Origin — $34/mo
+            </a>
+            <p class="font-mono-spec text-10 mt-3" style="color: rgba(245,242,236,0.35);">
+              Free shipping · 30-day money-back guarantee
+            </p>
+          </div>
+
+          <!-- Duplicate state -->
+          <div class="lead-form-duplicate text-center" style="display: none;">
+            <p class="font-heading text-14 font-medium" style="color: rgba(245,242,236,0.70);">
+              Already on the list — check your inbox for your report.
+            </p>
+            <a href="/products/origin"
+              class="inline-block font-heading text-15 font-semibold px-10 py-4 rounded-full mt-4 transition-all"
+              style="background: #C4783A; color: #1C2E23;">
+              Shop Origin — $34/mo
+            </a>
+          </div>
+        </div>
+
+        <!-- Shop CTA (visible before email submit) -->
+        <div data-quiz-shop-cta class="text-center mb-8 reveal-hidden">
+          <a href="/products/origin"
+            class="inline-block font-heading text-15 font-semibold px-10 py-4 rounded-full transition-all"
+            style="background: #C4783A; color: #1C2E23; box-shadow: 0 4px 20px rgba(196,120,58,0.25);">
+            Shop Origin — $34/mo
+          </a>
+          <p class="font-mono-spec text-11 mt-3" style="color: #8A9490;">
+            Free research report included · 30-day supply · Cancel anytime
+          </p>
+        </div>
+
+        <!-- 3. Risk explanation card -->
+        <div class="rounded-2xl p-8 mb-8 reveal-hidden" style="background: #EDE8DF;">
+          <h2 data-risk-headline class="font-heading font-medium mb-4"
+            style="color: #1C2E23; font-size: 24px; line-height: 1.2;">
+          </h2>
+          <p data-risk-body class="font-heading text-15 font-light" style="color: #4A5550; line-height: 1.75;">
+          </p>
+        </div>
+
+        <!-- 4. Dream outcome badges (SVG icons, grid of 6) -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-8 reveal-hidden">
+          <!-- End Bloating -->
+          <div class="flex flex-col items-center gap-1.5 py-3 px-2 rounded-xl" style="background: #EDE8DF;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C4783A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+            </svg>
+            <span class="font-mono-spec text-10 text-center" style="color: #4A5550; letter-spacing: 0.05em;">End Bloating</span>
+          </div>
+          <!-- More Energy -->
+          <div class="flex flex-col items-center gap-1.5 py-3 px-2 rounded-xl" style="background: #EDE8DF;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C4783A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+            <span class="font-mono-spec text-10 text-center" style="color: #4A5550; letter-spacing: 0.05em;">More Energy</span>
+          </div>
+          <!-- Clear Thinking -->
+          <div class="flex flex-col items-center gap-1.5 py-3 px-2 rounded-xl" style="background: #EDE8DF;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C4783A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9.5 2A5.5 5.5 0 0 0 4 7.5c0 1.58.67 3 1.74 4.01L7 12.76V16h4v-3.24l1.26-1.25A5.49 5.49 0 0 0 15 7.5 5.5 5.5 0 0 0 9.5 2z"/>
+              <path d="M12 16v2a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2v-2"/>
+              <path d="M9.5 2v1"/>
+              <path d="M4 7.5H3"/>
+              <path d="M16 7.5h1"/>
+              <path d="M5.28 4.28l-.71-.71"/>
+              <path d="M14.43 4.28l.71-.71"/>
+            </svg>
+            <span class="font-mono-spec text-10 text-center" style="color: #4A5550; letter-spacing: 0.05em;">Clear Thinking</span>
+          </div>
+          <!-- Better Sleep -->
+          <div class="flex flex-col items-center gap-1.5 py-3 px-2 rounded-xl" style="background: #EDE8DF;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C4783A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/>
+            </svg>
+            <span class="font-mono-spec text-10 text-center" style="color: #4A5550; letter-spacing: 0.05em;">Better Sleep</span>
+          </div>
+          <!-- Mood Support -->
+          <div class="flex flex-col items-center gap-1.5 py-3 px-2 rounded-xl" style="background: #EDE8DF;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C4783A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+            <span class="font-mono-spec text-10 text-center" style="color: #4A5550; letter-spacing: 0.05em;">Mood Support</span>
+          </div>
+          <!-- Immune Strength -->
+          <div class="flex flex-col items-center gap-1.5 py-3 px-2 rounded-xl" style="background: #EDE8DF;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C4783A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            <span class="font-mono-spec text-10 text-center" style="color: #4A5550; letter-spacing: 0.05em;">Immune Strength</span>
+          </div>
+        </div>
+
+        <!-- 5. Three stat badges -->
+        <div class="grid grid-cols-3 gap-4 mb-10 reveal-hidden">
+          <div class="text-center">
+            <p class="font-heading font-medium" style="color: #C4783A; font-size: 22px;">40–60%</p>
+            <p class="font-mono-spec text-10 mt-1" style="color: #8A9490; line-height: 1.5;">
+              butyrate-producer<br>decline after<br>westernisation
+            </p>
+          </div>
+          <div class="text-center">
+            <p class="font-heading font-medium" style="color: #C4783A; font-size: 22px;">5–10yr</p>
+            <p class="font-mono-spec text-10 mt-1" style="color: #8A9490; line-height: 1.5;">
+              earlier metabolic<br>onset in diaspora<br>populations
+            </p>
+          </div>
+          <div class="text-center">
+            <p class="font-heading font-medium" style="color: #C4783A; font-size: 22px;">2,084</p>
+            <p class="font-mono-spec text-10 mt-1" style="color: #8A9490; line-height: 1.5;">
+              subjects in the<br>HELIUS multi-ethnic<br>cohort study
+            </p>
+          </div>
+        </div>
+
+        <!-- 6. Value stack card (ochre bg, ochre border) -->
+        <div class="rounded-2xl p-8 mb-6 reveal-hidden" style="background: rgba(196,120,58,0.08); border: 1px solid rgba(196,120,58,0.20);">
+          <p class="font-mono-spec text-11 uppercase mb-3" style="color: #C4783A; letter-spacing: 0.15em;">
+            What Origin Does For You
+          </p>
+          <h3 data-purchase-headline class="font-heading font-medium mb-4"
+            style="color: #1C2E23; font-size: 20px; line-height: 1.3;">
+          </h3>
+          <p data-purchase-body class="font-heading text-15 font-light mb-5"
+            style="color: #4A5550; line-height: 1.75;">
+          </p>
+
+          <div class="flex flex-col gap-2 mb-5">
+            <div class="flex items-start gap-2">
+              <span class="text-12 mt-0.5 shrink-0" style="color: #C4783A;">&#10022;</span>
+              <span class="font-heading text-14 font-light" style="color: #4A5550;">40 Billion CFU — 4 targeted strains for diaspora biology</span>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="text-12 mt-0.5 shrink-0" style="color: #C4783A;">&#10022;</span>
+              <span class="font-heading text-14 font-light" style="color: #4A5550;">MAKTREK Bi-Pass — acid-protected delivery (most probiotics can't survive without it)</span>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="text-12 mt-0.5 shrink-0" style="color: #C4783A;">&#10022;</span>
+              <span class="font-heading text-14 font-light" style="color: #4A5550;">FOS prebiotic — feeds the bacteria on arrival, not just on the label</span>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="text-12 mt-0.5 shrink-0" style="color: #C4783A;">&#10022;</span>
+              <span class="font-heading text-14 font-light" style="color: #4A5550;">Free research report delivered with your order</span>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="text-12 mt-0.5 shrink-0" style="color: #C4783A;">&#10022;</span>
+              <span class="font-heading text-14 font-light" style="color: #4A5550;">Cancel anytime — no contracts, no commitment</span>
+            </div>
+          </div>
+
+          <p data-purchase-subtext class="font-heading text-14 font-light text-center italic"
+            style="color: #8A9490; line-height: 1.7;">
+          </p>
+        </div>
+
+        <!-- 7. Share + Retake -->
+        <div class="flex flex-col items-center gap-4 mt-8 reveal-hidden">
+          {% render 'whatsapp-share', text: 'I just took the Biology Score quiz — backed by real research. Takes 2 minutes.', url: 'https://basecodehealth.com/pages/quiz' %}
+          <button data-quiz-retake
+            class="font-heading text-14 font-normal transition-opacity"
+            style="color: #8A9490;">
+            Retake Assessment
+          </button>
+        </div>
+
+        <!-- 8. Back link -->
+        <div class="text-center mt-12 pt-8 reveal-hidden" style="border-top: 1px solid #DDD6CC;">
+          <a href="/"
+            class="font-heading text-14 font-medium transition-opacity"
+            style="color: #C4783A;">
+            &larr; Back to BaseCode Health
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Quiz Page",
+  "class": "quiz-page-section",
+  "settings": []
+}
+{% endschema %}

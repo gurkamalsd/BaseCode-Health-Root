@@ -1,0 +1,124 @@
+{
+  "sections": {
+    "landing": {
+      "type": "landing-page",
+      "settings": {
+        "symptom_slug": "skin",
+        "eyebrow": "The Gut-Skin Axis",
+        "headline": "Your dermatologist is treating the wrong organ.",
+        "subheadline": "Acne, eczema, and psoriasis are not skin diseases. They are inflammatory conditions driven by a broken gut barrier. When ancestral bacteria deplete — a documented pattern in immigrant and diaspora communities — your intestinal wall leaks endotoxins into your bloodstream. Your immune system responds. Your skin pays the price. No serum, steroid, or retinoid can fix what starts below the surface.",
+        "cta_text": "Clear Your Skin From the Inside — $34/mo",
+        "agitate_eyebrow": "The Topical Trap",
+        "agitate_headline": "You've tried everything on your skin. Nobody has tried fixing what's underneath it.",
+        "agitate_body": "The topical spiral: cleanser, toner, serum, retinoid, moisturizer, SPF — and when that fails, prescription steroids, antibiotics, Accutane consultations. Every product suppresses a symptom for weeks, then the flare returns worse. You rotate products like a desperate scientist running out of hypotheses, because you've been solving the wrong equation entirely.||The $200/month skincare graveyard: a bathroom cabinet full of half-used bottles that promised \"clear skin in 30 days.\" CeraVe. La Roche-Posay. Drunk Elephant. Prescription tretinoin. LED masks. Chemical peels. You've spent thousands — maybe tens of thousands — on an industry that profits from your skin never actually clearing. The global acne treatment market is $12 billion. They don't make money when you're cured.||The covering up: foundation over eczema patches. Long sleeves in summer. Cancelling plans because your face is flaring. The psychological weight of skin conditions isn't vanity — it's exhaustion. You've rearranged your entire life around an organ that's screaming a message from your gut, and nobody told you to listen to the right organ.",
+        "cost_headline": "Dermatology visits: $100-400/month. Prescription topicals: $50-200/month. Premium skincare: $80-300/month. Origin: $34/month.",
+        "cost_body": "The average person with chronic skin conditions spends $2,400-6,000 per year chasing clear skin from the outside. Dermatologist copays. Prescription retinoids. \"Medical grade\" serums. Monthly facials. The global skincare industry is worth $190 billion — built on the assumption that skin problems are skin problems. But when the inflammation driving your acne, eczema, or psoriasis starts in a leaky gut, every dollar spent topically is treating the exhaust pipe instead of the engine. Origin costs $1.13/day. That's less than the single-use sheet mask sitting in your drawer right now.",
+        "bridge_headline": "The gut-skin axis: your skin is a billboard for your gut's dysfunction.",
+        "bridge_body": "Research across three landmark studies confirms the same mechanism: disrupted gut microbiome composition leads to increased intestinal permeability, systemic endotoxemia, and inflammatory cytokine cascades that manifest as skin disease. Patients with acne show significantly altered gut flora compared to controls. Eczema patients have measurably higher intestinal permeability. Psoriasis correlates with specific bacterial depletions. L. plantarum and L. acidophilus directly reduce IL-6, TNF-alpha, and IL-17 — the exact inflammatory markers elevated in all three conditions. When you seal the gut, the skin signal resolves.",
+        "citation": "Salem et al., Journal of Dermatological Science, 2019 · Bowe & Logan, Gut Pathogens, 2011 · De Pessemier et al., Microorganisms, 2021",
+        "solution_headline": "Origin doesn't treat your skin. It stops the inflammation that's destroying it.",
+        "solution_body": "L. acidophilus repairs the intestinal tight junctions that are leaking endotoxins into your bloodstream — the root trigger behind inflammatory skin conditions. L. plantarum reduces IL-6 and TNF-alpha, the specific cytokines that activate skin immune cells and drive acne lesions, eczema flares, and psoriatic plaques. L. paracasei modulates the Th1/Th2 immune balance that determines whether your body over-reacts through your skin. B. lactis supports regulatory T-cells that keep the entire inflammatory cascade in check. MAKTREK Bi-Pass delivers all four strains past stomach acid alive. FOS prebiotic feeds them on arrival. Your skin clears because the war inside your gut ends.",
+        "lead_headline": "The gut-skin axis research your dermatologist hasn't read yet.",
+        "closing_quote": "Your mother had clear skin without a 10-step routine. Your grandmother never owned a serum. The difference isn't genetics or products — it's the microbiome they carried from home that you lost when your world changed."
+      },
+      "blocks": {
+        "pathway_1": {
+          "type": "pathway",
+          "settings": {
+            "step": "01 — Gut Barrier Breaks Down",
+            "title": "Inflammation floods your bloodstream",
+            "body": "When ancestral bacteria deplete — accelerated by immigration, westernized diets, and antibiotic exposure — intestinal tight junctions weaken. Lipopolysaccharides (endotoxins) leak through the gut wall into systemic circulation. Your immune system detects the breach and mounts a full inflammatory response. The inflammation needs an exit point. Your skin is the largest organ. It becomes the battlefield."
+          }
+        },
+        "pathway_2": {
+          "type": "pathway",
+          "settings": {
+            "step": "02 — Skin Becomes the Exit Wound",
+            "title": "Every flare is an internal fire reaching the surface",
+            "body": "Circulating inflammatory cytokines — IL-6, TNF-alpha, IL-17 — activate mast cells and keratinocytes in your skin. Sebum production spikes (acne). Epidermal barrier function collapses (eczema). Keratinocytes hyper-proliferate (psoriasis). Your dermatologist sees the symptom and prescribes a topical. But the topical can't reach your gut. The flare subsides temporarily, then returns — because the source never stopped."
+          }
+        },
+        "pathway_3": {
+          "type": "pathway",
+          "settings": {
+            "step": "03 — Origin Seals the Source",
+            "title": "Stop the leak. Stop the flare. Keep your skin clear.",
+            "body": "L. acidophilus restores tight junction proteins that seal the intestinal barrier. L. plantarum slashes the inflammatory cytokines that drive skin immune activation. Within weeks, systemic inflammation measurably drops. Flares decrease in frequency first, then intensity, then duration — until your skin reaches a baseline you haven't seen since before your microbiome shifted. No topical required."
+          }
+        },
+        "outcome_1": {
+          "type": "dream_outcome",
+          "settings": {
+            "title": "Wake up and skip the mirror scan",
+            "body": "That anxious first look every morning — checking for new breakouts, scanning for flare-ups, bracing for what today's skin will be. When gut-driven inflammation drops, your skin stabilizes. You stop checking because there's nothing to find. The mirror becomes neutral again."
+          }
+        },
+        "outcome_2": {
+          "type": "dream_outcome",
+          "settings": {
+            "title": "Throw out the 10-step routine",
+            "body": "Cleanser, toner, essence, serum, treatment, eye cream, moisturizer, SPF, primer, concealer. When the internal cause resolves, a simple cleanser and moisturizer become genuinely enough. Your bathroom shelf clears out. Your morning takes 3 minutes, not 20. Your skin doesn't need intervention because it's not under attack."
+          }
+        },
+        "outcome_3": {
+          "type": "dream_outcome",
+          "settings": {
+            "title": "Bare skin in public without thinking twice",
+            "body": "Short sleeves over arms that used to have eczema patches. A bare face at brunch. A swimsuit without strategizing which spots to cover. When your skin clears from the inside, you stop performing confidence and start actually having it. Your wardrobe opens up. Your life opens up."
+          }
+        },
+        "outcome_4": {
+          "type": "dream_outcome",
+          "settings": {
+            "title": "Save $3,000+ a year on products that never worked",
+            "body": "Dermatology copays. Prescription refills. The $68 serum you bought because an influencer swore by it. The LED mask collecting dust. When your skin stops flaring, the spending stops too. Origin at $34/month replaces a skincare budget that was costing you $200-500/month — and actually delivers the result none of those products could."
+          }
+        },
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "quote": "I've had eczema on my arms and neck since I moved to Canada at 19. Six years of steroid creams, oatmeal baths, elimination diets. Three weeks on Origin and the patches started fading. Week six — I wore a tank top for the first time in years. My mom cried when I showed her. It was my gut the entire time.",
+            "name": "Sana M. — Calgary, AB"
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "quote": "Adult cystic acne at 31 that three dermatologists couldn't fix permanently. Accutane cleared it for 8 months, then it came back worse. I read about the gut-skin axis in the free report and started Origin as a last resort. My skin is the clearest it's been since I was 15. I cancelled my derm appointment for the first time in four years.",
+            "name": "David L. — Austin, TX"
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "quote": "My psoriasis started two years after moving from Lagos to London, then got worse when I came to Toronto. Plaques on my elbows, knees, scalp. I'd tried biologics, UV therapy, coal tar. A friend sent me the BaseCode research page. One month on Origin and my plaques are 70% reduced. My rheumatologist asked what changed. I said: my gut.",
+            "name": "Chioma A. — Toronto, ON"
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "quote": "Hormonal acne that got ten times worse after I moved from Manila to New York for grad school. I spent $4,000 on skincare last year alone — Korean routines, prescription tretinoin, monthly facials. Nothing lasted more than a few weeks. Six weeks on Origin and my jawline is clear. I'm down to cleanser and sunscreen. I feel like I got scammed by the entire skincare industry.",
+            "name": "Maria T. — Brooklyn, NY"
+          }
+        }
+      },
+      "block_order": [
+        "pathway_1",
+        "pathway_2",
+        "pathway_3",
+        "outcome_1",
+        "outcome_2",
+        "outcome_3",
+        "outcome_4",
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4"
+      ]
+    }
+  },
+  "order": [
+    "landing"
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "sections": {
+    "faq": { "type": "faq-accordion", "settings": { "heading": "Frequently Asked Questions" }, "blocks": { "q1": { "type": "question", "settings": { "question": "What is Origin?", "answer": "<p>Origin is the first ethnobiotic — a probiotic informed by biological diversity research. 40 billion CFU, 4 targeted strains, MAKTREK Bi-Pass delivery, FOS prebiotic.</p>" } }, "q2": { "type": "question", "settings": { "question": "How is Origin different?", "answer": "<p>Most probiotics use generic strains. Origin's strains are selected based on the HELIUS study (2,084 subjects, 6 ethnic groups), and MAKTREK ensures bacteria survive stomach acid.</p>" } }, "q3": { "type": "question", "settings": { "question": "How do I take it?", "answer": "<p>2 capsules daily with water. 30-day supply per bottle.</p>" } }, "q4": { "type": "question", "settings": { "question": "Is it vegan?", "answer": "<p>Yes. HPMC veggie capsules. No gelatin.</p>" } }, "q5": { "type": "question", "settings": { "question": "Return policy?", "answer": "<p>30-day money-back guarantee. Email hello@basecodehealth.com.</p>" } } }, "block_order": ["q1", "q2", "q3", "q4", "q5"] }
+  },
+  "order": ["faq"]
+}

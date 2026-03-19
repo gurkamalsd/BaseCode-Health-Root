@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "landing": {
+      "type": "landing-page",
+      "settings": {},
+      "blocks": {}
+    }
+  },
+  "order": ["landing"]
+}

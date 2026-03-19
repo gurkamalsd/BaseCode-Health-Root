@@ -1,0 +1,58 @@
+<!-- Cart Drawer Backdrop -->
+<div class="cart-drawer__backdrop" id="cart-drawer-backdrop" aria-hidden="true"></div>
+
+<!-- Cart Drawer -->
+<aside class="cart-drawer" id="cart-drawer" role="dialog" aria-label="{{ 'cart.title' | t }}" aria-hidden="true">
+  <div class="cart-drawer__header">
+    <h2 style="font-family: var(--font-heading); font-size: var(--text-lg); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
+      {{ 'cart.title' | t }}
+      (<span id="cart-drawer-count">{{ cart.item_count }}</span>)
+    </h2>
+    <button class="header__icon" id="cart-drawer-close" aria-label="{{ 'accessibility.cart_close' | t }}">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+
+  <div class="cart-drawer__items" id="cart-drawer-items">
+    {%- if cart.item_count == 0 -%}
+      <div style="text-align: center; padding: var(--space-12) 0;">
+        <p style="font-size: var(--text-lg); margin-bottom: var(--space-4);">{{ 'cart.empty' | t }}</p>
+        <a href="/collections/all" class="btn btn--primary">{{ 'cart.continue_shopping' | t }}</a>
+      </div>
+    {%- else -%}
+      {%- for item in cart.items -%}
+        <div class="flex gap-4 items-start" style="padding: var(--space-4) 0; border-bottom: 1px solid var(--color-border);">
+          <div style="width: 80px; height: 80px; border-radius: var(--radius-md); overflow: hidden; flex-shrink: 0; background: var(--color-cream);">
+            {%- if item.image -%}
+              <img src="{{ item.image | image_url: width: 160 }}" alt="{{ item.title }}" width="80" height="80" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+            {%- endif -%}
+          </div>
+          <div style="flex: 1;">
+            <p style="font-weight: 600; font-size: var(--text-sm); margin-bottom: var(--space-1);">{{ item.product.title }}</p>
+            {%- if item.variant.title != 'Default Title' -%}
+              <p style="font-size: var(--text-xs); color: var(--color-text-light);">{{ item.variant.title }}</p>
+            {%- endif -%}
+            <p style="font-family: var(--font-mono); font-size: var(--text-sm); margin-top: var(--space-1);">{{ item.final_line_price | money }}</p>
+          </div>
+          <a href="/cart/change?id={{ item.key }}&quantity=0" style="color: var(--color-text-light); font-size: var(--text-xs);" aria-label="{{ 'cart.remove' | t }}">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </a>
+        </div>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+
+  {%- if cart.item_count > 0 -%}
+    <div class="cart-drawer__footer">
+      <div class="flex justify-between items-center" style="margin-bottom: var(--space-4);">
+        <span style="font-weight: 600;">{{ 'cart.subtotal' | t }}</span>
+        <span style="font-family: var(--font-mono); font-weight: 600;">{{ cart.total_price | money }}</span>
+      </div>
+      <p style="font-size: var(--text-xs); color: var(--color-text-light); margin-bottom: var(--space-4);">{{ 'cart.taxes_shipping_notice' | t }}</p>
+      <a href="/checkout" class="btn btn--primary btn--full btn--lg">{{ 'cart.checkout' | t }}</a>
+    </div>
+  {%- endif -%}
+</aside>

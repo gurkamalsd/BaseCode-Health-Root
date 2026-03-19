@@ -1,0 +1,17 @@
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "col1_heading": "Products",
+        "col2_heading": "Info",
+        "col3_heading": "Social",
+        "col4_heading": "About BaseCode",
+        "col4_text": "Supplements informed by biological diversity research. Built in Toronto, backed by science, designed for your unique biology."
+      }
+    }
+  },
+  "order": ["footer"]
+}

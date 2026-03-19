@@ -1,0 +1,130 @@
+<header class="header" id="site-header" role="banner">
+  <div class="header__inner">
+    <!-- Logo -->
+    <a href="/" class="header__logo" aria-label="{{ shop.name }}">
+      {%- if section.settings.logo != blank -%}
+        <img src="{{ section.settings.logo | image_url: width: 200 }}" alt="{{ shop.name }}" width="150" height="32" loading="eager">
+      {%- else -%}
+        <span style="font-family: var(--font-heading); font-size: var(--text-xl); font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em;">
+          BaseCode Health
+        </span>
+      {%- endif -%}
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="header__nav" role="navigation" aria-label="Main navigation">
+      {%- for link in section.settings.menu.links -%}
+        {%- if link.links.size > 0 -%}
+          <div class="header__nav-dropdown" style="position: relative;">
+            <button class="header__nav-link flex items-center gap-1" aria-expanded="false" aria-haspopup="true">
+              {{ link.title }}
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="header__dropdown-menu" style="position: absolute; top: 100%; left: 0; min-width: 200px; background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-3) 0; box-shadow: var(--shadow-lg); display: none; z-index: var(--z-dropdown);">
+              {%- for child_link in link.links -%}
+                <a href="{{ child_link.url }}" class="header__nav-link" style="display: block; padding: var(--space-2) var(--space-5); font-size: var(--text-sm);">
+                  {{ child_link.title }}
+                </a>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- else -%}
+          <a href="{{ link.url }}" class="header__nav-link" {% if link.current %}aria-current="page"{% endif %}>
+            {{ link.title }}
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </nav>
+
+    <!-- Header Icons -->
+    <div class="header__icons">
+      <!-- Search -->
+      <button class="header__icon hide-mobile" id="search-toggle" aria-label="{{ 'header.search' | t }}">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+
+      <!-- Account -->
+      <a href="/account" class="header__icon hide-mobile" aria-label="{{ 'header.account' | t }}">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </a>
+
+      <!-- Cart -->
+      <button class="header__icon" id="cart-toggle" aria-label="{{ 'header.cart' | t }} ({{ cart.item_count }})">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+        {%- if cart.item_count > 0 -%}
+          <span style="position: absolute; top: 2px; right: 2px; width: 16px; height: 16px; background: var(--color-accent); color: var(--color-white); font-size: 10px; font-weight: 700; border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center;" id="cart-count">{{ cart.item_count }}</span>
+        {%- endif -%}
+      </button>
+
+      <!-- Mobile Menu Toggle -->
+      <button class="header__menu-toggle header__icon" id="menu-toggle" aria-label="{{ 'accessibility.menu_open' | t }}" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Mobile menu" aria-hidden="true">
+  <div class="mobile-menu__backdrop" id="mobile-menu-backdrop"></div>
+  <div class="mobile-menu__panel">
+    <button class="header__icon" id="mobile-menu-close" aria-label="{{ 'accessibility.menu_close' | t }}" style="margin-bottom: var(--space-6);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <nav aria-label="Mobile navigation">
+      {%- for link in section.settings.menu.links -%}
+        <a href="{{ link.url }}" class="mobile-menu__link" {% if link.current %}aria-current="page"{% endif %}>
+          {{ link.title }}
+        </a>
+        {%- if link.links.size > 0 -%}
+          {%- for child_link in link.links -%}
+            <a href="{{ child_link.url }}" class="mobile-menu__link" style="font-size: var(--text-base); padding-left: var(--space-4); color: var(--color-text-light);">
+              {{ child_link.title }}
+            </a>
+          {%- endfor -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </nav>
+
+    <div style="margin-top: var(--space-8); display: flex; flex-direction: column; gap: var(--space-3);">
+      <a href="/account" class="mobile-menu__link" style="font-size: var(--text-base);">{{ 'header.account' | t }}</a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Main menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

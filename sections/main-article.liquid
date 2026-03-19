@@ -1,0 +1,26 @@
+<section class="section bg-white">
+  <div class="container container--narrow">
+    <article>
+      <header class="text-center mb-10">
+        <a href="{{ blog.url }}" class="link mb-4" style="display: inline-block;">&larr; {{ 'blog.back_to_blog' | t }}</a>
+        <h1 style="margin-top: var(--space-4);">{{ article.title }}</h1>
+        <p style="font-size: var(--text-sm); color: var(--color-text-light); margin-top: var(--space-3);">
+          {{ 'blog.posted_on' | t: date: article.published_at | date: '%B %d, %Y' }}
+          {%- if article.author -%} &middot; {{ 'blog.by_author' | t: author: article.author }}{%- endif -%}
+        </p>
+      </header>
+      {%- if article.image -%}
+        <div style="border-radius: var(--radius-lg); overflow: hidden; margin-bottom: var(--space-10);">
+          <img src="{{ article.image | image_url: width: 1200 }}" alt="{{ article.image.alt | default: article.title }}" loading="eager" style="width: 100%;">
+        </div>
+      {%- endif -%}
+      <div class="rte" style="font-size: var(--text-base); line-height: 1.8;">
+        {{ article.content }}
+      </div>
+    </article>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Article Page", "settings": [] }
+{% endschema %}

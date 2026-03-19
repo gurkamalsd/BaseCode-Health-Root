@@ -1,0 +1,124 @@
+{
+  "sections": {
+    "landing": {
+      "type": "landing-page",
+      "settings": {
+        "symptom_slug": "joint-pain",
+        "eyebrow": "Joint Pain & Your Microbiome",
+        "headline": "Your joints aren't aging. They're inflamed from the inside.",
+        "subheadline": "Glucosamine treats cartilage. Turmeric masks signals. Fish oil dampens response. None of them ask why your joints are inflamed in the first place. The answer is in your gut: when ancestral bacteria deplete, endotoxins leak through your intestinal wall, enter circulation, and settle in your joints. Origin seals the barrier. The inflammation stops where it starts.",
+        "cta_text": "End the Inflammation — $34/mo",
+        "agitate_eyebrow": "Why Glucosamine, Turmeric, and Fish Oil Don't Work",
+        "agitate_headline": "You're fighting downstream. The inflammation starts upstream — in your gut.",
+        "agitate_body": "You wake up stiff. Knees, shoulders, hands — it takes thirty minutes before your body feels like it belongs to you. You've accepted this as normal. It isn't.||Your supplement stack keeps growing. Glucosamine. Turmeric. Fish oil. Collagen. MSM. You're spending $80-150 a month on compounds that address cartilage, pain signals, and inflammatory markers — but never ask why those markers are elevated in the first place. The relief is temporary because the cause is untouched.||And it's getting worse every year. The stiffness lasts longer. The recovery takes more days. New joints start hurting. You're told it's aging, but your parents at your age were squatting in fields, kneading dough for hours, walking miles daily — without a single joint complaint. Something else changed.",
+        "cost_headline": "Joint supplements: $80-150/month fighting symptoms. Origin: $34/month fixing the source.",
+        "cost_body": "The average person with chronic joint inflammation spends $960-1,800 per year stacking glucosamine, turmeric, fish oil, collagen, and OTC anti-inflammatories — none of which address why inflammatory markers are elevated. When the root cause is bacterial endotoxin leakage from a compromised gut barrier, no downstream supplement resolves it. Origin costs $1.13/day and targets the single upstream mechanism. One capsule replaces the stack.",
+        "bridge_headline": "The gut-joint connection: endotoxins leak, joints pay.",
+        "bridge_body": "Your intestinal barrier is maintained by specific bacterial populations — L. acidophilus, L. plantarum, and others that produce tight-junction proteins. When these populations deplete after dietary westernisation, the barrier weakens. Lipopolysaccharides (LPS) — endotoxins from gram-negative bacteria — cross into your bloodstream. Your immune system recognises them as invaders and launches a chronic inflammatory response. CRP rises. IL-6 rises. TNF-alpha rises. Your joints, rich in blood supply and synovial tissue, absorb the damage. Scher et al. demonstrated that patients with inflammatory arthritis show distinct gut microbiome disruption — the joint disease starts in the gut.",
+        "citation": "Thevaranjan et al., Cell Host & Microbe, 2017 · Clairembault et al., Nature Reviews Gastroenterology, 2015 · Scher et al., eLife, 2013",
+        "solution_headline": "Origin seals the gut barrier. LPS drops. Inflammation resolves. Joints recover.",
+        "solution_body": "L. acidophilus restores the tight-junction proteins that seal your intestinal lining — stopping endotoxin leakage at the source. L. plantarum directly reduces inflammatory cytokine production (IL-6, TNF-alpha) that drives joint destruction. B. lactis modulates systemic immune response so your body stops attacking its own tissue. L. paracasei supports regulatory immune pathways that prevent inflammatory cascade escalation. FOS prebiotic feeds all four strains on arrival. MAKTREK ensures they survive stomach acid to reach your gut alive. The inflammation doesn't get masked — it gets resolved.",
+        "lead_headline": "The endotoxin research connecting your gut to your joint pain.",
+        "closing_quote": "Your grandfather worked with his hands until he was eighty. Your grandmother ground spices on a stone slab every morning. They didn't have joint pain at your age — and they never took glucosamine. The difference isn't your joints. It's the microbiome they never lost."
+      },
+      "blocks": {
+        "pathway_1": {
+          "type": "pathway",
+          "settings": {
+            "step": "01 — Barrier Breach",
+            "title": "Your gut wall develops gaps",
+            "body": "Ancestral bacteria that produce tight-junction proteins — the biological cement between intestinal cells — deplete after dietary westernisation. Microscopic gaps form in the intestinal lining. Your gut becomes permeable to compounds that should never enter your bloodstream."
+          }
+        },
+        "pathway_2": {
+          "type": "pathway",
+          "settings": {
+            "step": "02 — Endotoxin Flood",
+            "title": "LPS enters circulation and targets joints",
+            "body": "Bacterial lipopolysaccharides cross the weakened barrier into your blood. Your immune system identifies them as threats and launches inflammatory cascades — CRP, IL-6, TNF-alpha. These inflammatory signals concentrate in synovial tissue. Your joints swell, stiffen, and degrade."
+          }
+        },
+        "pathway_3": {
+          "type": "pathway",
+          "settings": {
+            "step": "03 — Origin Seals the Source",
+            "title": "Restore the barrier, resolve the inflammation",
+            "body": "L. acidophilus rebuilds tight junctions. L. plantarum reduces cytokine production at the gut level. LPS leakage decreases. Inflammatory markers drop systemically. Joint pain resolves because the upstream cause — not the downstream symptom — has been addressed."
+          }
+        },
+        "outcome_1": {
+          "type": "dream_outcome",
+          "settings": {
+            "title": "Mornings without stiffness",
+            "body": "That thirty-minute warm-up before your body cooperates? That's inflammatory fluid pooling in your joints overnight. When endotoxin-driven inflammation drops, you wake up and move — the way you used to."
+          }
+        },
+        "outcome_2": {
+          "type": "dream_outcome",
+          "settings": {
+            "title": "Exercise without paying for it the next day",
+            "body": "A workout shouldn't cost you two days of recovery. When systemic inflammation normalizes, your joints handle load the way they're designed to. You train, you recover, you go again."
+          }
+        },
+        "outcome_3": {
+          "type": "dream_outcome",
+          "settings": {
+            "title": "Stop the supplement spiral",
+            "body": "Glucosamine, turmeric, fish oil, collagen, MSM, boswellia — your cabinet looks like a pharmacy and nothing works long-term. Origin targets the single upstream cause. One product replaces the stack."
+          }
+        },
+        "outcome_4": {
+          "type": "dream_outcome",
+          "settings": {
+            "title": "Feel your actual age",
+            "body": "You're not eighty. You shouldn't move like it. When gut-driven inflammation resolves, the gap between your calendar age and how your body feels closes fast. Your joints stop lying about how old you are."
+          }
+        },
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "quote": "My knees were so bad I stopped playing basketball at 34. My dad played cricket until he was 60 back in Lahore. Three weeks on Origin and the morning stiffness is gone. I played a full game last weekend — no swelling the next day.",
+            "name": "Tariq A. — Chicago, IL"
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "quote": "I was spending $130 a month on glucosamine, turmeric, and fish oil. My physiotherapist suggested it might be gut-related inflammation. Started Origin, dropped everything else. Four weeks in and my hands don't ache when I wake up anymore.",
+            "name": "Nalini V. — Scarborough, ON"
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "quote": "Doctors told me it was early arthritis. I'm 29. My grandmother in Lagos still pounds yam every morning. I knew something else was wrong. The research report explained it — endotoxins. Two weeks on Origin and the swelling in my wrists dropped noticeably.",
+            "name": "Chiamaka O. — Atlanta, GA"
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "quote": "I emigrated from Mexico City twelve years ago. Joint pain started around year three. Tried everything — cortisone shots, supplements, even acupuncture. Origin is the first thing that actually made the pain stop coming back. My wife started taking it too.",
+            "name": "Marco E. — Phoenix, AZ"
+          }
+        }
+      },
+      "block_order": [
+        "pathway_1",
+        "pathway_2",
+        "pathway_3",
+        "outcome_1",
+        "outcome_2",
+        "outcome_3",
+        "outcome_4",
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4"
+      ]
+    }
+  },
+  "order": [
+    "landing"
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "sections": {
+    "landing": {
+      "type": "landing-page",
+      "settings": {
+        "symptom_slug": "food-sensitivities",
+        "eyebrow": "Food Intolerance & Your Microbiome",
+        "headline": "You flew 8,000 miles and lost the ability to eat your mother's food. That's not genetics. That's a bacterial collapse.",
+        "subheadline": "Lactose intolerance, legume sensitivity, wheat reactions, onion bloating — these aren't random food allergies. Your gut bacteria produce the enzymes that digest these foods. L. acidophilus makes lactase. L. plantarum breaks down plant fibers. When you lose ancestral bacterial populations after immigration and dietary westernisation, you don't lose a preference — you lose the enzymatic machinery your family's cuisine was built on. Origin restores it.",
+        "cta_text": "Eat Your Family's Food Again — $34/mo",
+        "agitate_eyebrow": "Why You Can't Eat What Your Parents Ate",
+        "agitate_headline": "You didn't develop food sensitivities. You lost the bacteria that made your family's food digestible.",
+        "agitate_body": "Your mother's kitchen smelled like ghee, fermenting dahi, simmering dal. You ate everything she made — two plates, no hesitation. Roti with butter. Rice and rajma. Lassi after every meal. Then you left. University. A new country. A different grocery store. And somewhere between the frozen meals and the fast food, your gut changed. Now her cooking hurts you. She makes your favourite dish when you visit. You take three bites and excuse yourself.||You went to a doctor. Lactose intolerant. IBS. Fructan sensitivity. They gave you enzyme pills and a list of foods to avoid — half of which are the staples your culture is built on. Nobody asked the real question: why can your mother eat everything she cooks, but you can't? Why could you eat it ten years ago but not now?||The answer isn't genetics — your DNA didn't change at the airport. The answer is bacterial. Your microbiome produces lactase (digests dairy), alpha-galactosidase (digests legumes and beans), and fructan-processing enzymes (digests wheat, onions, garlic). Immigration and dietary westernisation deplete these specific populations. The HELIUS study proved it across 2,084 people and six ethnic groups: your microbiome composition is determined by ethnicity and environment more than any other factor. The food didn't change. Your bacterial capacity to process it did.",
+        "cost_headline": "Lactase pills, Beano, enzyme stacks, and FODMAP-safe groceries: $60–150/month managing what you've lost. Origin: $34/month rebuilding it.",
+        "cost_body": "Every lactase pill before chai. Every Beano tablet before dal. Every enzyme capsule before dinner at your parents' house. You're paying a monthly tax on a depleted microbiome — renting back capacity your gut bacteria should produce for free. The digestive enzyme market is $1.2 billion because an entire generation of immigrants is buying temporary access to their own cuisine. For $1.13/day, Origin restores the bacterial populations that produce these enzymes naturally — so the pills become unnecessary.",
+        "bridge_headline": "Your bacteria are your digestive enzymes. Lose the bacteria, lose the food.",
+        "bridge_body": "L. acidophilus is one of the primary bacterial producers of beta-galactosidase — the enzyme your body needs to digest lactose. Peer-reviewed research demonstrates that L. acidophilus supplementation significantly improves lactose digestion and reduces symptoms in lactose-intolerant individuals. L. plantarum produces enzymes that break down the complex oligosaccharides in legumes, onions, and cruciferous vegetables — the exact compounds that cause gas, cramping, and bloating when they reach your colon undigested. These aren't optional bacteria. They're the enzymatic workforce your ancestral diet depended on.",
+        "citation": "Oak & Jha, Nutrients, 2019 · Savaiano et al., American Journal of Clinical Nutrition, 2013 · Marco et al., Nature Reviews Gastroenterology & Hepatology, 2017",
+        "solution_headline": "Origin rebuilds your enzymatic capacity from the bacterial level up. The foods come back naturally.",
+        "solution_body": "L. acidophilus restores lactase production — dairy becomes tolerable again without enzyme pills. L. plantarum breaks down the complex carbohydrates in legumes, onions, and garlic before they ferment in your colon. B. lactis improves intestinal transit and nutrient absorption so food moves through properly. L. paracasei modulates the immune over-reactions that get misdiagnosed as food allergies. MAKTREK Bi-Pass delivery ensures these bacteria survive stomach acid. FOS prebiotic feeds them on arrival. Your gut doesn't just receive bacteria — it rebuilds a functioning enzymatic workforce.",
+        "lead_headline": "The research that explains why immigration changes what you can eat.",
+        "closing_quote": "Your grandmother never carried enzyme pills in her purse. She never Googled 'is paneer low-FODMAP.' She had the bacteria. Origin gives them back."
+      },
+      "blocks": {
+        "pathway_1": {
+          "type": "pathway",
+          "settings": {
+            "step": "01 — Bacterial Enzyme Loss",
+            "title": "Your ancestral digestive workforce disappears",
+            "body": "L. acidophilus (your lactase producer), L. plantarum (your fiber processor), and other enzyme-producing bacteria decline after dietary westernisation. Within a single generation, your gut loses the machinery that made your family's cuisine digestible. Vangay et al. documented this: immigration depletes ancestral bacterial strains measurably and predictably."
+          }
+        },
+        "pathway_2": {
+          "type": "pathway",
+          "settings": {
+            "step": "02 — The Intolerance Cascade",
+            "title": "One by one, your foods become enemies",
+            "body": "First dairy hurts. Then lentils cause gas. Then onions and garlic become impossible. Each new 'sensitivity' is another bacterial population falling below functional threshold. Without lactase, lactose ferments. Without alpha-galactosidase, legumes produce explosive gas. Without fructan-processing enzymes, wheat and alliums cause bloating. Your diet shrinks while the real problem grows."
+          }
+        },
+        "pathway_3": {
+          "type": "pathway",
+          "settings": {
+            "step": "03 — Origin Restores Capacity",
+            "title": "Rebuild enzymes, reclaim your cuisine",
+            "body": "L. acidophilus restores lactase production. L. plantarum restores complex carbohydrate processing. As these bacterial populations recover and re-establish, enzymatic capacity returns progressively. Foods that triggered symptoms become tolerable again — naturally, without pills, the way your body was designed to handle them."
+          }
+        },
+        "outcome_1": {
+          "type": "dream_outcome",
+          "settings": {
+            "title": "Eat your family's cooking without pain",
+            "body": "Your mother's dal. Your grandmother's yogurt rice. The dishes that define where you come from. When your gut rebuilds the enzymatic capacity to process them, family meals stop being a source of dread and become what they were always meant to be."
+          }
+        },
+        "outcome_2": {
+          "type": "dream_outcome",
+          "settings": {
+            "title": "Stop carrying enzyme pills everywhere",
+            "body": "Lactase before chai. Beano before beans. Alpha-gal before every family dinner. When your microbiome produces these enzymes naturally again, the pill case stays in the drawer. Your gut does the work it was built to do."
+          }
+        },
+        "outcome_3": {
+          "type": "dream_outcome",
+          "settings": {
+            "title": "Travel and eat without fear",
+            "body": "Street food in Delhi. Night markets in Taipei. A grandmother's kitchen in Lagos. When your gut can handle ancestral cuisine again, travel stops being a digestive minefield and becomes the homecoming it should be."
+          }
+        },
+        "outcome_4": {
+          "type": "dream_outcome",
+          "settings": {
+            "title": "Accept every dinner invitation",
+            "body": "No more scanning menus for safe options. No more explaining your restrictions at someone's home. No more declining invitations because you don't know what they're serving. When your gut works, social eating becomes social again."
+          }
+        },
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "quote": "My nani makes kheer every Eid. I've had to say no for four years — the milk destroys me. Last month I ate a full bowl and waited for the pain. It never came. I called my mom at midnight crying. She said 'your body just remembered.' She was right, but it wasn't my body — it was my bacteria.",
+            "name": "Amira K. — Houston, TX"
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "quote": "Moved from Seoul to Vancouver at 22. Within two years I couldn't eat kimchi jjigae without bloating so bad I looked pregnant. My mom said I was being dramatic. Started Origin and four weeks later I had doenjang-guk and japchae at her house — zero issues. She still thinks I was being dramatic but at least I can eat again.",
+            "name": "Eunji P. — Vancouver, BC"
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "quote": "Black beans and plantains — that's my family's food. Frijoles negros with every meal growing up in Guatemala. After ten years in the States I couldn't eat beans without clearing the room. My doctor said take Beano forever. Origin gave me my food back in three weeks. I don't buy Beano anymore.",
+            "name": "Carlos M. — Chicago, IL"
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "quote": "Nigerian family, born in London. Egusi soup, pounded yam, moi moi — I grew up on all of it. By 25 I couldn't eat any of it without stomach cramps for hours. Gastro said IBS, take peppermint oil. I read the BaseCode research report instead. Five weeks on Origin and I'm eating my mum's jollof rice again. The real one, with all the pepper.",
+            "name": "Chiamaka O. — Birmingham, UK"
+          }
+        }
+      },
+      "block_order": [
+        "pathway_1",
+        "pathway_2",
+        "pathway_3",
+        "outcome_1",
+        "outcome_2",
+        "outcome_3",
+        "outcome_4",
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4"
+      ]
+    }
+  },
+  "order": [
+    "landing"
+  ]
+}

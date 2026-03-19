@@ -1,0 +1,155 @@
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__grid">
+      <!-- Products Column -->
+      <div>
+        <h3 class="footer__heading hide-mobile">{{ section.settings.col1_heading | default: 'Products' }}</h3>
+        <button class="footer__accordion-toggle hide-desktop" aria-expanded="false" data-accordion-toggle>
+          <span class="footer__heading" style="margin-bottom: 0;">{{ section.settings.col1_heading | default: 'Products' }}</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="footer__accordion-content" data-accordion-content>
+          {%- for link in section.settings.col1_menu.links -%}
+            <a href="{{ link.url }}" class="footer__link">{{ link.title }}</a>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <!-- Info Column -->
+      <div>
+        <h3 class="footer__heading hide-mobile">{{ section.settings.col2_heading | default: 'Info' }}</h3>
+        <button class="footer__accordion-toggle hide-desktop" aria-expanded="false" data-accordion-toggle>
+          <span class="footer__heading" style="margin-bottom: 0;">{{ section.settings.col2_heading | default: 'Info' }}</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="footer__accordion-content" data-accordion-content>
+          {%- for link in section.settings.col2_menu.links -%}
+            <a href="{{ link.url }}" class="footer__link">{{ link.title }}</a>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <!-- Social Column -->
+      <div>
+        <h3 class="footer__heading hide-mobile">{{ section.settings.col3_heading | default: 'Social' }}</h3>
+        <button class="footer__accordion-toggle hide-desktop" aria-expanded="false" data-accordion-toggle>
+          <span class="footer__heading" style="margin-bottom: 0;">{{ section.settings.col3_heading | default: 'Social' }}</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="footer__accordion-content" data-accordion-content>
+          {%- if settings.social_instagram != blank -%}
+            <a href="{{ settings.social_instagram }}" class="footer__link" target="_blank" rel="noopener">Instagram</a>
+          {%- endif -%}
+          {%- if settings.social_tiktok != blank -%}
+            <a href="{{ settings.social_tiktok }}" class="footer__link" target="_blank" rel="noopener">TikTok</a>
+          {%- endif -%}
+          {%- if settings.social_facebook != blank -%}
+            <a href="{{ settings.social_facebook }}" class="footer__link" target="_blank" rel="noopener">Facebook</a>
+          {%- endif -%}
+          {%- if settings.social_x != blank -%}
+            <a href="{{ settings.social_x }}" class="footer__link" target="_blank" rel="noopener">X (Twitter)</a>
+          {%- endif -%}
+          {%- if settings.social_youtube != blank -%}
+            <a href="{{ settings.social_youtube }}" class="footer__link" target="_blank" rel="noopener">YouTube</a>
+          {%- endif -%}
+          {%- if settings.social_linkedin != blank -%}
+            <a href="{{ settings.social_linkedin }}" class="footer__link" target="_blank" rel="noopener">LinkedIn</a>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- About Column -->
+      <div>
+        <h3 class="footer__heading">{{ section.settings.col4_heading | default: 'About BaseCode' }}</h3>
+        <p style="font-size: var(--text-sm); color: var(--color-text-light); line-height: 1.7;">
+          {{ section.settings.col4_text | default: 'Supplements informed by biological diversity research. Built in Toronto, backed by science, designed for your unique biology.' }}
+        </p>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer__bottom">
+      <div class="flex items-center gap-4" style="font-size: var(--text-xs); color: var(--color-text-light);">
+        <span>&copy; {{ 'now' | date: '%Y' }} BaseCode Health. All rights reserved.</span>
+        <a href="/policies/privacy-policy" class="footer__link" style="padding: 0;">Privacy</a>
+        <a href="/policies/terms-of-service" class="footer__link" style="padding: 0;">Terms</a>
+      </div>
+
+      <!-- Social Icons -->
+      <div class="footer__social">
+        {%- if settings.social_facebook != blank -%}
+          <a href="{{ settings.social_facebook }}" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+        {%- endif -%}
+        {%- if settings.social_x != blank -%}
+          <a href="{{ settings.social_x }}" target="_blank" rel="noopener" aria-label="X">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+        {%- endif -%}
+        {%- if settings.social_instagram != blank -%}
+          <a href="{{ settings.social_instagram }}" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          </a>
+        {%- endif -%}
+      </div>
+
+      <!-- Payment Badges -->
+      <div class="footer__payments">
+        {%- for type in shop.enabled_payment_types -%}
+          {{ type | payment_type_svg_tag: class: 'payment-icon' }}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "col1_heading",
+      "label": "Column 1 heading",
+      "default": "Products"
+    },
+    {
+      "type": "link_list",
+      "id": "col1_menu",
+      "label": "Column 1 menu",
+      "default": "footer"
+    },
+    {
+      "type": "text",
+      "id": "col2_heading",
+      "label": "Column 2 heading",
+      "default": "Info"
+    },
+    {
+      "type": "link_list",
+      "id": "col2_menu",
+      "label": "Column 2 menu",
+      "default": "footer"
+    },
+    {
+      "type": "text",
+      "id": "col3_heading",
+      "label": "Column 3 heading",
+      "default": "Social"
+    },
+    {
+      "type": "text",
+      "id": "col4_heading",
+      "label": "Column 4 heading",
+      "default": "About BaseCode"
+    },
+    {
+      "type": "textarea",
+      "id": "col4_text",
+      "label": "Column 4 text",
+      "default": "Supplements informed by biological diversity research. Built in Toronto, backed by science, designed for your unique biology."
+    }
+  ]
+}
+{% endschema %}

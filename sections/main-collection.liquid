@@ -1,0 +1,85 @@
+<section class="section bg-white">
+  <div class="container">
+    <!-- Collection Header -->
+    <div class="text-center mb-12">
+      <h1>{{ collection.title | default: 'All Products' }}</h1>
+      {%- if collection.description != blank -%}
+        <p style="font-size: var(--text-lg); color: var(--color-text-light); margin-top: var(--space-3); max-width: 600px; margin-left: auto; margin-right: auto;">
+          {{ collection.description }}
+        </p>
+      {%- endif -%}
+      <p style="font-size: var(--text-sm); color: var(--color-text-light); margin-top: var(--space-2);">
+        {{ 'collection.products_count' | t: count: collection.products_count }}
+      </p>
+    </div>
+
+    <!-- Sort -->
+    <div class="flex justify-between items-center mb-8" style="border-bottom: 1px solid var(--color-border); padding-bottom: var(--space-4);">
+      <span style="font-size: var(--text-sm); color: var(--color-text-light);">
+        {{ 'collection.products_count' | t: count: collection.products_count }}
+      </span>
+      <div class="flex items-center gap-2">
+        <label for="sort-select" style="font-size: var(--text-sm); font-weight: 500;">{{ 'collection.sort' | t }}:</label>
+        <select id="sort-select" class="form-input" style="width: auto; padding: var(--space-2) var(--space-4); font-size: var(--text-sm);" onchange="window.location.href = this.value;">
+          {%- for option in collection.sort_options -%}
+            <option value="{{ collection.url }}?sort_by={{ option.value }}" {% if collection.sort_by == option.value %}selected{% endif %}>
+              {{ option.name }}
+            </option>
+          {%- endfor -%}
+        </select>
+      </div>
+    </div>
+
+    <!-- Product Grid -->
+    {%- if collection.products.size > 0 -%}
+      <div class="collection-grid">
+        {%- for product in collection.products -%}
+          <div class="reveal-hidden reveal-delay-{{ forloop.index | modulo: 4 | plus: 1 }}">
+            {% render 'product-card', product: product, show_atc: true %}
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <!-- Pagination -->
+      {%- if paginate.pages > 1 -%}
+        <nav class="flex justify-center gap-2 mt-12" role="navigation" aria-label="Pagination">
+          {%- if paginate.previous -%}
+            <a href="{{ paginate.previous.url }}" class="btn btn--secondary btn--sm">&laquo; Previous</a>
+          {%- endif -%}
+          {%- for part in paginate.parts -%}
+            {%- if part.is_link -%}
+              <a href="{{ part.url }}" class="btn btn--secondary btn--sm">{{ part.title }}</a>
+            {%- else -%}
+              <span class="btn btn--primary btn--sm">{{ part.title }}</span>
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if paginate.next -%}
+            <a href="{{ paginate.next.url }}" class="btn btn--secondary btn--sm">Next &raquo;</a>
+          {%- endif -%}
+        </nav>
+      {%- endif -%}
+    {%- else -%}
+      <div class="text-center" style="padding: var(--space-16) 0;">
+        <p style="font-size: var(--text-lg); color: var(--color-text-light);">{{ 'collection.no_products' | t }}</p>
+        <a href="/collections/all" class="btn btn--primary mt-6">{{ 'cart.continue_shopping' | t }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection Page",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "min": 8,
+      "max": 32,
+      "step": 4,
+      "default": 16
+    }
+  ]
+}
+{% endschema %}

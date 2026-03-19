@@ -1,0 +1,36 @@
+<section class="section bg-white">
+  <div class="container">
+    <h1 class="text-center mb-10">{{ blog.title | default: 'Blog' }}</h1>
+    {%- paginate blog.articles by 9 -%}
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+        {%- for article in blog.articles -%}
+          <article class="blog-card reveal-hidden">
+            {%- if article.image -%}
+              <a href="{{ article.url }}" class="blog-card__image">
+                <img src="{{ article.image | image_url: width: 600 }}" alt="{{ article.image.alt | default: article.title }}" loading="lazy" sizes="(max-width: 767px) 100vw, 33vw">
+              </a>
+            {%- endif -%}
+            <p class="blog-card__date">{{ article.published_at | date: '%B %d, %Y' }}</p>
+            <h3 class="blog-card__title"><a href="{{ article.url }}">{{ article.title }}</a></h3>
+            <p class="blog-card__excerpt">{{ article.excerpt_or_content | strip_html | truncate: 160 }}</p>
+            <a href="{{ article.url }}" class="link">{{ 'blog.read_more' | t }}</a>
+          </article>
+        {%- endfor -%}
+      </div>
+      {%- if paginate.pages > 1 -%}
+        <nav class="flex justify-center gap-2 mt-12">
+          {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}" class="btn btn--secondary btn--sm">&laquo;</a>{%- endif -%}
+          {%- for part in paginate.parts -%}
+            {%- if part.is_link -%}<a href="{{ part.url }}" class="btn btn--secondary btn--sm">{{ part.title }}</a>
+            {%- else -%}<span class="btn btn--primary btn--sm">{{ part.title }}</span>{%- endif -%}
+          {%- endfor -%}
+          {%- if paginate.next -%}<a href="{{ paginate.next.url }}" class="btn btn--secondary btn--sm">&raquo;</a>{%- endif -%}
+        </nav>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Blog Page", "settings": [] }
+{% endschema %}

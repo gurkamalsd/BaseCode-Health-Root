@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "free-report": {
+      "type": "free-report-page",
+      "settings": {}
+    }
+  },
+  "order": ["free-report"]
+}

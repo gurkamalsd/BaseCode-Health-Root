@@ -1,0 +1,111 @@
+<section class="section bg-white">
+  <div class="container">
+    <div style="text-align: center; margin-bottom: var(--space-10);" class="reveal-hidden">
+      {%- if section.settings.subtitle != blank -%}
+        <p style="font-family: var(--font-heading); font-size: var(--text-sm); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-accent); margin-bottom: var(--space-3);">
+          {{ section.settings.subtitle }}
+        </p>
+      {%- endif -%}
+      <h2>{{ section.settings.heading | default: 'The science is clear.' }}</h2>
+    </div>
+
+    <div class="grid gap-8" style="grid-template-columns: 1fr;">
+      {%- for block in section.blocks -%}
+        <div class="reveal-hidden reveal-delay-{{ forloop.index }}" style="display: flex; gap: var(--space-6); align-items: flex-start; padding: var(--space-6); background: var(--color-cream); border-radius: var(--radius-lg);" {{ block.shopify_attributes }}>
+          <div style="flex-shrink: 0; width: 64px; height: 64px; background: var(--color-primary); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; color: var(--color-cream);">
+            <span style="font-family: var(--font-mono); font-size: var(--text-xl); font-weight: 700;">{{ block.settings.stat }}</span>
+          </div>
+          <div>
+            <h3 style="font-size: var(--text-lg); margin-bottom: var(--space-2); text-transform: none;">{{ block.settings.title }}</h3>
+            <p style="font-size: var(--text-sm); color: var(--color-text-light); line-height: 1.6; margin: 0;">{{ block.settings.text }}</p>
+            {%- if block.settings.source != blank -%}
+              <p style="font-size: var(--text-xs); color: var(--color-text-light); margin-top: var(--space-2); font-style: italic;">{{ block.settings.source }}</p>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.button_text != blank -%}
+      <div style="text-align: center; margin-top: var(--space-10);">
+        <a href="{{ section.settings.button_link | default: '/pages/science' }}" class="btn btn--primary btn--lg">
+          {{ section.settings.button_text }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Research Highlight",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "The Research"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The science is clear."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Read the Science"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link",
+      "default": "/pages/science"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Research stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "stat",
+          "label": "Stat number",
+          "default": "01"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "HELIUS Study: 2,084 subjects, 6 ethnic groups"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Biology — not diet, age, or lifestyle — is the strongest predictor of gut microbiome composition."
+        },
+        {
+          "type": "text",
+          "id": "source",
+          "label": "Source citation",
+          "default": "Deschasaux et al., 2018 — The BMJ"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Research Highlight",
+      "blocks": [
+        { "type": "stat", "settings": { "stat": "01", "title": "HELIUS Study: 2,084 subjects, 6 ethnic groups", "text": "Biology — not diet, age, or lifestyle — is the strongest predictor of gut microbiome composition.", "source": "Deschasaux et al., 2018 — The BMJ" } },
+        { "type": "stat", "settings": { "stat": "02", "title": "Microbiome shifts within one generation", "text": "Immigration and environmental changes cause ancestral microbiome depletion — replacing diverse bacteria with Western strains.", "source": "Vangay et al., 2018 — Cell Host & Microbe" } },
+        { "type": "stat", "settings": { "stat": "03", "title": "Most probiotics don't survive stomach acid", "text": "Without acid-protection delivery, up to 96% of probiotic bacteria die before reaching the gut. MAKTREK Bi-Pass solves this.", "source": "Govender et al., 2014 — Journal of Functional Foods" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

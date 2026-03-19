@@ -1,0 +1,52 @@
+<section class="section--sm bg-white">
+  <div class="container text-center">
+    {%- if section.settings.heading != blank -%}
+      <p style="font-family: var(--font-heading); font-size: var(--text-sm); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-text-light); margin-bottom: var(--space-6);">
+        {{ section.settings.heading }}
+      </p>
+    {%- endif -%}
+    <div class="press-logos__track">
+      {%- for block in section.blocks -%}
+        {%- if block.settings.logo != blank -%}
+          <img src="{{ block.settings.logo | image_url: width: 200 }}" alt="{{ block.settings.name }}" class="press-logos__item" loading="lazy" height="32" {{ block.shopify_attributes }}>
+        {%- elsif block.settings.name != blank -%}
+          <span class="press-logos__item" style="height: auto; font-family: var(--font-heading); font-size: var(--text-xl); font-weight: 700; text-transform: uppercase;" {{ block.shopify_attributes }}>{{ block.settings.name }}</span>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Press Logos",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Featured On"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo image"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Brand name (fallback if no image)",
+          "default": "Publication"
+        }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Press Logos" }]
+}
+{% endschema %}

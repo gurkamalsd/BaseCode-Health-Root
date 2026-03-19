@@ -1,0 +1,6 @@
+{
+  "sections": {
+    "contact": { "type": "contact-form", "settings": { "heading": "Contact Us", "text": "Have a question? Email hello@basecodehealth.com or use the form below." } }
+  },
+  "order": ["contact"]
+}

@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>
+      {%- if template == 'index' -%}
+        BaseCode Health — Supplements Built for Your Biology
+      {%- elsif template contains 'product' -%}
+        {{ product.title }} — Probiotic Informed by Biological Diversity Research | BaseCode Health
+      {%- elsif template == '404' -%}
+        Page Not Found | BaseCode Health
+      {%- elsif template.suffix == 'landing-estrogen' -%}
+        Estrogen Balance Starts in Your Gut | BaseCode Health
+      {%- elsif template.suffix == 'landing-testosterone' -%}
+        Your Testosterone Problem Starts in Your Gut | BaseCode Health
+      {%- elsif template.suffix == 'landing-joint-pain' -%}
+        Joint Pain Is Gut Inflammation | BaseCode Health
+      {%- elsif template.suffix == 'landing-brain-fog' -%}
+        Brain Fog Starts in Your Gut | BaseCode Health
+      {%- elsif template.suffix == 'landing-bloating' -%}
+        Bloating After Dietary Change? It's Your Microbiome | BaseCode Health
+      {%- elsif template.suffix == 'landing-body-odor' -%}
+        Body Odor Is a Gut Problem | BaseCode Health
+      {%- elsif template.suffix == 'landing-food-sensitivities' -%}
+        Food Sensitivities Start in Your Microbiome | BaseCode Health
+      {%- elsif template.suffix == 'landing-skin' -%}
+        Your Skin Problems Start in Your Gut | BaseCode Health
+      {%- elsif template.suffix == 'quiz' -%}
+        Biology Score — Free 2-Minute Quiz | BaseCode Health
+      {%- elsif template.suffix == 'free-report' -%}
+        The Biology Gap — Free Research Report | BaseCode Health
+      {%- elsif template.suffix == 'about' -%}
+        About BaseCode Health — Supplements Built for Your Biology
+      {%- elsif template.suffix == 'science' -%}
+        The Science — Biological Diversity Research | BaseCode Health
+      {%- elsif template.suffix == 'faq' -%}
+        Frequently Asked Questions | BaseCode Health
+      {%- elsif template.suffix == 'contact' -%}
+        Contact Us | BaseCode Health
+      {%- elsif template contains 'collection' -%}
+        {{ collection.title }} | BaseCode Health
+      {%- elsif template contains 'blog' -%}
+        {{ blog.title }} | BaseCode Health
+      {%- elsif template contains 'article' -%}
+        {{ article.title }} | BaseCode Health
+      {%- elsif template == 'cart' -%}
+        Your Cart | BaseCode Health
+      {%- elsif template == 'search' -%}
+        Search Results | BaseCode Health
+      {%- else -%}
+        {{ page_title }} | BaseCode Health
+      {%- endif -%}
+    </title>
+
+    {%- capture seo_description -%}
+      {%- if template == 'index' -%}
+        Your biology is unique — your supplements should be too. Origin is the first probiotic designed for your unique biology. 40B CFU, 4 strains, MAKTREK Bi-Pass delivery. From $34/mo.
+      {%- elsif template.suffix == 'landing-estrogen' -%}
+        Your gut controls estrogen metabolism through the estrobolome. When key bacteria deplete, hot flashes, mood swings, and weight gain follow. Origin supports the gut foundation your hormones depend on.
+      {%- elsif template.suffix == 'landing-testosterone' -%}
+        Your gut bacteria regulate testosterone through the HPG axis. When your microbiome shifts, energy, strength, and drive decline. Origin supports the gut-testosterone connection.
+      {%- elsif template.suffix == 'landing-joint-pain' -%}
+        Joint pain isn't aging — it's gut-driven inflammation. When your intestinal barrier weakens, endotoxins trigger chronic inflammation. Origin restores barrier integrity with 4 targeted strains.
+      {%- elsif template.suffix == 'landing-brain-fog' -%}
+        Brain fog isn't burnout. It's your gut leaking inflammation into your brain via the gut-brain axis. Origin delivers 4 strains that support neuroinflammation reduction and mental clarity.
+      {%- elsif template.suffix == 'landing-bloating' -%}
+        Chronic bloating after dietary changes? Your gut bacteria lost the enzymes to digest your food. Origin restores the bacterial community your digestion depends on.
+      {%- elsif template.suffix == 'landing-body-odor' -%}
+        Body odor is a metabolic processing problem that starts in your gut. When key bacteria deplete, volatile compounds build up. Origin supports the metabolic pathways that neutralize them.
+      {%- elsif template.suffix == 'landing-food-sensitivities' -%}
+        Food sensitivities develop when your gut bacteria lose the enzymes to digest certain foods. Origin restores bacterial enzyme production so you can eat the foods you love again.
+      {%- elsif template.suffix == 'landing-skin' -%}
+        Acne, eczema, and psoriasis often start in the gut, not the skin. The gut-skin axis drives inflammatory skin conditions. Origin supports the gut foundation your skin depends on.
+      {%- elsif template.suffix == 'quiz' -%}
+        Take the free 2-minute Biology Score quiz. 7 research-backed questions to assess your microbiome depletion risk. Instant results, no email required.
+      {%- elsif template.suffix == 'free-report' -%}
+        Download The Biology Gap — a free 6-page research report covering the HELIUS study, microbiome depletion, and why biological diversity demands a different approach to supplementation.
+      {%- elsif page_description != blank -%}
+        {{ page_description }}
+      {%- else -%}
+        Origin is the first probiotic informed by biological diversity research. 40B CFU, 4 strains, MAKTREK Bi-Pass delivery, FOS prebiotic. From $34/mo.
+      {%- endif -%}
+    {%- endcapture -%}
+    <meta name="description" content="{{ seo_description | strip_newlines | strip }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32 }}">
+    {%- endif -%}
+
+    <!-- Preconnects -->
+    <link rel="preconnect" href="https://cdn.shopify.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Google Fonts: Inter (body) + Instrument Sans (headings) -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;700&display=swap"></noscript>
+
+    <!-- Theme CSS -->
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+
+    <!-- SEO meta -->
+    <meta name="author" content="BaseCode Health">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="theme-color" content="{{ settings.color_primary | default: '#1C2E23' }}">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="{% if template contains 'product' %}product{% elsif template contains 'article' %}article{% else %}website{% endif %}">
+    <meta property="og:url" content="{{ canonical_url }}">
+    <meta property="og:site_name" content="BaseCode Health">
+    <meta property="og:title" content="{{ page_title }}">
+    <meta property="og:description" content="{{ seo_description | strip_newlines | strip }}">
+    {%- if settings.og_image != blank -%}
+      <meta property="og:image" content="{{ settings.og_image | image_url: width: 1200 }}">
+      <meta property="og:image:width" content="1200">
+      <meta property="og:image:height" content="630">
+    {%- endif -%}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@BaseCodeHealth">
+    <meta name="twitter:title" content="{{ page_title }}">
+    <meta name="twitter:description" content="{{ seo_description | strip_newlines | strip }}">
+    {%- if settings.og_image != blank -%}
+      <meta name="twitter:image" content="{{ settings.og_image | image_url: width: 1200 }}">
+    {%- endif -%}
+
+    <!-- Google Analytics 4 -->
+    {%- if settings.ga4_id != blank -%}
+      {% render 'ga4-tag' %}
+    {%- endif -%}
+
+    <!-- Meta Pixel -->
+    {%- if settings.meta_pixel_id != blank -%}
+      {% render 'meta-pixel' %}
+    {%- endif -%}
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "{{ shop.url }}/#organization",
+          "name": "BaseCode Health",
+          "url": "{{ shop.url }}",
+          "description": "Supplements informed by biological diversity research. Your biology isn't one-size-fits-all.",
+          "email": "hello@basecodehealth.com",
+          "foundingDate": "2025",
+          "sameAs": [
+            "https://www.instagram.com/basecodehealth",
+            "https://x.com/BaseCodeHealth"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "{{ shop.url }}/#website",
+          "name": "BaseCode Health",
+          "url": "{{ shop.url }}",
+          "publisher": { "@id": "{{ shop.url }}/#organization" },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "{{ shop.url }}/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }
+        {%- if template contains 'product' -%}
+        ,{
+          "@type": "Product",
+          "@id": "{{ shop.url }}/#product",
+          "name": "{{ product.title }}",
+          "brand": { "@type": "Brand", "name": "BaseCode Health" },
+          "description": "{{ product.description | strip_html | truncate: 250 }}",
+          "sku": "{{ product.selected_or_first_available_variant.sku }}",
+          "url": "{{ shop.url }}{{ product.url }}",
+          "image": "{{ product.featured_image | image_url: width: 1200 }}",
+          "offers": {
+            "@type": "Offer",
+            "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+            "url": "{{ shop.url }}{{ product.url }}",
+            "price": "{{ product.price | money_without_currency }}",
+            "priceCurrency": "{{ shop.currency }}"
+          }
+        }
+        {%- endif -%}
+      ]
+    }
+    </script>
+
+    {{ content_for_header }}
+  </head>
+
+  <body class="template-{{ template | replace: '.', '-' }}" data-template="{{ template }}">
+    <!-- Meta Pixel noscript fallback -->
+    {%- if settings.meta_pixel_id != blank -%}
+      <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id={{ settings.meta_pixel_id }}&ev=PageView&noscript=1"></noscript>
+    {%- endif -%}
+
+    <!-- Skip navigation -->
+    <a href="#main-content" class="skip-nav">Skip to content</a>
+
+    {% sections 'header-group' %}
+
+    <main id="main-content" role="main">
+      {{ content_for_layout }}
+    </main>
+
+    {% sections 'footer-group' %}
+
+    <!-- Cart Drawer -->
+    {% render 'cart-drawer' %}
+
+    <!-- Theme JS -->
+    <script src="{{ 'theme.js' | asset_url }}" defer></script>
+
+    <!-- Tracking events helper -->
+    {% render 'tracking-events' %}
+  </body>
+</html>

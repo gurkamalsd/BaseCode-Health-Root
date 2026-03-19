@@ -1,0 +1,8 @@
+{
+  "sections": {
+    "main": { "type": "main-page", "settings": {} },
+    "mission": { "type": "mission", "settings": { "subtitle": "Our Story", "heading": "Built from biology outward.", "button_text": "Read the Science", "button_link": "/pages/science" }, "blocks": { "i1": { "type": "item", "settings": { "text": "Founded in Toronto by Gurkamal Dhahan." } }, "i2": { "type": "item", "settings": { "text": "Informed by the HELIUS study and biological diversity research." } }, "i3": { "type": "item", "settings": { "text": "Every product designed for biological diversity, not generic formulas." } } }, "block_order": ["i1", "i2", "i3"] },
+    "newsletter": { "type": "newsletter", "settings": { "heading": "Join the journey", "text": "Get research updates and product launches.", "bg_color": "#1C2E23", "text_color": "#F5F2EC" } }
+  },
+  "order": ["main", "mission", "newsletter"]
+}
