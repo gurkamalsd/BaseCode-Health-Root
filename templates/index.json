@@ -209,11 +209,11 @@
   "order": [
     "hero",
     "features",
-    "image-banner",
     "research",
     "benefits",
     "mission",
     "brand-story",
+    "image-banner",
     "testimonials",
     "faq",
     "newsletter"
