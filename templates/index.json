@@ -1,124 +1,18 @@
-{
-  "sections": {
-    "hero": {
-      "type": "hero",
-      "settings": {
-        "bg_color": "#F5F2EC",
-        "show_social_proof": true,
-        "social_proof_text": "Backed by biological diversity research",
-        "subtitle": "The Future of Supplements",
-        "heading": "Your biology is unique. Your supplements should be too.",
-        "text": "Origin is the first probiotic informed by biological diversity research. 40 billion CFU. 4 targeted strains. MAKTREK delivery.",
-        "button_text": "Discover Now",
-        "button_link": "/products/origin",
-        "guarantee_text": "30-Day Money-Back Guarantee"
-      }
-    },
-    "trust-badges": {
-      "type": "trust-badges",
-      "settings": {
-        "bg_color": "#F5F2EC"
-      },
-      "blocks": {
-        "b1": { "type": "badge", "settings": { "icon": "leaf", "title": "Vegan", "text": "HPMC veggie capsules. No gelatin, no animal products." } },
-        "b2": { "type": "badge", "settings": { "icon": "award", "title": "cGMP Certified", "text": "Manufactured in a cGMP-certified facility." } },
-        "b3": { "type": "badge", "settings": { "icon": "zap", "title": "MAKTREK Delivery", "text": "Acid-protection ensures bacteria arrive alive." } },
-        "b4": { "type": "badge", "settings": { "icon": "check-circle", "title": "Third-Party Tested", "text": "Every batch independently verified." } },
-        "b5": { "type": "badge", "settings": { "icon": "shield", "title": "No Gelatin", "text": "White HPMC capsules. Clean formula." } },
-        "b6": { "type": "badge", "settings": { "icon": "heart", "title": "Made in USA", "text": "Manufactured in a US-based cGMP facility." } }
-      },
-      "block_order": ["b1", "b2", "b3", "b4", "b5", "b6"]
-    },
-    "image-banner": {
-      "type": "image-banner",
-      "settings": {
-        "heading": "Your gut controls more than digestion.",
-        "height": 400
-      }
-    },
-    "featured-product": {
-      "type": "featured-product",
-      "settings": {
-        "subtitle": "Biology-First Formula",
-        "text": "40 billion CFU. 4 targeted strains. MAKTREK Bi-Pass delivery. FOS prebiotic. From $34/mo.",
-        "button_text": "Shop Now",
-        "button_link": "/products/origin",
-        "bg_color": "#C4783A",
-        "text_color": "#FFFFFF"
-      }
-    },
-    "research": {
-      "type": "research-highlight",
-      "settings": {
-        "subtitle": "The Research",
-        "heading": "The science is clear.",
-        "button_text": "Read the Science",
-        "button_link": "/pages/science"
-      },
-      "blocks": {
-        "s1": { "type": "stat", "settings": { "stat": "01", "title": "HELIUS Study: 2,084 subjects, 6 ethnic groups", "text": "Biology is the strongest predictor of gut microbiome composition.", "source": "Deschasaux et al., 2018" } },
-        "s2": { "type": "stat", "settings": { "stat": "02", "title": "Microbiome shifts within one generation", "text": "Environmental changes cause ancestral microbiome depletion.", "source": "Vangay et al., 2018" } },
-        "s3": { "type": "stat", "settings": { "stat": "03", "title": "Most probiotics fail delivery", "text": "Without acid-protection, up to 96% of bacteria die before reaching the gut.", "source": "Govender et al., 2014" } }
-      },
-      "block_order": ["s1", "s2", "s3"]
-    },
-    "mission": {
-      "type": "mission",
-      "settings": {
-        "subtitle": "Our Mission",
-        "heading": "Supplements informed by biological diversity research.",
-        "button_text": "Read More",
-        "button_link": "/pages/science"
-      },
-      "blocks": {
-        "i1": { "type": "item", "settings": { "text": "Informed by the HELIUS study (2,084 subjects, 6 ethnic groups)." } },
-        "i2": { "type": "item", "settings": { "text": "Strains selected for biological diversity, not generic formulas." } },
-        "i3": { "type": "item", "settings": { "text": "MAKTREK acid-protection ensures bacteria arrive alive." } }
-      },
-      "block_order": ["i1", "i2", "i3"]
-    },
-    "brand-story": {
-      "type": "brand-story",
-      "settings": {
-        "heading": "Your biology is unique. Your supplements should be too.",
-        "text": "At BaseCode Health, we build supplements informed by biological diversity research. The supplement industry ignores biological diversity. We do not. Origin is our first product and it will not be the last.",
-        "button_text": "About Us",
-        "button_link": "/pages/about",
-        "bg_color": "#F5F2EC"
-      }
-    },
-    "testimonials": {
-      "type": "testimonials",
-      "settings": {
-        "heading": "What our customers say"
-      },
-      "blocks": {
-        "r1": { "type": "testimonial", "settings": { "quote": "Finally, a supplement that considers my biology. I noticed a difference within the first week.", "author": "Priya S." } },
-        "r2": { "type": "testimonial", "settings": { "quote": "Origin is the first probiotic that actually works for my body.", "author": "Marcus T." } }
-      },
-      "block_order": ["r1", "r2"]
-    },
-    "newsletter": {
-      "type": "newsletter",
-      "settings": {
-        "heading": "Stay in the loop",
-        "text": "Get research updates, product launches, and biology tips.",
-        "button_text": "Subscribe",
-        "bg_color": "#1C2E23",
-        "text_color": "#F5F2EC"
-      }
-    }
-  },
-  "order": [
-    "hero",
-    "trust-badges",
-    "image-banner",
-    "featured-product",
-    "research",
-    "mission",
-    "brand-story",
-    "testimonials",
-    "newsletter"
-  ]
-}
-
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{                                                                                                                     
+    "sections": {                                                                                                       
+      "hero": {                                                                                                         
+        "type": "hero",
+        "settings": {}                                                                                                  
+      }                                                                                                               
+    },                                                                                                                  
+    "order": ["hero"]
+  }      
