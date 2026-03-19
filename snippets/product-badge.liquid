@@ -1,0 +1,26 @@
+{%- comment -%}
+  Product badge snippet
+  Usage: {% render 'product-badge', product: product %}
+  Checks product tags against settings-defined badges
+{%- endcomment -%}
+
+{%- for tag in product.tags -%}
+  {%- if tag == 'sale' or tag == 'Sale' -%}
+    <span class="product-badge product-badge--sale">Sale</span>
+  {%- elsif tag == 'new' or tag == 'New' -%}
+    <span class="product-badge product-badge--new">New</span>
+  {%- elsif tag == 'bestseller' or tag == 'Bestseller' -%}
+    <span class="product-badge product-badge--bestseller">Bestseller</span>
+  {%- elsif tag == 'limited' or tag == 'Limited' -%}
+    <span class="product-badge product-badge--limited">Limited</span>
+  {%- endif -%}
+{%- endfor -%}
+
+{%- if product.compare_at_price > product.price -%}
+  {%- assign discount_pct = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
+  <span class="product-badge product-badge--sale">-{{ discount_pct }}%</span>
+{%- endif -%}
+
+{%- unless product.available -%}
+  <span class="product-badge product-badge--soldout">Sold Out</span>
+{%- endunless -%}

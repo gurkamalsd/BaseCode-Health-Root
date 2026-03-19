@@ -1,0 +1,121 @@
+{%- comment -%}BaseCode Root - collage{%- endcomment -%}
+<section class="section" style="background:{{ section.settings.bg_color | default: '#FFFFFF' }};">
+  <div class="{% if section.settings.full_width %}container--wide{% else %}container{% endif %}">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="text-center mb-10">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <div class="collage" style="gap:{{ section.settings.gap | default: 8 }}px;">
+      {%- for block in section.blocks -%}
+        <div class="collage__item collage__item--{{ block.settings.size | default: 'medium' }}" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            <a href="{{ block.settings.link | default: '#' }}" class="collage__link">
+              <img
+                src="{{ block.settings.image | image_url: width: 1200 }}"
+                srcset="{{ block.settings.image | image_url: width: 600 }} 600w, {{ block.settings.image | image_url: width: 1200 }} 1200w"
+                alt="{{ block.settings.heading | default: block.settings.image.alt }}"
+                loading="lazy"
+                class="collage__img"
+              >
+              {%- if block.settings.heading != blank or block.settings.button_text != blank -%}
+                <div class="collage__overlay" style="color:{{ block.settings.text_color | default: '#FFFFFF' }};">
+                  {%- if block.settings.subheading != blank -%}
+                    <p class="collage__subheading">{{ block.settings.subheading }}</p>
+                  {%- endif -%}
+                  {%- if block.settings.heading != blank -%}
+                    <h3 class="collage__heading">{{ block.settings.heading }}</h3>
+                  {%- endif -%}
+                  {%- if block.settings.button_text != blank -%}
+                    <span class="btn btn--white btn--sm">{{ block.settings.button_text }}</span>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            </a>
+          {%- else -%}
+            <div style="width:100%;height:100%;background:var(--color-cream);display:flex;align-items:center;justify-content:center;">
+              <span style="color:var(--color-text-light);">Image {{ forloop.index }}</span>
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .collage {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 300px;
+  }
+  @media (min-width: 768px) {
+    .collage { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 400px; }
+  }
+  .collage__item { position: relative; overflow: hidden; border-radius: var(--radius-md); }
+  .collage__item--large { grid-column: span 2; grid-row: span 2; }
+  .collage__item--tall { grid-row: span 2; }
+  .collage__item--wide { grid-column: span 2; }
+  .collage__link { display: block; width: 100%; height: 100%; position: relative; }
+  .collage__img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.6s var(--ease-out);
+  }
+  .collage__item:hover .collage__img { transform: scale(1.05); }
+  .collage__overlay {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: var(--space-6);
+    background: linear-gradient(transparent 40%, rgba(0,0,0,0.6));
+  }
+  .collage__subheading {
+    font-size: var(--text-xs); text-transform: uppercase;
+    letter-spacing: 0.1em; opacity: 0.8; margin-bottom: var(--space-1);
+  }
+  .collage__heading {
+    font-family: var(--font-heading); font-size: var(--text-2xl);
+    font-weight: 700; text-transform: uppercase; margin-bottom: var(--space-3);
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Collage",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#FFFFFF" },
+    { "type": "range", "id": "gap", "label": "Gap (px)", "min": 0, "max": 24, "step": 4, "default": 8 },
+    { "type": "checkbox", "id": "full_width", "label": "Full width", "default": false }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "subheading", "label": "Subheading" },
+        { "type": "text", "id": "heading", "label": "Heading" },
+        { "type": "text", "id": "button_text", "label": "Button text" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "color", "id": "text_color", "label": "Text color", "default": "#FFFFFF" },
+        {
+          "type": "select", "id": "size", "label": "Size", "default": "medium",
+          "options": [
+            { "value": "medium", "label": "Medium (1x1)" },
+            { "value": "large", "label": "Large (2x2)" },
+            { "value": "tall", "label": "Tall (1x2)" },
+            { "value": "wide", "label": "Wide (2x1)" }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Collage",
+    "blocks": [
+      { "type": "image", "settings": { "heading": "Shop All", "size": "large" } },
+      { "type": "image", "settings": { "heading": "Gut Health", "size": "medium" } },
+      { "type": "image", "settings": { "heading": "Energy", "size": "medium" } }
+    ]
+  }]
+}
+{% endschema %}

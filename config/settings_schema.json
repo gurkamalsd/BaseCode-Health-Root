@@ -146,6 +146,36 @@
           { "value": "drawer", "label": "Slide-out drawer" },
           { "value": "page", "label": "Cart page" }
         ]
+      },
+      {
+        "type": "header",
+        "content": "Cross-sell"
+      },
+      {
+        "type": "checkbox",
+        "id": "cross_sell_enable",
+        "label": "Enable cross-sell in cart",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "cross_sell_heading",
+        "label": "Cross-sell heading",
+        "default": "You might also like"
+      },
+      {
+        "type": "collection",
+        "id": "cross_sell_collection",
+        "label": "Cross-sell collection"
+      },
+      {
+        "type": "range",
+        "id": "cross_sell_limit",
+        "label": "Max products to show",
+        "min": 2,
+        "max": 8,
+        "step": 1,
+        "default": 4
       }
     ]
   },

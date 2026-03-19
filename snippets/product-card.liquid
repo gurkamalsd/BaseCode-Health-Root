@@ -6,6 +6,9 @@
 <div class="product-card">
   <a href="{{ product.url }}" class="product-card__link" aria-label="{{ product.title }}">
     <div class="product-card__image-wrapper" style="background-color: {{ bg_color | default: 'var(--color-cream)' }};">
+      <div style="position:absolute;top:var(--space-2);left:var(--space-2);z-index:2;display:flex;flex-direction:column;gap:var(--space-1);">
+        {% render 'product-badge', product: product %}
+      </div>
       {%- if product.featured_image -%}
         <img
           src="{{ product.featured_image | image_url: width: 600 }}"

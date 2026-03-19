@@ -45,6 +45,10 @@
     {%- endif -%}
   </div>
 
+  {%- if cart.item_count > 0 and settings.cross_sell_enable -%}
+    {% render 'cross-sell' %}
+  {%- endif -%}
+
   {%- if cart.item_count > 0 -%}
     <div class="cart-drawer__footer">
       <div class="flex justify-between items-center" style="margin-bottom: var(--space-4);">

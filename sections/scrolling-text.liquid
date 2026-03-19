@@ -1,0 +1,68 @@
+{%- comment -%}BaseCode Root - scrolling-text{%- endcomment -%}
+<section class="scrolling-text" style="background:{{ section.settings.bg_color | default: '#1C2E23' }}; color:{{ section.settings.text_color | default: '#F5F2EC' }}; padding:{{ section.settings.padding | default: 16 }}px 0; overflow:hidden;">
+  <div class="scrolling-text__track" style="animation-duration:{{ section.settings.speed | default: 20 }}s;">
+    {%- for i in (1..4) -%}
+      {%- for block in section.blocks -%}
+        <span class="scrolling-text__item" style="font-size:{{ section.settings.font_size | default: 14 }}px;" {{ block.shopify_attributes }}>
+          {{ block.settings.text }}
+          {%- if block.settings.icon -%}
+            <span style="margin:0 var(--space-4);">{{ block.settings.icon }}</span>
+          {%- else -%}
+            <span style="margin:0 var(--space-6); opacity:0.4;">&#x2022;</span>
+          {%- endif -%}
+        </span>
+      {%- endfor -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+<style>
+  .scrolling-text { position: relative; white-space: nowrap; }
+  .scrolling-text__track {
+    display: inline-flex;
+    animation: scrollText linear infinite;
+  }
+  .scrolling-text__item {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+  }
+  @keyframes scrollText {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-25%); }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Scrolling Text",
+  "settings": [
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#1C2E23" },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#F5F2EC" },
+    { "type": "range", "id": "speed", "label": "Speed (seconds)", "min": 10, "max": 60, "step": 5, "default": 25 },
+    { "type": "range", "id": "font_size", "label": "Font size (px)", "min": 10, "max": 48, "step": 2, "default": 14 },
+    { "type": "range", "id": "padding", "label": "Vertical padding (px)", "min": 8, "max": 40, "step": 4, "default": 16 }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Text item",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Free shipping on subscriptions" },
+        { "type": "text", "id": "icon", "label": "Separator icon (emoji)", "info": "Leave blank for bullet dot" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Scrolling Text",
+    "blocks": [
+      { "type": "text", "settings": { "text": "Free shipping on subscriptions" } },
+      { "type": "text", "settings": { "text": "30-day money-back guarantee" } },
+      { "type": "text", "settings": { "text": "Made in a cGMP facility" } },
+      { "type": "text", "settings": { "text": "Use code FOUNDER20 for 20% off" } }
+    ]
+  }]
+}
+{% endschema %}
