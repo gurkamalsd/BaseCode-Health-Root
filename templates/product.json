@@ -1,51 +1,178 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "main-product": {
       "type": "main-product",
-      "settings": {}
-    },
-    "trust-badges": {
-      "type": "trust-badges",
-      "settings": { "bg_color": "#FFFFFF" },
-      "blocks": {
-        "badge-1": { "type": "badge", "settings": { "icon": "leaf", "title": "Vegan", "text": "HPMC veggie capsules." } },
-        "badge-2": { "type": "badge", "settings": { "icon": "award", "title": "cGMP Certified", "text": "cGMP-certified facility." } },
-        "badge-3": { "type": "badge", "settings": { "icon": "zap", "title": "MAKTREK Delivery", "text": "Acid-protection technology." } },
-        "badge-4": { "type": "badge", "settings": { "icon": "check-circle", "title": "Third-Party Tested", "text": "Independently verified." } }
+      "settings": {
+        "bg_color": "#FFFFFF",
+        "gallery_layout": "thumbnails_below",
+        "button_style": "primary",
+        "show_vendor": true,
+        "show_rating": true,
+        "rating_value": "4.8",
+        "rating_count": 5,
+        "show_selling_plans": true,
+        "subscribe_discount_cents": 600,
+        "show_trust_signals": true,
+        "show_sticky_atc": true,
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "enable_animation": true
       },
-      "block_order": ["badge-1", "badge-2", "badge-3", "badge-4"]
+      "blocks": {
+        "tab-description": {
+          "type": "tab",
+          "settings": {
+            "title": "Description",
+            "content_source": "product_description"
+          }
+        },
+        "tab-ingredients": {
+          "type": "tab",
+          "settings": {
+            "title": "Ingredients",
+            "content_source": "custom",
+            "custom_content": "<p><strong>40 Billion CFU — 4 Targeted Strains</strong></p><ul><li><strong>L. acidophilus</strong> — Gut barrier integrity, digestion, lactose metabolism</li><li><strong>B. lactis</strong> — Immune function, regularity, barrier support</li><li><strong>L. plantarum</strong> — Anti-inflammatory, cross-cultural fermented food strain</li><li><strong>L. paracasei</strong> — Immune modulation, allergy response, gut-brain axis</li></ul><p><strong>Delivery System</strong></p><ul><li><strong>MAKTREK Bi-Pass</strong> — Marine polysaccharide acid-protection</li><li><strong>FOS Prebiotic</strong> — Feeds bacteria on arrival</li></ul><p><strong>Other:</strong> Hypromellose (HPMC veggie capsule), Rice maltodextrin, L-Leucine</p>"
+          }
+        },
+        "tab-shipping": {
+          "type": "tab",
+          "settings": {
+            "title": "Shipping & Returns",
+            "content_source": "custom",
+            "custom_content": "<p><strong>Free shipping</strong> on all subscription orders.</p><p>One-time orders ship for a flat rate of $5.99.</p><p>Orders ship within 1–2 business days. Delivery typically takes 3–7 business days depending on your location.</p><p><strong>30-day money-back guarantee.</strong> If Origin doesn't work for you, we'll refund your purchase. No questions asked.</p>"
+          }
+        },
+        "trust-1": {
+          "type": "trust_signal",
+          "settings": {
+            "icon": "check",
+            "text": "Free shipping on subscriptions"
+          }
+        },
+        "trust-2": {
+          "type": "trust_signal",
+          "settings": {
+            "icon": "shield",
+            "text": "30-day money-back guarantee"
+          }
+        },
+        "trust-3": {
+          "type": "trust_signal",
+          "settings": {
+            "icon": "lock",
+            "text": "Secure checkout"
+          }
+        },
+        "trust-4": {
+          "type": "trust_signal",
+          "settings": {
+            "icon": "leaf",
+            "text": "Vegan · No gelatin · cGMP certified"
+          }
+        }
+      },
+      "block_order": ["tab-description", "tab-ingredients", "tab-shipping", "trust-1", "trust-2", "trust-3", "trust-4"]
+    },
+    "features": {
+      "type": "features-banner",
+      "settings": {
+        "bg_color": "#F5F2EC",
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "layout": "inline"
+      },
+      "blocks": {
+        "f1": { "type": "feature", "settings": { "icon": "truck", "text": "Free Shipping on Subscriptions" } },
+        "f2": { "type": "feature", "settings": { "icon": "shield", "text": "30-Day Guarantee" } },
+        "f3": { "type": "feature", "settings": { "icon": "leaf", "text": "Vegan & Clean Formula" } },
+        "f4": { "type": "feature", "settings": { "icon": "lock", "text": "Secure Checkout" } }
+      },
+      "block_order": ["f1", "f2", "f3", "f4"]
     },
     "research": {
       "type": "research-highlight",
       "settings": {
         "subtitle": "The Research",
         "heading": "Why Origin is different.",
-        "button_text": "",
-        "button_link": ""
+        "button_text": "Read the Science",
+        "button_link": "/pages/science",
+        "bg_color": "#FFFFFF",
+        "padding_top": 60,
+        "padding_bottom": 60
       },
       "blocks": {
-        "stat-1": { "type": "stat", "settings": { "stat": "01", "title": "Biology determines your gut microbiome", "text": "The HELIUS study proved biology is the strongest predictor of microbiome composition.", "source": "Deschasaux et al., 2018" } },
-        "stat-2": { "type": "stat", "settings": { "stat": "02", "title": "Generic probiotics miss the mark", "text": "Most probiotics use strains selected for the average person. That person doesn't exist.", "source": "" } }
+        "s1": { "type": "stat", "settings": { "stat": "01", "title": "Biology determines your microbiome", "text": "The HELIUS study (2,084 subjects, 6 ethnic groups) proved ethnicity is the strongest predictor of gut microbiome composition — more than diet, age, or lifestyle.", "source": "Deschasaux et al., 2018 — Nature Medicine" } },
+        "s2": { "type": "stat", "settings": { "stat": "02", "title": "Your ancestral microbiome is depleting", "text": "Immigration and dietary westernization cause ancestral bacterial populations to collapse within a single generation.", "source": "Vangay et al., 2018 — Cell" } },
+        "s3": { "type": "stat", "settings": { "stat": "03", "title": "Most probiotics don't survive", "text": "Without acid-protection delivery, up to 96% of probiotic bacteria die before reaching the gut. MAKTREK Bi-Pass solves this.", "source": "Govender et al., 2014 — AAPS PharmSciTech" } }
       },
-      "block_order": ["stat-1", "stat-2"]
+      "block_order": ["s1", "s2", "s3"]
+    },
+    "benefits": {
+      "type": "benefits-product",
+      "settings": {
+        "heading": "The Origin Difference",
+        "subheading": "Biology-First Formula",
+        "bg_color": "#1C2E23",
+        "text_color": "#F5F2EC",
+        "accent_color": "#C4783A",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "enable_animation": true
+      },
+      "blocks": {
+        "b1": { "type": "benefit", "settings": { "icon": "star", "heading": "40 Billion CFU", "text": "Clinical-strength dose across 4 targeted strains" } },
+        "b2": { "type": "benefit", "settings": { "icon": "shield", "heading": "MAKTREK Delivery", "text": "Acid-protected so bacteria arrive alive" } },
+        "b3": { "type": "benefit", "settings": { "icon": "leaf", "heading": "FOS Prebiotic", "text": "Feeds bacteria on arrival, not just on the label" } },
+        "b4": { "type": "benefit", "settings": { "icon": "check", "heading": "Diversity Research", "text": "Informed by the HELIUS study (2,084 subjects)" } },
+        "b5": { "type": "benefit", "settings": { "icon": "heart", "heading": "Vegan & Clean", "text": "HPMC capsules, no gelatin, no fillers" } },
+        "b6": { "type": "benefit", "settings": { "icon": "refresh", "heading": "30-Day Guarantee", "text": "Full refund if it doesn't work for you" } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4", "b5", "b6"]
     },
     "testimonials": {
       "type": "testimonials",
-      "settings": { "heading": "Real results" },
-      "blocks": {
-        "review-1": { "type": "testimonial", "settings": { "quote": "Finally, a supplement that considers my biology. I noticed a difference within the first week.", "author": "Priya S." } },
-        "review-2": { "type": "testimonial", "settings": { "quote": "I've tried every probiotic out there. Origin is the first one that actually works for my body.", "author": "Marcus T." } }
+      "settings": {
+        "heading": "Real People. Real Results.",
+        "subheading": "What Our Customers Say",
+        "layout": "carousel",
+        "show_stars": true,
+        "bg_color": "#FFFFFF",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "enable_animation": true
       },
-      "block_order": ["review-1", "review-2"]
+      "blocks": {
+        "r1": { "type": "testimonial", "settings": { "quote": "Finally, a supplement that considers my biology. I noticed a difference within the first week.", "author": "Priya S.", "role": "Toronto, ON", "rating": 5 } },
+        "r2": { "type": "testimonial", "settings": { "quote": "I've tried every probiotic out there. Origin is the first one that actually works for my body.", "author": "Marcus T.", "role": "Verified Buyer", "rating": 5 } },
+        "r3": { "type": "testimonial", "settings": { "quote": "As someone from a South Asian background, this is the first time I feel like a supplement was made with me in mind.", "author": "Anjali R.", "role": "Vancouver, BC", "rating": 5 } }
+      },
+      "block_order": ["r1", "r2", "r3"]
+    },
+    "faq": {
+      "type": "faq-accordion",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "bg_color": "#F5F2EC",
+        "padding_top": 60,
+        "padding_bottom": 60
+      },
+      "blocks": {
+        "q1": { "type": "question", "settings": { "question": "What is Origin?", "answer": "<p>Origin is the first ethnobiotic — a probiotic informed by biological diversity research. 40 billion CFU, 4 targeted strains, MAKTREK Bi-Pass delivery, FOS prebiotic. 60 veggie capsules per bottle (30-day supply).</p>" } },
+        "q2": { "type": "question", "settings": { "question": "How is Origin different from other probiotics?", "answer": "<p>Most probiotics use generic strains for an average person. Origin's strains are selected based on biological diversity research — specifically the HELIUS study (2,084 subjects, 6 ethnic groups). Plus MAKTREK acid-protection ensures bacteria arrive alive.</p>" } },
+        "q3": { "type": "question", "settings": { "question": "How do I take Origin?", "answer": "<p>Take 2 capsules daily with water. Morning or evening, with or without food. Each bottle is a 30-day supply.</p>" } },
+        "q4": { "type": "question", "settings": { "question": "Is Origin vegan?", "answer": "<p>Yes. HPMC (hypromellose) veggie capsules. No gelatin, no animal products.</p>" } },
+        "q5": { "type": "question", "settings": { "question": "What's your return policy?", "answer": "<p>30-day money-back guarantee. If Origin doesn't work for you, email hello@basecodehealth.com for a full refund. No questions asked.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5"]
+    },
+    "recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "heading": "You May Also Like",
+        "bg_color": "#FFFFFF",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
     },
     "newsletter": {
       "type": "newsletter",
@@ -53,10 +180,11 @@
         "heading": "Join the biology-first movement",
         "text": "Get research updates and be first to know about new products.",
         "bg_color": "#1C2E23",
-        "text_color": "#F5F2EC"
+        "text_color": "#F5F2EC",
+        "padding_top": 60,
+        "padding_bottom": 60
       }
     }
   },
-  "order": ["main-product", "trust-badges", "research", "testimonials", "newsletter"]
+  "order": ["main-product", "features", "research", "benefits", "testimonials", "faq", "recommendations", "newsletter"]
 }
-

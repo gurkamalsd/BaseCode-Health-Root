@@ -1,133 +1,443 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "landing": {
-      "type": "landing-page",
+    "hero": {
+      "type": "hero",
       "settings": {
-        "symptom_slug": "body-odor",
-        "eyebrow": "Metabolic Chemistry & Your Microbiome",
-        "headline": "Your body odor isn't a hygiene failure. It's a metabolic processing breakdown inside your gut.",
-        "subheadline": "Your gut bacteria are supposed to neutralize ammonia, sulfur compounds, and volatile organic compounds before they ever reach your skin or breath. When those bacterial populations deplete — which happens within one generation of dietary westernization — your body loses its internal detoxification system. Unprocessed metabolites get pushed out through sweat glands, skin, and breath. No deodorant on earth fixes a problem that starts in your intestines.",
-        "cta_text": "Fix It From the Inside — $34/mo",
-        "agitate_eyebrow": "Why Nothing External Has Worked",
-        "agitate_headline": "You've tried every product. The problem isn't on your skin. It never was.",
-        "agitate_body": "You shower twice a day. You've rotated through every clinical-strength antiperspirant on the shelf. You carry breath strips, body spray, and a change of clothes. You've spent hundreds on specialty soaps, antibacterial washes, chlorophyll supplements, zinc tablets — anything that promises to help. You time your meals before social events. You wear dark fabrics. You stand further back than you need to. You've restructured your entire life around a problem you can't talk about — because nobody talks about this. The shame is worse than the symptom.||Here's what no dermatologist or hygiene product company will tell you: persistent body odor, chronic bad breath, and excessive sweating that doesn't respond to external treatment are metabolic symptoms. Your gut microbiome is responsible for processing trimethylamine (TMA), ammonia, hydrogen sulfide, and other volatile organic compounds. When the bacteria that handle this work disappear, these compounds accumulate in your bloodstream and get excreted through the nearest exit — your sweat glands, your breath, your skin. You are literally smelling your own metabolic waste because the internal processing plant shut down.||Every deodorant, every clinical wash, every breath product you buy is fighting the exhaust while the factory is broken. You're spending money and emotional energy suppressing a signal your body is sending you: something is missing inside. The cruelest part? This problem disproportionately affects immigrant communities whose ancestral microbiome — the one that handled all of this effortlessly — was depleted by dietary westernization. Your grandmother never dealt with this. Not because she had better hygiene. Because she had better bacteria.",
-        "cost_headline": "Clinical deodorants, specialty products, dermatologist visits: $40-100/month masking symptoms. Origin: $34/month addressing the cause.",
-        "cost_body": "Clinical-strength antiperspirant: $12-18/month. Prescription-grade deodorant: $30-50/month. Specialty antibacterial body wash: $15-25/month. Chlorophyll supplements: $20/month. Breath care products: $10-15/month. The dermatologist copay when nothing works: $50-75 per visit. The charcoal underwear you bought at 2am in desperation: $40. Americans spend over $26 billion annually on personal care products designed to mask body chemistry — not fix it. Origin costs $1.13 per day. Less than a single stick of the clinical deodorant that stopped working after a week.",
-        "bridge_headline": "Your gut is your body's chemical processing plant. When it shuts down, you smell the failure.",
-        "bridge_body": "Published research confirms that gut microbiome composition directly controls how your body processes volatile compounds. L. plantarum metabolizes sulfur-containing amino acids — methionine and cysteine — before they convert into hydrogen sulfide and methyl mercaptan, the compounds responsible for sulfurous body odor. L. acidophilus processes trimethylamine (TMA), the compound behind persistent fishy breath and body odor that no amount of brushing eliminates. B. lactis produces short-chain fatty acids (SCFAs) that strengthen the intestinal barrier, preventing unprocessed metabolites from leaking into the bloodstream and being excreted through skin. When these bacterial populations collapse — which Vangay et al. documented happens within a single generation of immigration — the entire metabolic detoxification chain breaks down. Compounds that should be neutralized in your colon end up in your sweat.",
-        "citation": "Callewaert et al., Microbiome, 2020 · Ara et al., Canadian Journal of Microbiology, 2006 · Kneubühl et al., Trends in Microbiology, 2023",
-        "solution_headline": "Origin restores your body's internal chemistry. The external symptoms resolve because the internal cause resolves.",
-        "solution_body": "L. plantarum and L. acidophilus restore the metabolic pathways that neutralize TMA, ammonia, and volatile sulfur compounds inside your gut — before they reach your bloodstream, your sweat glands, or your breath. B. lactis strengthens the intestinal barrier with SCFA production, sealing the leaky pathways that let unprocessed metabolites escape into circulation. L. paracasei modulates the immune-inflammatory cascade that drives excessive sweating and overactive sweat glands. MAKTREK Bi-Pass ensures all four strains arrive in your intestines alive — because dead bacteria process nothing. FOS prebiotic feeds them on arrival so they colonize and get to work immediately. This isn't a supplement that masks odor from the inside. This is metabolic restoration. Your body regains the ability to process its own chemistry, and the external symptoms disappear because the internal cause is gone.",
-        "lead_headline": "The microbiome research that explains what no deodorant can fix.",
-        "closing_quote": "You deserve to stand close to people without calculating the risk. To hug without hesitating. To exist in a room without monitoring yourself. This was never about hygiene — it was about biology. And biology can be restored."
+        "show_social_proof": true,
+        "social_proof_text": "Backed by biological diversity research",
+        "subtitle": "Metabolic Chemistry & Your Microbiome",
+        "heading": "Your body odor isn't a hygiene failure. It's a metabolic processing breakdown inside your gut.",
+        "text": "Your gut bacteria are supposed to neutralize ammonia, sulfur compounds, and volatile organic compounds before they ever reach your skin or breath. When those bacterial populations deplete — which happens within one generation of dietary westernization — your body loses its internal detoxification system. Unprocessed metabolites get pushed out through sweat glands, skin, and breath. No deodorant on earth fixes a problem that starts in your intestines.",
+        "button_text": "Fix It From the Inside — $34/mo",
+        "button_link": "/products/origin",
+        "guarantee_text": "30-Day Money-Back Guarantee",
+        "text_align": "left",
+        "overlay_opacity": 55,
+        "height": 100,
+        "mobile_height": 85,
+        "text_color": "#FFFFFF"
+      }
+    },
+    "features-banner": {
+      "type": "features-banner",
+      "settings": {
+        "bg_color": "#F5F2EC",
+        "text_color": "#1C2E23",
+        "icon_color": "#C4783A",
+        "layout": "inline",
+        "desktop_columns": "4",
+        "mobile_layout": "slider",
+        "show_dividers": true,
+        "padding_top": 24,
+        "padding_bottom": 24,
+        "enable_animation": true
       },
       "blocks": {
-        "pathway_1": {
-          "type": "pathway",
+        "badge-1": {
+          "type": "feature",
           "settings": {
-            "step": "01 — Metabolic Processing Collapses",
-            "title": "Your gut loses its detoxification workforce",
-            "body": "L. plantarum, L. acidophilus, and B. lactis are the bacterial strains that metabolize sulfur compounds, TMA, and ammonia inside your gut before they ever enter your bloodstream. After dietary westernization — documented across six ethnic groups in the HELIUS study — these populations collapse. Your body's internal chemical processing plant loses its workers."
+            "icon": "flask",
+            "text": "Metabolic Chemistry Research",
+            "subtext": "TMA, sulfur, ammonia processing"
           }
         },
-        "pathway_2": {
-          "type": "pathway",
+        "badge-2": {
+          "type": "feature",
           "settings": {
-            "step": "02 — Your Body Uses Backup Exits",
-            "title": "Unprocessed metabolites escape through skin and breath",
-            "body": "When gut bacteria can't neutralize volatile organic compounds internally, your body pushes them out through sweat glands, sebaceous glands, and exhalation. Hydrogen sulfide creates sulfurous body odor. TMA creates persistent breath issues. Ammonia makes sweat smell sharper than it should. These aren't hygiene failures — they're metabolic overflow from a broken processing system."
+            "icon": "shield",
+            "text": "MAKTREK Bi-Pass Delivery",
+            "subtext": "Bacteria arrive alive"
           }
         },
-        "pathway_3": {
-          "type": "pathway",
+        "badge-3": {
+          "type": "feature",
           "settings": {
-            "step": "03 — Origin Restores the Processing Plant",
-            "title": "Fix the internal chemistry. The outside corrects itself.",
-            "body": "Origin delivers four clinically documented strains — alive through stomach acid via MAKTREK, fed on arrival by FOS prebiotic. They restore the metabolic pathways that neutralize volatile compounds internally. When your gut handles its own chemistry again, the external symptoms resolve — not because you masked them, but because the cause is gone."
+            "icon": "leaf",
+            "text": "Vegan & Clean",
+            "subtext": "HPMC veggie capsule, no gelatin"
           }
         },
-        "outcome_1": {
-          "type": "dream_outcome",
+        "badge-4": {
+          "type": "feature",
           "settings": {
-            "title": "Confidence without reapplying",
-            "body": "When your body chemistry normalizes from the inside, clinical-strength products become unnecessary. One shower. One application. Done for the day. You stop checking, stop reapplying in bathroom stalls, stop carrying backup products everywhere you go. Standard hygiene is enough because the problem isn't external anymore."
-          }
-        },
-        "outcome_2": {
-          "type": "dream_outcome",
-          "settings": {
-            "title": "Close conversations without fear",
-            "body": "Breath driven by gut-produced volatile sulfur compounds and TMA resolves when the metabolic processing pathway recovers. You stop angling your face away during conversations. You stop covering your mouth when you laugh. Mouthwash becomes something you use by choice, not by compulsion."
-          }
-        },
-        "outcome_3": {
-          "type": "dream_outcome",
-          "settings": {
-            "title": "End the product spiral",
-            "body": "Clinical deodorant. Antibacterial soap. Charcoal body wash. Breath strips. Tongue scrapers. Chlorophyll drops. Zinc supplements. Probiotic deodorant. You've tried them all because each one promises to be the one that finally works. When you fix the internal cause, the external product dependency ends. Your bathroom shelf gets smaller. Your confidence doesn't need a product to hold it up."
-          }
-        },
-        "outcome_4": {
-          "type": "dream_outcome",
-          "settings": {
-            "title": "Social freedom without self-monitoring",
-            "body": "You stop choosing seats by the window. You stop avoiding elevators. You stop declining hugs. You stop arriving last and leaving first. You stop the constant mental calculation — how long has it been, should I reapply, can they tell? When your body chemistry is handled internally, you get to just be a person in a room. That's the freedom nobody talks about."
-          }
-        },
-        "review_1": {
-          "type": "review",
-          "settings": {
-            "quote": "I've spent twelve years ashamed of something I couldn't control. Every dermatologist said my hygiene was fine but nobody could explain why I still had the problem. Six weeks on Origin and for the first time in over a decade, I went an entire workday without reapplying anything. I sat through a two-hour meeting next to my manager and didn't think about it once. I didn't know that kind of freedom was possible.",
-            "name": "Anonymous — Toronto, ON"
-          }
-        },
-        "review_2": {
-          "type": "review",
-          "settings": {
-            "quote": "Moved from Lagos to Atlanta at nineteen. By twenty-two, I had a body chemistry problem I never had in Nigeria. I tried every clinical product. Spent over a thousand dollars in one year on things that didn't work. My sister sent me the BaseCode research link about the immigrant microbiome and it was the first time anything made sense. One month on Origin — the problem that controlled my twenties is just gone.",
-            "name": "Tunde A. — Atlanta, GA"
-          }
-        },
-        "review_3": {
-          "type": "review",
-          "settings": {
-            "quote": "My breath was the thing I couldn't fix. Brushed three times a day. Tongue scraped. Oil pulled. Saw a periodontist. Everything was healthy but the smell persisted. My wife was kind about it but I knew. Origin was honestly a last resort — I didn't even believe it would work. Three weeks in, my wife kissed me and said 'whatever you're doing, keep doing it.' That sentence was worth more than every product I ever bought.",
-            "name": "Naveed H. — Mississauga, ON"
-          }
-        },
-        "review_4": {
-          "type": "review",
-          "settings": {
-            "quote": "I'm a nurse. I work twelve-hour shifts in close quarters with patients and colleagues. The anxiety of wondering if people could tell was almost worse than the problem itself. I started Origin expecting nothing. By week four, I finished a full shift without that knot in my stomach. My scrubs smelled normal at the end of the day. I actually cried in my car. Nobody should have to carry that kind of shame over something biological.",
-            "name": "Anonymous — Phoenix, AZ"
+            "icon": "refresh",
+            "text": "30-Day Guarantee",
+            "subtext": "Full refund, no questions asked"
           }
         }
       },
-      "block_order": [
-        "pathway_1",
-        "pathway_2",
-        "pathway_3",
-        "outcome_1",
-        "outcome_2",
-        "outcome_3",
-        "outcome_4",
-        "review_1",
-        "review_2",
-        "review_3",
-        "review_4"
-      ]
+      "block_order": ["badge-1", "badge-2", "badge-3", "badge-4"]
+    },
+    "rich-text": {
+      "type": "rich-text",
+      "settings": {
+        "bg_color": "#FFFFFF",
+        "text_color": "#1C2E23",
+        "content_width": "medium",
+        "text_align": "left",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "enable_animation": true
+      },
+      "blocks": {
+        "eyebrow": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Why Nothing External Has Worked",
+            "subheading_color": "#C4783A"
+          }
+        },
+        "headline": {
+          "type": "heading",
+          "settings": {
+            "heading": "You've tried every product. The problem isn't on your skin. It never was.",
+            "heading_level": "h2",
+            "heading_size": "h2"
+          }
+        },
+        "body": {
+          "type": "text",
+          "settings": {
+            "text": "<p>You shower twice a day. You've rotated through every clinical-strength antiperspirant on the shelf. You carry breath strips, body spray, and a change of clothes. You've spent hundreds on specialty soaps, antibacterial washes, chlorophyll supplements, zinc tablets — anything that promises to help. You time your meals before social events. You wear dark fabrics. You stand further back than you need to. You've restructured your entire life around a problem you can't talk about — because nobody talks about this. The shame is worse than the symptom.</p><p>Here's what no dermatologist or hygiene product company will tell you: persistent body odor, chronic bad breath, and excessive sweating that doesn't respond to external treatment are metabolic symptoms. Your gut microbiome is responsible for processing trimethylamine (TMA), ammonia, hydrogen sulfide, and other volatile organic compounds. When the bacteria that handle this work disappear, these compounds accumulate in your bloodstream and get excreted through the nearest exit — your sweat glands, your breath, your skin. You are literally smelling your own metabolic waste because the internal processing plant shut down.</p><p>Every deodorant, every clinical wash, every breath product you buy is fighting the exhaust while the factory is broken. You're spending money and emotional energy suppressing a signal your body is sending you: something is missing inside.</p>"
+          }
+        },
+        "cost-cta": {
+          "type": "button",
+          "settings": {
+            "button_text": "Fix It From the Inside — $34/mo",
+            "button_link": "/products/origin",
+            "button_style": "primary"
+          }
+        }
+      },
+      "block_order": ["eyebrow", "headline", "body", "cost-cta"]
+    },
+    "image-with-text": {
+      "type": "image-with-text",
+      "settings": {
+        "bg_color": "#F5F2EC",
+        "text_color": "#1C2E23",
+        "layout": "image_first",
+        "image_width_pct": 50,
+        "text_align": "left",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "enable_animation": true
+      },
+      "blocks": {
+        "sub": {
+          "type": "subheading",
+          "settings": {
+            "text": "The Science",
+            "color": "#C4783A"
+          }
+        },
+        "head": {
+          "type": "heading",
+          "settings": {
+            "text": "Your gut is your body's chemical processing plant. When it shuts down, you smell the failure.",
+            "heading_level": "h2",
+            "heading_size": "h2"
+          }
+        },
+        "body": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Published research confirms that gut microbiome composition directly controls how your body processes volatile compounds. L. plantarum metabolizes sulfur-containing amino acids — methionine and cysteine — before they convert into hydrogen sulfide and methyl mercaptan, the compounds responsible for sulfurous body odor. L. acidophilus processes trimethylamine (TMA), the compound behind persistent fishy breath and body odor that no amount of brushing eliminates. B. lactis produces short-chain fatty acids (SCFAs) that strengthen the intestinal barrier, preventing unprocessed metabolites from leaking into the bloodstream and being excreted through skin. When these bacterial populations collapse, the entire metabolic detoxification chain breaks down.</p><p><em>Callewaert et al., Microbiome, 2020 · Ara et al., Canadian Journal of Microbiology, 2006</em></p>"
+          }
+        },
+        "btn": {
+          "type": "button",
+          "settings": {
+            "text": "Get Origin — $34/mo",
+            "link": "/products/origin",
+            "style": "primary"
+          }
+        }
+      },
+      "block_order": ["sub", "head", "body", "btn"]
+    },
+    "research-highlight": {
+      "type": "research-highlight",
+      "settings": {
+        "subtitle": "How It Works",
+        "heading": "Three steps from metabolic breakdown to internal chemistry restored.",
+        "bg_color": "#1C2E23",
+        "text_color": "#F5F2EC",
+        "accent_color": "#C4783A",
+        "card_bg_color": "#243D2B",
+        "icon_bg_color": "#C4783A",
+        "columns": "3",
+        "card_style": "vertical",
+        "button_text": "Get Origin — $34/mo",
+        "button_link": "/products/origin",
+        "button_style": "primary",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "enable_animation": true
+      },
+      "blocks": {
+        "step-1": {
+          "type": "stat",
+          "settings": {
+            "icon_style": "number",
+            "stat": "01",
+            "title": "Your gut loses its detoxification workforce",
+            "text": "L. plantarum, L. acidophilus, and B. lactis are the bacterial strains that metabolize sulfur compounds, TMA, and ammonia inside your gut before they ever enter your bloodstream. After dietary westernization — documented across six ethnic groups in the HELIUS study — these populations collapse. Your body's internal chemical processing plant loses its workers.",
+            "source": "Step 01 — Metabolic Processing Collapses"
+          }
+        },
+        "step-2": {
+          "type": "stat",
+          "settings": {
+            "icon_style": "number",
+            "stat": "02",
+            "title": "Unprocessed metabolites escape through skin and breath",
+            "text": "When gut bacteria can't neutralize volatile organic compounds internally, your body pushes them out through sweat glands, sebaceous glands, and exhalation. Hydrogen sulfide creates sulfurous body odor. TMA creates persistent breath issues. Ammonia makes sweat smell sharper than it should. These aren't hygiene failures — they're metabolic overflow from a broken processing system.",
+            "source": "Step 02 — Your Body Uses Backup Exits"
+          }
+        },
+        "step-3": {
+          "type": "stat",
+          "settings": {
+            "icon_style": "number",
+            "stat": "03",
+            "title": "Fix the internal chemistry. The outside corrects itself.",
+            "text": "Origin delivers four clinically documented strains — alive through stomach acid via MAKTREK, fed on arrival by FOS prebiotic. They restore the metabolic pathways that neutralize volatile compounds internally. When your gut handles its own chemistry again, the external symptoms resolve — not because you masked them, but because the cause is gone.",
+            "source": "Step 03 — Origin Restores the Processing Plant"
+          }
+        }
+      },
+      "block_order": ["step-1", "step-2", "step-3"]
+    },
+    "benefits-product": {
+      "type": "benefits-product",
+      "settings": {
+        "heading": "What social freedom actually feels like.",
+        "subheading": "Origin Results",
+        "bg_color": "#C4783A",
+        "text_color": "#FFFFFF",
+        "accent_color": "#1C2E23",
+        "button_text": "Get Origin — $34/mo",
+        "button_link": "/products/origin",
+        "button_style": "primary",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "enable_animation": true
+      },
+      "blocks": {
+        "benefit-1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "check",
+            "heading": "Confidence without reapplying",
+            "text": "When your body chemistry normalizes from the inside, clinical-strength products become unnecessary. One shower. One application. Done for the day. You stop checking, stop reapplying in bathroom stalls, stop carrying backup products everywhere."
+          }
+        },
+        "benefit-2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "heart",
+            "heading": "Close conversations without fear",
+            "text": "Breath driven by gut-produced volatile sulfur compounds and TMA resolves when the metabolic processing pathway recovers. You stop angling your face away during conversations. You stop covering your mouth when you laugh."
+          }
+        },
+        "benefit-3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "refresh",
+            "heading": "End the product spiral",
+            "text": "Clinical deodorant. Antibacterial soap. Charcoal body wash. Breath strips. Tongue scrapers. Chlorophyll drops. When you fix the internal cause, the external product dependency ends. Your bathroom shelf gets smaller."
+          }
+        },
+        "benefit-4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "star",
+            "heading": "Social freedom without self-monitoring",
+            "text": "You stop choosing seats by the window. You stop avoiding elevators. You stop declining hugs. You stop the constant mental calculation. When your body chemistry is handled internally, you get to just be a person in a room."
+          }
+        },
+        "benefit-5": {
+          "type": "benefit",
+          "settings": {
+            "icon": "flask",
+            "heading": "40 Billion CFU, 4 targeted strains",
+            "text": "MAKTREK Bi-Pass delivery ensures the bacteria that restore your internal metabolic processing actually arrive in your gut alive."
+          }
+        },
+        "benefit-6": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shield",
+            "heading": "30-Day Money-Back Guarantee",
+            "text": "Try Origin for 30 days. If the internal chemistry doesn't shift, we'll refund you in full. No questions asked."
+          }
+        }
+      },
+      "block_order": ["benefit-1", "benefit-2", "benefit-3", "benefit-4", "benefit-5", "benefit-6"]
+    },
+    "image-banner": {
+      "type": "image-banner",
+      "settings": {
+        "heading": "You deserve to stand close to people without calculating the risk. To hug without hesitating. This was never about hygiene — it was about biology. And biology can be restored.",
+        "heading_size": "text-3xl",
+        "button_text": "Get Origin — $34/mo",
+        "button_link": "/products/origin",
+        "button_style": "white",
+        "overlay_color": "#1C2E23",
+        "overlay_opacity": 65,
+        "text_color": "#FFFFFF",
+        "text_align": "center",
+        "height": 400,
+        "mobile_height": 300,
+        "full_width": true,
+        "enable_animation": true
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {
+        "heading": "Real results from real people.",
+        "subheading": "Customer Stories",
+        "bg_color": "#FFFFFF",
+        "layout": "carousel",
+        "card_style": "card",
+        "show_stars": true,
+        "accent_color": "#f59e0b",
+        "auto_play": true,
+        "auto_play_speed": 6,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "enable_animation": true
+      },
+      "blocks": {
+        "review-1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I've spent twelve years ashamed of something I couldn't control. Every dermatologist said my hygiene was fine but nobody could explain why I still had the problem. Six weeks on Origin and for the first time in over a decade, I went an entire workday without reapplying anything. I sat through a two-hour meeting next to my manager and didn't think about it once.",
+            "author": "Anonymous",
+            "role": "Toronto, ON",
+            "rating": 5
+          }
+        },
+        "review-2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Moved from Lagos to Atlanta at nineteen. By twenty-two, I had a body chemistry problem I never had in Nigeria. I tried every clinical product. Spent over a thousand dollars in one year on things that didn't work. One month on Origin — the problem that controlled my twenties is just gone.",
+            "author": "Tunde A.",
+            "role": "Atlanta, GA",
+            "rating": 5
+          }
+        },
+        "review-3": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "My breath was the thing I couldn't fix. Brushed three times a day. Tongue scraped. Oil pulled. Saw a periodontist. Everything was healthy but the smell persisted. Three weeks on Origin, my wife kissed me and said 'whatever you're doing, keep doing it.' That sentence was worth more than every product I ever bought.",
+            "author": "Naveed H.",
+            "role": "Mississauga, ON",
+            "rating": 5
+          }
+        },
+        "review-4": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I'm a nurse. I work twelve-hour shifts in close quarters with patients and colleagues. The anxiety of wondering if people could tell was almost worse than the problem itself. By week four, I finished a full shift without that knot in my stomach. My scrubs smelled normal at the end of the day. Nobody should have to carry that kind of shame over something biological.",
+            "author": "Anonymous",
+            "role": "Phoenix, AZ",
+            "rating": 5
+          }
+        }
+      },
+      "block_order": ["review-1", "review-2", "review-3", "review-4"]
+    },
+    "faq-accordion": {
+      "type": "faq-accordion",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "subheading": "Body Odor & Origin",
+        "bg_color": "#F5F2EC",
+        "text_color": "#1C2E23",
+        "accent_color": "#C4783A",
+        "accordion_style": "bordered",
+        "icon_style": "plus",
+        "open_first": true,
+        "content_width": "narrow",
+        "heading_align": "center",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "enable_animation": true
+      },
+      "blocks": {
+        "faq-1": {
+          "type": "question",
+          "settings": {
+            "question": "How does a probiotic help with body odor and bad breath?",
+            "answer": "<p>Persistent body odor and chronic bad breath that don't respond to external products are often metabolic symptoms — not hygiene problems. Your gut bacteria are responsible for neutralizing trimethylamine (TMA), hydrogen sulfide, and ammonia before they reach your bloodstream. When these bacterial populations deplete, unprocessed volatile compounds are excreted through sweat glands, skin, and breath. Origin restores the specific strains — L. plantarum, L. acidophilus, B. lactis — that handle this internal detoxification.</p>"
+          }
+        },
+        "faq-2": {
+          "type": "question",
+          "settings": {
+            "question": "How long before I notice a difference?",
+            "answer": "<p>Most people notice meaningful improvement within 3-6 weeks as the metabolic processing pathways restore. Breath-related improvements often come first (3-4 weeks), followed by body odor improvements as the gut barrier strengthens and fewer metabolites enter systemic circulation (4-8 weeks). The timeline varies by individual gut composition and the degree of bacterial depletion.</p>"
+          }
+        },
+        "faq-3": {
+          "type": "question",
+          "settings": {
+            "question": "Why did my body chemistry change after I moved countries or changed my diet?",
+            "answer": "<p>The bacterial strains that metabolize volatile organic compounds — L. plantarum, L. acidophilus — are abundantly present in traditional fermented foods consumed across South Asian, East Asian, African, and Latin American cuisines. When dietary westernization depletes these populations, the metabolic detoxification chain they supported breaks down. This explains why body odor and breath issues that weren't present in your home country — or in your parents — appear after dietary shift.</p>"
+          }
+        },
+        "faq-4": {
+          "type": "question",
+          "settings": {
+            "question": "Can I still use deodorant or antiperspirant while taking Origin?",
+            "answer": "<p>Yes. There's no conflict. You can continue your current hygiene routine while Origin works internally. Most customers find they need external products less as the internal metabolic processing restores — but there's no need to stop using them during the restoration period.</p>"
+          }
+        },
+        "faq-5": {
+          "type": "question",
+          "settings": {
+            "question": "Is this approach scientifically validated?",
+            "answer": "<p>Yes. Research published in Microbiome (Callewaert et al., 2020) documents the direct link between gut microbiome composition and body odor compounds. Research in the Canadian Journal of Microbiology (Ara et al., 2006) specifically documents L. acidophilus's role in TMA processing. B. lactis's role in producing short-chain fatty acids that strengthen the intestinal barrier — preventing metabolite leakage — is well-established across multiple peer-reviewed studies.</p>"
+          }
+        }
+      },
+      "block_order": ["faq-1", "faq-2", "faq-3", "faq-4", "faq-5"]
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "The microbiome research that explains what no deodorant can fix.",
+        "text": "Get the free Biology Gap report — plus research updates, product news, and biology-first insights. No spam.",
+        "button_text": "Send Me the Report",
+        "button_style": "white",
+        "form_layout": "stacked",
+        "show_name_field": false,
+        "success_heading": "You're in.",
+        "success_text": "Check your inbox — the report is on its way.",
+        "bg_color": "#1C2E23",
+        "text_color": "#F5F2EC",
+        "content_width": "narrow",
+        "text_align": "center",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "enable_animation": true
+      }
     }
   },
   "order": [
-    "landing"
+    "hero",
+    "features-banner",
+    "rich-text",
+    "image-with-text",
+    "research-highlight",
+    "benefits-product",
+    "image-banner",
+    "testimonials",
+    "faq-accordion",
+    "newsletter"
   ]
 }
