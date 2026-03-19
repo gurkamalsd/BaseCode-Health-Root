@@ -1,3 +1,4 @@
+{%- comment -%}BaseCode Root - hero{%- endcomment -%}
 <section class="hero" style="background-color: {{ section.settings.bg_color | default: '#F5F2EC' }};">
   <!-- Content Side -->
   <div class="hero__content" style="{% if section.settings.content_bg_color != blank %}background-color: {{ section.settings.content_bg_color }};{% endif %}">
@@ -52,7 +53,7 @@
     {%- else -%}
       <img
         src="{{ 'basecode-hero-bg-new.webp' | asset_url }}"
-        alt="BaseCode Health — Supplements built for your biology"
+        alt="BaseCode Health — Built for Your Biology"
         loading="eager"
         fetchpriority="high"
         style="width: 100%; height: 100%; object-fit: cover;"
