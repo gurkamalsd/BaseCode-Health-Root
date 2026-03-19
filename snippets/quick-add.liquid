@@ -1,0 +1,647 @@
+{%- comment -%}
+  Quick Add snippet — Root theme style
+  Renders a button that opens a mini modal with variant selector + ATC.
+  Usage: {% render 'quick-add', product: product %}
+
+  Events dispatched on successful add:
+    - 'cart-drawer:refresh'  (caught by cart-drawer JS to reload items)
+
+  Dependencies: none (self-contained JS + CSS)
+{%- endcomment -%}
+
+{%- liquid
+  assign qa_id = 'quick-add-' | append: product.id
+-%}
+
+{%- comment -%}---- Trigger button ----{%- endcomment -%}
+<button
+  type="button"
+  class="quick-add__trigger btn btn--secondary btn--sm btn--full"
+  data-quick-add-trigger="{{ qa_id }}"
+  aria-haspopup="dialog"
+  aria-controls="{{ qa_id }}"
+  aria-expanded="false"
+>
+  <svg
+    class="quick-add__plus-icon"
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2.5"
+    stroke-linecap="round"
+    aria-hidden="true"
+  >
+    <line x1="12" y1="5" x2="12" y2="19"></line>
+    <line x1="5" y1="12" x2="19" y2="12"></line>
+  </svg>
+  Quick Add
+</button>
+
+{%- comment -%}---- Modal ----{%- endcomment -%}
+<div
+  id="{{ qa_id }}"
+  class="quick-add__modal"
+  role="dialog"
+  aria-label="{{ product.title | escape }} — Quick Add"
+  aria-modal="true"
+  aria-hidden="true"
+  data-quick-add-modal="{{ qa_id }}"
+>
+  <div class="quick-add__backdrop" data-quick-add-backdrop="{{ qa_id }}"></div>
+
+  <div class="quick-add__panel" tabindex="-1">
+
+    {%- comment -%}---- Modal header ----{%- endcomment -%}
+    <div class="quick-add__panel-header">
+      <p class="quick-add__product-title">{{ product.title }}</p>
+      <button
+        type="button"
+        class="quick-add__close"
+        data-quick-add-close="{{ qa_id }}"
+        aria-label="Close"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    {%- comment -%}---- Modal body — content populated by JS ----{%- endcomment -%}
+    <div
+      class="quick-add__panel-body"
+      data-quick-add-body="{{ qa_id }}"
+      data-product-handle="{{ product.handle }}"
+      data-product-url="{{ product.url }}"
+    >
+      {%- comment -%}JS renders: image, price, variant selector, qty, ATC button{%- endcomment -%}
+      <div class="quick-add__loading" aria-label="Loading" role="status">
+        <span class="quick-add__spinner" aria-hidden="true"></span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{%- comment -%}
+  ── Styles ──────────────────────────────────────────────────────────────
+  Scoped to .quick-add__ so there are no global side-effects.
+{%- endcomment -%}
+<style>
+  /* ── Backdrop ──────────────────────────────────────────── */
+  .quick-add__backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 399;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+  .quick-add__modal[aria-hidden="false"] .quick-add__backdrop {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* ── Panel ─────────────────────────────────────────────── */
+  .quick-add__panel {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(100%);
+    width: min(480px, 100vw);
+    max-height: 90dvh;
+    overflow-y: auto;
+    background: var(--color-white, #FFFFFF);
+    border-radius: var(--radius-xl, 16px) var(--radius-xl, 16px) 0 0;
+    z-index: 400;
+    padding: var(--space-5, 1.25rem) var(--space-5, 1.25rem) var(--space-8, 2rem);
+    box-shadow: 0 -4px 32px rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+    outline: none;
+  }
+
+  @media (min-width: 600px) {
+    .quick-add__panel {
+      bottom: auto;
+      top: 50%;
+      transform: translateX(-50%) translateY(calc(-50% + 20px));
+      border-radius: var(--radius-xl, 16px);
+      max-height: 80dvh;
+      padding: var(--space-6, 1.5rem);
+      box-shadow: 0 8px 48px rgba(0, 0, 0, 0.16);
+      opacity: 0;
+      transition:
+        transform 0.25s cubic-bezier(0.32, 0.72, 0, 1),
+        opacity 0.25s ease;
+    }
+  }
+
+  .quick-add__modal[aria-hidden="false"] .quick-add__panel {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  @media (min-width: 600px) {
+    .quick-add__modal[aria-hidden="false"] .quick-add__panel {
+      transform: translateX(-50%) translateY(-50%);
+      opacity: 1;
+    }
+  }
+
+  /* ── Header ────────────────────────────────────────────── */
+  .quick-add__panel-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-3, 0.75rem);
+    margin-bottom: var(--space-4, 1rem);
+  }
+
+  .quick-add__product-title {
+    font-family: var(--font-heading);
+    font-size: var(--text-base, 1rem);
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 0;
+    color: var(--color-text, #1C2E23);
+  }
+
+  .quick-add__close {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-1, 0.25rem);
+    color: var(--color-text-light, #666);
+    line-height: 0;
+    border-radius: var(--radius-sm, 4px);
+    transition: color 0.15s ease;
+  }
+  .quick-add__close:hover { color: var(--color-text, #1C2E23); }
+
+  /* ── Body ──────────────────────────────────────────────── */
+  .quick-add__panel-body {}
+
+  /* ── Loading spinner ───────────────────────────────────── */
+  .quick-add__loading {
+    display: flex;
+    justify-content: center;
+    padding: var(--space-8, 2rem) 0;
+  }
+  .quick-add__spinner {
+    width: 28px;
+    height: 28px;
+    border: 3px solid var(--color-border, #E5E5E5);
+    border-top-color: var(--color-accent, #C4783A);
+    border-radius: 50%;
+    animation: qa-spin 0.7s linear infinite;
+  }
+  @keyframes qa-spin { to { transform: rotate(360deg); } }
+
+  /* ── Rendered body styles ──────────────────────────────── */
+  .quick-add__image {
+    width: 100%;
+    max-height: 220px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto var(--space-4, 1rem);
+    border-radius: var(--radius-md, 8px);
+    background: var(--color-cream, #F5F2EC);
+  }
+
+  .quick-add__price-row {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2, 0.5rem);
+    margin-bottom: var(--space-5, 1.25rem);
+  }
+  .quick-add__price {
+    font-family: var(--font-mono, monospace);
+    font-size: var(--text-lg, 1.125rem);
+    font-weight: 700;
+    color: var(--color-text, #1C2E23);
+  }
+  .quick-add__price--compare {
+    font-size: var(--text-sm, 0.875rem);
+    font-weight: 400;
+    color: var(--color-text-light, #888);
+    text-decoration: line-through;
+  }
+
+  .quick-add__label {
+    display: block;
+    font-size: var(--text-xs, 0.75rem);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-light, #888);
+    margin-bottom: var(--space-2, 0.5rem);
+  }
+
+  .quick-add__variant-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2, 0.5rem);
+    margin-bottom: var(--space-5, 1.25rem);
+  }
+
+  .quick-add__variant-btn {
+    padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+    font-size: var(--text-sm, 0.875rem);
+    font-weight: 500;
+    background: var(--color-cream, #F5F2EC);
+    color: var(--color-text, #1C2E23);
+    border: 1.5px solid transparent;
+    border-radius: var(--radius-sm, 6px);
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .quick-add__variant-btn:hover {
+    border-color: var(--color-text-light, #999);
+  }
+  .quick-add__variant-btn.is-selected {
+    border-color: var(--color-primary, #1C2E23);
+    background: var(--color-primary, #1C2E23);
+    color: var(--color-white, #FFFFFF);
+  }
+  .quick-add__variant-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  .quick-add__qty-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3, 0.75rem);
+    margin-bottom: var(--space-5, 1.25rem);
+  }
+  .quick-add__qty-btn {
+    width: 36px;
+    height: 36px;
+    background: var(--color-cream, #F5F2EC);
+    border: none;
+    border-radius: var(--radius-sm, 6px);
+    font-size: var(--text-lg, 1.125rem);
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s ease;
+    color: var(--color-text, #1C2E23);
+  }
+  .quick-add__qty-btn:hover { background: var(--color-border, #E5E5E5); }
+  .quick-add__qty-input {
+    width: 48px;
+    text-align: center;
+    border: 1.5px solid var(--color-border, #E5E5E5);
+    border-radius: var(--radius-sm, 6px);
+    font-size: var(--text-base, 1rem);
+    font-weight: 600;
+    padding: var(--space-1, 0.25rem) 0;
+    color: var(--color-text, #1C2E23);
+    background: var(--color-white, #FFFFFF);
+  }
+
+  .quick-add__atc {
+    width: 100%;
+    margin-top: var(--space-1, 0.25rem);
+  }
+  .quick-add__atc:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .quick-add__error {
+    display: none;
+    font-size: var(--text-sm, 0.875rem);
+    color: #c0392b;
+    margin-top: var(--space-3, 0.75rem);
+    text-align: center;
+  }
+  .quick-add__error.is-visible { display: block; }
+
+  .quick-add__success {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3, 0.75rem);
+    padding: var(--space-6, 1.5rem) 0;
+    text-align: center;
+  }
+  .quick-add__success.is-visible { display: flex; }
+  .quick-add__success-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--color-primary, #1C2E23);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+  }
+  .quick-add__success p {
+    font-size: var(--text-sm, 0.875rem);
+    color: var(--color-text, #1C2E23);
+    margin: 0;
+  }
+</style>
+
+{%- comment -%}
+  ── Self-contained JS ────────────────────────────────────────────────────
+  One <script> block per product card. We guard against double-registration
+  with a global flag keyed to the modal id so multiple cards on the same
+  page each get their own instance without re-defining shared helpers.
+{%- endcomment -%}
+<script>
+(function () {
+  'use strict';
+
+  var MODAL_ID = {{ qa_id | json }};
+
+  /* ── Shared helper: format money (cents → "$0.00") ── */
+  if (!window.__qaFormatMoney) {
+    window.__qaFormatMoney = function (cents) {
+      return '$' + (cents / 100).toFixed(2);
+    };
+  }
+
+  /* ── Shared helper: open / close modals ── */
+  if (!window.__qaModalOpen) {
+    window.__qaModalOpen = function (modalId) {
+      var modal = document.getElementById(modalId);
+      if (!modal) return;
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      var panel = modal.querySelector('[data-quick-add-panel], .quick-add__panel');
+      if (panel) panel.focus();
+      var trigger = document.querySelector('[data-quick-add-trigger="' + modalId + '"]');
+      if (trigger) trigger.setAttribute('aria-expanded', 'true');
+    };
+  }
+  if (!window.__qaModalClose) {
+    window.__qaModalClose = function (modalId) {
+      var modal = document.getElementById(modalId);
+      if (!modal) return;
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      var trigger = document.querySelector('[data-quick-add-trigger="' + modalId + '"]');
+      if (trigger) { trigger.setAttribute('aria-expanded', 'false'); trigger.focus(); }
+    };
+  }
+
+  /* ── Shared: escape key closes any open modal ── */
+  if (!window.__qaEscBound) {
+    window.__qaEscBound = true;
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      var openModals = document.querySelectorAll('.quick-add__modal[aria-hidden="false"]');
+      openModals.forEach(function (m) { window.__qaModalClose(m.id); });
+    });
+  }
+
+  /* ── Per-instance setup ── */
+  function init () {
+    var trigger  = document.querySelector('[data-quick-add-trigger="' + MODAL_ID + '"]');
+    var modal    = document.getElementById(MODAL_ID);
+    var closeBtn = modal && modal.querySelector('[data-quick-add-close="' + MODAL_ID + '"]');
+    var backdrop = modal && modal.querySelector('[data-quick-add-backdrop="' + MODAL_ID + '"]');
+    var body     = modal && modal.querySelector('[data-quick-add-body="' + MODAL_ID + '"]');
+
+    if (!trigger || !modal || !body) return;
+
+    var handle      = body.getAttribute('data-product-handle');
+    var productUrl  = body.getAttribute('data-product-url');
+    var productData = null; /* cached after first fetch */
+
+    /* ── Trigger: open + fetch ── */
+    trigger.addEventListener('click', function (e) {
+      e.preventDefault();
+      window.__qaModalOpen(MODAL_ID);
+      if (!productData) {
+        fetchProduct(handle);
+      }
+    });
+
+    /* ── Close ── */
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function () {
+        window.__qaModalClose(MODAL_ID);
+      });
+    }
+    if (backdrop) {
+      backdrop.addEventListener('click', function () {
+        window.__qaModalClose(MODAL_ID);
+      });
+    }
+
+    /* ── Focus trap inside panel ── */
+    modal.addEventListener('keydown', function (e) {
+      if (e.key !== 'Tab') return;
+      var focusable = modal.querySelectorAll(
+        'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+      var first = focusable[0];
+      var last  = focusable[focusable.length - 1];
+      if (!first) return;
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else {
+        if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
+      }
+    });
+
+    /* ── Fetch product JSON ── */
+    function fetchProduct (productHandle) {
+      fetch('/products/' + productHandle + '.js')
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          productData = data;
+          renderBody(data);
+        })
+        .catch(function () {
+          body.innerHTML = '<p style="text-align:center;padding:1.5rem;color:#c0392b;">Could not load product. <a href="' + productUrl + '">View product page</a></p>';
+        });
+    }
+
+    /* ── Render body ── */
+    function renderBody (data) {
+      var firstVariant    = data.variants[0];
+      var selectedVariant = firstVariant;
+      var hasMultiple     = data.variants.length > 1;
+      var qty             = 1;
+
+      var html = '';
+
+      /* Product image */
+      if (data.featured_image) {
+        html += '<img class="quick-add__image" src="' + data.featured_image + '" alt="' + escAttr(data.title) + '" loading="lazy">';
+      }
+
+      /* Price row (updated when variant changes) */
+      html += '<div class="quick-add__price-row" data-qa-price-row>';
+      html += '<span class="quick-add__price" data-qa-price>' + window.__qaFormatMoney(firstVariant.price) + '</span>';
+      if (firstVariant.compare_at_price > firstVariant.price) {
+        html += '<span class="quick-add__price--compare" data-qa-compare>' + window.__qaFormatMoney(firstVariant.compare_at_price) + '</span>';
+      } else {
+        html += '<span class="quick-add__price--compare" data-qa-compare style="display:none;"></span>';
+      }
+      html += '</div>';
+
+      /* Variant selector */
+      if (hasMultiple) {
+        html += '<label class="quick-add__label">Choose option</label>';
+        html += '<div class="quick-add__variant-grid" data-qa-variants>';
+        data.variants.forEach(function (v) {
+          var disabled = !v.available ? ' disabled' : '';
+          var selected = v.id === firstVariant.id ? ' is-selected' : '';
+          html += '<button type="button" class="quick-add__variant-btn' + selected + '"' + disabled + ' data-variant-id="' + v.id + '" data-variant-price="' + v.price + '" data-variant-compare="' + (v.compare_at_price || 0) + '">' + escHtml(v.title) + '</button>';
+        });
+        html += '</div>';
+      }
+
+      /* Quantity */
+      html += '<label class="quick-add__label" for="qa-qty-' + MODAL_ID + '">Quantity</label>';
+      html += '<div class="quick-add__qty-row">';
+      html += '<button type="button" class="quick-add__qty-btn" data-qa-qty-minus aria-label="Decrease quantity">&#8722;</button>';
+      html += '<input id="qa-qty-' + MODAL_ID + '" class="quick-add__qty-input" type="number" min="1" value="1" data-qa-qty-input aria-label="Quantity">';
+      html += '<button type="button" class="quick-add__qty-btn" data-qa-qty-plus aria-label="Increase quantity">&#43;</button>';
+      html += '</div>';
+
+      /* ATC button */
+      var atcDisabled = !firstVariant.available ? ' disabled' : '';
+      var atcText     = firstVariant.available ? 'Add to Cart' : 'Sold Out';
+      html += '<button type="button" class="btn btn--primary quick-add__atc"' + atcDisabled + ' data-qa-atc data-variant-id="' + firstVariant.id + '">' + atcText + '</button>';
+
+      /* Error + success states */
+      html += '<p class="quick-add__error" data-qa-error role="alert"></p>';
+      html += '<div class="quick-add__success" data-qa-success aria-live="polite">';
+      html += '<div class="quick-add__success-icon">';
+      html += '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+      html += '</div>';
+      html += '<p>Added to cart!</p>';
+      html += '<button type="button" class="btn btn--outline btn--sm" data-quick-add-close="' + MODAL_ID + '">Continue shopping</button>';
+      html += '</div>';
+
+      body.innerHTML = html;
+      bindBodyEvents();
+
+      function bindBodyEvents () {
+        /* Variant selection */
+        var variantBtns = body.querySelectorAll('[data-variant-id]');
+        var atcBtn      = body.querySelector('[data-qa-atc]');
+        var priceEl     = body.querySelector('[data-qa-price]');
+        var compareEl   = body.querySelector('[data-qa-compare]');
+        var qtyInput    = body.querySelector('[data-qa-qty-input]');
+        var qtyMinus    = body.querySelector('[data-qa-qty-minus]');
+        var qtyPlus     = body.querySelector('[data-qa-qty-plus]');
+        var errorEl     = body.querySelector('[data-qa-error]');
+        var successEl   = body.querySelector('[data-qa-success]');
+
+        variantBtns.forEach(function (btn) {
+          if (btn === atcBtn) return; /* atc btn also has data-variant-id */
+          btn.addEventListener('click', function () {
+            variantBtns.forEach(function (b) { b.classList.remove('is-selected'); });
+            btn.classList.add('is-selected');
+            selectedVariant = data.variants.find(function (v) { return v.id === parseInt(btn.getAttribute('data-variant-id'), 10); });
+            if (!selectedVariant) return;
+            /* Update price */
+            priceEl.textContent = window.__qaFormatMoney(selectedVariant.price);
+            if (selectedVariant.compare_at_price > selectedVariant.price) {
+              compareEl.textContent = window.__qaFormatMoney(selectedVariant.compare_at_price);
+              compareEl.style.display = '';
+            } else {
+              compareEl.textContent = '';
+              compareEl.style.display = 'none';
+            }
+            /* Update ATC */
+            atcBtn.setAttribute('data-variant-id', selectedVariant.id);
+            atcBtn.disabled = !selectedVariant.available;
+            atcBtn.textContent = selectedVariant.available ? 'Add to Cart' : 'Sold Out';
+          });
+        });
+
+        /* Quantity controls */
+        if (qtyMinus) {
+          qtyMinus.addEventListener('click', function () {
+            var v = parseInt(qtyInput.value, 10);
+            if (v > 1) { qty = v - 1; qtyInput.value = qty; }
+          });
+        }
+        if (qtyPlus) {
+          qtyPlus.addEventListener('click', function () {
+            var v = parseInt(qtyInput.value, 10);
+            qty = v + 1; qtyInput.value = qty;
+          });
+        }
+        if (qtyInput) {
+          qtyInput.addEventListener('change', function () {
+            qty = Math.max(1, parseInt(qtyInput.value, 10) || 1);
+            qtyInput.value = qty;
+          });
+        }
+
+        /* Bind close button inside success block */
+        var innerClose = body.querySelector('[data-quick-add-close="' + MODAL_ID + '"]');
+        if (innerClose) {
+          innerClose.addEventListener('click', function () {
+            window.__qaModalClose(MODAL_ID);
+          });
+        }
+
+        /* ATC submit */
+        if (atcBtn) {
+          atcBtn.addEventListener('click', function () {
+            var variantId = parseInt(atcBtn.getAttribute('data-variant-id'), 10);
+            qty = parseInt(qtyInput ? qtyInput.value : 1, 10) || 1;
+            if (!variantId) return;
+
+            atcBtn.disabled = true;
+            atcBtn.textContent = 'Adding\u2026';
+            errorEl.classList.remove('is-visible');
+
+            fetch('/cart/add.js', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
+              body: JSON.stringify({ id: variantId, quantity: qty })
+            })
+              .then(function (r) {
+                if (!r.ok) return r.json().then(function (d) { throw new Error(d.description || 'Could not add to cart.'); });
+                return r.json();
+              })
+              .then(function () {
+                /* Show success state */
+                atcBtn.style.display = 'none';
+                successEl.classList.add('is-visible');
+                /* Re-bind the close button that was just added */
+                var sc = successEl.querySelector('[data-quick-add-close="' + MODAL_ID + '"]');
+                if (sc) sc.addEventListener('click', function () { window.__qaModalClose(MODAL_ID); });
+                /* Notify cart drawer */
+                document.dispatchEvent(new CustomEvent('cart-drawer:refresh', { bubbles: true }));
+              })
+              .catch(function (err) {
+                atcBtn.disabled = false;
+                atcBtn.textContent = 'Add to Cart';
+                errorEl.textContent = err.message || 'Something went wrong. Please try again.';
+                errorEl.classList.add('is-visible');
+              });
+          });
+        }
+      }
+    }
+  }
+
+  /* ── Helpers ── */
+  function escAttr (str) { return String(str).replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function escHtml (str) { return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+
+  /* ── Boot ── */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>

@@ -1,36 +1,336 @@
 {%- comment -%}BaseCode Root - brand-story{%- endcomment -%}
-<section class="section" style="background-color: {{ section.settings.bg_color | default: '#F5F2EC' }};">
-  <div class="container container--narrow text-center">
-    {%- if section.settings.image != blank -%}
-      <div style="width: 120px; height: 120px; margin: 0 auto var(--space-6); border-radius: var(--radius-full); overflow: hidden;" class="reveal-hidden">
-        <img src="{{ section.settings.image | image_url: width: 240 }}" alt="" width="120" height="120" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
-      </div>
-    {%- endif -%}
 
-    <h2 class="reveal-hidden" style="margin-bottom: var(--space-6);">{{ section.settings.heading | default: 'Empowering your health through biology.' }}</h2>
+{%- liquid
+  assign bg_color    = section.settings.bg_color | default: '#F5F2EC'
+  assign bg_opacity  = section.settings.bg_opacity | divided_by: 100.0
+  assign text_color  = section.settings.text_color | default: '#1C2E23'
+  assign pt          = section.settings.padding_top
+  assign pb          = section.settings.padding_bottom
+  assign align       = section.settings.text_align | default: 'center'
+  assign full_width  = section.settings.full_width
+  assign animate     = section.settings.enable_animation
 
-    {%- if section.settings.text != blank -%}
-      <p style="font-size: var(--text-lg); color: var(--color-text-light); line-height: 1.7; margin-bottom: var(--space-8);" class="reveal-hidden">
-        {{ section.settings.text }}
-      </p>
-    {%- endif -%}
+  case section.settings.image_size
+    when 'small'
+      assign img_px = 80
+    when 'large'
+      assign img_px = 200
+    else
+      assign img_px = 120
+  endcase
 
-    {%- if section.settings.button_text != blank -%}
-      <div class="reveal-hidden">
-        <a href="{{ section.settings.button_link }}" class="btn btn--primary btn--lg">{{ section.settings.button_text }}</a>
-      </div>
-    {%- endif -%}
+  case section.settings.image_shape
+    when 'circle'
+      assign img_radius = '50%'
+    when 'square'
+      assign img_radius = '0'
+    else
+      assign img_radius = '12px'
+  endcase
+
+  case section.settings.content_width
+    when 'narrow'
+      assign width_class = 'brand-story__inner--narrow'
+    when 'wide'
+      assign width_class = 'brand-story__inner--wide'
+    else
+      assign width_class = 'brand-story__inner--medium'
+  endcase
+
+  case section.settings.heading_size
+    when 'small'
+      assign h_size = 'brand-story__heading--sm'
+    when 'large'
+      assign h_size = 'brand-story__heading--lg'
+    when 'xlarge'
+      assign h_size = 'brand-story__heading--xl'
+    else
+      assign h_size = 'brand-story__heading--md'
+  endcase
+
+  assign heading_tag = section.settings.heading_level | default: 'h2'
+
+  case section.settings.button_style
+    when 'secondary'
+      assign btn_class = 'btn btn--secondary btn--lg'
+    when 'white'
+      assign btn_class = 'btn btn--white btn--lg'
+    else
+      assign btn_class = 'btn btn--primary btn--lg'
+  endcase
+-%}
+
+{%- style -%}
+  #section-brand-story-{{ section.id }} {
+    background-color: {{ bg_color }};
+    opacity: {{ bg_opacity }};
+    padding-top: {{ pt }}px;
+    padding-bottom: {{ pb }}px;
+    color: {{ text_color }};
+  }
+
+  #section-brand-story-{{ section.id }} .brand-story__inner {
+    text-align: {{ align }};
+    {% if align == 'left' %}margin-left: 0;{% else %}margin-left: auto;{% endif %}
+    margin-right: auto;
+  }
+
+  #section-brand-story-{{ section.id }} .brand-story__inner--narrow  { max-width: 560px; }
+  #section-brand-story-{{ section.id }} .brand-story__inner--medium  { max-width: 760px; }
+  #section-brand-story-{{ section.id }} .brand-story__inner--wide    { max-width: 1060px; }
+
+  #section-brand-story-{{ section.id }} .brand-story__image-wrap {
+    width: {{ img_px }}px;
+    height: {{ img_px }}px;
+    border-radius: {{ img_radius }};
+    overflow: hidden;
+    margin-bottom: var(--space-6);
+    {% if align == 'center' %}margin-left: auto; margin-right: auto;{% endif %}
+  }
+
+  #section-brand-story-{{ section.id }} .brand-story__image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  #section-brand-story-{{ section.id }} .brand-story__heading--sm  { font-size: clamp(1.25rem, 2vw, 1.5rem); }
+  #section-brand-story-{{ section.id }} .brand-story__heading--md  { font-size: clamp(1.5rem, 2.5vw, 2rem); }
+  #section-brand-story-{{ section.id }} .brand-story__heading--lg  { font-size: clamp(1.75rem, 3vw, 2.5rem); }
+  #section-brand-story-{{ section.id }} .brand-story__heading--xl  { font-size: clamp(2rem, 4vw, 3.25rem); }
+
+  @media (max-width: 749px) {
+    #section-brand-story-{{ section.id }} .brand-story__desktop-image { display: none; }
+    #section-brand-story-{{ section.id }} .brand-story__mobile-image  { display: block; }
+  }
+  @media (min-width: 750px) {
+    #section-brand-story-{{ section.id }} .brand-story__desktop-image { display: block; }
+    #section-brand-story-{{ section.id }} .brand-story__mobile-image  { display: none; }
+  }
+{%- endstyle -%}
+
+<section
+  id="section-brand-story-{{ section.id }}"
+  class="brand-story{% if full_width %} brand-story--full-width{% endif %}"
+  aria-label="{{ section.settings.heading | escape }}"
+>
+  <div class="{% unless full_width %}page-width{% endunless %}">
+    <div class="brand-story__inner {{ width_class }}">
+
+      {%- comment -%}---- Image (desktop / mobile) ----{%- endcomment -%}
+      {%- if section.settings.image != blank or section.settings.image_mobile != blank -%}
+        {%- if section.settings.image != blank -%}
+          <div
+            class="brand-story__image-wrap brand-story__desktop-image{% if animate %} reveal-hidden{% endif %}"
+          >
+            <img
+              src="{{ section.settings.image | image_url: width: img_px | times: 2 }}"
+              alt="{{ section.settings.image.alt | escape }}"
+              width="{{ img_px }}"
+              height="{{ img_px }}"
+              loading="lazy"
+            >
+          </div>
+        {%- endif -%}
+        {%- if section.settings.image_mobile != blank -%}
+          <div
+            class="brand-story__image-wrap brand-story__mobile-image{% if animate %} reveal-hidden{% endif %}"
+          >
+            <img
+              src="{{ section.settings.image_mobile | image_url: width: img_px | times: 2 }}"
+              alt="{{ section.settings.image_mobile.alt | escape }}"
+              width="{{ img_px }}"
+              height="{{ img_px }}"
+              loading="lazy"
+            >
+          </div>
+        {%- elsif section.settings.image != blank -%}
+          {%- comment -%}Fallback: use desktop image on mobile too if no mobile image set{%- endcomment -%}
+          <div
+            class="brand-story__image-wrap brand-story__mobile-image{% if animate %} reveal-hidden{% endif %}"
+          >
+            <img
+              src="{{ section.settings.image | image_url: width: img_px | times: 2 }}"
+              alt="{{ section.settings.image.alt | escape }}"
+              width="{{ img_px }}"
+              height="{{ img_px }}"
+              loading="lazy"
+            >
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- comment -%}---- Subheading ----{%- endcomment -%}
+      {%- if section.settings.subheading != blank -%}
+        <p
+          class="brand-story__subheading{% if animate %} reveal-hidden{% endif %}"
+          style="font-size: var(--text-sm); letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; margin-bottom: var(--space-3); color: {{ text_color }}; opacity: 0.65;"
+        >
+          {{ section.settings.subheading }}
+        </p>
+      {%- endif -%}
+
+      {%- comment -%}---- Heading ----{%- endcomment -%}
+      {%- if section.settings.heading != blank -%}
+        <{{ heading_tag }}
+          class="brand-story__heading {{ h_size }}{% if animate %} reveal-hidden{% endif %}"
+          style="margin-bottom: var(--space-5); color: {{ text_color }};"
+        >
+          {{ section.settings.heading }}
+        </{{ heading_tag }}>
+      {%- endif -%}
+
+      {%- comment -%}---- Body text ----{%- endcomment -%}
+      {%- if section.settings.text != blank -%}
+        <div
+          class="brand-story__text rte{% if animate %} reveal-hidden{% endif %}"
+          style="font-size: var(--text-lg); line-height: 1.7; margin-bottom: var(--space-8); color: {{ text_color }}; opacity: 0.82;"
+        >
+          {{ section.settings.text }}
+        </div>
+      {%- endif -%}
+
+      {%- comment -%}---- Button ----{%- endcomment -%}
+      {%- if section.settings.button_text != blank -%}
+        <div class="brand-story__cta{% if animate %} reveal-hidden{% endif %}">
+          <a href="{{ section.settings.button_link }}" class="{{ btn_class }}">
+            {{ section.settings.button_text }}
+          </a>
+        </div>
+      {%- endif -%}
+
+    </div>
   </div>
 </section>
 
 {% schema %}
 {
   "name": "Brand Story",
+  "tag": "section",
   "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "content_width",
+      "label": "Content width",
+      "options": [
+        { "value": "narrow", "label": "Narrow (560px)" },
+        { "value": "medium", "label": "Medium (760px)" },
+        { "value": "wide",   "label": "Wide (1060px)" }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left",   "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#F5F2EC"
+    },
+    {
+      "type": "range",
+      "id": "bg_opacity",
+      "label": "Background opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#1C2E23"
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Small image (optional)"
+      "label": "Image (desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image (mobile — optional)"
+    },
+    {
+      "type": "select",
+      "id": "image_size",
+      "label": "Image size",
+      "options": [
+        { "value": "small",  "label": "Small (80px)" },
+        { "value": "medium", "label": "Medium (120px)" },
+        { "value": "large",  "label": "Large (200px)" }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "select",
+      "id": "image_shape",
+      "label": "Image shape",
+      "options": [
+        { "value": "circle",  "label": "Circle" },
+        { "value": "square",  "label": "Square" },
+        { "value": "rounded", "label": "Rounded" }
+      ],
+      "default": "circle"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading (optional)",
+      "default": "Our Story"
     },
     {
       "type": "text",
@@ -39,10 +339,40 @@
       "default": "Your biology is unique. Your supplements should be too."
     },
     {
-      "type": "textarea",
+      "type": "select",
+      "id": "heading_level",
+      "label": "Heading level",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "small",  "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large",  "label": "Large" },
+        { "value": "xlarge", "label": "X-Large" }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "richtext",
       "id": "text",
       "label": "Body text",
-      "default": "At BaseCode Health, we build supplements informed by biological diversity research. The supplement industry ignores the fact that biology differs from person to person. We do not. Origin is our first product and it will not be the last."
+      "default": "<p>At BaseCode Health, we build supplements informed by biological diversity research. The supplement industry ignores the fact that biology differs from person to person. We do not. Origin is our first product — and it will not be the last.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Button"
     },
     {
       "type": "text",
@@ -56,15 +386,49 @@
       "label": "Button link"
     },
     {
-      "type": "color",
-      "id": "bg_color",
-      "label": "Background color",
-      "default": "#F5F2EC"
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        { "value": "primary",   "label": "Primary (green)" },
+        { "value": "secondary", "label": "Secondary (outlined)" },
+        { "value": "white",     "label": "White" }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable scroll animation",
+      "default": true
     }
   ],
   "presets": [
     {
-      "name": "Brand Story"
+      "name": "Brand Story",
+      "settings": {
+        "subheading": "Our Story",
+        "heading": "Your biology is unique. Your supplements should be too.",
+        "heading_level": "h2",
+        "heading_size": "medium",
+        "text_align": "center",
+        "content_width": "medium",
+        "image_size": "medium",
+        "image_shape": "circle",
+        "button_text": "About Us",
+        "button_style": "primary",
+        "bg_color": "#F5F2EC",
+        "bg_opacity": 100,
+        "text_color": "#1C2E23",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "enable_animation": true,
+        "full_width": false
+      }
     }
   ]
 }

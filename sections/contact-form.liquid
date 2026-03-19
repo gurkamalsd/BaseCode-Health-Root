@@ -1,53 +1,251 @@
-{%- comment -%}BaseCode Root - contact-form{%- endcomment -%}
-<section class="section bg-white">
-  <div class="container container--narrow">
-    <h1 class="text-center mb-4">{{ section.settings.heading | default: 'Contact Us' }}</h1>
+{%- comment -%}
+  BaseCode Root — contact-form
+  Contact form with configurable heading level/size, subject field toggle, content width,
+  success message, button text, animation, and full color/padding controls.
+  Settings: bg_color, text_color, padding_top/bottom, heading, heading_level, heading_size,
+            text, show_subject, button_text, success_message, content_width, enable_animation
+{%- endcomment -%}
+
+{%- liquid
+  assign bg           = section.settings.bg_color
+  assign tc           = section.settings.text_color
+  assign pt           = section.settings.padding_top
+  assign pb           = section.settings.padding_bottom
+  assign animate      = section.settings.enable_animation
+  assign h_tag        = section.settings.heading_level | default: 'h1'
+  assign content_w    = section.settings.content_width | default: 'narrow'
+  assign show_subject = section.settings.show_subject
+  assign btn_text     = section.settings.button_text | default: 'Send Message'
+  assign success_msg  = section.settings.success_message | default: "Thanks for reaching out! We'll get back to you within 24 hours."
+
+  case section.settings.heading_size
+    when 'small'
+      assign h_size = 'var(--text-xl, 1.25rem)'
+    when 'medium'
+      assign h_size = 'var(--text-2xl, 1.5rem)'
+    when 'large'
+      assign h_size = 'var(--text-4xl, 2.25rem)'
+    when 'xlarge'
+      assign h_size = 'var(--text-5xl, 3rem)'
+    else
+      assign h_size = 'var(--text-3xl, 2rem)'
+  endcase
+
+  case content_w
+    when 'medium'
+      assign w_cls = 'container--medium'
+    when 'full'
+      assign w_cls = ''
+    else
+      assign w_cls = 'container--narrow'
+  endcase
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} .s-contact-wrap {
+    background-color: {{ bg }};
+    color: {{ tc }};
+    padding-top: {{ pt }}px;
+    padding-bottom: {{ pb }}px;
+  }
+  #shopify-section-{{ section.id }} .s-contact-wrap *:not(a):not(.btn):not(.form-label) {
+    color: inherit;
+  }
+  #shopify-section-{{ section.id }} .s-contact-heading {
+    font-size: {{ h_size }};
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: var(--space-4, 1rem);
+  }
+  #shopify-section-{{ section.id }} .s-contact-subtext {
+    text-align: center;
+    font-size: var(--text-lg, 1.125rem);
+    opacity: 0.75;
+    margin-bottom: var(--space-10, 2.5rem);
+  }
+  #shopify-section-{{ section.id }} .s-contact-success {
+    padding: var(--space-6, 1.5rem);
+    background: rgba(22, 163, 74, 0.08);
+    border: 1px solid var(--color-success, #16a34a);
+    border-radius: var(--radius-md, 0.5rem);
+    text-align: center;
+    margin-bottom: var(--space-6, 1.5rem);
+    font-weight: 600;
+    color: var(--color-success, #16a34a);
+  }
+  #shopify-section-{{ section.id }} .s-contact-errors {
+    padding: var(--space-4, 1rem);
+    background: rgba(220, 38, 38, 0.08);
+    border: 1px solid var(--color-error, #dc2626);
+    border-radius: var(--radius-md, 0.5rem);
+    margin-bottom: var(--space-6, 1.5rem);
+  }
+  #shopify-section-{{ section.id }} .s-contact-field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6, 1.5rem);
+    margin-bottom: var(--space-4, 1rem);
+  }
+  @media (max-width: 640px) {
+    #shopify-section-{{ section.id }} .s-contact-field-row {
+      grid-template-columns: 1fr;
+    }
+  }
+  #shopify-section-{{ section.id }} .s-contact-field {
+    margin-top: var(--space-4, 1rem);
+  }
+  #shopify-section-{{ section.id }} .s-contact-submit {
+    margin-top: var(--space-6, 1.5rem);
+  }
+  {%- if animate -%}
+  @keyframes sContactFadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  #shopify-section-{{ section.id }} .s-contact-animate {
+    animation: sContactFadeUp 0.55s ease both;
+  }
+  #shopify-section-{{ section.id }} .s-contact-animate:nth-child(2) { animation-delay: 0.1s; }
+  #shopify-section-{{ section.id }} .s-contact-animate:nth-child(3) { animation-delay: 0.2s; }
+  {%- endif -%}
+</style>
+
+<div class="s-contact-wrap">
+  <div class="container {{ w_cls }}">
+
+    {%- if section.settings.heading != blank -%}
+      <{{ h_tag }} class="s-contact-heading{% if animate %} s-contact-animate{% endif %}">
+        {{ section.settings.heading }}
+      </{{ h_tag }}>
+    {%- endif -%}
+
     {%- if section.settings.text != blank -%}
-      <p class="text-center mb-10" style="font-size: var(--text-lg); color: var(--color-text-light);">{{ section.settings.text }}</p>
+      <p class="s-contact-subtext{% if animate %} s-contact-animate{% endif %}">
+        {{ section.settings.text }}
+      </p>
     {%- endif -%}
 
     {%- form 'contact' -%}
+
       {%- if form.posted_successfully? -%}
-        <div style="padding: var(--space-6); background: rgba(22, 163, 74, 0.1); border: 1px solid var(--color-success); border-radius: var(--radius-md); text-align: center; margin-bottom: var(--space-6);">
-          <p style="color: var(--color-success); font-weight: 600;">Thanks for reaching out! We'll get back to you within 24 hours.</p>
+        <div class="s-contact-success">
+          <p>{{ success_msg }}</p>
         </div>
       {%- endif -%}
 
       {%- if form.errors -%}
-        <div style="padding: var(--space-4); background: rgba(220, 38, 38, 0.1); border: 1px solid var(--color-error); border-radius: var(--radius-md); margin-bottom: var(--space-6);">
+        <div class="s-contact-errors">
           {{ form.errors | default_errors }}
         </div>
       {%- endif -%}
 
-      <div class="grid gap-6" style="grid-template-columns: 1fr 1fr;">
+      <div class="s-contact-field-row">
         <div>
-          <label for="contact-name" class="form-label">Name</label>
-          <input type="text" name="contact[name]" id="contact-name" class="form-input" placeholder="{{ 'forms.name_placeholder' | t }}" required>
+          <label for="contact-name-{{ section.id }}" class="form-label">Name</label>
+          <input
+            type="text"
+            name="contact[name]"
+            id="contact-name-{{ section.id }}"
+            class="form-input"
+            placeholder="{{ 'forms.name_placeholder' | t }}"
+            required
+          >
         </div>
         <div>
-          <label for="contact-email" class="form-label">Email</label>
-          <input type="email" name="contact[email]" id="contact-email" class="form-input" placeholder="{{ 'forms.email_placeholder' | t }}" required>
+          <label for="contact-email-{{ section.id }}" class="form-label">Email</label>
+          <input
+            type="email"
+            name="contact[email]"
+            id="contact-email-{{ section.id }}"
+            class="form-input"
+            placeholder="{{ 'forms.email_placeholder' | t }}"
+            required
+          >
         </div>
       </div>
-      <div style="margin-top: var(--space-4);">
-        <label for="contact-subject" class="form-label">Subject</label>
-        <input type="text" name="contact[subject]" id="contact-subject" class="form-input" placeholder="{{ 'forms.subject_placeholder' | t }}">
+
+      {%- if show_subject -%}
+        <div class="s-contact-field">
+          <label for="contact-subject-{{ section.id }}" class="form-label">Subject</label>
+          <input
+            type="text"
+            name="contact[subject]"
+            id="contact-subject-{{ section.id }}"
+            class="form-input"
+            placeholder="{{ 'forms.subject_placeholder' | t }}"
+          >
+        </div>
+      {%- endif -%}
+
+      <div class="s-contact-field">
+        <label for="contact-message-{{ section.id }}" class="form-label">Message</label>
+        <textarea
+          name="contact[body]"
+          id="contact-message-{{ section.id }}"
+          class="form-input"
+          rows="6"
+          placeholder="{{ 'forms.message_placeholder' | t }}"
+          required
+        ></textarea>
       </div>
-      <div style="margin-top: var(--space-4);">
-        <label for="contact-message" class="form-label">Message</label>
-        <textarea name="contact[body]" id="contact-message" class="form-input" rows="6" placeholder="{{ 'forms.message_placeholder' | t }}" required></textarea>
+
+      <div class="s-contact-submit">
+        <button type="submit" class="btn btn--primary btn--lg">{{ btn_text }}</button>
       </div>
-      <div style="margin-top: var(--space-6);">
-        <button type="submit" class="btn btn--primary btn--lg">{{ 'forms.submit' | t }}</button>
-      </div>
+
     {%- endform -%}
+
   </div>
-</section>
+</div>
 
 {% schema %}
 {
   "name": "Contact Form",
   "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#1C2E23"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
     {
       "type": "text",
       "id": "heading",
@@ -55,12 +253,90 @@
       "default": "Contact Us"
     },
     {
+      "type": "select",
+      "id": "heading_level",
+      "label": "Heading tag",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "small",  "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "default","label": "Default" },
+        { "value": "large",  "label": "Large" },
+        { "value": "xlarge", "label": "X-Large" }
+      ],
+      "default": "default"
+    },
+    {
       "type": "textarea",
       "id": "text",
       "label": "Subtext",
       "default": "Have a question? We'd love to hear from you. Email us at hello@basecodehealth.com or use the form below."
+    },
+    {
+      "type": "header",
+      "content": "Form"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_subject",
+      "label": "Show subject field",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Submit button text",
+      "default": "Send Message"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thanks for reaching out! We'll get back to you within 24 hours."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "content_width",
+      "label": "Content width",
+      "options": [
+        { "value": "narrow", "label": "Narrow" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "full",   "label": "Full" }
+      ],
+      "default": "narrow"
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable fade-up animation",
+      "default": true
     }
   ],
-  "presets": [{ "name": "Contact Form" }]
+  "presets": [
+    {
+      "name": "Contact Form"
+    }
+  ]
 }
 {% endschema %}

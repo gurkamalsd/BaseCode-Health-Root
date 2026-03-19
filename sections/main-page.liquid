@@ -1,16 +1,167 @@
-{%- comment -%}BaseCode Root - main-page{%- endcomment -%}
-<section class="section bg-white">
-  <div class="container container--narrow">
-    <h1 class="text-center mb-8">{{ page.title }}</h1>
-    <div class="rte" style="font-size: var(--text-base); line-height: 1.8; color: var(--color-text-light);">
+{%- comment -%}
+  BaseCode Root — main-page
+  Generic page template with configurable content width, page title visibility,
+  full color/padding controls, and animation.
+  Settings: bg_color, text_color, padding_top/bottom, content_width,
+            show_page_title, enable_animation
+{%- endcomment -%}
+
+{%- liquid
+  assign bg             = section.settings.bg_color
+  assign tc             = section.settings.text_color
+  assign pt             = section.settings.padding_top
+  assign pb             = section.settings.padding_bottom
+  assign animate        = section.settings.enable_animation
+  assign show_title     = section.settings.show_page_title
+  assign content_w      = section.settings.content_width | default: 'narrow'
+
+  case content_w
+    when 'medium'
+      assign w_cls = 'container--medium'
+    when 'full'
+      assign w_cls = ''
+    else
+      assign w_cls = 'container--narrow'
+  endcase
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} .s-page-wrap {
+    background-color: {{ bg }};
+    color: {{ tc }};
+    padding-top: {{ pt }}px;
+    padding-bottom: {{ pb }}px;
+  }
+  #shopify-section-{{ section.id }} .s-page-wrap h1,
+  #shopify-section-{{ section.id }} .s-page-wrap .rte,
+  #shopify-section-{{ section.id }} .s-page-wrap p {
+    color: inherit;
+  }
+  #shopify-section-{{ section.id }} .s-page-title {
+    text-align: center;
+    font-size: var(--text-4xl, 2.25rem);
+    font-weight: 700;
+    margin-bottom: var(--space-8, 2rem);
+  }
+  #shopify-section-{{ section.id }} .s-page-content {
+    font-size: var(--text-base, 1rem);
+    line-height: 1.8;
+  }
+  {%- if animate -%}
+  @keyframes sPageFadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  #shopify-section-{{ section.id }} .s-page-animate {
+    animation: sPageFadeUp 0.55s ease both;
+  }
+  #shopify-section-{{ section.id }} .s-page-animate-2 {
+    animation: sPageFadeUp 0.55s ease both;
+    animation-delay: 0.12s;
+  }
+  {%- endif -%}
+</style>
+
+<div class="s-page-wrap">
+  <div class="container {{ w_cls }}">
+
+    {%- if show_title -%}
+      <h1 class="s-page-title{% if animate %} s-page-animate{% endif %}">
+        {{ page.title }}
+      </h1>
+    {%- endif -%}
+
+    <div class="rte s-page-content{% if animate %} s-page-animate-2{% endif %}">
       {{ page.content }}
     </div>
+
   </div>
-</section>
+</div>
 
 {% schema %}
 {
   "name": "Page Content",
-  "settings": []
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#1C2E23"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "content_width",
+      "label": "Content width",
+      "options": [
+        { "value": "narrow", "label": "Narrow" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "full",   "label": "Full" }
+      ],
+      "default": "narrow"
+    },
+    {
+      "type": "header",
+      "content": "Display Options"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_page_title",
+      "label": "Show page title",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable fade-up animation",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Page Content"
+    }
+  ]
 }
 {% endschema %}

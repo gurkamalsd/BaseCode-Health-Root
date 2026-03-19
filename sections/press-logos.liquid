@@ -1,32 +1,392 @@
-{%- comment -%}BaseCode Root - press-logos{%- endcomment -%}
-<section class="section--sm bg-white">
-  <div class="container text-center">
-    {%- if section.settings.heading != blank -%}
-      <p style="font-family: var(--font-heading); font-size: var(--text-sm); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-text-light); margin-bottom: var(--space-6);">
-        {{ section.settings.heading }}
-      </p>
+{%- comment -%}BaseCode Root - press-logos (Wonder-level customization){%- endcomment -%}
+
+{%- liquid
+  assign animation_mode = section.settings.animation_mode
+  assign marquee_speed   = section.settings.marquee_speed
+  assign logo_height     = section.settings.logo_height
+  assign logo_spacing    = section.settings.logo_spacing
+  assign grayscale       = section.settings.grayscale
+  assign full_width      = section.settings.full_width
+  assign enable_anim     = section.settings.enable_animation
+
+  case marquee_speed
+    when 'slow'
+      assign duration = '60s'
+    when 'fast'
+      assign duration = '18s'
+    else
+      assign duration = '30s'
+  endcase
+
+  assign use_marquee = false
+  if animation_mode == 'marquee' and enable_anim
+    assign use_marquee = true
+  endif
+
+  assign heading_tag = 'p'
+  case section.settings.heading_size
+    when 'h1'
+      assign heading_tag = 'h1'
+    when 'h2'
+      assign heading_tag = 'h2'
+    when 'h3'
+      assign heading_tag = 'h3'
+    when 'h4'
+      assign heading_tag = 'h4'
+  endcase
+-%}
+
+{%- style -%}
+  #press-logos-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+    color: {{ section.settings.text_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    overflow: hidden;
+  }
+
+  #press-logos-{{ section.id }} .press-logos__heading {
+    color: {{ section.settings.text_color }};
+    font-family: var(--font-heading);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  #press-logos-{{ section.id }} .press-logos__heading--h1 { font-size: clamp(2rem, 5vw, 3rem); text-transform: none; letter-spacing: -0.02em; }
+  #press-logos-{{ section.id }} .press-logos__heading--h2 { font-size: clamp(1.5rem, 4vw, 2.25rem); text-transform: none; letter-spacing: -0.01em; }
+  #press-logos-{{ section.id }} .press-logos__heading--h3 { font-size: clamp(1.25rem, 3vw, 1.75rem); text-transform: none; }
+  #press-logos-{{ section.id }} .press-logos__heading--h4 { font-size: clamp(1rem, 2.5vw, 1.375rem); text-transform: none; }
+
+  /* ── Static layout ─────────────────────────────────────────── */
+  #press-logos-{{ section.id }} .press-logos__static {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: {{ logo_spacing }}px;
+  }
+
+  /* ── Marquee layout ─────────────────────────────────────────── */
+  #press-logos-{{ section.id }} .press-logos__marquee-wrapper {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  }
+
+  #press-logos-{{ section.id }} .press-logos__marquee-track {
+    display: flex;
+    align-items: center;
+    gap: {{ logo_spacing }}px;
+    width: max-content;
+    will-change: transform;
+  }
+
+  {%- if enable_anim and use_marquee -%}
+  #press-logos-{{ section.id }} .press-logos__marquee-track {
+    animation: pressLogosScroll-{{ section.id }} {{ duration }} linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #press-logos-{{ section.id }} .press-logos__marquee-track {
+      animation: none;
+    }
+  }
+
+  @keyframes pressLogosScroll-{{ section.id }} {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  {%- endif -%}
+
+  /* ── Logo items ─────────────────────────────────────────── */
+  #press-logos-{{ section.id }} .press-logos__item {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    text-decoration: none;
+  }
+
+  #press-logos-{{ section.id }} .press-logos__item img {
+    height: {{ logo_height }}px;
+    width: auto;
+    max-width: 160px;
+    object-fit: contain;
+    display: block;
+    {%- if grayscale -%}
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
     {%- endif -%}
-    <div class="press-logos__track">
-      {%- for block in section.blocks -%}
-        {%- if block.settings.logo != blank -%}
-          <img src="{{ block.settings.logo | image_url: width: 200 }}" alt="{{ block.settings.name }}" class="press-logos__item" loading="lazy" height="32" {{ block.shopify_attributes }}>
-        {%- elsif block.settings.name != blank -%}
-          <span class="press-logos__item" style="height: auto; font-family: var(--font-heading); font-size: var(--text-xl); font-weight: 700; text-transform: uppercase;" {{ block.shopify_attributes }}>{{ block.settings.name }}</span>
-        {%- endif -%}
-      {%- endfor -%}
-    </div>
+  }
+
+  {%- if grayscale -%}
+  #press-logos-{{ section.id }} .press-logos__item:hover img {
+    filter: grayscale(0%);
+  }
+  {%- endif -%}
+
+  #press-logos-{{ section.id }} .press-logos__item .press-logos__name {
+    height: auto;
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: {{ section.settings.text_color }};
+    {%- if grayscale -%}
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+    {%- endif -%}
+  }
+
+  {%- if grayscale -%}
+  #press-logos-{{ section.id }} .press-logos__item:hover .press-logos__name {
+    opacity: 1;
+  }
+  {%- endif -%}
+{%- endstyle -%}
+
+<section id="press-logos-{{ section.id }}" class="press-logos">
+  <div class="{{ full_width | default: false | ternary: '', 'container' }}">
+
+    {%- if section.settings.heading != blank -%}
+      <{{ heading_tag }} class="press-logos__heading press-logos__heading--{{ section.settings.heading_size }}">
+        {{ section.settings.heading }}
+      </{{ heading_tag }}>
+    {%- endif -%}
+
+    {%- if use_marquee -%}
+
+      {%- comment -%} Marquee mode: render track twice for seamless loop {%- endcomment -%}
+      <div class="press-logos__marquee-wrapper" aria-hidden="true">
+        <div class="press-logos__marquee-track">
+          {%- for block in section.blocks -%}
+            {%- capture item_content -%}
+              {%- if block.settings.logo != blank -%}
+                <img
+                  src="{{ block.settings.logo | image_url: width: 320 }}"
+                  alt="{{ block.settings.name | default: 'Press logo' }}"
+                  loading="lazy"
+                  decoding="async"
+                  height="{{ logo_height }}"
+                  width=""
+                >
+              {%- elsif block.settings.name != blank -%}
+                <span class="press-logos__name">{{ block.settings.name }}</span>
+              {%- endif -%}
+            {%- endcapture -%}
+
+            {%- if item_content != blank -%}
+              {%- if block.settings.link != blank -%}
+                <a href="{{ block.settings.link }}" class="press-logos__item" {{ block.shopify_attributes }}>{{ item_content }}</a>
+              {%- else -%}
+                <div class="press-logos__item" {{ block.shopify_attributes }}>{{ item_content }}</div>
+              {%- endif -%}
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- comment -%} Duplicate set — translateX(-50%) loops back to start {%- endcomment -%}
+          {%- for block in section.blocks -%}
+            {%- capture item_content -%}
+              {%- if block.settings.logo != blank -%}
+                <img
+                  src="{{ block.settings.logo | image_url: width: 320 }}"
+                  alt="{{ block.settings.name | default: 'Press logo' }}"
+                  loading="lazy"
+                  decoding="async"
+                  height="{{ logo_height }}"
+                  width=""
+                >
+              {%- elsif block.settings.name != blank -%}
+                <span class="press-logos__name">{{ block.settings.name }}</span>
+              {%- endif -%}
+            {%- endcapture -%}
+
+            {%- if item_content != blank -%}
+              {%- if block.settings.link != blank -%}
+                <a href="{{ block.settings.link }}" class="press-logos__item" aria-hidden="true" tabindex="-1">{{ item_content }}</a>
+              {%- else -%}
+                <div class="press-logos__item" aria-hidden="true">{{ item_content }}</div>
+              {%- endif -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+
+    {%- else -%}
+
+      {%- comment -%} Static mode: centered flexbox with wrap {%- endcomment -%}
+      <div class="press-logos__static">
+        {%- for block in section.blocks -%}
+          {%- capture item_content -%}
+            {%- if block.settings.logo != blank -%}
+              <img
+                src="{{ block.settings.logo | image_url: width: 320 }}"
+                alt="{{ block.settings.name | default: 'Press logo' }}"
+                loading="lazy"
+                decoding="async"
+                height="{{ logo_height }}"
+                width=""
+              >
+            {%- elsif block.settings.name != blank -%}
+              <span class="press-logos__name">{{ block.settings.name }}</span>
+            {%- endif -%}
+          {%- endcapture -%}
+
+          {%- if item_content != blank -%}
+            {%- if block.settings.link != blank -%}
+              <a href="{{ block.settings.link }}" class="press-logos__item" {{ block.shopify_attributes }}>{{ item_content }}</a>
+            {%- else -%}
+              <div class="press-logos__item" {{ block.shopify_attributes }}>{{ item_content }}</div>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+    {%- endif -%}
+
   </div>
 </section>
 
 {% schema %}
 {
   "name": "Press Logos",
+  "max_blocks": 12,
   "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text / fallback name color",
+      "default": "#1C2E23"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
     {
       "type": "text",
       "id": "heading",
       "label": "Heading",
       "default": "Featured On"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "label", "label": "Label (default)" },
+        { "value": "h4",    "label": "H4 — Small" },
+        { "value": "h3",    "label": "H3 — Medium" },
+        { "value": "h2",    "label": "H2 — Large" },
+        { "value": "h1",    "label": "H1 — Extra large" }
+      ],
+      "default": "label"
+    },
+    {
+      "type": "header",
+      "content": "Logos"
+    },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "label": "Logo height",
+      "min": 24,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "logo_spacing",
+      "label": "Logo spacing (gap)",
+      "min": 16,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "checkbox",
+      "id": "grayscale",
+      "label": "Grayscale logos (color on hover)",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable animation",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "animation_mode",
+      "label": "Animation mode",
+      "options": [
+        { "value": "static",  "label": "Static (centered)" },
+        { "value": "marquee", "label": "Marquee (scrolling)" }
+      ],
+      "default": "static"
+    },
+    {
+      "type": "select",
+      "id": "marquee_speed",
+      "label": "Marquee speed",
+      "info": "Only applies when Marquee mode is selected",
+      "options": [
+        { "value": "slow",   "label": "Slow (60s)" },
+        { "value": "normal", "label": "Normal (30s)" },
+        { "value": "fast",   "label": "Fast (18s)" }
+      ],
+      "default": "normal"
     }
   ],
   "blocks": [
@@ -44,10 +404,25 @@
           "id": "name",
           "label": "Brand name (fallback if no image)",
           "default": "Publication"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link URL (optional)"
         }
       ]
     }
   ],
-  "presets": [{ "name": "Press Logos" }]
+  "presets": [
+    {
+      "name": "Press Logos",
+      "blocks": [
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" }
+      ]
+    }
+  ]
 }
 {% endschema %}

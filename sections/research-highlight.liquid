@@ -1,39 +1,105 @@
 {%- comment -%}BaseCode Root - research-highlight{%- endcomment -%}
-<section class="section bg-white">
-  <div class="container">
-    <div style="text-align: center; margin-bottom: var(--space-10);" class="reveal-hidden">
+{%- liquid
+  assign bg         = section.settings.bg_color    | default: '#FFFFFF'
+  assign text_col   = section.settings.text_color  | default: ''
+  assign accent     = section.settings.accent_color | default: '#1C2E23'
+  assign card_bg    = section.settings.card_bg_color | default: '#F5F2EC'
+  assign icon_bg    = section.settings.icon_bg_color | default: '#1C2E23'
+  assign pt         = section.settings.padding_top  | default: 60
+  assign pb         = section.settings.padding_bottom | default: 60
+  assign h_size     = section.settings.heading_size | default: 'text-3xl'
+  assign h_level    = section.settings.heading_level | default: 'h2'
+  assign cols       = section.settings.columns      | default: 1
+  assign card_style = section.settings.card_style   | default: 'horizontal'
+  assign btn_style  = section.settings.button_style | default: 'primary'
+  assign full_w     = section.settings.full_width
+  assign animate    = section.settings.enable_animation
+-%}
+
+<section
+  class="section"
+  style="background:{{ bg }};padding-top:{{ pt }}px;padding-bottom:{{ pb }}px;{% if text_col != blank %}color:{{ text_col }};{% endif %}"
+>
+  <div class="{% if full_w %}container--wide{% else %}container{% endif %}">
+
+    {%- comment -%} Section header {%- endcomment -%}
+    <div style="text-align:center;margin-bottom:var(--space-10);">
       {%- if section.settings.subtitle != blank -%}
-        <p style="font-family: var(--font-heading); font-size: var(--text-sm); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-accent); margin-bottom: var(--space-3);">
+        <p class="{% if animate %}reveal-hidden{% endif %}" style="font-family:var(--font-heading);font-size:var(--text-sm);font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:{{ accent }};margin-bottom:var(--space-3);">
           {{ section.settings.subtitle }}
         </p>
       {%- endif -%}
-      <h2>{{ section.settings.heading | default: 'The science is clear.' }}</h2>
+
+      {%- if section.settings.heading != blank -%}
+        <{{ h_level }} class="{% if animate %}reveal-hidden{% endif %}" style="font-size:var(--{{ h_size }});">
+          {{ section.settings.heading }}
+        </{{ h_level }}>
+      {%- endif -%}
     </div>
 
-    <div class="grid gap-8" style="grid-template-columns: 1fr;">
+    {%- comment -%} Card grid {%- endcomment -%}
+    <div style="display:grid;grid-template-columns:repeat({{ cols }},1fr);gap:var(--space-8);">
       {%- for block in section.blocks -%}
-        <div class="reveal-hidden reveal-delay-{{ forloop.index }}" style="display: flex; gap: var(--space-6); align-items: flex-start; padding: var(--space-6); background: var(--color-cream); border-radius: var(--radius-lg);" {{ block.shopify_attributes }}>
-          <div style="flex-shrink: 0; width: 64px; height: 64px; background: var(--color-primary); border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; color: var(--color-cream);">
-            <span style="font-family: var(--font-mono); font-size: var(--text-xl); font-weight: 700;">{{ block.settings.stat }}</span>
-          </div>
-          <div>
-            <h3 style="font-size: var(--text-lg); margin-bottom: var(--space-2); text-transform: none;">{{ block.settings.title }}</h3>
-            <p style="font-size: var(--text-sm); color: var(--color-text-light); line-height: 1.6; margin: 0;">{{ block.settings.text }}</p>
-            {%- if block.settings.source != blank -%}
-              <p style="font-size: var(--text-xs); color: var(--color-text-light); margin-top: var(--space-2); font-style: italic;">{{ block.settings.source }}</p>
+
+        {%- comment -%} Determine icon content {%- endcomment -%}
+        {%- liquid
+          assign icon_style = block.settings.icon_style | default: 'number'
+        -%}
+
+        <div
+          class="{% if animate %}reveal-hidden reveal-delay-{{ forloop.index }}{% endif %}"
+          style="display:flex;{% if card_style == 'vertical' %}flex-direction:column;align-items:flex-start;{% else %}align-items:flex-start;{% endif %}gap:var(--space-6);padding:var(--space-6);background:{{ card_bg }};border-radius:var(--radius-lg);"
+          {{ block.shopify_attributes }}
+        >
+
+          {%- comment -%} Icon / number badge {%- endcomment -%}
+          <div style="flex-shrink:0;width:64px;height:64px;background:{{ icon_bg }};border-radius:var(--radius-full);display:flex;align-items:center;justify-content:center;{% if card_style == 'vertical' %}margin-bottom:var(--space-2);{% endif %}">
+            {%- if icon_style == 'image' and block.settings.icon_image != blank -%}
+              <img
+                src="{{ block.settings.icon_image | image_url: width: 128 }}"
+                alt="{{ block.settings.title }}"
+                width="40"
+                height="40"
+                loading="lazy"
+                style="width:40px;height:40px;object-fit:contain;"
+              >
+            {%- else -%}
+              <span style="font-family:var(--font-mono);font-size:var(--text-xl);font-weight:700;color:var(--color-cream);">{{ block.settings.stat }}</span>
             {%- endif -%}
           </div>
+
+          {%- comment -%} Text content {%- endcomment -%}
+          <div style="flex:1;">
+            {%- if block.settings.title != blank -%}
+              <h3 style="font-size:var(--text-lg);margin-bottom:var(--space-2);text-transform:none;">{{ block.settings.title }}</h3>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <p style="font-size:var(--text-sm);{% if text_col != blank %}color:{{ text_col }};{% else %}color:var(--color-text-light);{% endif %}line-height:1.6;margin:0;">{{ block.settings.text }}</p>
+            {%- endif -%}
+            {%- if block.settings.source != blank -%}
+              <p style="font-size:var(--text-xs);color:var(--color-text-light);margin-top:var(--space-2);font-style:italic;">{{ block.settings.source }}</p>
+            {%- endif -%}
+          </div>
+
         </div>
       {%- endfor -%}
     </div>
 
+    {%- comment -%} CTA button {%- endcomment -%}
     {%- if section.settings.button_text != blank -%}
-      <div style="text-align: center; margin-top: var(--space-10);">
-        <a href="{{ section.settings.button_link | default: '/pages/science' }}" class="btn btn--primary btn--lg">
-          {{ section.settings.button_text }}
-        </a>
+      <div style="text-align:center;margin-top:var(--space-10);">
+        {%- if btn_style == 'link' -%}
+          <a href="{{ section.settings.button_link | default: '/pages/science' }}" style="font-family:var(--font-heading);font-size:var(--text-sm);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;text-decoration:underline;color:{{ accent }};">
+            {{ section.settings.button_text }}
+          </a>
+        {%- else -%}
+          <a href="{{ section.settings.button_link | default: '/pages/science' }}" class="btn btn--{{ btn_style }} btn--lg">
+            {{ section.settings.button_text }}
+          </a>
+        {%- endif -%}
       </div>
     {%- endif -%}
+
   </div>
 </section>
 
@@ -41,10 +107,11 @@
 {
   "name": "Research Highlight",
   "settings": [
+    { "type": "header", "content": "Content" },
     {
       "type": "text",
       "id": "subtitle",
-      "label": "Subtitle",
+      "label": "Subtitle / eyebrow",
       "default": "The Research"
     },
     {
@@ -53,6 +120,33 @@
       "label": "Heading",
       "default": "The science is clear."
     },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "default": "text-3xl",
+      "options": [
+        { "value": "text-2xl", "label": "Small" },
+        { "value": "text-3xl", "label": "Medium" },
+        { "value": "text-4xl", "label": "Large" },
+        { "value": "text-5xl", "label": "X-Large" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_level",
+      "label": "Heading level (SEO)",
+      "default": "h2",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ]
+    },
+    { "type": "header", "content": "Button" },
     {
       "type": "text",
       "id": "button_text",
@@ -63,18 +157,134 @@
       "type": "url",
       "id": "button_link",
       "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "default": "primary",
+      "options": [
+        { "value": "primary", "label": "Primary" },
+        { "value": "secondary", "label": "Secondary" },
+        { "value": "link", "label": "Text link" }
+      ]
+    },
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Grid columns",
+      "default": "1",
+      "options": [
+        { "value": "1", "label": "1 column" },
+        { "value": "2", "label": "2 columns" },
+        { "value": "3", "label": "3 columns" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "card_style",
+      "label": "Card style",
+      "default": "horizontal",
+      "options": [
+        { "value": "horizontal", "label": "Horizontal (icon + text side by side)" },
+        { "value": "vertical", "label": "Vertical (icon on top, text below)" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width container",
+      "default": false
+    },
+    { "type": "header", "content": "Colors" },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "info": "Leave blank to use theme defaults"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color (subtitle + link text)",
+      "default": "#1C2E23"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card background",
+      "default": "#F5F2EC"
+    },
+    {
+      "type": "color",
+      "id": "icon_bg_color",
+      "label": "Icon circle background",
+      "default": "#1C2E23"
+    },
+    { "type": "header", "content": "Spacing" },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 60,
+      "unit": "px"
+    },
+    { "type": "header", "content": "Animation" },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable scroll animation",
+      "default": true
     }
   ],
   "blocks": [
     {
       "type": "stat",
       "name": "Research stat",
+      "limit": 8,
       "settings": [
+        {
+          "type": "select",
+          "id": "icon_style",
+          "label": "Icon style",
+          "default": "number",
+          "options": [
+            { "value": "number", "label": "Number / text" },
+            { "value": "image", "label": "Custom icon image" }
+          ]
+        },
         {
           "type": "text",
           "id": "stat",
-          "label": "Stat number",
-          "default": "01"
+          "label": "Stat / number",
+          "default": "01",
+          "info": "Shown when Icon style is set to Number"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Icon image",
+          "info": "Shown when Icon style is set to Custom icon image. Recommended: 80×80px PNG with transparency."
         },
         {
           "type": "text",
@@ -100,10 +310,19 @@
   "presets": [
     {
       "name": "Research Highlight",
+      "settings": {
+        "subtitle": "The Research",
+        "heading": "The science is clear.",
+        "button_text": "Read the Science",
+        "columns": "1",
+        "card_style": "horizontal",
+        "enable_animation": true
+      },
       "blocks": [
         {
           "type": "stat",
           "settings": {
+            "icon_style": "number",
             "stat": "01",
             "title": "HELIUS Study: 2,084 subjects, 6 ethnic groups",
             "text": "Biology \u2014 not diet, age, or lifestyle \u2014 is the strongest predictor of gut microbiome composition.",
@@ -113,6 +332,7 @@
         {
           "type": "stat",
           "settings": {
+            "icon_style": "number",
             "stat": "02",
             "title": "Microbiome shifts within one generation",
             "text": "Immigration and environmental changes cause ancestral microbiome depletion \u2014 replacing diverse bacteria with Western strains.",
@@ -122,6 +342,7 @@
         {
           "type": "stat",
           "settings": {
+            "icon_style": "number",
             "stat": "03",
             "title": "Most probiotics don't survive stomach acid",
             "text": "Without acid-protection delivery, up to 96% of probiotic bacteria die before reaching the gut. MAKTREK Bi-Pass solves this.",

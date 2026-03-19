@@ -1,18 +1,42 @@
-{%- comment -%}BaseCode Root - faq-accordion{%- endcomment -%}
-<section class="section bg-white">
-  <div class="container container--narrow">
+{%- comment -%}BaseCode Root - faq-accordion (fully customizable){%- endcomment -%}
+{%- liquid
+  assign bg = section.settings.bg_color | default: '#FFFFFF'
+  assign text_col = section.settings.text_color | default: ''
+  assign accent = section.settings.accent_color | default: ''
+  assign pt = section.settings.padding_top | default: 60
+  assign pb = section.settings.padding_bottom | default: 60
+  assign style = section.settings.accordion_style | default: 'bordered'
+  assign icon_style = section.settings.icon_style | default: 'plus'
+  assign content_width = section.settings.content_width | default: 'narrow'
+  assign open_first = section.settings.open_first
+  assign enable_animation = section.settings.enable_animation
+-%}
+
+<section
+  class="section"
+  style="background:{{ bg }};padding-top:{{ pt }}px;padding-bottom:{{ pb }}px;{% if text_col != blank %}color:{{ text_col }};{% endif %}"
+>
+  <div class="container{% if content_width == 'narrow' %} container--narrow{% endif %}">
+    {%- if section.settings.subheading != blank -%}
+      <p class="{% if section.settings.heading_align == 'center' %}text-center{% endif %}{% if enable_animation %} reveal-hidden{% endif %}" style="font-family:var(--font-heading);font-size:var(--text-sm);font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:{{ accent | default: 'var(--color-accent)' }};margin-bottom:var(--space-3);">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+
     {%- if section.settings.heading != blank -%}
-      <h2 class="text-center mb-10">{{ section.settings.heading }}</h2>
+      <h2 class="{% if section.settings.heading_align == 'center' %}text-center{% endif %} mb-10{% if enable_animation %} reveal-hidden{% endif %}" style="font-size:var(--{{ section.settings.heading_size | default: 'text-3xl' }});">{{ section.settings.heading }}</h2>
     {%- endif -%}
 
     <div>
       {%- for block in section.blocks -%}
-        <div class="faq-item" {{ block.shopify_attributes }}>
-          <button class="faq-item__question" aria-expanded="false" data-faq-toggle>
+        <div class="faq-item{% if style == 'borderless' %} faq-item--borderless{% endif %}{% if enable_animation %} reveal-hidden{% endif %}" {{ block.shopify_attributes }}>
+          <button class="faq-item__question" aria-expanded="{% if open_first and forloop.first %}true{% else %}false{% endif %}" data-faq-toggle>
             <span>{{ block.settings.question }}</span>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            {%- if icon_style == 'plus' -%}
+              <svg class="faq-item__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{% if accent != blank %}{{ accent }}{% else %}currentColor{% endif %}" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            {%- else -%}
+              <svg class="faq-item__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{% if accent != blank %}{{ accent }}{% else %}currentColor{% endif %}" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            {%- endif -%}
           </button>
-          <div class="faq-item__answer" data-faq-content>
+          <div class="faq-item__answer" data-faq-content{% if open_first and forloop.first %} style="display:block;"{% endif %}>
             {{ block.settings.answer }}
           </div>
         </div>
@@ -25,30 +49,69 @@
 {
   "name": "FAQ Accordion",
   "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "subheading", "label": "Subheading" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently Asked Questions" },
     {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Frequently Asked Questions"
-    }
+      "type": "select", "id": "heading_size", "label": "Heading size", "default": "text-3xl",
+      "options": [
+        { "value": "text-2xl", "label": "Small" },
+        { "value": "text-3xl", "label": "Medium" },
+        { "value": "text-4xl", "label": "Large" }
+      ]
+    },
+    {
+      "type": "select", "id": "heading_align", "label": "Heading alignment", "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
+    },
+    { "type": "header", "content": "Style" },
+    {
+      "type": "select", "id": "accordion_style", "label": "Accordion style", "default": "bordered",
+      "options": [
+        { "value": "bordered", "label": "Bordered (dividers)" },
+        { "value": "borderless", "label": "Borderless (clean)" }
+      ]
+    },
+    {
+      "type": "select", "id": "icon_style", "label": "Toggle icon", "default": "plus",
+      "options": [
+        { "value": "plus", "label": "Plus / minus" },
+        { "value": "chevron", "label": "Chevron" }
+      ]
+    },
+    { "type": "checkbox", "id": "open_first", "label": "Open first item by default", "default": false },
+    {
+      "type": "select", "id": "content_width", "label": "Content width", "default": "narrow",
+      "options": [
+        { "value": "narrow", "label": "Narrow" },
+        { "value": "wide", "label": "Full width" }
+      ]
+    },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#FFFFFF" },
+    { "type": "color", "id": "text_color", "label": "Text color" },
+    { "type": "color", "id": "accent_color", "label": "Accent color", "info": "Used for icon and subheading" },
+    { "type": "header", "content": "Spacing" },
+    {
+      "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "default": 60, "unit": "px"
+    },
+    {
+      "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "default": 60, "unit": "px"
+    },
+    { "type": "header", "content": "Animation" },
+    { "type": "checkbox", "id": "enable_animation", "label": "Enable scroll animation", "default": true }
   ],
   "blocks": [
     {
       "type": "question",
       "name": "Question",
+      "limit": 20,
       "settings": [
-        {
-          "type": "text",
-          "id": "question",
-          "label": "Question",
-          "default": "What is Origin?"
-        },
-        {
-          "type": "richtext",
-          "id": "answer",
-          "label": "Answer",
-          "default": "<p>Origin is the first ethnobiotic — a probiotic informed by biological diversity research. It contains 40 billion CFU across 4 targeted strains with MAKTREK Bi-Pass delivery and FOS prebiotic.</p>"
-        }
+        { "type": "text", "id": "question", "label": "Question", "default": "What is Origin?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Origin is the first ethnobiotic — a probiotic informed by biological diversity research. It contains 40 billion CFU across 4 targeted strains with MAKTREK Bi-Pass delivery and FOS prebiotic.</p>" }
       ]
     }
   ],

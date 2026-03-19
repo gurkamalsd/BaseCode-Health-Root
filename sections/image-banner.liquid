@@ -1,5 +1,22 @@
-{%- comment -%}BaseCode Root - image-banner{%- endcomment -%}
-<section class="image-banner" style="min-height: {{ section.settings.height | default: '400' }}px;">
+{%- comment -%}BaseCode Root - image-banner (fully customizable){%- endcomment -%}
+{%- liquid
+  assign height = section.settings.height | default: 400
+  assign mobile_height = section.settings.mobile_height | default: 300
+  assign text_col = section.settings.text_color | default: '#FFFFFF'
+  assign overlay_color = section.settings.overlay_color | default: '#1C2E23'
+  assign overlay_opacity = section.settings.overlay_opacity | default: 50
+  assign text_align = section.settings.text_align | default: 'center'
+  assign vertical_align = section.settings.vertical_align | default: 'center'
+  assign content_width = section.settings.content_width | default: 'narrow'
+  assign enable_animation = section.settings.enable_animation
+  assign button_style = section.settings.button_style | default: 'white'
+  assign full_width = section.settings.full_width
+-%}
+
+<section
+  class="image-banner{% if full_width %} image-banner--full{% endif %}"
+  style="min-height:{{ height }}px;--mobile-height:{{ mobile_height }}px;"
+>
   <div class="image-banner__bg">
     {%- if section.settings.image != blank -%}
       <img
@@ -8,59 +25,143 @@
         sizes="100vw"
         alt="{{ section.settings.image.alt | default: section.settings.heading }}"
         loading="lazy"
-        style="width: 100%; height: 100%; object-fit: cover;"
+        style="width:100%;height:100%;object-fit:cover;{% if section.settings.image_position != blank %}object-position:{{ section.settings.image_position }};{% endif %}"
       >
     {%- else -%}
-      <div style="width: 100%; height: 100%; background: linear-gradient(135deg, var(--color-primary), var(--color-accent));"></div>
+      <div style="width:100%;height:100%;background:linear-gradient(135deg, var(--color-primary), var(--color-accent));"></div>
     {%- endif -%}
   </div>
-  <div class="image-banner__overlay" style="background: {{ section.settings.overlay_color | default: 'linear-gradient(135deg, rgba(28, 46, 35, 0.6), rgba(196, 120, 58, 0.4))' }};"></div>
-  <div class="image-banner__content reveal-hidden">
-    {%- if section.settings.heading != blank -%}
-      <h2 class="image-banner__heading">{{ section.settings.heading }}</h2>
+
+  <div class="image-banner__overlay" style="background:{{ overlay_color }};opacity:{{ overlay_opacity | divided_by: 100.0 }};"></div>
+
+  <div class="image-banner__content{% if enable_animation %} reveal-hidden{% endif %}" style="text-align:{{ text_align }};justify-content:{{ vertical_align }};{% if content_width == 'narrow' %}max-width:800px;{% elsif content_width == 'medium' %}max-width:1000px;{% endif %}margin:0 auto;color:{{ text_col }};">
+    {%- if section.settings.subheading != blank -%}
+      <p style="font-family:var(--font-heading);font-size:var(--text-sm);font-weight:600;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:var(--space-3);opacity:0.9;">{{ section.settings.subheading }}</p>
     {%- endif -%}
+
+    {%- if section.settings.heading != blank -%}
+      <h2 class="image-banner__heading" style="font-size:var(--{{ section.settings.heading_size | default: 'text-4xl' }});">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.text != blank -%}
+      <p style="font-size:var(--text-lg);line-height:1.6;margin-top:var(--space-4);max-width:600px;{% if text_align == 'center' %}margin-left:auto;margin-right:auto;{% endif %}opacity:0.9;">{{ section.settings.text }}</p>
+    {%- endif -%}
+
     {%- if section.settings.button_text != blank -%}
-      <a href="{{ section.settings.button_link }}" class="btn btn--white btn--lg" style="margin-top: var(--space-6);">
-        {{ section.settings.button_text }}
-      </a>
+      <div style="margin-top:var(--space-6);{% if section.settings.button_2_text != blank %}display:flex;gap:var(--space-4);{% if text_align == 'center' %}justify-content:center;{% endif %}flex-wrap:wrap;{% endif %}">
+        <a href="{{ section.settings.button_link }}" class="btn btn--{{ button_style }} btn--lg">
+          {{ section.settings.button_text }}
+        </a>
+        {%- if section.settings.button_2_text != blank -%}
+          <a href="{{ section.settings.button_2_link }}" class="btn btn--{{ section.settings.button_2_style | default: 'secondary' }} btn--lg">
+            {{ section.settings.button_2_text }}
+          </a>
+        {%- endif -%}
+      </div>
     {%- endif -%}
   </div>
 </section>
+
+<style>
+  @media (max-width: 767px) {
+    [data-section-id="{{ section.id }}"] .image-banner,
+    #shopify-section-{{ section.id }} .image-banner {
+      min-height: var(--mobile-height) !important;
+    }
+  }
+</style>
 
 {% schema %}
 {
   "name": "Image Banner",
   "settings": [
+    { "type": "header", "content": "Image" },
+    { "type": "image_picker", "id": "image", "label": "Background image" },
     {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Background image"
+      "type": "select", "id": "image_position", "label": "Image focal point", "default": "center center",
+      "options": [
+        { "value": "center center", "label": "Center" },
+        { "value": "center top", "label": "Top" },
+        { "value": "center bottom", "label": "Bottom" },
+        { "value": "left center", "label": "Left" },
+        { "value": "right center", "label": "Right" }
+      ]
+    },
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "subheading", "label": "Subheading" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Your gut controls more than digestion." },
+    {
+      "type": "select", "id": "heading_size", "label": "Heading size", "default": "text-4xl",
+      "options": [
+        { "value": "text-2xl", "label": "Small" },
+        { "value": "text-3xl", "label": "Medium" },
+        { "value": "text-4xl", "label": "Large" },
+        { "value": "text-5xl", "label": "Extra large" }
+      ]
+    },
+    { "type": "textarea", "id": "text", "label": "Body text" },
+    { "type": "header", "content": "Buttons" },
+    { "type": "text", "id": "button_text", "label": "Button 1 text" },
+    { "type": "url", "id": "button_link", "label": "Button 1 link" },
+    {
+      "type": "select", "id": "button_style", "label": "Button 1 style", "default": "white",
+      "options": [
+        { "value": "white", "label": "White" },
+        { "value": "primary", "label": "Primary" },
+        { "value": "secondary", "label": "Secondary" }
+      ]
+    },
+    { "type": "text", "id": "button_2_text", "label": "Button 2 text" },
+    { "type": "url", "id": "button_2_link", "label": "Button 2 link" },
+    {
+      "type": "select", "id": "button_2_style", "label": "Button 2 style", "default": "secondary",
+      "options": [
+        { "value": "white", "label": "White" },
+        { "value": "primary", "label": "Primary" },
+        { "value": "secondary", "label": "Secondary" }
+      ]
+    },
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "select", "id": "text_align", "label": "Text alignment", "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
     },
     {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Your gut controls more than digestion."
+      "type": "select", "id": "vertical_align", "label": "Vertical alignment", "default": "center",
+      "options": [
+        { "value": "flex-start", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Bottom" }
+      ]
     },
     {
-      "type": "text",
-      "id": "button_text",
-      "label": "Button text"
+      "type": "select", "id": "content_width", "label": "Content width", "default": "narrow",
+      "options": [
+        { "value": "narrow", "label": "Narrow" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "wide", "label": "Full width" }
+      ]
+    },
+    { "type": "checkbox", "id": "full_width", "label": "Full width (no container)", "default": true },
+    { "type": "header", "content": "Overlay" },
+    { "type": "color", "id": "overlay_color", "label": "Overlay color", "default": "#1C2E23" },
+    {
+      "type": "range", "id": "overlay_opacity", "label": "Overlay opacity", "min": 0, "max": 100, "step": 5, "default": 50, "unit": "%"
+    },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#FFFFFF" },
+    { "type": "header", "content": "Height" },
+    {
+      "type": "range", "id": "height", "label": "Desktop height", "min": 200, "max": 800, "step": 50, "default": 400, "unit": "px"
     },
     {
-      "type": "url",
-      "id": "button_link",
-      "label": "Button link"
+      "type": "range", "id": "mobile_height", "label": "Mobile height", "min": 150, "max": 600, "step": 50, "default": 300, "unit": "px"
     },
-    {
-      "type": "range",
-      "id": "height",
-      "label": "Section height (px)",
-      "min": 200,
-      "max": 600,
-      "step": 50,
-      "default": 400
-    }
+    { "type": "header", "content": "Animation" },
+    { "type": "checkbox", "id": "enable_animation", "label": "Enable scroll animation", "default": true }
   ],
   "presets": [
     {

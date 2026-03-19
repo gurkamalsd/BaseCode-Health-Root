@@ -1,0 +1,413 @@
+{%- comment -%}BaseCode Root - marquee-images{%- endcomment -%}
+{%- liquid
+  assign section_id  = 'marquee-images-' | append: section.id
+  assign pt          = section.settings.padding_top   | default: 40
+  assign pb          = section.settings.padding_bottom | default: 40
+  assign enable_anim = section.settings.enable_animation
+  assign direction   = section.settings.direction | default: 'left'
+  assign h_desktop   = section.settings.image_height_desktop | default: 200
+  assign h_mobile    = section.settings.image_height_mobile  | default: 150
+  assign img_gap     = section.settings.image_gap | default: 16
+  assign heading_lv  = section.settings.heading_level | default: 'h2'
+
+  case section.settings.speed
+    when 'slow'
+      assign anim_dur = 80
+    when 'fast'
+      assign anim_dur = 20
+    else
+      assign anim_dur = 40
+  endcase
+
+  if direction == 'right'
+    assign anim_name = 'marqueeImagesRight'
+  else
+    assign anim_name = 'marqueeImagesLeft'
+  endif
+-%}
+
+<section
+  id="{{ section_id }}"
+  class="marquee-images{% if enable_anim %} anim-enabled{% endif %}"
+  style="
+    background-color: {{ section.settings.bg_color | default: '#F5F2EC' }};
+    color: {{ section.settings.text_color | default: '#1C2E23' }};
+    padding-top: {{ pt }}px;
+    padding-bottom: {{ pb }}px;
+    overflow: hidden;
+  "
+>
+
+  {%- comment -%}---- Optional heading ----{%- endcomment -%}
+  {%- if section.settings.heading != blank -%}
+    {%- assign hs = section.settings.heading_size | default: 'h2' -%}
+    {%- case hs -%}
+      {%- when 'h1' -%}{%- assign h_fs = 'var(--text-5xl, 3rem)' -%}
+      {%- when 'h2' -%}{%- assign h_fs = 'var(--text-4xl, 2.25rem)' -%}
+      {%- when 'h3' -%}{%- assign h_fs = 'var(--text-3xl, 1.875rem)' -%}
+      {%- when 'h4' -%}{%- assign h_fs = 'var(--text-2xl, 1.5rem)' -%}
+      {%- when 'h5' -%}{%- assign h_fs = 'var(--text-xl, 1.25rem)' -%}
+      {%- when 'h6' -%}{%- assign h_fs = 'var(--text-lg, 1.125rem)' -%}
+      {%- else -%}{%- assign h_fs = 'var(--text-4xl, 2.25rem)' -%}
+    {%- endcase -%}
+    <div class="container marquee-images__heading-wrap">
+      <{{ heading_lv }}
+        class="marquee-images__heading{% if enable_anim %} anim-fade-up{% endif %}"
+        style="font-size: {{ h_fs }}; line-height: 1.15; margin-bottom: var(--space-8, 2rem);"
+      >
+        {{ section.settings.heading }}
+      </{{ heading_lv }}>
+    </div>
+  {%- endif -%}
+
+  {%- comment -%}---- Marquee track ----{%- endcomment -%}
+  {%- if section.blocks.size > 0 -%}
+    <div
+      class="marquee-images__viewport"
+      style="overflow: hidden;"
+    >
+      <div
+        class="marquee-images__track"
+        aria-label="Scrolling image row"
+        style="
+          display: flex;
+          gap: {{ img_gap }}px;
+          animation: {{ anim_name }} {{ anim_dur }}s linear infinite;
+          width: max-content;
+        "
+      >
+        {%- comment -%} Render blocks twice to create seamless loop {%- endcomment -%}
+        {%- for loop_pass in (1..2) -%}
+          {%- for block in section.blocks -%}
+            <div
+              class="marquee-images__item"
+              style="flex-shrink: 0; height: {{ h_desktop }}px; line-height: 0;"
+              {%- if loop_pass == 1 -%}{{ block.shopify_attributes }}{%- endif -%}
+              aria-hidden="{% if loop_pass == 2 %}true{% else %}false{% endif %}"
+            >
+              {%- if block.settings.link != blank -%}
+                <a href="{{ block.settings.link }}" class="marquee-images__item-link" tabindex="{% if loop_pass == 2 %}-1{% else %}0{% endif %}">
+              {%- endif -%}
+
+              {%- if block.settings.image != blank -%}
+                <img
+                  src="{{ block.settings.image | image_url: width: 600 }}"
+                  srcset="
+                    {{ block.settings.image | image_url: width: 300 }} 300w,
+                    {{ block.settings.image | image_url: width: 500 }} 500w,
+                    {{ block.settings.image | image_url: width: 600 }} 600w
+                  "
+                  sizes="auto"
+                  alt="{{ block.settings.alt_text | default: block.settings.image.alt | default: '' }}"
+                  loading="lazy"
+                  draggable="false"
+                  style="
+                    height: {{ h_desktop }}px;
+                    width: auto;
+                    max-width: none;
+                    object-fit: cover;
+                    display: block;
+                    border-radius: 4px;
+                  "
+                >
+              {%- else -%}
+                <div
+                  style="
+                    height: {{ h_desktop }}px;
+                    width: {{ h_desktop | times: 0.75 | round }}px;
+                    background: rgba(0,0,0,0.08);
+                    border-radius: 4px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                  "
+                >
+                  <span style="font-size: 0.75rem; opacity: 0.4;">Image</span>
+                </div>
+              {%- endif -%}
+
+              {%- if block.settings.link != blank -%}
+                </a>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+</section>
+
+{%- comment -%}---- Section-scoped CSS ----{%- endcomment -%}
+<style>
+  #{{ section_id }} .marquee-images__heading-wrap {
+    text-align: left;
+  }
+
+  #{{ section_id }} .marquee-images__item-link {
+    display: block;
+    text-decoration: none;
+    height: 100%;
+  }
+
+  #{{ section_id }} .marquee-images__track {
+    will-change: transform;
+  }
+
+  @keyframes marqueeImagesLeft {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  @keyframes marqueeImagesRight {
+    0%   { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+  }
+
+  @media (max-width: 767px) {
+    #{{ section_id }} .marquee-images__item {
+      height: {{ h_mobile }}px !important;
+    }
+    #{{ section_id }} .marquee-images__item img {
+      height: {{ h_mobile }}px !important;
+    }
+    #{{ section_id }} .marquee-images__item > div {
+      height: {{ h_mobile }}px !important;
+      width: {{ h_mobile | times: 0.75 | round }}px !important;
+    }
+  }
+
+  {%- if enable_anim -%}
+  #{{ section_id }} .anim-fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  #{{ section_id }}.in-view .anim-fade-up {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Pause on hover / reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    #{{ section_id }} .marquee-images__track {
+      animation-play-state: paused;
+    }
+  }
+  #{{ section_id }}:hover .marquee-images__track {
+    animation-play-state: paused;
+  }
+  {%- endif -%}
+</style>
+
+{%- if enable_anim -%}
+<script>
+(function () {
+  var el = document.getElementById('{{ section_id }}');
+  if (!el) return;
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in-view'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    obs.observe(el);
+  } else {
+    el.classList.add('in-view');
+  }
+})();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Marquee Images",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Leave blank to hide"
+    },
+    {
+      "type": "select",
+      "id": "heading_level",
+      "label": "Heading level (SEO)",
+      "default": "h2",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "default": "h2",
+      "options": [
+        { "value": "h1", "label": "Extra large (H1 size)" },
+        { "value": "h2", "label": "Large (H2 size)" },
+        { "value": "h3", "label": "Medium (H3 size)" },
+        { "value": "h4", "label": "Small (H4 size)" },
+        { "value": "h5", "label": "Extra small (H5 size)" },
+        { "value": "h6", "label": "Tiny (H6 size)" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Marquee"
+    },
+    {
+      "type": "select",
+      "id": "direction",
+      "label": "Scroll direction",
+      "default": "left",
+      "options": [
+        { "value": "left",  "label": "Left (default)" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "speed",
+      "label": "Speed",
+      "default": "normal",
+      "options": [
+        { "value": "slow",   "label": "Slow (80s)" },
+        { "value": "normal", "label": "Normal (40s)" },
+        { "value": "fast",   "label": "Fast (20s)" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "image_height_desktop",
+      "label": "Image height — desktop (px)",
+      "min": 100,
+      "max": 400,
+      "step": 10,
+      "default": 200
+    },
+    {
+      "type": "range",
+      "id": "image_height_mobile",
+      "label": "Image height — mobile (px)",
+      "min": 80,
+      "max": 300,
+      "step": 10,
+      "default": 150
+    },
+    {
+      "type": "range",
+      "id": "image_gap",
+      "label": "Gap between images (px)",
+      "min": 8,
+      "max": 48,
+      "step": 4,
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background",
+      "default": "#F5F2EC"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Heading color",
+      "default": "#1C2E23"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top (px)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom (px)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable animation (scroll + pause on hover)",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (optional)"
+        },
+        {
+          "type": "text",
+          "id": "alt_text",
+          "label": "Alt text",
+          "info": "Leave blank to use image alt from Shopify Files"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marquee Images",
+      "settings": {
+        "direction": "left",
+        "speed": "normal",
+        "image_height_desktop": 200,
+        "image_height_mobile": 150,
+        "image_gap": 16,
+        "bg_color": "#F5F2EC",
+        "text_color": "#1C2E23",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "enable_animation": true
+      },
+      "blocks": [
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" }
+      ]
+    }
+  ]
+}
+{% endschema %}

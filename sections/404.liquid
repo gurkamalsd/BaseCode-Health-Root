@@ -1,12 +1,237 @@
-{%- comment -%}BaseCode Root - 404{%- endcomment -%}
-<section class="section bg-white" style="min-height: 60vh; display: flex; align-items: center;">
-  <div class="container text-center">
-    <h1 style="font-size: var(--text-5xl); margin-bottom: var(--space-4);">404</h1>
-    <p style="font-size: var(--text-xl); color: var(--color-text-light); margin-bottom: var(--space-8);">{{ 'general.404_text' | t }}</p>
-    <a href="/" class="btn btn--primary btn--lg">{{ 'general.404_cta' | t }}</a>
+{%- comment -%}
+  BaseCode Root — 404
+  Error page with custom heading, body text, CTA button, optional illustration, and animation.
+  Settings: bg_color, text_color, padding, heading, body_text, button_text, button_link,
+            button_style, image_picker, enable_animation
+{%- endcomment -%}
+
+{%- liquid
+  assign bg      = section.settings.bg_color
+  assign tc      = section.settings.text_color
+  assign pt      = section.settings.padding_top
+  assign pb      = section.settings.padding_bottom
+  assign animate = section.settings.enable_animation
+  assign btn_cls = 'btn btn--lg'
+  if section.settings.button_style == 'secondary'
+    assign btn_cls = 'btn btn--secondary btn--lg'
+  else
+    assign btn_cls = 'btn btn--primary btn--lg'
+  endif
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} .s-404-wrap {
+    background-color: {{ bg }};
+    color: {{ tc }};
+    padding-top: {{ pt }}px;
+    padding-bottom: {{ pb }}px;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+  }
+  #shopify-section-{{ section.id }} .s-404-wrap .s-404-inner {
+    width: 100%;
+    text-align: center;
+  }
+  #shopify-section-{{ section.id }} .s-404-wrap h1,
+  #shopify-section-{{ section.id }} .s-404-wrap p,
+  #shopify-section-{{ section.id }} .s-404-wrap a {
+    color: inherit;
+  }
+  #shopify-section-{{ section.id }} .s-404-wrap .s-404-code {
+    font-size: var(--text-6xl, 6rem);
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: var(--space-4, 1rem);
+  }
+  #shopify-section-{{ section.id }} .s-404-wrap .s-404-heading {
+    font-size: var(--text-3xl, 2rem);
+    font-weight: 600;
+    margin-bottom: var(--space-4, 1rem);
+  }
+  #shopify-section-{{ section.id }} .s-404-wrap .s-404-body {
+    font-size: var(--text-lg, 1.125rem);
+    opacity: 0.75;
+    margin-bottom: var(--space-8, 2rem);
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #shopify-section-{{ section.id }} .s-404-wrap .s-404-img {
+    max-width: 320px;
+    margin: 0 auto var(--space-8, 2rem);
+  }
+  #shopify-section-{{ section.id }} .s-404-wrap .s-404-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  {%- if animate -%}
+  @keyframes s404FadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  #shopify-section-{{ section.id }} .s-404-animate {
+    animation: s404FadeUp 0.6s ease both;
+  }
+  #shopify-section-{{ section.id }} .s-404-animate:nth-child(2) { animation-delay: 0.1s; }
+  #shopify-section-{{ section.id }} .s-404-animate:nth-child(3) { animation-delay: 0.2s; }
+  #shopify-section-{{ section.id }} .s-404-animate:nth-child(4) { animation-delay: 0.3s; }
+  #shopify-section-{{ section.id }} .s-404-animate:nth-child(5) { animation-delay: 0.4s; }
+  {%- endif -%}
+</style>
+
+<div class="s-404-wrap">
+  <div class="container s-404-inner">
+
+    {%- if section.settings.custom_image != blank -%}
+      <div class="s-404-img{% if animate %} s-404-animate{% endif %}">
+        <img
+          src="{{ section.settings.custom_image | image_url: width: 640 }}"
+          alt="{{ section.settings.custom_image.alt | default: '404 illustration' }}"
+          loading="eager"
+          width="{{ section.settings.custom_image.width }}"
+          height="{{ section.settings.custom_image.height }}"
+        >
+      </div>
+    {%- endif -%}
+
+    <p class="s-404-code{% if animate %} s-404-animate{% endif %}">404</p>
+
+    {%- if section.settings.heading != blank -%}
+      <h1 class="s-404-heading{% if animate %} s-404-animate{% endif %}">
+        {{ section.settings.heading }}
+      </h1>
+    {%- endif -%}
+
+    {%- if section.settings.body_text != blank -%}
+      <p class="s-404-body{% if animate %} s-404-animate{% endif %}">
+        {{ section.settings.body_text }}
+      </p>
+    {%- endif -%}
+
+    {%- if section.settings.button_text != blank -%}
+      <a
+        href="{{ section.settings.button_link | default: '/' }}"
+        class="{{ btn_cls }}{% if animate %} s-404-animate{% endif %}"
+      >
+        {{ section.settings.button_text }}
+      </a>
+    {%- endif -%}
+
   </div>
-</section>
+</div>
 
 {% schema %}
-{ "name": "404 Page", "settings": [] }
+{
+  "name": "404 Page",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#1C2E23"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Page not found"
+    },
+    {
+      "type": "textarea",
+      "id": "body_text",
+      "label": "Body text",
+      "default": "Sorry, the page you were looking for doesn't exist."
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Back to home"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link",
+      "default": "/"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        { "value": "primary",   "label": "Primary" },
+        { "value": "secondary", "label": "Secondary" }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "header",
+      "content": "Illustration"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_image",
+      "label": "Custom 404 illustration"
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable fade-up animation",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "404 Page"
+    }
+  ]
+}
 {% endschema %}

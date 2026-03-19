@@ -1,59 +1,640 @@
 {%- comment -%}BaseCode Root - rich-text{%- endcomment -%}
-<section class="section" style="background-color: {{ section.settings.bg_color | default: '#FFFFFF' }};">
-  <div class="container container--narrow">
-    {%- if section.settings.heading != blank -%}
-      <h2 class="{% if section.settings.center %}text-center{% endif %} mb-8">{{ section.settings.heading }}</h2>
-    {%- endif -%}
-    {%- if section.settings.text != blank -%}
-      <div class="rte {% if section.settings.center %}text-center{% endif %}" style="font-size: var(--text-base); line-height: 1.8; color: var(--color-text-light);">
-        {{ section.settings.text }}
-      </div>
-    {%- endif -%}
-    {%- if section.settings.button_text != blank -%}
-      <div class="{% if section.settings.center %}text-center{% endif %} mt-8">
-        <a href="{{ section.settings.button_link }}" class="btn btn--primary">{{ section.settings.button_text }}</a>
-      </div>
-    {%- endif -%}
+
+{%- liquid
+  assign pt = section.settings.padding_top
+  assign pb = section.settings.padding_bottom
+  assign bg = section.settings.bg_color | default: '#FFFFFF'
+  assign tc = section.settings.text_color | default: '#1C2E23'
+  assign opacity_val = section.settings.bg_opacity | default: 100
+  assign opacity_decimal = opacity_val | divided_by: 100.0
+
+  case section.settings.content_width
+    when 'narrow'
+      assign width_class = 'container container--narrow'
+    when 'full'
+      assign width_class = 'container--full'
+    else
+      assign width_class = 'container container--medium'
+  endcase
+
+  case section.settings.text_align
+    when 'left'
+      assign align_class = 'text-left'
+    when 'right'
+      assign align_class = 'text-right'
+    else
+      assign align_class = 'text-center'
+  endcase
+-%}
+
+{%- style -%}
+  #section-{{ section.id }} {
+    padding-top: {{ pt }}px;
+    padding-bottom: {{ pb }}px;
+    position: relative;
+    overflow: hidden;
+  }
+  #section-{{ section.id }} .rich-text__bg {
+    position: absolute;
+    inset: 0;
+    background-color: {{ bg }};
+    opacity: {{ opacity_decimal }};
+    z-index: 0;
+  }
+  #section-{{ section.id }} .rich-text__bg-media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  #section-{{ section.id }} .rich-text__bg-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  #section-{{ section.id }} .rich-text__bg-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: {{ bg }};
+    opacity: {{ opacity_decimal }};
+    z-index: 1;
+  }
+  #section-{{ section.id }} .rich-text__inner {
+    position: relative;
+    z-index: 2;
+    color: {{ tc }};
+  }
+  #section-{{ section.id }} .rich-text__images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 32px;
+  }
+  #section-{{ section.id }} .rich-text__image-item {
+    flex: 1 1 200px;
+    max-width: 340px;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+  #section-{{ section.id }} .rich-text__image-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  #section-{{ section.id }} .rich-text__image-item:hover img {
+    transform: scale(1.04);
+  }
+  @media (max-width: 767px) {
+    #section-{{ section.id }} .rich-text__image-item {
+      flex: 1 1 100%;
+      max-width: 100%;
+    }
+  }
+  {%- if section.settings.enable_animation -%}
+  #section-{{ section.id }} [data-animate] {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  #section-{{ section.id }} [data-animate].is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  {%- endif -%}
+{%- endstyle -%}
+
+<section id="section-{{ section.id }}" class="rich-text-section">
+  {%- comment -%} Background layer {%- endcomment -%}
+  {%- if section.settings.desktop_image != blank or section.settings.mobile_image != blank -%}
+    <div class="rich-text__bg-media">
+      {%- if section.settings.mobile_image != blank -%}
+        <picture>
+          <source media="(max-width: 767px)" srcset="{{ section.settings.mobile_image | image_url: width: 767 }}">
+          {%- if section.settings.desktop_image != blank -%}
+            <img src="{{ section.settings.desktop_image | image_url: width: 1600 }}"
+                 alt="{{ section.settings.desktop_image.alt | escape }}"
+                 loading="lazy"
+                 width="{{ section.settings.desktop_image.width }}"
+                 height="{{ section.settings.desktop_image.height }}">
+          {%- else -%}
+            <img src="{{ section.settings.mobile_image | image_url: width: 767 }}"
+                 alt="{{ section.settings.mobile_image.alt | escape }}"
+                 loading="lazy">
+          {%- endif -%}
+        </picture>
+      {%- elsif section.settings.desktop_image != blank -%}
+        <img src="{{ section.settings.desktop_image | image_url: width: 1600 }}"
+             alt="{{ section.settings.desktop_image.alt | escape }}"
+             loading="lazy"
+             width="{{ section.settings.desktop_image.width }}"
+             height="{{ section.settings.desktop_image.height }}">
+      {%- endif -%}
+    </div>
+    <div class="rich-text__bg-overlay"></div>
+  {%- else -%}
+    <div class="rich-text__bg"></div>
+  {%- endif -%}
+
+  <div class="{{ width_class }} rich-text__inner {{ align_class }}">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+
+        {%- when 'subheading' -%}
+          {%- if block.settings.subheading != blank -%}
+            <p class="rich-text__subheading{% if section.settings.enable_animation %} {% endif %}"
+               style="color: {{ block.settings.subheading_color | default: section.settings.text_color | default: '#C4783A' }}; font-size: var(--text-sm); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 12px;"
+               {{ block.shopify_attributes }}
+               {% if section.settings.enable_animation %}data-animate{% endif %}>
+              {{ block.settings.subheading | escape }}
+            </p>
+          {%- endif -%}
+
+        {%- when 'heading' -%}
+          {%- if block.settings.heading != blank -%}
+            {%- assign h_level = block.settings.heading_level | default: 'h2' -%}
+            {%- assign h_size = block.settings.heading_size | default: 'h2' -%}
+            <{{ h_level }} class="rich-text__heading heading--{{ h_size }}"
+               style="margin-bottom: 16px;"
+               {{ block.shopify_attributes }}
+               {% if section.settings.enable_animation %}data-animate{% endif %}>
+              {{ block.settings.heading | escape }}
+            </{{ h_level }}>
+          {%- endif -%}
+
+        {%- when 'text' -%}
+          {%- if block.settings.text != blank -%}
+            <div class="rte rich-text__body"
+                 style="font-size: var(--text-base); line-height: 1.8; color: {{ block.settings.text_color | default: section.settings.text_color | default: 'inherit' }}; margin-bottom: 16px;"
+                 {{ block.shopify_attributes }}
+                 {% if section.settings.enable_animation %}data-animate{% endif %}>
+              {{ block.settings.text }}
+            </div>
+          {%- endif -%}
+
+        {%- when 'button' -%}
+          {%- if block.settings.button_text != blank -%}
+            {%- liquid
+              case block.settings.button_style
+                when 'secondary'
+                  assign btn_class = 'btn btn--secondary'
+                when 'white'
+                  assign btn_class = 'btn btn--white'
+                when 'link'
+                  assign btn_class = 'btn btn--link'
+                else
+                  assign btn_class = 'btn btn--primary'
+              endcase
+            -%}
+            <div style="margin-top: 24px; display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: {{ section.settings.text_align }};"
+                 {{ block.shopify_attributes }}
+                 {% if section.settings.enable_animation %}data-animate{% endif %}>
+              <a href="{{ block.settings.button_link }}" class="{{ btn_class }}">
+                {{ block.settings.button_text | escape }}
+              </a>
+              {%- if block.settings.button2_text != blank -%}
+                {%- liquid
+                  case block.settings.button2_style
+                    when 'secondary'
+                      assign btn2_class = 'btn btn--secondary'
+                    when 'white'
+                      assign btn2_class = 'btn btn--white'
+                    when 'link'
+                      assign btn2_class = 'btn btn--link'
+                    else
+                      assign btn2_class = 'btn btn--primary'
+                  endcase
+                -%}
+                <a href="{{ block.settings.button2_link }}" class="{{ btn2_class }}">
+                  {{ block.settings.button2_text | escape }}
+                </a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+
+        {%- when 'image' -%}
+          {%- if block.settings.image != blank -%}
+            {%- assign img_link = block.settings.image_link -%}
+            <div class="rich-text__image-item" style="margin: 24px auto 0;"
+                 {{ block.shopify_attributes }}
+                 {% if section.settings.enable_animation %}data-animate{% endif %}>
+              {%- if img_link != blank -%}
+                <a href="{{ img_link }}" {% if block.settings.open_in_new_tab %}target="_blank" rel="noopener"{% endif %}>
+              {%- endif -%}
+                  <img src="{{ block.settings.image | image_url: width: 800 }}"
+                       alt="{{ block.settings.image.alt | escape }}"
+                       loading="lazy"
+                       width="{{ block.settings.image.width }}"
+                       height="{{ block.settings.image.height }}">
+              {%- if img_link != blank -%}
+                </a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+
+        {%- when 'image_row' -%}
+          {%- comment -%} Up to 3 images with hover animations {%- endcomment -%}
+          <div class="rich-text__images"
+               {{ block.shopify_attributes }}
+               {% if section.settings.enable_animation %}data-animate{% endif %}>
+            {%- for i in (1..3) -%}
+              {%- liquid
+                case i
+                  when 1
+                    assign row_image = block.settings.image_1
+                    assign row_link = block.settings.image_1_link
+                  when 2
+                    assign row_image = block.settings.image_2
+                    assign row_link = block.settings.image_2_link
+                  when 3
+                    assign row_image = block.settings.image_3
+                    assign row_link = block.settings.image_3_link
+                endcase
+              -%}
+              {%- if row_image != blank -%}
+                <div class="rich-text__image-item">
+                  {%- if row_link != blank -%}
+                    <a href="{{ row_link }}">
+                  {%- endif -%}
+                    <img src="{{ row_image | image_url: width: 600 }}"
+                         alt="{{ row_image.alt | escape }}"
+                         loading="lazy"
+                         width="{{ row_image.width }}"
+                         height="{{ row_image.height }}">
+                  {%- if row_link != blank -%}
+                    </a>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+
+        {%- when 'spacer' -%}
+          <div style="height: {{ block.settings.height | default: 24 }}px;" {{ block.shopify_attributes }}></div>
+
+      {%- endcase -%}
+    {%- endfor -%}
   </div>
 </section>
+
+{%- if section.settings.enable_animation -%}
+<script>
+  (function() {
+    var items = document.querySelectorAll('#section-{{ section.id }} [data-animate]');
+    if (!items.length) return;
+    var delays = [0, 80, 160, 240, 320, 400, 480, 560];
+    items.forEach(function(el, i) {
+      el.style.transitionDelay = (delays[i] || 0) + 'ms';
+    });
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    items.forEach(function(el) { observer.observe(el); });
+  })();
+</script>
+{%- endif -%}
 
 {% schema %}
 {
   "name": "Rich Text",
   "settings": [
     {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading"
+      "type": "header",
+      "content": "Layout"
     },
     {
-      "type": "richtext",
-      "id": "text",
-      "label": "Content"
+      "type": "select",
+      "id": "content_width",
+      "label": "Content width",
+      "default": "medium",
+      "options": [
+        { "value": "narrow", "label": "Narrow" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "full", "label": "Full width" }
+      ]
     },
     {
-      "type": "text",
-      "id": "button_text",
-      "label": "Button text"
+      "type": "select",
+      "id": "text_align",
+      "label": "Text alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
     },
     {
-      "type": "url",
-      "id": "button_link",
-      "label": "Button link"
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 60,
+      "unit": "px"
     },
     {
-      "type": "checkbox",
-      "id": "center",
-      "label": "Center text",
-      "default": false
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
     },
     {
       "type": "color",
       "id": "bg_color",
       "label": "Background color",
       "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "bg_opacity",
+      "label": "Background opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 100,
+      "unit": "%"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#1C2E23"
+    },
+    {
+      "type": "header",
+      "content": "Background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_image",
+      "label": "Desktop background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile background image"
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable scroll animations",
+      "default": true
     }
   ],
-  "presets": [{ "name": "Rich Text" }]
+  "blocks": [
+    {
+      "type": "subheading",
+      "name": "Subheading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading text"
+        },
+        {
+          "type": "color",
+          "id": "subheading_color",
+          "label": "Subheading color",
+          "default": "#C4783A"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading text",
+          "default": "Your biology isn't one-size-fits-all."
+        },
+        {
+          "type": "select",
+          "id": "heading_level",
+          "label": "Heading level (SEO)",
+          "default": "h2",
+          "options": [
+            { "value": "h1", "label": "H1" },
+            { "value": "h2", "label": "H2" },
+            { "value": "h3", "label": "H3" },
+            { "value": "h4", "label": "H4" },
+            { "value": "h5", "label": "H5" },
+            { "value": "h6", "label": "H6" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "label": "Heading size",
+          "default": "h2",
+          "options": [
+            { "value": "h1", "label": "Extra large (H1 size)" },
+            { "value": "h2", "label": "Large (H2 size)" },
+            { "value": "h3", "label": "Medium (H3 size)" },
+            { "value": "h4", "label": "Small (H4 size)" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Content",
+          "default": "<p>Supplements informed by biological diversity research — because your biology isn't one-size-fits-all.</p>"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color override"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button(s)",
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button 1 text"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button 1 link"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button 1 style",
+          "default": "primary",
+          "options": [
+            { "value": "primary", "label": "Primary" },
+            { "value": "secondary", "label": "Secondary" },
+            { "value": "white", "label": "White" },
+            { "value": "link", "label": "Link / Text" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "button2_text",
+          "label": "Button 2 text"
+        },
+        {
+          "type": "url",
+          "id": "button2_link",
+          "label": "Button 2 link"
+        },
+        {
+          "type": "select",
+          "id": "button2_style",
+          "label": "Button 2 style",
+          "default": "secondary",
+          "options": [
+            { "value": "primary", "label": "Primary" },
+            { "value": "secondary", "label": "Secondary" },
+            { "value": "white", "label": "White" },
+            { "value": "link", "label": "Link / Text" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Single image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "image_link",
+          "label": "Image link"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_in_new_tab",
+          "label": "Open link in new tab",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "image_row",
+      "name": "Image row (up to 3)",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Image 1"
+        },
+        {
+          "type": "url",
+          "id": "image_1_link",
+          "label": "Image 1 link"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Image 2"
+        },
+        {
+          "type": "url",
+          "id": "image_2_link",
+          "label": "Image 2 link"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_3",
+          "label": "Image 3"
+        },
+        {
+          "type": "url",
+          "id": "image_3_link",
+          "label": "Image 3 link"
+        }
+      ]
+    },
+    {
+      "type": "spacer",
+      "name": "Spacer",
+      "settings": [
+        {
+          "type": "range",
+          "id": "height",
+          "label": "Height",
+          "min": 8,
+          "max": 120,
+          "step": 4,
+          "default": 24,
+          "unit": "px"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rich Text",
+      "blocks": [
+        {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Biological diversity research"
+          }
+        },
+        {
+          "type": "heading",
+          "settings": {
+            "heading": "Your biology isn't one-size-fits-all.",
+            "heading_level": "h2",
+            "heading_size": "h2"
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "text": "<p>The supplement industry formulates for one kind of body. Origin was built for yours — informed by the largest population-level microbiome study ever conducted.</p>"
+          }
+        },
+        {
+          "type": "button",
+          "settings": {
+            "button_text": "Shop Origin",
+            "button_link": "/products/origin",
+            "button_style": "primary",
+            "button2_text": "See the research",
+            "button2_link": "/pages/science",
+            "button2_style": "link"
+          }
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}

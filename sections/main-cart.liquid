@@ -1,66 +1,556 @@
-{%- comment -%}BaseCode Root - main-cart{%- endcomment -%}
-<section class="section bg-white">
+{%- comment -%}BaseCode Root - main-cart — Wonder-level customization{%- endcomment -%}
+
+{%- liquid
+  assign pt = section.settings.padding_top | default: 60
+  assign pb = section.settings.padding_bottom | default: 60
+  assign enable_anim = section.settings.enable_animation
+  assign free_shipping_threshold = section.settings.free_shipping_threshold | default: 50
+  assign show_images = section.settings.show_line_images
+  assign heading_text = section.settings.heading_text | default: 'cart.title' | t
+-%}
+
+<section
+  id="main-cart-{{ section.id }}"
+  class="main-cart-section{% if enable_anim %} anim-enabled{% endif %}"
+  style="
+    background-color: {{ section.settings.bg_color | default: '#FFFFFF' }};
+    color: {{ section.settings.text_color | default: '#1C2E23' }};
+    padding-top: {{ pt }}px;
+    padding-bottom: {{ pb }}px;
+  "
+>
   <div class="container container--narrow">
-    <h1 class="text-center mb-10">{{ 'cart.title' | t }}</h1>
+
+    {%- comment -%}---- Cart heading ----{%- endcomment -%}
+    <h1
+      class="text-center{% if enable_anim %} anim-fade-up{% endif %}"
+      style="margin-bottom: var(--space-8, 2rem);"
+    >
+      {%- if section.settings.heading_text != blank -%}
+        {{ section.settings.heading_text }}
+      {%- else -%}
+        {{ 'cart.title' | t }}
+      {%- endif -%}
+    </h1>
 
     {%- if cart.item_count == 0 -%}
-      <div class="text-center" style="padding: var(--space-12) 0;">
-        <p style="font-size: var(--text-lg); color: var(--color-text-light); margin-bottom: var(--space-6);">{{ 'cart.empty' | t }}</p>
-        <a href="/collections/all" class="btn btn--primary btn--lg">{{ 'cart.continue_shopping' | t }}</a>
+
+      {%- comment -%}---- Empty cart state ----{%- endcomment -%}
+      <div
+        class="text-center{% if enable_anim %} anim-fade-up{% endif %}"
+        style="padding: var(--space-16, 4rem) 0;"
+      >
+        <p style="font-size: var(--text-lg, 1.125rem); color: var(--color-text-light, #666); margin-bottom: var(--space-3, 0.75rem);">
+          {%- if section.settings.empty_heading != blank -%}
+            {{ section.settings.empty_heading }}
+          {%- else -%}
+            {{ 'cart.empty' | t }}
+          {%- endif -%}
+        </p>
+        {%- if section.settings.empty_text != blank -%}
+          <p style="font-size: var(--text-base, 1rem); color: var(--color-text-light, #666); margin-bottom: var(--space-6, 1.5rem);">
+            {{ section.settings.empty_text }}
+          </p>
+        {%- else -%}
+          <div style="margin-bottom: var(--space-6, 1.5rem);"></div>
+        {%- endif -%}
+        <a
+          href="{{ section.settings.empty_button_link | default: '/collections/all' }}"
+          class="btn btn--primary btn--lg"
+        >
+          {%- if section.settings.empty_button_text != blank -%}
+            {{ section.settings.empty_button_text }}
+          {%- else -%}
+            {{ 'cart.continue_shopping' | t }}
+          {%- endif -%}
+        </a>
       </div>
+
     {%- else -%}
-      <form action="/cart" method="post">
+
+      <form action="/cart" method="post" id="cart-form-{{ section.id }}">
+
+        {%- comment -%}---- Free shipping progress bar ----{%- endcomment -%}
+        {%- if section.settings.show_free_shipping_bar -%}
+          {%- assign cart_total_dollars = cart.total_price | divided_by: 100.0 -%}
+          {%- assign threshold = free_shipping_threshold | times: 1.0 -%}
+          {%- if cart_total_dollars >= threshold -%}
+            {%- assign bar_pct = 100 -%}
+          {%- else -%}
+            {%- assign bar_pct = cart_total_dollars | divided_by: threshold | times: 100 | round -%}
+          {%- endif -%}
+
+          <div
+            class="cart-shipping-bar{% if enable_anim %} anim-fade-up{% endif %}"
+            style="
+              margin-bottom: var(--space-6, 1.5rem);
+              padding: var(--space-4, 1rem) var(--space-5, 1.25rem);
+              background: var(--color-cream, #F5F2EC);
+              border-radius: var(--radius-md, 0.5rem);
+            "
+          >
+            <p style="font-size: var(--text-sm, 0.875rem); font-weight: 600; margin-bottom: var(--space-2, 0.5rem); text-align: center;">
+              {%- if cart_total_dollars >= threshold -%}
+                🎉 You've unlocked free shipping!
+              {%- else -%}
+                {%- assign remaining = threshold | minus: cart_total_dollars -%}
+                Add <strong>{{ remaining | money }}</strong> more for free shipping
+              {%- endif -%}
+            </p>
+            <div
+              style="
+                background: var(--color-border, #E5E7EB);
+                border-radius: 99px;
+                height: 8px;
+                overflow: hidden;
+              "
+            >
+              <div
+                style="
+                  height: 100%;
+                  width: {{ bar_pct }}%;
+                  background: var(--color-accent, #C4783A);
+                  border-radius: 99px;
+                  transition: width 0.4s ease;
+                "
+              ></div>
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- comment -%}---- Line items ----{%- endcomment -%}
         {%- for item in cart.items -%}
-          <div class="flex gap-6 items-start" style="padding: var(--space-6) 0; border-bottom: 1px solid var(--color-border);">
-            <a href="{{ item.url }}" style="flex-shrink: 0; width: 100px; height: 100px; border-radius: var(--radius-md); overflow: hidden; background: var(--color-cream);">
-              {%- if item.image -%}
-                <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title }}" width="100" height="100" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
-              {%- endif -%}
-            </a>
-            <div style="flex: 1;">
-              <a href="{{ item.url }}" style="font-weight: 600; font-size: var(--text-base);">{{ item.product.title }}</a>
+          <div
+            class="cart-item{% if enable_anim %} anim-fade-up{% endif %}"
+            style="
+              display: flex;
+              gap: var(--space-5, 1.25rem);
+              align-items: flex-start;
+              padding: var(--space-6, 1.5rem) 0;
+              border-bottom: 1px solid var(--color-border, #E5E7EB);
+            "
+          >
+            {%- comment -%} Item image {%- endcomment -%}
+            {%- if show_images -%}
+              <a
+                href="{{ item.url }}"
+                style="
+                  flex-shrink: 0;
+                  width: 100px;
+                  height: 100px;
+                  border-radius: var(--radius-md, 0.5rem);
+                  overflow: hidden;
+                  background: var(--color-cream, #F5F2EC);
+                  display: block;
+                "
+                tabindex="-1"
+                aria-hidden="true"
+              >
+                {%- if item.image -%}
+                  <img
+                    src="{{ item.image | image_url: width: 200 }}"
+                    alt="{{ item.title | escape }}"
+                    width="100"
+                    height="100"
+                    loading="lazy"
+                    style="width: 100%; height: 100%; object-fit: cover;"
+                  >
+                {%- endif -%}
+              </a>
+            {%- endif -%}
+
+            {%- comment -%} Item details {%- endcomment -%}
+            <div style="flex: 1; min-width: 0;">
+              <a href="{{ item.url }}" style="font-weight: 600; font-size: var(--text-base, 1rem); display: block; margin-bottom: var(--space-1, 0.25rem);">
+                {{ item.product.title }}
+              </a>
+
               {%- if item.variant.title != 'Default Title' -%}
-                <p style="font-size: var(--text-sm); color: var(--color-text-light);">{{ item.variant.title }}</p>
+                <p style="font-size: var(--text-sm, 0.875rem); color: var(--color-text-light, #666); margin-bottom: var(--space-1, 0.25rem);">
+                  {{ item.variant.title }}
+                </p>
               {%- endif -%}
+
               {%- if item.selling_plan_allocation -%}
-                <p style="font-size: var(--text-xs); color: var(--color-accent); margin-top: var(--space-1);">{{ item.selling_plan_allocation.selling_plan.name }}</p>
+                <p style="font-size: var(--text-xs, 0.75rem); color: var(--color-accent, #C4783A); margin-bottom: var(--space-2, 0.5rem); font-weight: 600;">
+                  {{ item.selling_plan_allocation.selling_plan.name }}
+                </p>
               {%- endif -%}
-              <div class="flex items-center gap-4 mt-4">
-                <div class="flex items-center" style="border: 1px solid var(--color-border); border-radius: var(--radius-sm);">
-                  <a href="/cart/change?id={{ item.key }}&quantity={{ item.quantity | minus: 1 }}" style="padding: var(--space-2) var(--space-3); font-size: var(--text-sm);">-</a>
-                  <span style="padding: var(--space-2) var(--space-3); font-size: var(--text-sm); min-width: 32px; text-align: center;">{{ item.quantity }}</span>
-                  <a href="/cart/change?id={{ item.key }}&quantity={{ item.quantity | plus: 1 }}" style="padding: var(--space-2) var(--space-3); font-size: var(--text-sm);">+</a>
+
+              {%- comment -%} Line item properties {%- endcomment -%}
+              {%- for property in item.properties -%}
+                {%- unless property.last == blank -%}
+                  <p style="font-size: var(--text-xs, 0.75rem); color: var(--color-text-light, #666);">
+                    {{ property.first }}: {{ property.last }}
+                  </p>
+                {%- endunless -%}
+              {%- endfor -%}
+
+              {%- comment -%} Quantity + remove {%- endcomment -%}
+              <div style="display: flex; align-items: center; gap: var(--space-4, 1rem); margin-top: var(--space-4, 1rem);">
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    border: 1px solid var(--color-border, #E5E7EB);
+                    border-radius: var(--radius-sm, 0.25rem);
+                    overflow: hidden;
+                  "
+                >
+                  <a
+                    href="/cart/change?id={{ item.key }}&quantity={{ item.quantity | minus: 1 }}"
+                    style="padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem); font-size: var(--text-sm, 0.875rem); line-height: 1; display: flex; align-items: center; justify-content: center; min-width: 36px;"
+                    aria-label="Decrease quantity"
+                  >−</a>
+                  <span
+                    style="
+                      padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+                      font-size: var(--text-sm, 0.875rem);
+                      min-width: 32px;
+                      text-align: center;
+                      border-left: 1px solid var(--color-border, #E5E7EB);
+                      border-right: 1px solid var(--color-border, #E5E7EB);
+                    "
+                  >{{ item.quantity }}</span>
+                  <a
+                    href="/cart/change?id={{ item.key }}&quantity={{ item.quantity | plus: 1 }}"
+                    style="padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem); font-size: var(--text-sm, 0.875rem); line-height: 1; display: flex; align-items: center; justify-content: center; min-width: 36px;"
+                    aria-label="Increase quantity"
+                  >+</a>
                 </div>
-                <a href="/cart/change?id={{ item.key }}&quantity=0" style="font-size: var(--text-xs); color: var(--color-text-light); text-decoration: underline;">{{ 'cart.remove' | t }}</a>
+                <a
+                  href="/cart/change?id={{ item.key }}&quantity=0"
+                  style="font-size: var(--text-xs, 0.75rem); color: var(--color-text-light, #666); text-decoration: underline;"
+                >
+                  {{ 'cart.remove' | t }}
+                </a>
               </div>
             </div>
-            <div style="text-align: right;">
-              <p style="font-family: var(--font-mono); font-weight: 600;">{{ item.final_line_price | money }}</p>
+
+            {%- comment -%} Price {%- endcomment -%}
+            <div style="text-align: right; flex-shrink: 0;">
+              <p style="font-family: var(--font-mono, monospace); font-weight: 700;">
+                {{ item.final_line_price | money }}
+              </p>
               {%- if item.original_line_price > item.final_line_price -%}
-                <del style="font-size: var(--text-sm); color: var(--color-text-light);">{{ item.original_line_price | money }}</del>
+                <del style="font-size: var(--text-sm, 0.875rem); color: var(--color-text-light, #666);">
+                  {{ item.original_line_price | money }}
+                </del>
               {%- endif -%}
             </div>
+
           </div>
         {%- endfor -%}
 
-        <!-- Cart Footer -->
-        <div style="padding: var(--space-8) 0;">
-          <div class="flex justify-between items-center mb-4">
-            <span style="font-size: var(--text-lg); font-weight: 600;">{{ 'cart.subtotal' | t }}</span>
-            <span style="font-family: var(--font-mono); font-size: var(--text-xl); font-weight: 700;">{{ cart.total_price | money }}</span>
+        {%- comment -%}---- Cart notes ----{%- endcomment -%}
+        {%- if section.settings.show_cart_note -%}
+          <div style="padding: var(--space-6, 1.5rem) 0; border-bottom: 1px solid var(--color-border, #E5E7EB);">
+            <label
+              for="cart-note-{{ section.id }}"
+              style="display: block; font-size: var(--text-sm, 0.875rem); font-weight: 600; margin-bottom: var(--space-2, 0.5rem);"
+            >
+              {{ 'cart.note' | t | default: 'Order note' }}
+            </label>
+            <textarea
+              id="cart-note-{{ section.id }}"
+              name="note"
+              rows="3"
+              style="
+                width: 100%;
+                border: 1px solid var(--color-border, #E5E7EB);
+                border-radius: var(--radius-md, 0.5rem);
+                padding: var(--space-3, 0.75rem);
+                font-size: var(--text-sm, 0.875rem);
+                resize: vertical;
+                font-family: inherit;
+              "
+              placeholder="{{ 'cart.note_placeholder' | t | default: 'Add a note to your order...' }}"
+            >{{ cart.note }}</textarea>
           </div>
-          <p style="font-size: var(--text-sm); color: var(--color-text-light); margin-bottom: var(--space-6);">{{ 'cart.taxes_shipping_notice' | t }}</p>
-          <button type="submit" name="checkout" class="btn btn--primary btn--full btn--lg">{{ 'cart.checkout' | t }}</button>
-          <a href="/collections/all" style="display: block; text-align: center; margin-top: var(--space-4); font-size: var(--text-sm); color: var(--color-text-light); text-decoration: underline;">{{ 'cart.continue_shopping' | t }}</a>
+        {%- endif -%}
+
+        {%- comment -%}---- Cart footer ----{%- endcomment -%}
+        <div
+          class="cart-footer{% if enable_anim %} anim-fade-up{% endif %}"
+          style="padding: var(--space-8, 2rem) 0 0;"
+        >
+          {%- comment -%} Subtotal {%- endcomment -%}
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2, 0.5rem);">
+            <span style="font-size: var(--text-lg, 1.125rem); font-weight: 600;">{{ 'cart.subtotal' | t }}</span>
+            <span style="font-family: var(--font-mono, monospace); font-size: var(--text-xl, 1.25rem); font-weight: 700;">
+              {{ cart.total_price | money }}
+            </span>
+          </div>
+          {%- if cart.total_discounts > 0 -%}
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2, 0.5rem);">
+              <span style="font-size: var(--text-sm, 0.875rem); color: var(--color-accent, #C4783A);">{{ 'cart.savings' | t | default: 'You save' }}</span>
+              <span style="font-size: var(--text-sm, 0.875rem); color: var(--color-accent, #C4783A); font-weight: 600;">−{{ cart.total_discounts | money }}</span>
+            </div>
+          {%- endif -%}
+          <p style="font-size: var(--text-sm, 0.875rem); color: var(--color-text-light, #666); margin-bottom: var(--space-6, 1.5rem);">
+            {{ 'cart.taxes_shipping_notice' | t }}
+          </p>
+
+          {%- comment -%} Trust badges blocks (above checkout) {%- endcomment -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'trust_badge' -%}
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: var(--space-2, 0.5rem);
+                  margin-bottom: var(--space-3, 0.75rem);
+                  font-size: var(--text-sm, 0.875rem);
+                  color: {{ block.settings.color | default: 'var(--color-text-light, #666)' }};
+                "
+                {{ block.shopify_attributes }}
+              >
+                {%- if block.settings.icon != blank -%}
+                  <span style="flex-shrink: 0; font-size: 1.1em;" aria-hidden="true">{{ block.settings.icon }}</span>
+                {%- endif -%}
+                <span>{{ block.settings.text }}</span>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- comment -%} Checkout button {%- endcomment -%}
+          <button
+            type="submit"
+            name="checkout"
+            class="btn btn--primary btn--full btn--lg"
+            style="margin-bottom: var(--space-4, 1rem);"
+          >
+            {{ 'cart.checkout' | t }}
+          </button>
+
+          {%- comment -%} Accepted payment icons {%- endcomment -%}
+          {%- if section.settings.show_payment_icons -%}
+            <div style="display: flex; justify-content: center; gap: var(--space-2, 0.5rem); margin-bottom: var(--space-4, 1rem); flex-wrap: wrap;">
+              {%- for type in shop.enabled_payment_types -%}
+                {{ type | payment_type_svg_tag: class: 'payment-icon', style: 'height: 24px; width: auto; opacity: 0.65;' }}
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+
+          <a
+            href="{{ section.settings.continue_shopping_link | default: '/collections/all' }}"
+            style="display: block; text-align: center; font-size: var(--text-sm, 0.875rem); color: var(--color-text-light, #666); text-decoration: underline;"
+          >
+            {{ 'cart.continue_shopping' | t }}
+          </a>
         </div>
       </form>
+
     {%- endif -%}
   </div>
 </section>
 
+{%- comment -%}---- Animation CSS ----{%- endcomment -%}
+<style>
+  {%- if section.settings.enable_animation -%}
+  #main-cart-{{ section.id }} .anim-fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  #main-cart-{{ section.id }}.in-view .anim-fade-up {
+    opacity: 1;
+    transform: none;
+  }
+  #main-cart-{{ section.id }}.in-view .cart-item:nth-child(1) { transition-delay: 0.05s; }
+  #main-cart-{{ section.id }}.in-view .cart-item:nth-child(2) { transition-delay: 0.12s; }
+  #main-cart-{{ section.id }}.in-view .cart-item:nth-child(3) { transition-delay: 0.19s; }
+  #main-cart-{{ section.id }}.in-view .cart-item:nth-child(4) { transition-delay: 0.26s; }
+  {%- endif -%}
+</style>
+
+{%- if section.settings.enable_animation -%}
+<script>
+(function() {
+  var el = document.getElementById('main-cart-{{ section.id }}');
+  if (!el) return;
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('in-view'); obs.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    obs.observe(el);
+  } else {
+    el.classList.add('in-view');
+  }
+})();
+</script>
+{%- endif -%}
+
 {% schema %}
 {
   "name": "Cart Page",
-  "settings": []
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#1C2E23"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top (px)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom (px)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading_text",
+      "label": "Cart heading",
+      "info": "Leave blank to use translation default"
+    },
+    {
+      "type": "header",
+      "content": "Free shipping bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_free_shipping_bar",
+      "label": "Show free shipping progress bar",
+      "default": true
+    },
+    {
+      "type": "number",
+      "id": "free_shipping_threshold",
+      "label": "Free shipping threshold ($)",
+      "default": 50,
+      "info": "Enter amount in dollars (e.g. 50 = $50 USD)"
+    },
+    {
+      "type": "header",
+      "content": "Cart options"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart_note",
+      "label": "Show order note field",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_line_images",
+      "label": "Show product images",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show accepted payment icons",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "continue_shopping_link",
+      "label": "Continue shopping link",
+      "info": "Defaults to /collections/all if blank"
+    },
+    {
+      "type": "header",
+      "content": "Empty cart"
+    },
+    {
+      "type": "text",
+      "id": "empty_heading",
+      "label": "Empty cart heading",
+      "info": "Leave blank to use translation default"
+    },
+    {
+      "type": "text",
+      "id": "empty_text",
+      "label": "Empty cart subtext",
+      "default": "Looks like your cart is waiting for something worth it."
+    },
+    {
+      "type": "text",
+      "id": "empty_button_text",
+      "label": "Empty cart button label",
+      "default": "Continue Shopping"
+    },
+    {
+      "type": "url",
+      "id": "empty_button_link",
+      "label": "Empty cart button link"
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable scroll animations",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "trust_badge",
+      "name": "Trust badge",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (emoji)",
+          "default": "🔒"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Badge text",
+          "default": "Secure checkout — 256-bit SSL encryption"
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Text color",
+          "default": "#666666"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cart Page",
+      "blocks": [
+        { "type": "trust_badge", "settings": { "icon": "🔒", "text": "Secure checkout — 256-bit SSL encryption" } },
+        { "type": "trust_badge", "settings": { "icon": "↩️", "text": "30-day money-back guarantee" } },
+        { "type": "trust_badge", "settings": { "icon": "🚚", "text": "Free shipping on orders over $50" } }
+      ]
+    }
+  ]
 }
 {% endschema %}

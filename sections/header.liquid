@@ -1,171 +1,515 @@
-{%- comment -%}BaseCode Root - header{%- endcomment -%}
+{%- comment -%}BaseCode Root - header (Wonder-level customization){%- endcomment -%}
+
 {%- liquid
   assign is_transparent = false
   if template == 'index' and section.settings.transparent_homepage
     assign is_transparent = true
   endif
+
+  assign sticky = section.settings.sticky_header
+  assign show_search  = section.settings.show_search
+  assign show_account = section.settings.show_account
+  assign mobile_style = section.settings.mobile_menu_style
+  assign bg_opacity   = section.settings.sticky_bg_opacity | times: 1.0 | divided_by: 100.0
+  assign blur_val     = section.settings.background_blur
+  assign logo_w_d     = section.settings.logo_width_desktop
+  assign logo_w_m     = section.settings.logo_width_mobile
+  assign transparent_color = section.settings.transparent_text_color
 -%}
-<header class="header {% if is_transparent %}header--transparent{% endif %}" id="site-header" role="banner">
+
+{%- style -%}
+  .header {
+    position: {{ sticky | default: true | replace: 'true', 'sticky' | replace: 'false', 'relative' }};
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--z-sticky);
+    background-color: var(--color-white);
+    border-bottom: 1px solid var(--color-border);
+    transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+  }
+  {%- unless sticky -%}
+    .header { position: relative; }
+  {%- endunless -%}
+  {%- if section.settings.show_shadow -%}
+    .header { box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  {%- endif -%}
+  {%- unless section.settings.show_separator -%}
+    .header { border-bottom-color: transparent; }
+  {%- endunless -%}
+
+  /* Logo sizing */
+  .header__logo-img { width: {{ logo_w_d }}px; height: auto; display: block; }
+  @media (max-width: 767px) {
+    .header__logo-img { width: {{ logo_w_m }}px; }
+  }
+
+  /* Transparent header state */
+  .header--transparent {
+    position: fixed;
+    top: var(--announcement-height, 0px);
+    background: transparent !important;
+    border-bottom-color: transparent !important;
+    box-shadow: none !important;
+    color: {{ transparent_color }};
+  }
+  .header--transparent .header__nav-link,
+  .header--transparent .header__icon,
+  .header--transparent .header__logo-wordmark {
+    color: {{ transparent_color }};
+  }
+  .header--transparent .header__nav-link::after {
+    background: {{ transparent_color }};
+  }
+  .header--transparent .header__icon:hover {
+    background-color: {{ transparent_color | color_modify: 'alpha', 0.12 }};
+  }
+  /* Use alternate logo when transparent if set */
+  {%- if section.settings.transparent_logo != blank -%}
+    .header--transparent .header__logo-default { display: none; }
+    .header--transparent .header__logo-transparent { display: block; }
+    .header--scrolled .header__logo-default { display: block; }
+    .header--scrolled .header__logo-transparent { display: none !important; }
+  {%- endif -%}
+  .header__logo-transparent { display: none; }
+
+  /* Scrolled / sticky state */
+  .header--scrolled {
+    background-color: rgba(255, 255, 255, {{ bg_opacity }}) !important;
+    border-bottom-color: var(--color-border) !important;
+    {%- if blur_val -%}
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+    {%- endif -%}
+    {%- if section.settings.show_shadow -%}
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08) !important;
+    {%- endif -%}
+    color: var(--color-text);
+  }
+  .header--scrolled .header__nav-link,
+  .header--scrolled .header__icon,
+  .header--scrolled .header__logo-wordmark {
+    color: var(--color-text);
+  }
+  .header--scrolled .header__nav-link::after {
+    background: var(--color-accent);
+  }
+  .header--scrolled .header__icon:hover {
+    background-color: var(--color-cream);
+  }
+
+  /* Predictive search */
+  .header__search-form {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--color-white);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-4) var(--space-6);
+    box-shadow: var(--shadow-md);
+    display: none;
+    z-index: var(--z-dropdown);
+  }
+  .header__search-form.is-open {
+    display: block;
+  }
+  .header__search-input {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-base);
+    background: var(--color-bg);
+    color: var(--color-text);
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+  .header__search-input:focus {
+    border-color: var(--color-accent);
+  }
+
+  /* Full-screen mobile menu variant */
+  .mobile-menu--fullscreen .mobile-menu__panel {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: var(--space-8) var(--space-6) !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .mobile-menu--fullscreen .mobile-menu__link {
+    font-size: var(--text-3xl) !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.02em;
+  }
+{%- endstyle -%}
+
+<header
+  class="header {% if is_transparent %}header--transparent{% endif %} {% if sticky %}header--sticky{% endif %}"
+  id="site-header"
+  role="banner"
+  data-transparent="{{ is_transparent }}"
+  data-sticky="{{ sticky }}"
+>
   <div class="header__inner">
-    <!-- Logo -->
-    <a href="/" class="header__logo" aria-label="{{ shop.name }}">
+
+    {%- comment -%} Logo {%- endcomment -%}
+    <a href="{{ routes.root_url }}" class="header__logo" aria-label="{{ shop.name }}">
       {%- if section.settings.logo != blank -%}
-        <img src="{{ section.settings.logo | image_url: width: 200 }}" alt="{{ shop.name }}" width="150" height="32" loading="eager">
+        <img
+          src="{{ section.settings.logo | image_url: width: 400 }}"
+          alt="{{ shop.name }}"
+          class="header__logo-img header__logo-default"
+          width="{{ logo_w_d }}"
+          height="auto"
+          loading="eager"
+          fetchpriority="high"
+        >
+        {%- if section.settings.transparent_logo != blank -%}
+          <img
+            src="{{ section.settings.transparent_logo | image_url: width: 400 }}"
+            alt="{{ shop.name }}"
+            class="header__logo-img header__logo-transparent"
+            width="{{ logo_w_d }}"
+            height="auto"
+            loading="eager"
+          >
+        {%- endif -%}
       {%- else -%}
-        <span style="font-family: var(--font-heading); font-size: var(--text-xl); font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em;">
-          BaseCode Health
+        <span class="header__logo-wordmark" style="font-family: var(--font-heading); font-size: var(--text-xl); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;">
+          {{ shop.name }}
         </span>
       {%- endif -%}
     </a>
 
-    <!-- Desktop Navigation -->
+    {%- comment -%} Desktop navigation {%- endcomment -%}
     <nav class="header__nav" role="navigation" aria-label="Main navigation">
       {%- for link in section.settings.menu.links -%}
         {%- if link.links.size > 0 -%}
           <div class="header__nav-dropdown" style="position: relative;">
-            <button class="header__nav-link flex items-center gap-1" aria-expanded="false" aria-haspopup="true">
+            <button
+              class="header__nav-link"
+              style="display: flex; align-items: center; gap: 4px; background: none; border: none; cursor: pointer; padding: 0;"
+              aria-expanded="false"
+              aria-haspopup="true"
+            >
               {{ link.title }}
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0; transition: transform 0.2s ease;"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
-            <div class="header__dropdown-menu" style="position: absolute; top: 100%; left: 0; min-width: 200px; background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-3) 0; box-shadow: var(--shadow-lg); display: none; z-index: var(--z-dropdown);">
+            <div class="header__dropdown-menu" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); min-width: 200px; background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-2) 0; box-shadow: 0 8px 30px rgba(0,0,0,0.10); display: none; z-index: var(--z-dropdown);">
               {%- for child_link in link.links -%}
-                <a href="{{ child_link.url }}" class="header__nav-link" style="display: block; padding: var(--space-2) var(--space-5); font-size: var(--text-sm);">
+                <a
+                  href="{{ child_link.url }}"
+                  class="header__nav-link"
+                  style="display: block; padding: var(--space-2) var(--space-5); font-size: var(--text-sm); white-space: nowrap;"
+                  {% if child_link.current %}aria-current="page"{% endif %}
+                >
                   {{ child_link.title }}
                 </a>
               {%- endfor -%}
             </div>
           </div>
         {%- else -%}
-          <a href="{{ link.url }}" class="header__nav-link" {% if link.current %}aria-current="page"{% endif %}>
+          <a
+            href="{{ link.url }}"
+            class="header__nav-link"
+            {% if link.current %}aria-current="page"{% endif %}
+          >
             {{ link.title }}
           </a>
         {%- endif -%}
       {%- endfor -%}
     </nav>
 
-    <!-- Header Icons -->
+    {%- comment -%} Right icons {%- endcomment -%}
     <div class="header__icons">
-      <!-- Search -->
-      <button class="header__icon hide-mobile" id="search-toggle" aria-label="{{ 'header.search' | t }}">
+
+      {%- if show_search -%}
+        <button class="header__icon hide-mobile" id="search-toggle" aria-label="{{ 'header.search' | t | default: 'Search' }}" aria-expanded="false" aria-controls="header-search-form">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </button>
+      {%- endif -%}
+
+      {%- if show_account -%}
+        <a href="{{ routes.account_url }}" class="header__icon hide-mobile" aria-label="{{ 'header.account' | t | default: 'Account' }}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+          </svg>
+        </a>
+      {%- endif -%}
+
+      {%- comment -%} Cart icon — always visible {%- endcomment -%}
+      <button class="header__icon" id="cart-toggle" aria-label="{{ 'header.cart' | t | default: 'Cart' }} ({{ cart.item_count }})" style="position: relative;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+        <span
+          id="cart-count"
+          aria-live="polite"
+          style="position: absolute; top: 2px; right: 2px; width: 16px; height: 16px; background: var(--color-accent); color: var(--color-white); font-size: 10px; font-weight: 700; border-radius: var(--radius-full); display: {% if cart.item_count > 0 %}flex{% else %}none{% endif %}; align-items: center; justify-content: center;"
+        >{{ cart.item_count }}</span>
+      </button>
+
+      {%- comment -%} Mobile hamburger {%- endcomment -%}
+      <button
+        class="header__menu-toggle header__icon"
+        id="menu-toggle"
+        aria-label="{{ 'accessibility.menu_open' | t | default: 'Open menu' }}"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg id="menu-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+        <svg id="menu-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
         </svg>
       </button>
 
-      <!-- Account -->
-      <a href="/account" class="header__icon hide-mobile" aria-label="{{ 'header.account' | t }}">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-          <circle cx="12" cy="7" r="4"></circle>
-        </svg>
-      </a>
+    </div>
+  </div>
 
-      <!-- Cart -->
-      <button class="header__icon" id="cart-toggle" aria-label="{{ 'header.cart' | t }} ({{ cart.item_count }})">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <path d="M16 10a4 4 0 0 1-8 0"></path>
-        </svg>
-        {%- if cart.item_count > 0 -%}
-          <span style="position: absolute; top: 2px; right: 2px; width: 16px; height: 16px; background: var(--color-accent); color: var(--color-white); font-size: 10px; font-weight: 700; border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center;" id="cart-count">{{ cart.item_count }}</span>
+  {%- comment -%} Predictive search form {%- endcomment -%}
+  {%- if show_search -%}
+    <div class="header__search-form" id="header-search-form" role="search">
+      <form action="{{ routes.search_url }}" method="get">
+        <input
+          type="search"
+          name="q"
+          class="header__search-input"
+          placeholder="{{ section.settings.search_placeholder | default: 'Search products…' }}"
+          aria-label="{{ section.settings.search_placeholder | default: 'Search products…' }}"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
+        >
+      </form>
+    </div>
+  {%- endif -%}
+
+</header>
+
+{%- comment -%} Mobile menu {%- endcomment -%}
+<div
+  class="mobile-menu {% if mobile_style == 'fullscreen' %}mobile-menu--fullscreen{% endif %}"
+  id="mobile-menu"
+  role="dialog"
+  aria-label="{{ 'accessibility.menu_title' | t | default: 'Mobile menu' }}"
+  aria-hidden="true"
+  aria-modal="true"
+>
+  <div class="mobile-menu__backdrop" id="mobile-menu-backdrop" aria-hidden="true"></div>
+  <div class="mobile-menu__panel">
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-8);">
+      <a href="{{ routes.root_url }}" aria-label="{{ shop.name }}" style="text-decoration: none; color: inherit;" tabindex="-1">
+        {%- if section.settings.logo != blank -%}
+          <img src="{{ section.settings.logo | image_url: width: 300 }}" alt="{{ shop.name }}" width="{{ logo_w_m }}" height="auto" style="width: {{ logo_w_m }}px; height: auto;">
+        {%- else -%}
+          <span style="font-family: var(--font-heading); font-size: var(--text-lg); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;">{{ shop.name }}</span>
         {%- endif -%}
-      </button>
-
-      <!-- Mobile Menu Toggle -->
-      <button class="header__menu-toggle header__icon" id="menu-toggle" aria-label="{{ 'accessibility.menu_open' | t }}" aria-expanded="false">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
+      </a>
+      <button class="header__icon" id="mobile-menu-close" aria-label="{{ 'accessibility.menu_close' | t | default: 'Close menu' }}">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
         </svg>
       </button>
     </div>
-  </div>
-</header>
 
-<!-- Mobile Menu -->
-<div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Mobile menu" aria-hidden="true">
-  <div class="mobile-menu__backdrop" id="mobile-menu-backdrop"></div>
-  <div class="mobile-menu__panel">
-    <button class="header__icon" id="mobile-menu-close" aria-label="{{ 'accessibility.menu_close' | t }}" style="margin-bottom: var(--space-6);">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="18" y1="6" x2="6" y2="18"></line>
-        <line x1="6" y1="6" x2="18" y2="18"></line>
-      </svg>
-    </button>
-
-    <nav aria-label="Mobile navigation">
+    <nav aria-label="{{ 'accessibility.menu_title' | t | default: 'Mobile navigation' }}" style="width: 100%;">
       {%- for link in section.settings.menu.links -%}
-        <a href="{{ link.url }}" class="mobile-menu__link" {% if link.current %}aria-current="page"{% endif %}>
-          {{ link.title }}
-        </a>
         {%- if link.links.size > 0 -%}
-          {%- for child_link in link.links -%}
-            <a href="{{ child_link.url }}" class="mobile-menu__link" style="font-size: var(--text-base); padding-left: var(--space-4); color: var(--color-text-light);">
-              {{ child_link.title }}
-            </a>
-          {%- endfor -%}
+          <button
+            class="mobile-menu__link mobile-menu__parent-toggle"
+            aria-expanded="false"
+            style="display: flex; align-items: center; justify-content: space-between; width: 100%; background: none; border: none; cursor: pointer; text-align: left; padding: var(--space-3) 0; border-bottom: 1px solid var(--color-border);"
+          >
+            {{ link.title }}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.2s ease; flex-shrink: 0;"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="mobile-menu__children" style="display: none; padding-left: var(--space-4);">
+            {%- for child_link in link.links -%}
+              <a
+                href="{{ child_link.url }}"
+                class="mobile-menu__link"
+                style="font-size: var(--text-base); padding: var(--space-2) 0; border-bottom: 1px solid var(--color-border); color: var(--color-text-light);"
+                {% if child_link.current %}aria-current="page"{% endif %}
+              >
+                {{ child_link.title }}
+              </a>
+            {%- endfor -%}
+          </div>
+        {%- else -%}
+          <a
+            href="{{ link.url }}"
+            class="mobile-menu__link"
+            style="display: block; padding: var(--space-3) 0; border-bottom: 1px solid var(--color-border);"
+            {% if link.current %}aria-current="page"{% endif %}
+          >
+            {{ link.title }}
+          </a>
         {%- endif -%}
       {%- endfor -%}
     </nav>
 
-    <div style="margin-top: var(--space-8); display: flex; flex-direction: column; gap: var(--space-3);">
-      <a href="/account" class="mobile-menu__link" style="font-size: var(--text-base);">{{ 'header.account' | t }}</a>
+    <div style="margin-top: auto; padding-top: var(--space-8); display: flex; flex-direction: column; gap: var(--space-3);">
+      {%- if show_account -%}
+        <a href="{{ routes.account_url }}" class="mobile-menu__link" style="font-size: var(--text-base);">{{ 'header.account' | t | default: 'Account' }}</a>
+      {%- endif -%}
     </div>
   </div>
 </div>
 
-<style>
-  .header--transparent {
-    position: fixed;
-    top: var(--announcement-height);
-    left: 0;
-    right: 0;
-    background: transparent;
-    border-bottom-color: transparent;
-    color: #fff;
-    z-index: var(--z-sticky);
+<script>
+(function() {
+  var header     = document.getElementById('site-header');
+  var menuToggle = document.getElementById('menu-toggle');
+  var menuClose  = document.getElementById('mobile-menu-close');
+  var mobileMenu = document.getElementById('mobile-menu');
+  var backdrop   = document.getElementById('mobile-menu-backdrop');
+  var searchBtn  = document.getElementById('search-toggle');
+  var searchForm = document.getElementById('header-search-form');
+  var iconOpen   = document.getElementById('menu-icon-open');
+  var iconClose  = document.getElementById('menu-icon-close');
+  var isTransparent = header && header.dataset.transparent === 'true';
+
+  /* Sticky + transparent scroll behaviour */
+  if (header) {
+    var scrolled = false;
+    window.addEventListener('scroll', function() {
+      var shouldScroll = window.scrollY > 40;
+      if (shouldScroll !== scrolled) {
+        scrolled = shouldScroll;
+        header.classList.toggle('header--scrolled', scrolled);
+      }
+    }, { passive: true });
+    /* Trigger once on load so refresh below-fold works */
+    if (window.scrollY > 40) {
+      header.classList.add('header--scrolled');
+      scrolled = true;
+    }
   }
-  .header--transparent .header__nav-link,
-  .header--transparent .header__icon,
-  .header--transparent .header__logo span {
-    color: #fff;
+
+  /* Mobile menu open/close */
+  function openMenu() {
+    mobileMenu.setAttribute('aria-hidden', 'false');
+    menuToggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    if (iconOpen) iconOpen.style.display = 'none';
+    if (iconClose) iconClose.style.display = 'block';
+    /* Focus first link */
+    var first = mobileMenu.querySelector('a, button');
+    if (first) setTimeout(function() { first.focus(); }, 50);
   }
-  .header--transparent .header__nav-link::after {
-    background: #fff;
+  function closeMenu() {
+    mobileMenu.setAttribute('aria-hidden', 'true');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    if (iconOpen) iconOpen.style.display = 'block';
+    if (iconClose) iconClose.style.display = 'none';
+    menuToggle.focus();
   }
-  .header--transparent .header__icon:hover {
-    background-color: rgba(255,255,255,0.15);
+  if (menuToggle) menuToggle.addEventListener('click', function() {
+    mobileMenu.getAttribute('aria-hidden') === 'false' ? closeMenu() : openMenu();
+  });
+  if (menuClose) menuClose.addEventListener('click', closeMenu);
+  if (backdrop) backdrop.addEventListener('click', closeMenu);
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && mobileMenu && mobileMenu.getAttribute('aria-hidden') === 'false') closeMenu();
+  });
+
+  /* Mobile sub-menus */
+  document.querySelectorAll('.mobile-menu__parent-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = this.getAttribute('aria-expanded') === 'true';
+      var children = this.nextElementSibling;
+      this.setAttribute('aria-expanded', !expanded);
+      var chevron = this.querySelector('svg');
+      if (chevron) chevron.style.transform = expanded ? '' : 'rotate(180deg)';
+      if (children) children.style.display = expanded ? 'none' : 'block';
+    });
+  });
+
+  /* Desktop dropdowns */
+  document.querySelectorAll('.header__nav-dropdown').forEach(function(dropdown) {
+    var btn  = dropdown.querySelector('button');
+    var menu = dropdown.querySelector('.header__dropdown-menu');
+    if (!btn || !menu) return;
+    function show() { menu.style.display = 'block'; btn.setAttribute('aria-expanded', 'true'); var chevron = btn.querySelector('svg'); if (chevron) chevron.style.transform = 'rotate(180deg)'; }
+    function hide() { menu.style.display = 'none';  btn.setAttribute('aria-expanded', 'false'); var chevron = btn.querySelector('svg'); if (chevron) chevron.style.transform = ''; }
+    dropdown.addEventListener('mouseenter', show);
+    dropdown.addEventListener('mouseleave', hide);
+    btn.addEventListener('click', function() { menu.style.display === 'block' ? hide() : show(); });
+    btn.addEventListener('keydown', function(e) { if (e.key === 'Escape') { hide(); btn.focus(); } });
+  });
+
+  /* Search toggle */
+  if (searchBtn && searchForm) {
+    searchBtn.addEventListener('click', function() {
+      var open = searchForm.classList.toggle('is-open');
+      searchBtn.setAttribute('aria-expanded', open);
+      if (open) {
+        var input = searchForm.querySelector('input');
+        if (input) setTimeout(function() { input.focus(); }, 50);
+      }
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && searchForm.classList.contains('is-open')) {
+        searchForm.classList.remove('is-open');
+        searchBtn.setAttribute('aria-expanded', 'false');
+        searchBtn.focus();
+      }
+    });
+    document.addEventListener('click', function(e) {
+      if (!header.contains(e.target)) {
+        searchForm.classList.remove('is-open');
+        searchBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
   }
-  .header--transparent.header--scrolled {
-    background: var(--color-white);
-    border-bottom-color: var(--color-border);
-    box-shadow: var(--shadow-md);
-    color: var(--color-text);
-  }
-  .header--transparent.header--scrolled .header__nav-link,
-  .header--transparent.header--scrolled .header__icon,
-  .header--transparent.header--scrolled .header__logo span {
-    color: var(--color-text);
-  }
-  .header--transparent.header--scrolled .header__nav-link::after {
-    background: var(--color-accent);
-  }
-  .header--transparent.header--scrolled .header__icon:hover {
-    background-color: var(--color-cream);
-  }
-</style>
+})();
+</script>
 
 {% schema %}
 {
   "name": "Header",
   "settings": [
     {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
       "type": "image_picker",
       "id": "logo",
       "label": "Logo image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width_desktop",
+      "label": "Logo width — desktop",
+      "min": 60,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "logo_width_mobile",
+      "label": "Logo width — mobile",
+      "min": 40,
+      "max": 160,
+      "step": 5,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
     },
     {
       "type": "link_list",
@@ -174,17 +518,104 @@
       "default": "main-menu"
     },
     {
+      "type": "select",
+      "id": "mobile_menu_style",
+      "label": "Mobile menu style",
+      "options": [
+        { "value": "slide", "label": "Slide-in panel" },
+        { "value": "fullscreen", "label": "Full-screen overlay" }
+      ],
+      "default": "slide"
+    },
+    {
+      "type": "header",
+      "content": "Icons"
+    },
+    {
       "type": "checkbox",
-      "id": "transparent_homepage",
-      "label": "Transparent header on homepage",
-      "default": true,
-      "info": "Header overlays the hero image with white text, becomes solid on scroll."
+      "id": "show_search",
+      "label": "Show search icon",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "search_placeholder",
+      "label": "Search placeholder text",
+      "default": "Search products…"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_account",
+      "label": "Show account icon",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Sticky header"
     },
     {
       "type": "checkbox",
       "id": "sticky_header",
       "label": "Sticky header",
       "default": true
+    },
+    {
+      "type": "range",
+      "id": "sticky_bg_opacity",
+      "label": "Sticky background opacity",
+      "min": 80,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 95,
+      "info": "Useful with background blur enabled."
+    },
+    {
+      "type": "checkbox",
+      "id": "background_blur",
+      "label": "Background blur (frosted glass)",
+      "default": false,
+      "info": "Applies backdrop-filter blur when header is sticky-scrolled."
+    },
+    {
+      "type": "header",
+      "content": "Transparent header"
+    },
+    {
+      "type": "checkbox",
+      "id": "transparent_homepage",
+      "label": "Transparent header on homepage",
+      "default": true,
+      "info": "Header overlays the hero section with custom text color, becomes solid on scroll."
+    },
+    {
+      "type": "color",
+      "id": "transparent_text_color",
+      "label": "Transparent header text color",
+      "default": "#FFFFFF",
+      "info": "Color of nav links, icons, and wordmark when transparent."
+    },
+    {
+      "type": "image_picker",
+      "id": "transparent_logo",
+      "label": "Transparent header alternate logo",
+      "info": "Optional. Use a light-colored logo version for dark hero backgrounds. Falls back to main logo if blank."
+    },
+    {
+      "type": "header",
+      "content": "Borders & shadow"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_separator",
+      "label": "Show separator line",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_shadow",
+      "label": "Show shadow",
+      "default": false
     }
   ]
 }

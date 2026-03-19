@@ -1,55 +1,499 @@
-{%- comment -%}BaseCode Root - product-carousel{%- endcomment -%}
-<section class="section bg-white">
-  <div class="container">
-    {%- if section.settings.heading != blank -%}
-      <h2 class="text-center mb-10 reveal-hidden">{{ section.settings.heading }}</h2>
+{%- comment -%}BaseCode Root - product-carousel (Wonder-level customization){%- endcomment -%}
+
+{%- liquid
+  assign bg          = section.settings.bg_color       | default: '#FFFFFF'
+  assign text_col    = section.settings.text_color     | default: '#1C2E23'
+  assign pt          = section.settings.padding_top    | default: 60
+  assign pb          = section.settings.padding_bottom | default: 60
+  assign heading_tag = section.settings.heading_tag    | default: 'h2'
+  assign heading_sz  = section.settings.heading_size   | default: 'medium'
+  assign text_align  = section.settings.text_align     | default: 'center'
+  assign per_desktop = section.settings.per_desktop    | default: 4
+  assign per_mobile  = section.settings.per_mobile     | default: 2
+  assign img_ratio   = section.settings.image_ratio    | default: 'adapt'
+  assign show_vendor = section.settings.show_vendor
+  assign show_rating = section.settings.show_rating
+  assign show_hover  = section.settings.show_secondary_image
+  assign auto_play   = section.settings.auto_play
+  assign auto_speed  = section.settings.auto_play_speed | default: 4
+  assign show_arrows = section.settings.show_arrows
+  assign btn_style   = section.settings.button_style   | default: 'button_secondary'
+  assign full_width  = section.settings.full_width
+  assign animate     = section.settings.enable_animation
+  assign collection  = collections[section.settings.collection]
+-%}
+
+<style>
+  #section-{{ section.id }} {
+    background-color: {{ bg }};
+    color: {{ text_col }};
+    padding-top: {{ pt }}px;
+    padding-bottom: {{ pb }}px;
+  }
+
+  /* ── Header ─────────────────────────────────── */
+  #section-{{ section.id }} .pc-header {
+    text-align: {{ text_align }};
+    margin-bottom: 2.5rem;
+  }
+
+  #section-{{ section.id }} .pc-subheading {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-accent);
+    margin-bottom: 0.625rem;
+  }
+
+  #section-{{ section.id }} .pc-heading {
+    color: {{ text_col }};
+    margin: 0 0 0.5rem;
+    {% if heading_sz == 'small' %}
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+    {% elsif heading_sz == 'medium' %}
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+    {% elsif heading_sz == 'large' %}
+      font-size: clamp(2rem, 4vw, 3rem);
+    {% elsif heading_sz == 'xlarge' %}
+      font-size: clamp(2.5rem, 5vw, 4rem);
+    {% else %}
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+    {% endif %}
+  }
+
+  /* ── Carousel track ─────────────────────────── */
+  #section-{{ section.id }} .carousel {
+    position: relative;
+  }
+
+  #section-{{ section.id }} .carousel__track {
+    display: grid;
+    grid-template-columns: repeat({{ per_desktop }}, 1fr);
+    gap: 1.5rem;
+    overflow: hidden;
+  }
+
+  @media (max-width: 1023px) {
+    #section-{{ section.id }} .carousel__track {
+      grid-template-columns: repeat({{ per_desktop | at_most: 3 }}, 1fr);
+    }
+  }
+
+  @media (max-width: 767px) {
+    #section-{{ section.id }} .carousel__track {
+      grid-template-columns: repeat({{ per_mobile }}, 1fr);
+      gap: 1rem;
+    }
+  }
+
+  /* ── Slide ──────────────────────────────────── */
+  #section-{{ section.id }} .carousel__slide {
+    min-width: 0; /* prevent grid blowout */
+  }
+
+  /* ── Image ratio ────────────────────────────── */
+  {%- if img_ratio == 'portrait' -%}
+  #section-{{ section.id }} .product-card__image-wrapper {
+    aspect-ratio: 3 / 4;
+  }
+  {%- elsif img_ratio == 'square' -%}
+  #section-{{ section.id }} .product-card__image-wrapper {
+    aspect-ratio: 1 / 1;
+  }
+  {%- endif -%}
+
+  /* ── Secondary image on hover ───────────────── */
+  {%- if show_hover -%}
+  #section-{{ section.id }} .product-card__image--secondary {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+  #section-{{ section.id }} .product-card__image-wrapper:hover .product-card__image--secondary {
+    opacity: 1;
+  }
+  #section-{{ section.id }} .product-card__image-wrapper:hover .product-card__image--primary {
+    opacity: 0;
+  }
+  #section-{{ section.id }} .product-card__image--primary {
+    transition: opacity 0.35s ease;
+  }
+  {%- endif -%}
+
+  /* ── Vendor ─────────────────────────────────── */
+  #section-{{ section.id }} .product-card__vendor {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.55;
+    margin-bottom: 0.25rem;
+  }
+
+  /* ── Rating ─────────────────────────────────── */
+  #section-{{ section.id }} .product-card__rating {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.78rem;
+    color: var(--color-accent, #C4783A);
+    margin-bottom: 0.375rem;
+  }
+
+  /* ── Arrows ─────────────────────────────────── */
+  #section-{{ section.id }} .carousel__arrow {
+    display: {% if show_arrows %}flex{% else %}none{% endif %};
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    z-index: 10;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: {{ bg }};
+    border: 1px solid {{ text_col | color_modify: 'alpha', 0.2 }};
+    border-radius: 50%;
+    cursor: pointer;
+    color: {{ text_col }};
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: background 0.2s, border-color 0.2s;
+  }
+  #section-{{ section.id }} .carousel__arrow:hover {
+    background: {{ text_col | color_modify: 'alpha', 0.07 }};
+    border-color: {{ text_col | color_modify: 'alpha', 0.4 }};
+  }
+  #section-{{ section.id }} .carousel__arrow--prev { left: -20px; }
+  #section-{{ section.id }} .carousel__arrow--next { right: -20px; }
+
+  @media (max-width: 767px) {
+    #section-{{ section.id }} .carousel__arrow--prev { left: -12px; }
+    #section-{{ section.id }} .carousel__arrow--next { right: -12px; }
+  }
+
+  /* ── View all footer ────────────────────────── */
+  #section-{{ section.id }} .pc-footer {
+    text-align: {{ text_align }};
+    margin-top: 2.5rem;
+  }
+
+  /* ── Animation ──────────────────────────────── */
+  {%- if animate -%}
+  #section-{{ section.id }} .animate-fade {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  #section-{{ section.id }} .animate-fade.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  {%- endif -%}
+</style>
+
+<section
+  id="section-{{ section.id }}"
+  class="product-carousel-section{% if full_width %} product-carousel-section--full{% endif %}"
+>
+  <div class="{% if full_width %}container--wide{% else %}container{% endif %}">
+
+    {%- if section.settings.subheading != blank or section.settings.heading != blank -%}
+      <div class="pc-header">
+        {%- if section.settings.subheading != blank -%}
+          <p class="pc-subheading{% if animate %} animate-fade{% endif %}">
+            {{ section.settings.subheading | escape }}
+          </p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <{{ heading_tag }} class="pc-heading{% if animate %} animate-fade{% endif %}">
+            {{ section.settings.heading | escape }}
+          </{{ heading_tag }}>
+        {%- endif -%}
+      </div>
     {%- endif -%}
 
-    <div class="carousel">
-      <div class="carousel__track" id="product-carousel-track">
-        {%- if section.settings.collection != blank -%}
-          {%- for product in collections[section.settings.collection].products limit: section.settings.limit -%}
-            <div class="carousel__slide">
-              {% render 'product-card', product: product, show_atc: true %}
+    <div
+      class="carousel"
+      data-product-carousel
+      {% if auto_play %}data-auto-play="{{ auto_speed }}" data-per-desktop="{{ per_desktop }}"{% endif %}
+    >
+      <div class="carousel__track" id="product-carousel-track-{{ section.id }}">
+
+        {%- if section.settings.collection != blank and collection != blank -%}
+          {%- for product in collection.products limit: section.settings.limit -%}
+            <div class="carousel__slide{% if animate %} animate-fade{% endif %}"
+              style="{% if animate %}transition-delay:{{ forloop.index0 | times: 60 }}ms;{% endif %}">
+
+              {%- comment -%} Secondary-image wrapper overlay {%- endcomment -%}
+              {%- if show_hover and product.images.size > 1 -%}
+                <div class="product-card">
+                  <a href="{{ product.url }}" class="product-card__link" aria-label="{{ product.title | escape }}">
+                    <div class="product-card__image-wrapper" style="background-color:var(--color-cream);position:relative;overflow:hidden;">
+                      <img
+                        src="{{ product.featured_image | image_url: width: 600 }}"
+                        srcset="{{ product.featured_image | image_url: width: 300 }} 300w, {{ product.featured_image | image_url: width: 600 }} 600w"
+                        sizes="(max-width: 767px) {{ 100 | divided_by: per_mobile }}vw, {{ 100 | divided_by: per_desktop }}vw"
+                        alt="{{ product.featured_image.alt | default: product.title | escape }}"
+                        loading="lazy"
+                        class="product-card__image product-card__image--primary"
+                        width="300" height="300"
+                      >
+                      <img
+                        src="{{ product.images[1] | image_url: width: 600 }}"
+                        srcset="{{ product.images[1] | image_url: width: 300 }} 300w, {{ product.images[1] | image_url: width: 600 }} 600w"
+                        sizes="(max-width: 767px) {{ 100 | divided_by: per_mobile }}vw, {{ 100 | divided_by: per_desktop }}vw"
+                        alt="{{ product.images[1].alt | default: product.title | escape }}"
+                        loading="lazy"
+                        class="product-card__image product-card__image--secondary"
+                        width="300" height="300"
+                      >
+                    </div>
+                  </a>
+
+                  {%- if show_vendor -%}
+                    <p class="product-card__vendor">{{ product.vendor }}</p>
+                  {%- endif -%}
+
+                  <a href="{{ product.url }}" class="product-card__link" tabindex="-1" aria-hidden="true">
+                    <h3 class="product-card__title">{{ product.title }}</h3>
+                  </a>
+
+                  {%- if show_rating -%}
+                    {%- if product.metafields.reviews.rating.value != blank -%}
+                      <div class="product-card__rating">
+                        {% render 'star-rating', rating: product.metafields.reviews.rating.value %}
+                        <span>({{ product.metafields.reviews.rating_count }})</span>
+                      </div>
+                    {%- endif -%}
+                  {%- endif -%}
+
+                  <div class="product-card__price">
+                    {%- if product.compare_at_price > product.price -%}
+                      <del style="color:var(--color-text-light);margin-right:var(--space-2);">{{ product.compare_at_price | money }}</del>
+                    {%- endif -%}
+                    <span>{{ product.price | money }}</span>
+                  </div>
+
+                  {%- if product.available -%}
+                    <form action="/cart/add" method="post">
+                      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                      <input type="hidden" name="quantity" value="1">
+                      <button type="submit" class="
+                        {%- if btn_style == 'button_primary' -%}btn btn--primary btn--full btn--sm
+                        {%- elsif btn_style == 'button_outline' -%}btn btn--outline btn--full btn--sm
+                        {%- else -%}btn btn--secondary btn--full btn--sm
+                        {%- endif -%}
+                      ">{{ 'product.add_to_cart' | t }}</button>
+                    </form>
+                  {%- else -%}
+                    <button class="btn btn--secondary btn--full btn--sm" disabled>{{ 'product.sold_out' | t }}</button>
+                  {%- endif -%}
+                </div>
+
+              {%- else -%}
+                {%- comment -%} Standard card — delegate to snippet, augmented with vendor/rating {%- endcomment -%}
+                <div class="product-card">
+                  {% render 'product-card', product: product, show_atc: true %}
+
+                  {%- if show_vendor -%}
+                    <p class="product-card__vendor">{{ product.vendor }}</p>
+                  {%- endif -%}
+
+                  {%- if show_rating -%}
+                    {%- if product.metafields.reviews.rating.value != blank -%}
+                      <div class="product-card__rating">
+                        {% render 'star-rating', rating: product.metafields.reviews.rating.value %}
+                        <span>({{ product.metafields.reviews.rating_count }})</span>
+                      </div>
+                    {%- endif -%}
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+
             </div>
+          {%- else -%}
+            <p style="opacity:0.5;grid-column:1/-1;">No products found in the selected collection.</p>
           {%- endfor -%}
+
         {%- else -%}
-          {%- for i in (1..4) -%}
+          {%- comment -%} Editor placeholder cards {%- endcomment -%}
+          {%- for i in (1..section.settings.limit) -%}
             <div class="carousel__slide">
               <div class="product-card">
-                <div class="product-card__image-wrapper" style="background: var(--color-cream);">
-                  <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
-                    <span style="color: var(--color-text-light); font-size: var(--text-sm);">Product {{ i }}</span>
-                  </div>
+                <div class="product-card__image-wrapper" style="background:var(--color-cream);{% if img_ratio == 'portrait' %}aspect-ratio:3/4;{% elsif img_ratio == 'square' %}aspect-ratio:1/1;{% endif %}display:flex;align-items:center;justify-content:center;">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-light)" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
                 </div>
+                {%- if show_vendor -%}<p class="product-card__vendor">BaseCode Health</p>{%- endif -%}
                 <h3 class="product-card__title">Sample Product {{ i }}</h3>
-                <div class="product-card__price">$29.99</div>
-                <button class="btn btn--secondary btn--full btn--sm" disabled>Add to Cart</button>
+                {%- if show_rating -%}
+                  <div class="product-card__rating">★★★★★ <span>(24)</span></div>
+                {%- endif -%}
+                <div class="product-card__price">$34.00</div>
+                <button class="btn btn--secondary btn--full btn--sm" disabled>{{ 'product.add_to_cart' | t }}</button>
               </div>
             </div>
           {%- endfor -%}
         {%- endif -%}
-      </div>
 
-      <button class="carousel__arrow carousel__arrow--prev" aria-label="{{ 'accessibility.previous_slide' | t }}" data-carousel-prev>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
-      </button>
-      <button class="carousel__arrow carousel__arrow--next" aria-label="{{ 'accessibility.next_slide' | t }}" data-carousel-next>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-      </button>
-    </div>
+      </div>{%- comment -%} /.carousel__track {%- endcomment -%}
+
+      {%- if show_arrows -%}
+        <button
+          class="carousel__arrow carousel__arrow--prev"
+          aria-label="{{ 'accessibility.previous_slide' | t }}"
+          data-carousel-prev
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <button
+          class="carousel__arrow carousel__arrow--next"
+          aria-label="{{ 'accessibility.next_slide' | t }}"
+          data-carousel-next
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      {%- endif -%}
+
+    </div>{%- comment -%} /.carousel {%- endcomment -%}
+
+    {%- if section.settings.show_view_all and section.settings.collection != blank and collection != blank -%}
+      <div class="pc-footer{% if animate %} animate-fade{% endif %}">
+        <a
+          href="{{ collection.url }}"
+          class="
+            {%- if btn_style == 'button_primary' -%}btn btn--primary
+            {%- elsif btn_style == 'button_outline' -%}btn btn--outline
+            {%- else -%}btn btn--secondary
+            {%- endif -%}
+          "
+        >{{ 'collections.general.view_all' | t }}</a>
+      </div>
+    {%- endif -%}
+
   </div>
 </section>
 
+{%- comment -%} ── JavaScript ─────────────────────────────────────────────── {%- endcomment -%}
+
+{%- if auto_play -%}
+<script>
+(function () {
+  var section  = document.getElementById('section-{{ section.id }}');
+  if (!section) return;
+  var carousel = section.querySelector('[data-product-carousel][data-auto-play]');
+  if (!carousel) return;
+  var track    = section.querySelector('.carousel__track');
+  var slides   = Array.from(track ? track.children : []);
+  if (slides.length <= 1) return;
+
+  var speed      = parseInt(carousel.dataset.autoPlay, 10) * 1000;
+  var perDesktop = parseInt(carousel.dataset.perDesktop, 10) || 4;
+  var current    = 0;
+  var total      = slides.length;
+
+  function getVisible() {
+    return window.innerWidth <= 767
+      ? {{ per_mobile }}
+      : window.innerWidth <= 1023
+        ? Math.min(perDesktop, 3)
+        : perDesktop;
+  }
+
+  function advance() {
+    var vis = getVisible();
+    if (total <= vis) return;
+    current = (current + 1) % (total - vis + 1);
+    slides.forEach(function (slide, i) {
+      slide.style.display = (i >= current && i < current + vis) ? '' : 'none';
+    });
+  }
+
+  // Init: hide overflow slides
+  (function init() {
+    var vis = getVisible();
+    slides.forEach(function (slide, i) {
+      slide.style.display = i < vis ? '' : 'none';
+    });
+  })();
+
+  var timer = setInterval(advance, speed);
+
+  // Pause on hover
+  carousel.addEventListener('mouseenter', function () { clearInterval(timer); });
+  carousel.addEventListener('mouseleave', function () { timer = setInterval(advance, speed); });
+})();
+</script>
+{%- endif -%}
+
+{%- if animate -%}
+<script>
+(function () {
+  var targets = document.querySelectorAll('#section-{{ section.id }} .animate-fade');
+  if (!targets.length) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  targets.forEach(function (el) { io.observe(el); });
+})();
+</script>
+{%- endif -%}
+
 {% schema %}
 {
-  "name": "Product Carousel",
+  "name": "Products Slider",
   "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "info": "Displays above the heading in accent color"
+    },
     {
       "type": "text",
       "id": "heading",
       "label": "Heading",
       "default": "Built for Your Biology"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "small",  "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large",  "label": "Large" },
+        { "value": "xlarge", "label": "X-Large" }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading level (SEO)",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "header",
+      "content": "Collection"
     },
     {
       "type": "collection",
@@ -64,11 +508,205 @@
       "max": 12,
       "step": 1,
       "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "per_desktop",
+      "label": "Products per slide — desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "per_mobile",
+      "label": "Products per slide — mobile",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left",   "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": false,
+      "info": "Extends section edge-to-edge (uses wide container)"
+    },
+    {
+      "type": "header",
+      "content": "Product Cards"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "options": [
+        { "value": "adapt",   "label": "Adapt to image" },
+        { "value": "portrait","label": "Portrait (3:4)" },
+        { "value": "square",  "label": "Square (1:1)" }
+      ],
+      "default": "adapt"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show vendor",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show product rating",
+      "default": false,
+      "info": "Requires a reviews app that writes to product.metafields.reviews"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "label": "Show secondary image on hover",
+      "default": false,
+      "info": "Swaps to the product's second image on mouse-over (desktop)"
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Show prev/next arrows",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_play",
+      "label": "Auto-play",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "auto_play_speed",
+      "label": "Auto-play speed (seconds)",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "View All Button"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show 'View all' button",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        { "value": "button_primary",   "label": "Primary" },
+        { "value": "button_secondary", "label": "Secondary" },
+        { "value": "button_outline",   "label": "Outline" }
+      ],
+      "default": "button_secondary"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#1C2E23"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable scroll animations",
+      "default": true
     }
   ],
   "presets": [
     {
-      "name": "Product Carousel"
+      "name": "Products Slider",
+      "settings": {
+        "heading": "Built for Your Biology",
+        "heading_size": "medium",
+        "heading_tag": "h2",
+        "text_align": "center",
+        "per_desktop": 4,
+        "per_mobile": 2,
+        "limit": 8,
+        "image_ratio": "adapt",
+        "show_vendor": false,
+        "show_rating": false,
+        "show_secondary_image": false,
+        "show_arrows": true,
+        "auto_play": false,
+        "auto_play_speed": 4,
+        "show_view_all": false,
+        "button_style": "button_secondary",
+        "full_width": false,
+        "bg_color": "#FFFFFF",
+        "text_color": "#1C2E23",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "enable_animation": true
+      }
     }
   ]
 }

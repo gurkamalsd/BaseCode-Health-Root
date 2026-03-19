@@ -1,0 +1,650 @@
+{%- comment -%}BaseCode Root - grid-view — Wonder-level customization{%- endcomment -%}
+
+{%- liquid
+  assign section_id = 'grid-view-' | append: section.id
+  assign pt = section.settings.padding_top | default: 60
+  assign pb = section.settings.padding_bottom | default: 60
+  assign enable_anim = section.settings.enable_animation
+  assign mobile_swipe = section.settings.mobile_swipe
+
+  case section.settings.heading_size
+    when 'h1'
+      assign h_fs = 'var(--text-5xl, 3rem)'
+    when 'h2'
+      assign h_fs = 'var(--text-4xl, 2.25rem)'
+    when 'h3'
+      assign h_fs = 'var(--text-3xl, 1.875rem)'
+    when 'h4'
+      assign h_fs = 'var(--text-2xl, 1.5rem)'
+    when 'h5'
+      assign h_fs = 'var(--text-xl, 1.25rem)'
+    when 'h6'
+      assign h_fs = 'var(--text-lg, 1.125rem)'
+    else
+      assign h_fs = 'var(--text-4xl, 2.25rem)'
+  endcase
+
+  assign heading_tag = section.settings.heading_level | default: 'h2'
+
+  case section.settings.image_ratio
+    when 'portrait'
+      assign img_ratio = '3/4'
+    when 'square'
+      assign img_ratio = '1/1'
+    else
+      assign img_ratio = ''
+  endcase
+-%}
+
+<section
+  id="{{ section_id }}"
+  class="grid-view-section{% if enable_anim %} anim-enabled{% endif %}"
+  style="
+    background-color: {{ section.settings.bg_color | default: '#FFFFFF' }};
+    color: {{ section.settings.text_color | default: '#1C2E23' }};
+    padding-top: {{ pt }}px;
+    padding-bottom: {{ pb }}px;
+  "
+>
+  <div class="{% if section.settings.full_width %}container--wide{% else %}container{% endif %}">
+
+    {%- comment -%}---- Section heading ----{%- endcomment -%}
+    {%- if section.settings.heading != blank -%}
+      <div
+        class="grid-view__header{% if enable_anim %} anim-fade-up{% endif %}"
+        style="
+          margin-bottom: var(--space-10, 2.5rem);
+          max-width: 760px;
+        "
+      >
+        <{{ heading_tag }}
+          class="grid-view__heading"
+          style="
+            font-size: {{ h_fs }};
+            line-height: 1.15;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            margin: 0;
+          "
+        >
+          {{- section.settings.heading -}}
+        </{{ heading_tag }}>
+      </div>
+    {%- endif -%}
+
+    {%- comment -%}---- Grid ----{%- endcomment -%}
+    <div
+      class="grid-view__grid{% if mobile_swipe %} grid-view__grid--swipe{% endif %}"
+    >
+
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign desktop_img = block.settings.desktop_image
+          assign mobile_img = block.settings.mobile_image | default: desktop_img
+          assign col_span = block.settings.column_span | default: 1
+
+          case block.settings.heading_scale
+            when 'small'
+              assign b_h_fs = 'var(--text-base, 1rem)'
+            when 'large'
+              assign b_h_fs = 'var(--text-2xl, 1.5rem)'
+            else
+              assign b_h_fs = 'var(--text-xl, 1.25rem)'
+          endcase
+
+          assign b_text_align = block.settings.text_align | default: 'left'
+          assign b_vert_align = block.settings.vertical_align | default: 'bottom'
+          assign b_text_color = block.settings.text_color | default: '#FFFFFF'
+          assign b_bg_color = block.settings.bg_color | default: '#000000'
+          assign b_bg_opacity = block.settings.bg_opacity | default: 40 | divided_by: 100.0
+        -%}
+
+        <div
+          class="grid-view__item grid-view__item--span-{{ col_span }}{% if enable_anim %} anim-fade-up{% endif %}"
+          {{ block.shopify_attributes }}
+        >
+
+          {%- comment -%}---- Item image ----{%- endcomment -%}
+          <div
+            class="grid-view__img-wrap"
+            style="
+              position: relative;
+              overflow: hidden;
+              width: 100%;
+              {%- if img_ratio != blank -%}
+                aspect-ratio: {{ img_ratio }};
+              {%- else -%}
+                aspect-ratio: 1/1;
+              {%- endif -%}
+            "
+          >
+            {%- if desktop_img != blank -%}
+              {%- comment -%}Mobile image (renders only when distinct mobile image is set){%- endcomment -%}
+              {%- if mobile_img != blank and mobile_img != desktop_img -%}
+                <img
+                  class="grid-view__img grid-view__img--mobile"
+                  src="{{ mobile_img | image_url: width: 800 }}"
+                  srcset="{{ mobile_img | image_url: width: 400 }} 400w, {{ mobile_img | image_url: width: 800 }} 800w"
+                  sizes="100vw"
+                  alt="{{ mobile_img.alt | default: block.settings.heading | escape }}"
+                  loading="lazy"
+                  width="{{ mobile_img.width }}"
+                  height="{{ mobile_img.height }}"
+                  style="width: 100%; height: 100%; object-fit: cover; display: block; position: absolute; inset: 0;"
+                >
+              {%- endif -%}
+
+              {%- comment -%}Desktop image{%- endcomment -%}
+              <img
+                class="grid-view__img grid-view__img--desktop{% if mobile_img != blank and mobile_img != desktop_img %} grid-view__img--hide-mobile{% endif %}"
+                src="{{ desktop_img | image_url: width: 1200 }}"
+                srcset="
+                  {{ desktop_img | image_url: width: 400 }} 400w,
+                  {{ desktop_img | image_url: width: 800 }} 800w,
+                  {{ desktop_img | image_url: width: 1200 }} 1200w
+                "
+                sizes="(max-width: 767px) 100vw, {{ col_span | times: 50 }}vw"
+                alt="{{ desktop_img.alt | default: block.settings.heading | escape }}"
+                loading="lazy"
+                width="{{ desktop_img.width }}"
+                height="{{ desktop_img.height }}"
+                style="width: 100%; height: 100%; object-fit: cover; display: block; position: absolute; inset: 0;"
+              >
+            {%- else -%}
+              <div class="grid-view__img-placeholder">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                  <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                  <polyline points="21 15 16 10 5 21"></polyline>
+                </svg>
+              </div>
+            {%- endif -%}
+
+            {%- comment -%}---- Text overlay ----{%- endcomment -%}
+            {%- if block.settings.heading != blank or block.settings.text != blank or block.settings.button_text != blank -%}
+              {%- liquid
+                assign ov_r = b_bg_color | color_extract: 'red'
+                assign ov_g = b_bg_color | color_extract: 'green'
+                assign ov_b = b_bg_color | color_extract: 'blue'
+              -%}
+              <div
+                class="grid-view__overlay grid-view__overlay--{{ b_vert_align }} grid-view__overlay--{{ b_text_align }}{% if block.settings.hide_text_mobile %} grid-view__overlay--hide-mobile{% endif %}"
+                style="
+                  background: rgba({{ ov_r }}, {{ ov_g }}, {{ ov_b }}, {{ b_bg_opacity }});
+                  color: {{ b_text_color }};
+                  text-align: {{ b_text_align }};
+                  {%- if b_text_align == 'center' -%}align-items: center;{%- else -%}align-items: flex-start;{%- endif -%}
+                "
+              >
+
+                {%- if block.settings.heading != blank -%}
+                  <p
+                    class="grid-view__item-heading"
+                    style="
+                      font-family: var(--font-heading);
+                      font-size: {{ b_h_fs }};
+                      font-weight: 700;
+                      line-height: 1.15;
+                      margin: 0 0 var(--space-2, 0.5rem);
+                    "
+                  >
+                    {{- block.settings.heading -}}
+                  </p>
+                {%- endif -%}
+
+                {%- if block.settings.text != blank -%}
+                  <p
+                    class="grid-view__item-text"
+                    style="
+                      font-size: var(--text-sm, 0.875rem);
+                      line-height: 1.6;
+                      opacity: 0.9;
+                      margin: 0 0 var(--space-3, 0.75rem);
+                    "
+                  >
+                    {{- block.settings.text -}}
+                  </p>
+                {%- endif -%}
+
+                {%- if block.settings.button_text != blank -%}
+                  <a
+                    href="{{ block.settings.button_link | default: '#' }}"
+                    class="btn btn--outline"
+                    style="align-self: {% if b_text_align == 'center' %}center{% else %}flex-start{% endif %};"
+                  >
+                    {{- block.settings.button_text -}}
+                  </a>
+                {%- endif -%}
+
+              </div>
+            {%- endif -%}
+
+          </div>{%- comment -%}/img-wrap{%- endcomment -%}
+
+        </div>{%- comment -%}/item{%- endcomment -%}
+      {%- endfor -%}
+
+    </div>{%- comment -%}/grid{%- endcomment -%}
+
+  </div>
+</section>
+
+<style>
+  /* ── Base grid ─────────────────────────────────────────── */
+  #{{ section_id }} .grid-view__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+    gap: var(--space-4, 1rem);
+    align-items: start;
+  }
+
+  /* ── Column span ───────────────────────────────────────── */
+  #{{ section_id }} .grid-view__item--span-2 {
+    grid-column: span 2;
+  }
+
+  /* ── Image helpers ─────────────────────────────────────── */
+  #{{ section_id }} .grid-view__img--hide-mobile { display: block; }
+  #{{ section_id }} .grid-view__img--mobile       { display: none; }
+
+  #{{ section_id }} .grid-view__img-placeholder {
+    width: 100%;
+    height: 100%;
+    background: var(--color-cream, #F5F2EC);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-light, #999);
+    position: absolute;
+    inset: 0;
+  }
+
+  /* ── Overlay ───────────────────────────────────────────── */
+  #{{ section_id }} .grid-view__overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    padding: var(--space-5, 1.25rem);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2, 0.5rem);
+    pointer-events: none;
+  }
+
+  #{{ section_id }} .grid-view__overlay--top    { top: 0; bottom: auto; }
+  #{{ section_id }} .grid-view__overlay--bottom { bottom: 0; top: auto; }
+  #{{ section_id }} .grid-view__overlay--center {
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+  }
+
+  /* pointer-events on button inside overlay */
+  #{{ section_id }} .grid-view__overlay .btn { pointer-events: auto; }
+
+  /* ── Mobile swipe mode ─────────────────────────────────── */
+  @media (max-width: 767px) {
+    #{{ section_id }} .grid-view__grid--swipe {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: var(--space-3, 0.75rem);
+      padding-bottom: var(--space-2, 0.5rem);
+    }
+    #{{ section_id }} .grid-view__grid--swipe::-webkit-scrollbar {
+      display: none;
+    }
+    #{{ section_id }} .grid-view__grid--swipe .grid-view__item {
+      flex: 0 0 80vw;
+      max-width: 320px;
+      scroll-snap-align: start;
+    }
+    #{{ section_id }} .grid-view__grid--swipe .grid-view__item--span-2 {
+      flex: 0 0 90vw;
+      max-width: 360px;
+    }
+
+    /* ── Stack mode: reset span on mobile ──────────────────── */
+    #{{ section_id }} .grid-view__grid:not(.grid-view__grid--swipe) .grid-view__item--span-2 {
+      grid-column: span 1;
+    }
+    #{{ section_id }} .grid-view__grid:not(.grid-view__grid--swipe) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    /* ── Mobile image visibility ───────────────────────────── */
+    #{{ section_id }} .grid-view__img--hide-mobile { display: none; }
+    #{{ section_id }} .grid-view__img--mobile       { display: block; }
+
+    /* ── Hide overlay text on mobile when toggled ──────────── */
+    #{{ section_id }} .grid-view__overlay--hide-mobile { display: none; }
+  }
+
+  /* ── Animation ─────────────────────────────────────────── */
+  {%- if enable_anim -%}
+  #{{ section_id }}.anim-enabled .anim-fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  #{{ section_id }}.anim-enabled.in-view .anim-fade-up {
+    opacity: 1;
+    transform: none;
+  }
+  {%- for block in section.blocks -%}
+  #{{ section_id }}.anim-enabled.in-view .grid-view__item:nth-child({{ forloop.index }}) {
+    transition-delay: {{ forloop.index0 | times: 0.1 }}s;
+  }
+  {%- endfor -%}
+  {%- endif -%}
+</style>
+
+{%- if enable_anim -%}
+<script>
+(function () {
+  var el = document.getElementById('{{ section_id }}');
+  if (!el) return;
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    obs.observe(el);
+  } else {
+    el.classList.add('in-view');
+  }
+})();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Grid View",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_level",
+      "label": "Heading level (SEO)",
+      "default": "h2",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "default": "h2",
+      "options": [
+        { "value": "h1", "label": "Extra large (H1 size)" },
+        { "value": "h2", "label": "Large (H2 size)" },
+        { "value": "h3", "label": "Medium (H3 size)" },
+        { "value": "h4", "label": "Small (H4 size)" },
+        { "value": "h5", "label": "Extra small (H5 size)" },
+        { "value": "h6", "label": "Tiny (H6 size)" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_swipe",
+      "label": "Mobile swipe (horizontal scroll)",
+      "default": false,
+      "info": "On mobile, items scroll horizontally with scroll-snap. When off, items stack in a 2-column grid."
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "default": "square",
+      "options": [
+        { "value": "adapt", "label": "Adapt to image" },
+        { "value": "portrait", "label": "Portrait (3:4)" },
+        { "value": "square", "label": "Square (1:1)" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#1C2E23"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable scroll animations",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "grid_item",
+      "name": "Grid Item",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Images"
+        },
+        {
+          "type": "image_picker",
+          "id": "desktop_image",
+          "label": "Desktop image"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Mobile image (optional)",
+          "info": "Shown on screens under 768px. Falls back to desktop image if not set."
+        },
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "select",
+          "id": "heading_scale",
+          "label": "Heading size",
+          "default": "medium",
+          "options": [
+            { "value": "small", "label": "Small" },
+            { "value": "medium", "label": "Medium" },
+            { "value": "large", "label": "Large" }
+          ]
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "header",
+          "content": "Overlay style"
+        },
+        {
+          "type": "select",
+          "id": "text_align",
+          "label": "Text alignment",
+          "default": "left",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Center" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "vertical_align",
+          "label": "Vertical position",
+          "default": "bottom",
+          "options": [
+            { "value": "top", "label": "Top" },
+            { "value": "center", "label": "Center" },
+            { "value": "bottom", "label": "Bottom" }
+          ]
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Overlay background color",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "bg_opacity",
+          "label": "Overlay opacity",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "default": 40,
+          "unit": "%"
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "column_span",
+          "label": "Column span (desktop)",
+          "default": "1",
+          "options": [
+            { "value": "1", "label": "1 column" },
+            { "value": "2", "label": "2 columns (wide)" }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "hide_text_mobile",
+          "label": "Hide text overlay on mobile",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Grid View",
+      "settings": {
+        "heading": "Shop the Collection"
+      },
+      "blocks": [
+        {
+          "type": "grid_item",
+          "settings": {
+            "heading": "Origin",
+            "text": "The first ethnobiotic probiotic.",
+            "button_text": "Shop Now",
+            "column_span": "1"
+          }
+        },
+        {
+          "type": "grid_item",
+          "settings": {
+            "heading": "The Science",
+            "text": "Informed by biological diversity research.",
+            "button_text": "Learn More",
+            "column_span": "1"
+          }
+        },
+        {
+          "type": "grid_item",
+          "settings": {
+            "heading": "Take the Quiz",
+            "text": "Discover your Biology Score.",
+            "button_text": "Start Quiz",
+            "column_span": "2"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

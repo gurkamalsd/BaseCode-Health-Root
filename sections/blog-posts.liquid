@@ -1,61 +1,388 @@
-{%- comment -%}BaseCode Root - blog-posts{%- endcomment -%}
-<section class="section bg-white">
+{%- comment -%}BaseCode Root - blog-posts (Wonder-level customization){%- endcomment -%}
+
+{%- liquid
+  assign section_bg    = section.settings.background_color
+  assign section_color = section.settings.text_color
+  assign pt            = section.settings.padding_top
+  assign pb            = section.settings.padding_bottom
+  assign columns       = section.settings.columns | default: 3
+  assign aspect        = section.settings.image_aspect_ratio
+  assign show_date     = section.settings.show_date
+  assign show_author   = section.settings.show_author
+  assign show_excerpt  = section.settings.show_excerpt
+  assign heading_size  = section.settings.heading_size
+  assign heading_tag   = section.settings.heading_tag | default: 'h2'
+  assign card_style    = section.settings.card_style
+  assign swipe_mobile  = section.settings.mobile_swipe
+  assign animate       = section.settings.enable_animation
+  assign btn_style     = section.settings.button_style
+-%}
+
+<style>
+  #section-{{ section.id }} {
+    background-color: {{ section_bg }};
+    color: {{ section_color }};
+    padding-top: {{ pt }}px;
+    padding-bottom: {{ pb }}px;
+  }
+
+  #section-{{ section.id }} .blog-posts__grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat({{ columns }}, 1fr);
+  }
+
+  @media (max-width: 1023px) {
+    #section-{{ section.id }} .blog-posts__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 767px) {
+    {%- if swipe_mobile -%}
+    #section-{{ section.id }} .blog-posts__grid {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 1rem;
+      padding-bottom: 1rem;
+    }
+    #section-{{ section.id }} .blog-posts__grid::-webkit-scrollbar {
+      height: 4px;
+    }
+    #section-{{ section.id }} .blog-posts__grid::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    #section-{{ section.id }} .blog-posts__grid::-webkit-scrollbar-thumb {
+      background: {{ section_color | color_modify: 'alpha', 0.3 }};
+      border-radius: 2px;
+    }
+    #section-{{ section.id }} .blog-card {
+      flex: 0 0 80vw;
+      max-width: 320px;
+      scroll-snap-align: start;
+    }
+    {%- else -%}
+    #section-{{ section.id }} .blog-posts__grid {
+      grid-template-columns: 1fr;
+    }
+    {%- endif -%}
+  }
+
+  /* Image aspect ratios */
+  #section-{{ section.id }} .blog-card__image-wrap {
+    overflow: hidden;
+    border-radius: {% if card_style == 'card' %}0{% else %}4px{% endif %};
+    display: block;
+    margin-bottom: 1.25rem;
+    background: {{ section_bg | color_modify: 'lightness', 90 }};
+  }
+
+  {%- if aspect == 'portrait' -%}
+  #section-{{ section.id }} .blog-card__image-wrap {
+    aspect-ratio: 3 / 4;
+  }
+  {%- elsif aspect == 'square' -%}
+  #section-{{ section.id }} .blog-card__image-wrap {
+    aspect-ratio: 1 / 1;
+  }
+  {%- else -%}
+  /* Adapt: natural image height */
+  {%- endif -%}
+
+  #section-{{ section.id }} .blog-card__image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  #section-{{ section.id }} .blog-card__image-wrap:hover img {
+    transform: scale(1.04);
+  }
+
+  /* Card styles */
+  #section-{{ section.id }} .blog-card {
+    color: {{ section_color }};
+    {% if card_style == 'card' %}
+    background: {{ section_bg | color_modify: 'lightness', 96 }};
+    border: 1px solid {{ section_color | color_modify: 'alpha', 0.1 }};
+    border-radius: 8px;
+    overflow: hidden;
+    {% endif %}
+  }
+
+  #section-{{ section.id }} .blog-card__body {
+    {% if card_style == 'card' %}
+    padding: 1.5rem;
+    {% endif %}
+  }
+
+  #section-{{ section.id }} .blog-card__meta {
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 0.5rem;
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  #section-{{ section.id }} .blog-card__title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.35;
+    margin: 0 0 0.6rem;
+  }
+  #section-{{ section.id }} .blog-card__title a {
+    color: inherit;
+    text-decoration: none;
+  }
+  #section-{{ section.id }} .blog-card__title a:hover {
+    text-decoration: underline;
+  }
+
+  #section-{{ section.id }} .blog-card__excerpt {
+    font-size: 0.92rem;
+    line-height: 1.65;
+    opacity: 0.8;
+    margin-bottom: 1rem;
+  }
+
+  /* Heading sizes */
+  #section-{{ section.id }} .blog-posts__heading {
+    {% if heading_size == 'small' %}
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+    {% elsif heading_size == 'medium' %}
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+    {% elsif heading_size == 'large' %}
+      font-size: clamp(2rem, 4vw, 3rem);
+    {% elsif heading_size == 'xlarge' %}
+      font-size: clamp(2.5rem, 5vw, 4rem);
+    {% else %}
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+    {% endif %}
+    color: {{ section_color }};
+    margin-bottom: {% if section.settings.subheading != blank %}0.5rem{% else %}1rem{% endif %};
+  }
+
+  #section-{{ section.id }} .blog-posts__subheading {
+    font-size: 1rem;
+    opacity: 0.7;
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+  }
+
+  #section-{{ section.id }} .blog-posts__header {
+    text-align: {{ section.settings.heading_alignment }};
+    margin-bottom: 3rem;
+  }
+
+  /* Animation */
+  {% if animate %}
+  #section-{{ section.id }} .animate-fade {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  #section-{{ section.id }} .animate-fade.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  {% endif %}
+
+  /* Button styles */
+  #section-{{ section.id }} .blog-posts__view-all {
+    text-align: center;
+    margin-top: 3rem;
+  }
+</style>
+
+<section id="section-{{ section.id }}" class="blog-posts-section">
   <div class="container">
-    {%- if section.settings.heading != blank -%}
-      <h2 class="text-center mb-10 reveal-hidden">{{ section.settings.heading }}</h2>
+
+    {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
+      <div class="blog-posts__header">
+        {%- if section.settings.heading != blank -%}
+          <{{ heading_tag }} class="blog-posts__heading {% if animate %}animate-fade{% endif %}">
+            {{ section.settings.heading | escape }}
+          </{{ heading_tag }}>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <p class="blog-posts__subheading {% if animate %}animate-fade{% endif %}">{{ section.settings.subheading | escape }}</p>
+        {%- endif -%}
+      </div>
     {%- endif -%}
 
-    <div class="grid grid-cols-1 gap-8" style="grid-template-columns: 1fr;">
+    <div class="blog-posts__grid">
+
       {%- if section.settings.blog != blank -%}
         {%- for article in blogs[section.settings.blog].articles limit: section.settings.limit -%}
-          <article class="blog-card reveal-hidden reveal-delay-{{ forloop.index }}">
+
+          <article class="blog-card {% if animate %}animate-fade{% endif %}" style="{% if animate %}transition-delay: {{ forloop.index0 | times: 80 }}ms{% endif %}">
+
             {%- if article.image -%}
-              <a href="{{ article.url }}" class="blog-card__image">
-                <img
-                  src="{{ article.image | image_url: width: 800 }}"
-                  srcset="{{ article.image | image_url: width: 400 }} 400w, {{ article.image | image_url: width: 800 }} 800w"
-                  sizes="(max-width: 767px) 100vw, 33vw"
-                  alt="{{ article.image.alt | default: article.title }}"
-                  loading="lazy"
-                >
+              <a href="{{ article.url }}" class="blog-card__image-wrap" aria-label="{{ article.title | escape }}">
+                {%- if aspect == 'adapt' or aspect == blank -%}
+                  <img
+                    src="{{ article.image | image_url: width: 800 }}"
+                    srcset="
+                      {{ article.image | image_url: width: 400 }} 400w,
+                      {{ article.image | image_url: width: 800 }} 800w,
+                      {{ article.image | image_url: width: 1200 }} 1200w"
+                    sizes="(max-width: 767px) 90vw, (max-width: 1023px) 50vw, {{ 100 | divided_by: columns }}vw"
+                    alt="{{ article.image.alt | default: article.title | escape }}"
+                    loading="lazy"
+                    width="{{ article.image.width }}"
+                    height="{{ article.image.height }}"
+                  >
+                {%- else -%}
+                  <img
+                    src="{{ article.image | image_url: width: 800 }}"
+                    srcset="
+                      {{ article.image | image_url: width: 400 }} 400w,
+                      {{ article.image | image_url: width: 800 }} 800w,
+                      {{ article.image | image_url: width: 1200 }} 1200w"
+                    sizes="(max-width: 767px) 90vw, (max-width: 1023px) 50vw, {{ 100 | divided_by: columns }}vw"
+                    alt="{{ article.image.alt | default: article.title | escape }}"
+                    loading="lazy"
+                  >
+                {%- endif -%}
               </a>
+            {%- elsif card_style == 'card' -%}
+              <div class="blog-card__image-wrap" style="
+                {% if aspect == 'portrait' %}aspect-ratio: 3/4;{% elsif aspect == 'square' %}aspect-ratio: 1/1;{% else %}aspect-ratio: 16/9;{% endif %}
+                background: {{ section_bg | color_modify: 'lightness', 88 }};
+              "></div>
             {%- endif -%}
-            <p class="blog-card__date">{{ article.published_at | date: '%B %d, %Y' }}</p>
-            <h3 class="blog-card__title"><a href="{{ article.url }}">{{ article.title }}</a></h3>
-            <p class="blog-card__excerpt">{{ article.excerpt_or_content | strip_html | truncate: 160 }}</p>
-            <a href="{{ article.url }}" class="link">{{ 'blog.read_more' | t }}</a>
+
+            <div class="blog-card__body">
+
+              {%- if show_date or show_author -%}
+                <p class="blog-card__meta">
+                  {%- if show_date -%}
+                    <span class="blog-card__date">{{ article.published_at | date: '%B %d, %Y' }}</span>
+                  {%- endif -%}
+                  {%- if show_author -%}
+                    <span class="blog-card__author">{{ article.author }}</span>
+                  {%- endif -%}
+                </p>
+              {%- endif -%}
+
+              <h3 class="blog-card__title">
+                <a href="{{ article.url }}">{{ article.title }}</a>
+              </h3>
+
+              {%- if show_excerpt and article.excerpt_or_content != blank -%}
+                <p class="blog-card__excerpt">{{ article.excerpt_or_content | strip_html | truncate: 160 }}</p>
+              {%- endif -%}
+
+              <a href="{{ article.url }}" class="
+                {%- if btn_style == 'button_primary' -%}btn btn--primary
+                {%- elsif btn_style == 'button_secondary' -%}btn btn--secondary
+                {%- elsif btn_style == 'button_outline' -%}btn btn--outline
+                {%- else -%}link
+                {%- endif -%}
+              ">{{ 'blog.read_more' | t }}</a>
+
+            </div>
+          </article>
+
+        {%- else -%}
+          <p style="opacity: 0.6;">No posts found in the selected blog.</p>
+        {%- endfor -%}
+
+      {%- else -%}
+        {%- comment -%} Placeholder cards for editor preview {%- endcomment -%}
+        {%- for i in (1..section.settings.limit) -%}
+          <article class="blog-card">
+            <div class="blog-card__image-wrap" style="
+              {% if aspect == 'portrait' %}aspect-ratio: 3/4;{% elsif aspect == 'square' %}aspect-ratio: 1/1;{% else %}aspect-ratio: 16/9;{% endif %}
+              background: {{ section_bg | color_modify: 'lightness', 88 }};
+              display: flex; align-items: center; justify-content: center;
+            ">
+              <span style="opacity: 0.3; font-size: 0.8rem;">Blog Image</span>
+            </div>
+            <div class="blog-card__body">
+              {%- if show_date or show_author -%}
+                <p class="blog-card__meta">
+                  {%- if show_date -%}<span>March 19, 2026</span>{%- endif -%}
+                  {%- if show_author -%}<span>Gurkamal</span>{%- endif -%}
+                </p>
+              {%- endif -%}
+              <h3 class="blog-card__title"><a href="#">The Biology Gap: Why Generic Supplements Fail</a></h3>
+              {%- if show_excerpt -%}
+                <p class="blog-card__excerpt">Your biology is unique. Here's why that matters for your supplement choices — and what the HELIUS study revealed.</p>
+              {%- endif -%}
+              <a href="#" class="
+                {%- if btn_style == 'button_primary' -%}btn btn--primary
+                {%- elsif btn_style == 'button_secondary' -%}btn btn--secondary
+                {%- elsif btn_style == 'button_outline' -%}btn btn--outline
+                {%- else -%}link
+                {%- endif -%}
+              ">{{ 'blog.read_more' | t }}</a>
+            </div>
           </article>
         {%- endfor -%}
-      {%- else -%}
-        <article class="blog-card">
-          <div class="blog-card__image" style="background: var(--color-cream); display: flex; align-items: center; justify-content: center;">
-            <span style="color: var(--color-text-light);">Blog Image</span>
-          </div>
-          <p class="blog-card__date">March 18, 2026</p>
-          <h3 class="blog-card__title">The Biology Gap: Why Generic Supplements Fail</h3>
-          <p class="blog-card__excerpt">Your biology is unique. Here's why that matters for your supplement choices.</p>
-          <span class="link">Read More</span>
-        </article>
       {%- endif -%}
+
     </div>
 
     {%- if section.settings.show_view_all and section.settings.blog != blank -%}
-      <div class="text-center mt-10">
-        <a href="{{ blogs[section.settings.blog].url }}" class="btn btn--secondary">{{ 'blog.all_posts' | t }}</a>
+      <div class="blog-posts__view-all {% if animate %}animate-fade{% endif %}">
+        <a href="{{ blogs[section.settings.blog].url }}" class="
+          {%- if btn_style == 'button_primary' -%}btn btn--primary
+          {%- elsif btn_style == 'button_secondary' -%}btn btn--secondary
+          {%- elsif btn_style == 'button_outline' -%}btn btn--outline
+          {%- else -%}btn btn--secondary
+          {%- endif -%}
+        ">{{ 'blog.all_posts' | t }}</a>
       </div>
     {%- endif -%}
+
   </div>
 </section>
+
+{% if section.settings.enable_animation %}
+<script>
+  (function () {
+    var targets = document.querySelectorAll('#section-{{ section.id }} .animate-fade');
+    if (!targets.length) return;
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    targets.forEach(function (el) { observer.observe(el); });
+  })();
+</script>
+{% endif %}
 
 {% schema %}
 {
   "name": "Blog Posts",
   "settings": [
     {
+      "type": "header",
+      "content": "Content"
+    },
+    {
       "type": "text",
       "id": "heading",
       "label": "Heading",
       "default": "From the Lab"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "info": "Optional line below the heading"
     },
     {
       "type": "blog",
@@ -67,17 +394,212 @@
       "id": "limit",
       "label": "Posts to show",
       "min": 1,
-      "max": 6,
+      "max": 9,
       "step": 1,
       "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Heading Style"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading level (SEO)",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "small",  "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large",  "label": "Large" },
+        { "value": "xlarge", "label": "X-Large" }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading alignment",
+      "options": [
+        { "value": "left",   "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right",  "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Desktop columns",
+      "options": [
+        { "value": "1", "label": "1 column" },
+        { "value": "2", "label": "2 columns" },
+        { "value": "3", "label": "3 columns" }
+      ],
+      "default": "3"
+    },
+    {
+      "type": "select",
+      "id": "image_aspect_ratio",
+      "label": "Image aspect ratio",
+      "options": [
+        { "value": "adapt",   "label": "Adapt to image" },
+        { "value": "portrait","label": "Portrait (3:4)" },
+        { "value": "square",  "label": "Square (1:1)" }
+      ],
+      "default": "adapt"
+    },
+    {
+      "type": "select",
+      "id": "card_style",
+      "label": "Card style",
+      "options": [
+        { "value": "minimal", "label": "Minimal (no background)" },
+        { "value": "card",    "label": "Card (with background + border)" }
+      ],
+      "default": "minimal"
+    },
+    {
+      "type": "header",
+      "content": "Card Content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "Show publish date",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "label": "Show author",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_excerpt",
+      "label": "Show excerpt",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "View All Button"
     },
     {
       "type": "checkbox",
       "id": "show_view_all",
       "label": "Show 'View all' button",
       "default": true
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        { "value": "link",            "label": "Text link" },
+        { "value": "button_primary",  "label": "Primary button" },
+        { "value": "button_secondary","label": "Secondary button" },
+        { "value": "button_outline",  "label": "Outline button" }
+      ],
+      "default": "link"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#F5F2EC"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#1C2E23"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Behavior"
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_swipe",
+      "label": "Mobile swipe (horizontal scroll on mobile)",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable scroll animations",
+      "default": true
     }
   ],
-  "presets": [{ "name": "Blog Posts" }]
+  "presets": [
+    {
+      "name": "Blog Posts",
+      "settings": {
+        "heading": "From the Lab",
+        "columns": "3",
+        "heading_tag": "h2",
+        "heading_size": "medium",
+        "heading_alignment": "center",
+        "image_aspect_ratio": "adapt",
+        "card_style": "minimal",
+        "show_date": true,
+        "show_author": false,
+        "show_excerpt": true,
+        "show_view_all": true,
+        "button_style": "link",
+        "background_color": "#F5F2EC",
+        "text_color": "#1C2E23",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "mobile_swipe": false,
+        "enable_animation": true
+      }
+    }
+  ]
 }
 {% endschema %}

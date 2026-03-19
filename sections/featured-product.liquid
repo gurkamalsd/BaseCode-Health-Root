@@ -1,118 +1,162 @@
-{%- comment -%}BaseCode Root - featured-product{%- endcomment -%}
-<section class="section" style="background-color: {{ section.settings.bg_color | default: '#C4783A' }}; color: {{ section.settings.text_color | default: '#FFFFFF' }};">
-  <div class="container">
-    <div class="grid gap-10 items-center" style="grid-template-columns: 1fr;">
-      {%- assign featured = all_products[section.settings.product] -%}
+{%- comment -%}BaseCode Root - featured-product (Wonder-level customization){%- endcomment -%}
+{%- liquid
+  assign bg = section.settings.bg_color | default: '#C4783A'
+  assign bg_opacity = section.settings.bg_opacity | default: 100
+  assign text_col = section.settings.text_color | default: '#FFFFFF'
+  assign pt = section.settings.padding_top | default: 60
+  assign pb = section.settings.padding_bottom | default: 60
+  assign layout = section.settings.layout | default: 'stacked'
+  assign image_size = section.settings.image_size | default: 'medium'
+  assign text_align = section.settings.text_align | default: 'center'
+  assign heading_size = section.settings.heading_size | default: 'text-4xl'
+  assign heading_level = section.settings.heading_level | default: 'h2'
+  assign button_style = section.settings.button_style | default: 'white'
+  assign show_price = section.settings.show_price
+  assign show_subtitle = section.settings.show_subtitle
+  assign full_width = section.settings.full_width
+  assign enable_animation = section.settings.enable_animation
+  assign featured = all_products[section.settings.product]
+  assign image_max = '400px'
+  if image_size == 'small'
+    assign image_max = '280px'
+  elsif image_size == 'large'
+    assign image_max = '520px'
+  endif
+-%}
 
-      <div style="display: grid; grid-template-columns: 1fr; gap: var(--space-8); align-items: center;">
-        <!-- Product Image -->
-        <div style="text-align: center;" class="reveal-left">
-          {%- if featured.featured_image -%}
-            <img
-              src="{{ featured.featured_image | image_url: width: 600 }}"
-              alt="{{ featured.title }}"
-              width="400"
-              height="400"
-              loading="lazy"
-              style="max-width: 400px; margin: 0 auto;"
-            >
-          {%- else -%}
-            <div style="width: 300px; height: 400px; background: rgba(255,255,255,0.1); border-radius: var(--radius-lg); margin: 0 auto; display: flex; align-items: center; justify-content: center;">
-              <span style="opacity: 0.5;">Product Image</span>
-            </div>
-          {%- endif -%}
+<section
+  class="section"
+  style="background:{{ bg }};{% if bg_opacity < 100 %}opacity:{{ bg_opacity | divided_by: 100.0 }};{% endif %}color:{{ text_col }};padding-top:{{ pt }}px;padding-bottom:{{ pb }}px;"
+>
+  <div class="{% if full_width %}container--wide{% else %}container{% endif %}">
+    <div style="display:grid;{% if layout == 'side_by_side' %}grid-template-columns:1fr 1fr;gap:var(--space-12);align-items:center;{% elsif layout == 'side_by_side_reverse' %}grid-template-columns:1fr 1fr;gap:var(--space-12);align-items:center;{% else %}grid-template-columns:1fr;gap:var(--space-8);{% endif %}">
+
+      {%- if layout == 'side_by_side_reverse' -%}
+        <!-- Text First -->
+        <div class="{% if enable_animation %}reveal-left{% endif %}" style="text-align:{{ text_align }};">
+          {%- render 'featured-product-text', section: section, featured: featured, text_col: text_col, heading_size: heading_size, heading_level: heading_level, button_style: button_style, show_price: show_price, show_subtitle: show_subtitle -%}
         </div>
-
-        <!-- Product Info -->
-        <div class="reveal-right" style="text-align: center;">
-          {%- if section.settings.subtitle != blank -%}
-            <p style="font-size: var(--text-sm); text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8; margin-bottom: var(--space-2);">
-              {{ section.settings.subtitle }}
-            </p>
-          {%- endif -%}
-
-          <h2 style="font-size: var(--text-4xl); margin-bottom: var(--space-4);">
-            {{ section.settings.heading | default: featured.title | default: 'Origin — The First Ethnobiotic' }}
-          </h2>
-
-          {%- if section.settings.text != blank -%}
-            <p style="font-size: var(--text-lg); opacity: 0.9; margin-bottom: var(--space-6); max-width: 500px; margin-left: auto; margin-right: auto;">
-              {{ section.settings.text }}
-            </p>
-          {%- endif -%}
-
-          {%- if featured -%}
-            <p style="font-family: var(--font-mono); font-size: var(--text-2xl); margin-bottom: var(--space-6);">
-              {{ featured.price | money }}
-              {%- if featured.selling_plan_groups.size > 0 -%}
-                <span style="font-size: var(--text-sm);">{{ 'product.per_month' | t }}</span>
-              {%- endif -%}
-            </p>
-          {%- endif -%}
-
-          <a href="{{ featured.url | default: section.settings.button_link | default: '/products/origin' }}" class="btn btn--white btn--lg">
-            {{ section.settings.button_text | default: 'Shop Now' }}
-          </a>
+        <!-- Image -->
+        <div style="text-align:center;" class="{% if enable_animation %}reveal-right{% endif %}">
+          {%- render 'featured-product-image', section: section, featured: featured, image_max: image_max -%}
         </div>
-      </div>
+      {%- elsif layout == 'side_by_side' -%}
+        <!-- Image First -->
+        <div style="text-align:center;" class="{% if enable_animation %}reveal-left{% endif %}">
+          {%- render 'featured-product-image', section: section, featured: featured, image_max: image_max -%}
+        </div>
+        <!-- Text -->
+        <div class="{% if enable_animation %}reveal-right{% endif %}" style="text-align:{{ text_align }};">
+          {%- render 'featured-product-text', section: section, featured: featured, text_col: text_col, heading_size: heading_size, heading_level: heading_level, button_style: button_style, show_price: show_price, show_subtitle: show_subtitle -%}
+        </div>
+      {%- else -%}
+        <!-- Stacked: Image then Text -->
+        <div style="text-align:center;" class="{% if enable_animation %}reveal-left{% endif %}">
+          {%- render 'featured-product-image', section: section, featured: featured, image_max: image_max -%}
+        </div>
+        <div class="{% if enable_animation %}reveal-right{% endif %}" style="text-align:{{ text_align }};">
+          {%- render 'featured-product-text', section: section, featured: featured, text_col: text_col, heading_size: heading_size, heading_level: heading_level, button_style: button_style, show_price: show_price, show_subtitle: show_subtitle -%}
+        </div>
+      {%- endif -%}
+
     </div>
   </div>
 </section>
+
+<style>
+  @media (max-width: 767px) {
+    #shopify-section-{{ section.id }} [style*="grid-template-columns:1fr 1fr"] {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>
 
 {% schema %}
 {
   "name": "Featured Product",
   "settings": [
+    { "type": "header", "content": "Product" },
+    { "type": "product", "id": "product", "label": "Product" },
+    { "type": "checkbox", "id": "show_price", "label": "Show price", "default": true },
+    { "type": "header", "content": "Content" },
+    { "type": "checkbox", "id": "show_subtitle", "label": "Show subtitle", "default": true },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Biology-First Formula" },
+    { "type": "text", "id": "heading", "label": "Heading override" },
     {
-      "type": "product",
-      "id": "product",
-      "label": "Product"
+      "type": "select", "id": "heading_size", "label": "Heading size", "default": "text-4xl",
+      "options": [
+        { "value": "text-2xl", "label": "Small" },
+        { "value": "text-3xl", "label": "Medium" },
+        { "value": "text-4xl", "label": "Large" },
+        { "value": "text-5xl", "label": "Extra large" }
+      ]
     },
     {
-      "type": "text",
-      "id": "subtitle",
-      "label": "Subtitle",
-      "default": "Biology-First Formula"
+      "type": "select", "id": "heading_level", "label": "Heading tag (SEO)", "default": "h2",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" }
+      ]
+    },
+    { "type": "textarea", "id": "text", "label": "Description", "default": "40 billion CFU. 4 targeted strains. MAKTREK Bi-Pass delivery. FOS prebiotic. From $34/mo." },
+    { "type": "text", "id": "button_text", "label": "Button text", "default": "Shop Now" },
+    { "type": "url", "id": "button_link", "label": "Button link (fallback)" },
+    {
+      "type": "select", "id": "button_style", "label": "Button style", "default": "white",
+      "options": [
+        { "value": "white", "label": "White" },
+        { "value": "primary", "label": "Primary" },
+        { "value": "secondary", "label": "Secondary" }
+      ]
+    },
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "select", "id": "layout", "label": "Layout", "default": "stacked",
+      "options": [
+        { "value": "stacked", "label": "Stacked (centered)" },
+        { "value": "side_by_side", "label": "Image left, text right" },
+        { "value": "side_by_side_reverse", "label": "Text left, image right" }
+      ]
     },
     {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading override"
+      "type": "select", "id": "text_align", "label": "Text alignment", "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
     },
     {
-      "type": "textarea",
-      "id": "text",
-      "label": "Description",
-      "default": "40 billion CFU. 4 targeted strains. MAKTREK Bi-Pass delivery. FOS prebiotic. From $34/mo."
+      "type": "select", "id": "image_size", "label": "Image size", "default": "medium",
+      "options": [
+        { "value": "small", "label": "Small (280px)" },
+        { "value": "medium", "label": "Medium (400px)" },
+        { "value": "large", "label": "Large (520px)" }
+      ]
+    },
+    { "type": "image_picker", "id": "desktop_image", "label": "Desktop image override" },
+    { "type": "image_picker", "id": "mobile_image", "label": "Mobile image override" },
+    { "type": "checkbox", "id": "full_width", "label": "Full width", "default": false },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#C4783A" },
+    {
+      "type": "range", "id": "bg_opacity", "label": "Background opacity", "min": 0, "max": 100, "step": 5, "default": 100, "unit": "%"
+    },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#FFFFFF" },
+    { "type": "header", "content": "Spacing" },
+    {
+      "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "default": 60, "unit": "px"
     },
     {
-      "type": "text",
-      "id": "button_text",
-      "label": "Button text",
-      "default": "Shop Now"
+      "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "default": 60, "unit": "px"
     },
-    {
-      "type": "url",
-      "id": "button_link",
-      "label": "Button link (fallback)"
-    },
-    {
-      "type": "color",
-      "id": "bg_color",
-      "label": "Background color",
-      "default": "#C4783A"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text color",
-      "default": "#FFFFFF"
-    }
+    { "type": "header", "content": "Animation" },
+    { "type": "checkbox", "id": "enable_animation", "label": "Enable scroll animation", "default": true }
   ],
-  "presets": [
-    {
-      "name": "Featured Product"
-    }
-  ]
+  "presets": [{
+    "name": "Featured Product"
+  }]
 }
 {% endschema %}

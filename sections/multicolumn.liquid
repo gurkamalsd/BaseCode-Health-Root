@@ -1,0 +1,574 @@
+{%- comment -%}BaseCode Root - multicolumn — Wonder-level customization{%- endcomment -%}
+
+{%- liquid
+  assign section_id = 'multicolumn-' | append: section.id
+  assign pt = section.settings.padding_top | default: 60
+  assign pb = section.settings.padding_bottom | default: 60
+  assign col_count = section.blocks.size | at_least: 1
+  assign enable_anim = section.settings.enable_animation
+  assign mobile_swipe = section.settings.mobile_swipe
+  assign text_align = section.settings.columns_alignment | default: 'left'
+
+  case section.settings.heading_size
+    when 'h1'
+      assign h_fs = 'var(--text-5xl, 3rem)'
+    when 'h2'
+      assign h_fs = 'var(--text-4xl, 2.25rem)'
+    when 'h3'
+      assign h_fs = 'var(--text-3xl, 1.875rem)'
+    when 'h4'
+      assign h_fs = 'var(--text-2xl, 1.5rem)'
+    when 'h5'
+      assign h_fs = 'var(--text-xl, 1.25rem)'
+    when 'h6'
+      assign h_fs = 'var(--text-lg, 1.125rem)'
+    else
+      assign h_fs = 'var(--text-4xl, 2.25rem)'
+  endcase
+
+  assign heading_tag = section.settings.heading_level | default: 'h2'
+-%}
+
+<section
+  id="{{ section_id }}"
+  class="multicolumn-section{% if enable_anim %} anim-enabled{% endif %}"
+  style="
+    background-color: {{ section.settings.bg_color | default: '#FFFFFF' }};
+    color: {{ section.settings.text_color | default: '#1C2E23' }};
+    padding-top: {{ pt }}px;
+    padding-bottom: {{ pb }}px;
+  "
+>
+  <div class="{% if section.settings.full_width %}container--wide{% else %}container{% endif %}">
+
+    {%- comment -%}---- Section heading ----{%- endcomment -%}
+    {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
+      <div
+        class="multicolumn__header{% if enable_anim %} anim-fade-up{% endif %}"
+        style="
+          text-align: {{ text_align }};
+          margin-bottom: var(--space-10, 2.5rem);
+          max-width: 760px;
+          {%- if text_align == 'center' -%}margin-left: auto; margin-right: auto;{%- endif -%}
+        "
+      >
+        {%- if section.settings.subheading != blank -%}
+          <p
+            class="multicolumn__subheading"
+            style="
+              font-family: var(--font-heading);
+              font-size: var(--text-sm, 0.875rem);
+              font-weight: 600;
+              text-transform: uppercase;
+              letter-spacing: 0.1em;
+              color: var(--color-accent, #C4783A);
+              margin-bottom: var(--space-3, 0.75rem);
+            "
+          >
+            {{- section.settings.subheading -}}
+          </p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <{{ heading_tag }}
+            class="multicolumn__heading"
+            style="
+              font-size: {{ h_fs }};
+              line-height: 1.15;
+              font-family: var(--font-heading);
+              font-weight: 700;
+              margin: 0;
+            "
+          >
+            {{- section.settings.heading -}}
+          </{{ heading_tag }}>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%}---- Columns ----{%- endcomment -%}
+    <div
+      class="multicolumn__grid{% if mobile_swipe %} multicolumn__grid--swipe{% endif %}"
+      style="--mc-col-count: {{ col_count }};"
+    >
+      {%- for block in section.blocks -%}
+        {%- assign desktop_img = block.settings.desktop_image -%}
+        {%- assign mobile_img = block.settings.mobile_image | default: desktop_img -%}
+
+        {%- comment -%} Heading scale for columns -%}
+        {%- case block.settings.heading_scale -%}
+          {%- when 'small' -%}{%- assign col_h_fs = 'var(--text-base, 1rem)' -%}
+          {%- when 'large' -%}{%- assign col_h_fs = 'var(--text-2xl, 1.5rem)' -%}
+          {%- else -%}{%- assign col_h_fs = 'var(--text-xl, 1.25rem)' -%}
+        {%- endcase -%}
+        {%- comment -%} Image ratio CSS -%}
+        {%- case section.settings.image_ratio -%}
+          {%- when 'portrait' -%}{%- assign img_ratio = '3/4' -%}
+          {%- when 'square' -%}{%- assign img_ratio = '1/1' -%}
+          {%- else -%}{%- assign img_ratio = '' -%}
+        {%- endcase -%}
+
+        <div
+          class="multicolumn__col{% if enable_anim %} anim-fade-up{% endif %}"
+          style="text-align: {{ text_align }};"
+          {{ block.shopify_attributes }}
+        >
+
+          {%- comment -%}---- Column image ----{%- endcomment -%}
+          {%- if desktop_img != blank -%}
+            <div
+              class="multicolumn__img-wrap"
+              style="
+                overflow: hidden;
+                margin-bottom: var(--space-5, 1.25rem);
+                {%- if img_ratio != blank -%}
+                  aspect-ratio: {{ img_ratio }};
+                {%- endif -%}
+              "
+            >
+              {%- comment -%} Mobile image {%- endcomment -%}
+              {%- if mobile_img != blank and mobile_img != desktop_img -%}
+                <img
+                  class="multicolumn__img multicolumn__img--mobile"
+                  src="{{ mobile_img | image_url: width: 800 }}"
+                  srcset="{{ mobile_img | image_url: width: 400 }} 400w, {{ mobile_img | image_url: width: 800 }} 800w"
+                  sizes="100vw"
+                  alt="{{ mobile_img.alt | default: block.settings.heading | escape }}"
+                  loading="lazy"
+                  width="{{ mobile_img.width }}"
+                  height="{{ mobile_img.height }}"
+                  style="width: 100%; display: block; {%- if img_ratio != blank -%}height: 100%; object-fit: cover;{%- endif -%}"
+                >
+              {%- endif -%}
+              {%- comment -%} Desktop image {%- endcomment -%}
+              <img
+                class="multicolumn__img multicolumn__img--desktop{% if mobile_img != blank and mobile_img != desktop_img %} multicolumn__img--hide-mobile{% endif %}"
+                src="{{ desktop_img | image_url: width: 1000 }}"
+                srcset="
+                  {{ desktop_img | image_url: width: 400 }} 400w,
+                  {{ desktop_img | image_url: width: 700 }} 700w,
+                  {{ desktop_img | image_url: width: 1000 }} 1000w
+                "
+                sizes="(max-width: 767px) 100vw, {{ 100 | divided_by: col_count }}vw"
+                alt="{{ desktop_img.alt | default: block.settings.heading | escape }}"
+                loading="lazy"
+                width="{{ desktop_img.width }}"
+                height="{{ desktop_img.height }}"
+                style="width: 100%; display: block; {%- if img_ratio != blank -%}height: 100%; object-fit: cover;{%- endif -%}"
+              >
+            </div>
+          {%- endif -%}
+
+          {%- comment -%}---- Column text content ----{%- endcomment -%}
+          <div
+            class="multicolumn__col-text"
+            style="{%- if block.settings.hide_text_mobile -%}--mc-text-mobile-display: none;{%- else -%}--mc-text-mobile-display: block;{%- endif -%}"
+          >
+
+            {%- if block.settings.heading != blank -%}
+              <h3
+                class="multicolumn__col-heading"
+                style="
+                  font-family: var(--font-heading);
+                  font-size: {{ col_h_fs }};
+                  font-weight: 700;
+                  line-height: 1.2;
+                  margin-bottom: var(--space-3, 0.75rem);
+                "
+              >
+                {{- block.settings.heading -}}
+              </h3>
+            {%- endif -%}
+
+            {%- if block.settings.text != blank -%}
+              <div
+                class="multicolumn__col-body rte"
+                style="
+                  font-size: var(--text-base, 1rem);
+                  line-height: 1.7;
+                  color: inherit;
+                  opacity: 0.85;
+                  margin-bottom: var(--space-4, 1rem);
+                "
+              >
+                {{- block.settings.text -}}
+              </div>
+            {%- endif -%}
+
+            {%- if block.settings.button_text != blank -%}
+              <div
+                class="multicolumn__col-btn-wrap"
+                style="{%- if block.settings.hide_button_mobile -%}--mc-btn-mobile-display: none;{%- else -%}--mc-btn-mobile-display: inline-flex;{%- endif -%}"
+              >
+                <a
+                  href="{{ block.settings.button_link | default: '#' }}"
+                  class="btn btn--{{ block.settings.button_style | default: 'primary' }}"
+                  {% if block.settings.button_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+                >
+                  {{- block.settings.button_text -}}
+                </a>
+              </div>
+            {%- endif -%}
+
+          </div>{%- comment -%}/col-text{%- endcomment -%}
+
+        </div>{%- comment -%}/col{%- endcomment -%}
+      {%- endfor -%}
+    </div>{%- comment -%}/grid{%- endcomment -%}
+
+  </div>
+</section>
+
+<style>
+  /* ── Base grid ───────────────────────────────────── */
+  #{{ section_id }} .multicolumn__grid {
+    display: grid;
+    grid-template-columns: repeat(var(--mc-col-count, 3), 1fr);
+    gap: var(--space-8, 2rem) var(--space-6, 1.5rem);
+    align-items: start;
+  }
+
+  /* ── Mobile ──────────────────────────────────────── */
+  @media (max-width: 767px) {
+    #{{ section_id }} .multicolumn__grid:not(.multicolumn__grid--swipe) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-6, 1.5rem) var(--space-4, 1rem);
+    }
+    #{{ section_id }} .multicolumn__grid--swipe {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: var(--space-4, 1rem);
+      padding-bottom: var(--space-3, 0.75rem);
+    }
+    #{{ section_id }} .multicolumn__grid--swipe::-webkit-scrollbar {
+      display: none;
+    }
+    #{{ section_id }} .multicolumn__grid--swipe .multicolumn__col {
+      flex: 0 0 80vw;
+      max-width: 320px;
+      scroll-snap-align: start;
+    }
+    #{{ section_id }} .multicolumn__col-text {
+      display: var(--mc-text-mobile-display, block);
+    }
+    #{{ section_id }} .multicolumn__col-btn-wrap {
+      display: var(--mc-btn-mobile-display, inline-flex);
+    }
+    #{{ section_id }} .multicolumn__img--hide-mobile {
+      display: none;
+    }
+    #{{ section_id }} .multicolumn__img--mobile {
+      display: block;
+    }
+  }
+
+  /* ── Mobile-only image visibility defaults ───────── */
+  #{{ section_id }} .multicolumn__img--hide-mobile { display: block; }
+  #{{ section_id }} .multicolumn__img--mobile       { display: none; }
+
+  /* ── Animation ───────────────────────────────────── */
+  {%- if enable_anim -%}
+  #{{ section_id }}.anim-enabled .anim-fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  #{{ section_id }}.anim-enabled.in-view .anim-fade-up {
+    opacity: 1;
+    transform: none;
+  }
+  {%- for block in section.blocks -%}
+  #{{ section_id }}.anim-enabled.in-view .multicolumn__col:nth-child({{ forloop.index }}) {
+    transition-delay: {{ forloop.index0 | times: 0.1 }}s;
+  }
+  {%- endfor -%}
+  {%- endif -%}
+</style>
+
+{%- if enable_anim -%}
+<script>
+(function () {
+  var el = document.getElementById('{{ section_id }}');
+  if (!el) return;
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    obs.observe(el);
+  } else {
+    el.classList.add('in-view');
+  }
+})();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Multicolumn",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading / eyebrow"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "default": "h2",
+      "options": [
+        { "value": "h1", "label": "Extra large (H1 size)" },
+        { "value": "h2", "label": "Large (H2 size)" },
+        { "value": "h3", "label": "Medium (H3 size)" },
+        { "value": "h4", "label": "Small (H4 size)" },
+        { "value": "h5", "label": "Extra small (H5 size)" },
+        { "value": "h6", "label": "Tiny (H6 size)" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_level",
+      "label": "Heading level (SEO)",
+      "default": "h2",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "columns_alignment",
+      "label": "Columns alignment",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_swipe",
+      "label": "Mobile swipe (horizontal scroll)",
+      "default": false,
+      "info": "On mobile, columns scroll horizontally with scroll-snap. When off, columns wrap to a 2-column grid."
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "default": "adapt",
+      "options": [
+        { "value": "adapt", "label": "Adapt to image" },
+        { "value": "portrait", "label": "Portrait (3:4)" },
+        { "value": "square", "label": "Square (1:1)" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#1C2E23"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable scroll animations",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Column",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Images"
+        },
+        {
+          "type": "image_picker",
+          "id": "desktop_image",
+          "label": "Desktop image"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Mobile image (optional)"
+        },
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Column Heading"
+        },
+        {
+          "type": "select",
+          "id": "heading_scale",
+          "label": "Heading size",
+          "default": "medium",
+          "options": [
+            { "value": "small", "label": "Small" },
+            { "value": "medium", "label": "Medium" },
+            { "value": "large", "label": "Large" }
+          ]
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Describe this column with supporting detail. Keep it brief and benefit-focused.</p>"
+        },
+        {
+          "type": "header",
+          "content": "Button"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "default": "primary",
+          "options": [
+            { "value": "primary", "label": "Primary" },
+            { "value": "secondary", "label": "Secondary" },
+            { "value": "outline", "label": "Outline" },
+            { "value": "ghost", "label": "Ghost / text" }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "button_new_tab",
+          "label": "Open in new tab",
+          "default": false
+        },
+        {
+          "type": "header",
+          "content": "Mobile visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "hide_text_mobile",
+          "label": "Hide text on mobile",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "hide_button_mobile",
+          "label": "Hide button on mobile",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Multicolumn",
+      "blocks": [
+        {
+          "type": "column",
+          "settings": {
+            "heading": "Research-Backed Formula",
+            "text": "<p>Every strain in Origin is selected based on biological diversity data — not marketing trends.</p>"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "heading": "MAKTREK Delivery",
+            "text": "<p>Marine polysaccharide technology protects strains through stomach acid so they arrive alive in your gut.</p>"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "heading": "40 Billion CFU",
+            "text": "<p>A clinically relevant dose delivered intact — not listed on paper and destroyed before it gets there.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,581 @@
+{%- comment -%}BaseCode Root - map — Wonder-level customization{%- endcomment -%}
+
+{%- liquid
+  assign section_id = 'map-' | append: section.id
+  assign pt = section.settings.padding_top | default: 60
+  assign pb = section.settings.padding_bottom | default: 60
+  assign api_key = section.settings.api_key
+  assign has_api_key = false
+  if api_key != blank
+    assign has_api_key = true
+  endif
+  assign heading_tag = section.settings.heading_level | default: 'h2'
+  assign desktop_img = section.settings.desktop_image
+  assign mobile_img = section.settings.mobile_image | default: desktop_img
+  assign height_mode = section.settings.height_mode | default: 'adapt'
+  assign text_align_desktop = section.settings.text_align_desktop | default: 'left'
+  assign text_align_mobile = section.settings.text_align_mobile | default: 'center'
+  assign blur_bg = section.settings.text_bg_blur
+  assign text_bg_color = section.settings.text_bg_color | default: '#FFFFFF'
+  assign text_bg_opacity = section.settings.text_bg_opacity | default: 85 | divided_by: 100.0
+-%}
+
+<section
+  id="{{ section_id }}"
+  class="map-section"
+  style="
+    background-color: {{ section.settings.bg_color | default: '#F5F2EC' }};
+    color: {{ section.settings.text_color | default: '#1C2E23' }};
+    padding-top: {{ pt }}px;
+    padding-bottom: {{ pb }}px;
+  "
+>
+  <div class="{% if section.settings.full_width %}container--full{% else %}container{% endif %}">
+
+    {%- comment -%}---- Map / image wrapper ----{%- endcomment -%}
+    <div class="map-section__media-wrap map-section__media-wrap--{{ height_mode }}">
+
+      {%- comment -%}---- Google Maps embed (when API key is set) ----{%- endcomment -%}
+      {%- if has_api_key and section.settings.address != blank -%}
+        {%- liquid
+          assign map_zoom = section.settings.map_zoom | default: 14
+          assign encoded_address = section.settings.address | url_encode
+        -%}
+        <iframe
+          class="map-section__iframe"
+          title="{{ section.settings.heading | default: 'Map' | escape }}"
+          src="https://www.google.com/maps/embed/v1/place?key={{ api_key }}&q={{ encoded_address }}&zoom={{ map_zoom }}"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          style="border: 0;"
+        ></iframe>
+
+      {%- comment -%}---- Static image fallback ----{%- endcomment -%}
+      {%- elsif desktop_img != blank -%}
+        <picture class="map-section__picture">
+          {%- if mobile_img != blank and mobile_img != desktop_img -%}
+            <source
+              media="(max-width: 767px)"
+              srcset="{{ mobile_img | image_url: width: 800 }} 800w, {{ mobile_img | image_url: width: 1200 }} 1200w"
+              sizes="100vw"
+            >
+          {%- endif -%}
+          <img
+            class="map-section__img"
+            src="{{ desktop_img | image_url: width: 1600 }}"
+            srcset="
+              {{ desktop_img | image_url: width: 800 }} 800w,
+              {{ desktop_img | image_url: width: 1200 }} 1200w,
+              {{ desktop_img | image_url: width: 1600 }} 1600w
+            "
+            sizes="100vw"
+            alt="{{ desktop_img.alt | default: section.settings.heading | escape }}"
+            loading="lazy"
+            width="{{ desktop_img.width }}"
+            height="{{ desktop_img.height }}"
+          >
+        </picture>
+
+      {%- comment -%}---- Placeholder when no API key and no image ----{%- endcomment -%}
+      {%- else -%}
+        <div class="map-section__placeholder">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          <p>Add a Google Maps API key or a static image to display your location.</p>
+        </div>
+      {%- endif -%}
+
+      {%- comment -%}---- Content overlay (blocks) ----{%- endcomment -%}
+      {%- if section.blocks.size > 0 -%}
+        {%- liquid
+          assign text_bg_r = text_bg_color | color_extract: 'red'
+          assign text_bg_g = text_bg_color | color_extract: 'green'
+          assign text_bg_b = text_bg_color | color_extract: 'blue'
+        -%}
+        <div
+          class="map-section__content map-section__content--{{ text_align_desktop }}"
+          style="
+            background: rgba({{ text_bg_r }}, {{ text_bg_g }}, {{ text_bg_b }}, {{ text_bg_opacity }});
+            color: {{ section.settings.text_color | default: '#1C2E23' }};
+            {%- if blur_bg -%}backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);{%- endif -%}
+          "
+        >
+          {%- for block in section.blocks -%}
+
+            {%- comment -%}Block: address_heading{%- endcomment -%}
+            {%- if block.type == 'address_heading' -%}
+              <{{ heading_tag }}
+                class="map-section__address-heading"
+                style="
+                  font-family: var(--font-heading);
+                  font-size: var(--text-xl, 1.25rem);
+                  font-weight: 700;
+                  line-height: 1.2;
+                  margin: 0 0 var(--space-2, 0.5rem);
+                "
+                {{ block.shopify_attributes }}
+              >
+                {{- block.settings.heading | default: section.settings.heading -}}
+              </{{ heading_tag }}>
+
+            {%- comment -%}Block: address_detail{%- endcomment -%}
+            {%- elsif block.type == 'address_detail' -%}
+              <div
+                class="map-section__address-detail"
+                style="
+                  font-size: var(--text-sm, 0.875rem);
+                  line-height: 1.7;
+                  opacity: 0.85;
+                  margin-bottom: var(--space-4, 1rem);
+                "
+                {{ block.shopify_attributes }}
+              >
+                {%- if block.settings.text != blank -%}
+                  {{ block.settings.text | newline_to_br }}
+                {%- elsif section.settings.address != blank -%}
+                  {{ section.settings.address | newline_to_br }}
+                {%- endif -%}
+              </div>
+
+            {%- comment -%}Block: button{%- endcomment -%}
+            {%- elsif block.type == 'button' -%}
+              {%- if block.settings.button_text != blank -%}
+                <a
+                  href="{{ block.settings.button_link | default: '#' }}"
+                  class="btn btn--{{ block.settings.button_style | default: 'primary' }}"
+                  {% if block.settings.button_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+                  {{ block.shopify_attributes }}
+                >
+                  {{- block.settings.button_text -}}
+                </a>
+              {%- endif -%}
+            {%- endif -%}
+
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+    </div>{%- comment -%}/media-wrap{%- endcomment -%}
+
+  </div>
+</section>
+
+<style>
+  /* ── Media wrapper ──────────────────────────────────────── */
+  #{{ section_id }} .map-section__media-wrap {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-lg, 12px);
+  }
+
+  /* ── Height modes ───────────────────────────────────────── */
+  #{{ section_id }} .map-section__media-wrap--adapt {
+    /* height driven by image aspect ratio */
+  }
+  #{{ section_id }} .map-section__media-wrap--fixed {
+    height: {{ section.settings.fixed_height_desktop | default: 480 }}px;
+  }
+  @media (max-width: 767px) {
+    #{{ section_id }} .map-section__media-wrap--fixed {
+      height: {{ section.settings.fixed_height_mobile | default: 320 }}px;
+    }
+  }
+
+  /* ── iframe / img fill ──────────────────────────────────── */
+  #{{ section_id }} .map-section__iframe,
+  #{{ section_id }} .map-section__picture,
+  #{{ section_id }} .map-section__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  #{{ section_id }} .map-section__media-wrap--adapt .map-section__img {
+    height: auto;
+  }
+
+  #{{ section_id }} .map-section__media-wrap--fixed .map-section__img {
+    object-fit: cover;
+  }
+
+  #{{ section_id }} .map-section__media-wrap--fixed .map-section__iframe {
+    position: absolute;
+    inset: 0;
+  }
+
+  /* ── Placeholder ────────────────────────────────────────── */
+  #{{ section_id }} .map-section__placeholder {
+    width: 100%;
+    min-height: 320px;
+    background: var(--color-cream, #F5F2EC);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4, 1rem);
+    color: var(--color-text-light, #999);
+    text-align: center;
+    padding: var(--space-8, 2rem);
+  }
+  #{{ section_id }} .map-section__placeholder p {
+    font-size: var(--text-sm, 0.875rem);
+    max-width: 320px;
+  }
+
+  /* ── Content overlay ────────────────────────────────────── */
+  #{{ section_id }} .map-section__content {
+    position: absolute;
+    top: var(--space-6, 1.5rem);
+    bottom: var(--space-6, 1.5rem);
+    padding: var(--space-6, 1.5rem) var(--space-8, 2rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 360px;
+    border-radius: var(--radius-md, 8px);
+  }
+
+  #{{ section_id }} .map-section__content--left {
+    left: var(--space-6, 1.5rem);
+    right: auto;
+    text-align: left;
+    align-items: flex-start;
+  }
+  #{{ section_id }} .map-section__content--center {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    text-align: center;
+    align-items: center;
+  }
+  #{{ section_id }} .map-section__content--right {
+    right: var(--space-6, 1.5rem);
+    left: auto;
+    text-align: right;
+    align-items: flex-end;
+  }
+
+  /* ── Mobile content alignment ───────────────────────────── */
+  @media (max-width: 767px) {
+    #{{ section_id }} .map-section__content {
+      position: static;
+      max-width: 100%;
+      border-radius: 0;
+      text-align: {{ text_align_mobile }};
+      align-items: {% if text_align_mobile == 'center' %}center{% elsif text_align_mobile == 'right' %}flex-end{% else %}flex-start{% endif %};
+      padding: var(--space-5, 1.25rem) var(--space-4, 1rem);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+  }
+
+  /* ── Full-width container ───────────────────────────────── */
+  .container--full {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .container--full #{{ section_id }} .map-section__media-wrap {
+    border-radius: 0;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Map",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Find Us"
+    },
+    {
+      "type": "select",
+      "id": "heading_level",
+      "label": "Heading level (SEO)",
+      "default": "h2",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Address"
+    },
+    {
+      "type": "textarea",
+      "id": "address",
+      "label": "Address",
+      "info": "Used for the Google Maps embed query and as fallback text in the Address Detail block.",
+      "default": "Toronto, Ontario, Canada"
+    },
+    {
+      "type": "header",
+      "content": "Google Maps"
+    },
+    {
+      "type": "text",
+      "id": "api_key",
+      "label": "Google Maps API key",
+      "info": "When set, an interactive Google Maps embed is shown instead of the static image. Get a key at console.cloud.google.com."
+    },
+    {
+      "type": "range",
+      "id": "map_zoom",
+      "label": "Map zoom level",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "default": 14,
+      "info": "Higher = more zoomed in. Only applies when API key is set."
+    },
+    {
+      "type": "header",
+      "content": "Static image fallback"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_image",
+      "label": "Desktop image",
+      "info": "Shown when no API key is provided."
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile image (optional)",
+      "info": "Shown on screens under 768px. Falls back to desktop image."
+    },
+    {
+      "type": "header",
+      "content": "Height"
+    },
+    {
+      "type": "select",
+      "id": "height_mode",
+      "label": "Height mode",
+      "default": "fixed",
+      "options": [
+        { "value": "adapt", "label": "Adapt to image" },
+        { "value": "fixed", "label": "Fixed height" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "fixed_height_desktop",
+      "label": "Fixed height — desktop",
+      "min": 200,
+      "max": 700,
+      "step": 20,
+      "default": 480,
+      "unit": "px",
+      "info": "Only applies when Height mode is set to Fixed."
+    },
+    {
+      "type": "range",
+      "id": "fixed_height_mobile",
+      "label": "Fixed height — mobile",
+      "min": 200,
+      "max": 500,
+      "step": 20,
+      "default": 320,
+      "unit": "px",
+      "info": "Only applies when Height mode is set to Fixed."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "text_align_desktop",
+      "label": "Content alignment — desktop",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_align_mobile",
+      "label": "Content alignment — mobile",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Text container background"
+    },
+    {
+      "type": "color",
+      "id": "text_bg_color",
+      "label": "Background color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "text_bg_opacity",
+      "label": "Background opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 85,
+      "unit": "%"
+    },
+    {
+      "type": "checkbox",
+      "id": "text_bg_blur",
+      "label": "Frosted glass blur",
+      "default": false,
+      "info": "Applies a backdrop-filter blur to the text container. Best on desktop over the map."
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section background color",
+      "default": "#F5F2EC"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#1C2E23"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 60,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "address_heading",
+      "name": "Address heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "info": "Leave blank to use the section heading."
+        }
+      ]
+    },
+    {
+      "type": "address_detail",
+      "name": "Address detail",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Address text",
+          "info": "Leave blank to use the section address field. Accepts line breaks."
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button label",
+          "default": "Get Directions"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "default": "primary",
+          "options": [
+            { "value": "primary", "label": "Primary" },
+            { "value": "secondary", "label": "Secondary" },
+            { "value": "outline", "label": "Outline" },
+            { "value": "ghost", "label": "Ghost / text" }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "button_new_tab",
+          "label": "Open in new tab",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Map",
+      "settings": {
+        "heading": "Find Us",
+        "address": "Toronto, Ontario, Canada"
+      },
+      "blocks": [
+        { "type": "address_heading" },
+        { "type": "address_detail" },
+        {
+          "type": "button",
+          "settings": {
+            "button_text": "Get Directions",
+            "button_new_tab": true
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,526 @@
+{%- comment -%}BaseCode Root - parallax{%- endcomment -%}
+{%- liquid
+  assign section_id   = 'parallax-' | append: section.id
+  assign pt           = section.settings.padding_top   | default: 80
+  assign pb           = section.settings.padding_bottom | default: 80
+  assign enable_anim  = section.settings.enable_animation
+  assign speed        = section.settings.parallax_speed | default: 0.3
+  assign rot1         = section.settings.rotation_1 | default: 5
+  assign rot2         = section.settings.rotation_2 | default: -5
+  assign text_align   = section.settings.text_align | default: 'center'
+  assign mob_align    = section.settings.text_align_mobile | default: 'center'
+  assign btn_style    = section.settings.button_style | default: 'primary'
+-%}
+
+<section
+  id="{{ section_id }}"
+  class="parallax-section{% if enable_anim %} anim-enabled{% endif %}"
+  style="
+    background-color: {{ section.settings.bg_color | default: '#1C2E23' }};
+    color: {{ section.settings.text_color | default: '#F5F2EC' }};
+    padding-top: {{ pt }}px;
+    padding-bottom: {{ pb }}px;
+    position: relative;
+    overflow: hidden;
+  "
+>
+  {%- comment -%}---- PARALLAX IMAGE LAYER ----{%- endcomment -%}
+  <div class="parallax-section__images" aria-hidden="true">
+
+    {%- comment -%} Image 1 {%- endcomment -%}
+    <div
+      class="parallax-section__img-wrap parallax-section__img-wrap--1"
+      data-parallax-speed="{{ speed }}"
+      style="transform: rotate({{ rot1 }}deg);"
+    >
+      {%- if section.settings.image_1 != blank -%}
+        {%- if section.settings.image_1_link != blank -%}
+          <a href="{{ section.settings.image_1_link }}" class="parallax-section__img-link" tabindex="-1">
+        {%- endif -%}
+        <picture>
+          {%- if section.settings.image_1_mobile != blank -%}
+            <source
+              media="(max-width: 767px)"
+              srcset="{{ section.settings.image_1_mobile | image_url: width: 800 }}"
+            >
+          {%- endif -%}
+          <img
+            src="{{ section.settings.image_1 | image_url: width: 900 }}"
+            srcset="
+              {{ section.settings.image_1 | image_url: width: 500 }} 500w,
+              {{ section.settings.image_1 | image_url: width: 800 }} 800w,
+              {{ section.settings.image_1 | image_url: width: 900 }} 900w
+            "
+            sizes="(max-width: 767px) 80vw, 45vw"
+            alt="{{ section.settings.image_1.alt | default: '' }}"
+            loading="lazy"
+            draggable="false"
+            class="parallax-section__img"
+          >
+        </picture>
+        {%- if section.settings.image_1_link != blank -%}
+          </a>
+        {%- endif -%}
+      {%- else -%}
+        <div class="parallax-section__img-placeholder" style="background: rgba(255,255,255,0.08);"></div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Image 2 {%- endcomment -%}
+    <div
+      class="parallax-section__img-wrap parallax-section__img-wrap--2"
+      data-parallax-speed="{{ speed | times: 0.6 }}"
+      style="transform: rotate({{ rot2 }}deg);"
+    >
+      {%- if section.settings.image_2 != blank -%}
+        {%- if section.settings.image_2_link != blank -%}
+          <a href="{{ section.settings.image_2_link }}" class="parallax-section__img-link" tabindex="-1">
+        {%- endif -%}
+        <picture>
+          {%- if section.settings.image_2_mobile != blank -%}
+            <source
+              media="(max-width: 767px)"
+              srcset="{{ section.settings.image_2_mobile | image_url: width: 700 }}"
+            >
+          {%- endif -%}
+          <img
+            src="{{ section.settings.image_2 | image_url: width: 700 }}"
+            srcset="
+              {{ section.settings.image_2 | image_url: width: 400 }} 400w,
+              {{ section.settings.image_2 | image_url: width: 600 }} 600w,
+              {{ section.settings.image_2 | image_url: width: 700 }} 700w
+            "
+            sizes="(max-width: 767px) 55vw, 35vw"
+            alt="{{ section.settings.image_2.alt | default: '' }}"
+            loading="lazy"
+            draggable="false"
+            class="parallax-section__img"
+          >
+        </picture>
+        {%- if section.settings.image_2_link != blank -%}
+          </a>
+        {%- endif -%}
+      {%- else -%}
+        <div class="parallax-section__img-placeholder parallax-section__img-placeholder--2" style="background: rgba(255,255,255,0.05);"></div>
+      {%- endif -%}
+    </div>
+
+  </div>{%- comment -%}end .parallax-section__images{%- endcomment -%}
+
+  {%- comment -%}---- TEXT OVERLAY ----{%- endcomment -%}
+  <div
+    class="parallax-section__content{% if enable_anim %} anim-fade-up{% endif %}"
+    style="text-align: {{ text_align }}; --mob-align: {{ mob_align }};"
+  >
+    {%- if section.settings.subheading != blank -%}
+      <p class="parallax-section__subheading">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.heading != blank -%}
+      <h2 class="parallax-section__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.button_text != blank -%}
+      <div class="parallax-section__cta">
+        <a href="{{ section.settings.button_link | default: '#' }}" class="btn btn--{{ btn_style }}">
+          {{ section.settings.button_text }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+
+</section>
+
+{%- comment -%}---- Section-scoped CSS ----{%- endcomment -%}
+<style>
+  #{{ section_id }} {
+    --parallax-speed: {{ speed }};
+  }
+
+  #{{ section_id }} .parallax-section__images {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  #{{ section_id }} .parallax-section__img-wrap {
+    position: absolute;
+    will-change: transform;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.1s linear;
+  }
+
+  /* Image 1 — larger, left-ish */
+  #{{ section_id }} .parallax-section__img-wrap--1 {
+    width: 42%;
+    max-width: 480px;
+    top: -8%;
+    left: -4%;
+    transform-origin: center center;
+  }
+
+  /* Image 2 — smaller, right-ish, offset lower */
+  #{{ section_id }} .parallax-section__img-wrap--2 {
+    width: 28%;
+    max-width: 340px;
+    bottom: -6%;
+    right: 2%;
+    transform-origin: center center;
+  }
+
+  #{{ section_id }} .parallax-section__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    pointer-events: none;
+  }
+
+  #{{ section_id }} .parallax-section__img-link {
+    display: block;
+    pointer-events: auto;
+  }
+
+  #{{ section_id }} .parallax-section__img-placeholder {
+    width: 100%;
+    padding-bottom: 130%;
+    border-radius: 4px;
+  }
+
+  #{{ section_id }} .parallax-section__img-placeholder--2 {
+    padding-bottom: 110%;
+  }
+
+  /* Content overlay */
+  #{{ section_id }} .parallax-section__content {
+    position: relative;
+    z-index: 2;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: var(--space-8, 2rem) var(--space-6, 1.5rem);
+  }
+
+  #{{ section_id }} .parallax-section__subheading {
+    font-family: var(--font-heading);
+    font-size: var(--text-sm, 0.875rem);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.75;
+    margin-bottom: var(--space-3, 0.75rem);
+  }
+
+  #{{ section_id }} .parallax-section__heading {
+    font-family: var(--font-heading);
+    font-size: var(--text-5xl, 3rem);
+    line-height: 1.1;
+    margin-bottom: var(--space-6, 1.5rem);
+    font-weight: 700;
+  }
+
+  #{{ section_id }} .parallax-section__cta {
+    margin-top: var(--space-6, 1.5rem);
+  }
+
+  /* Entrance animation */
+  {%- if enable_anim -%}
+  #{{ section_id }} .anim-fade-up {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  #{{ section_id }}.in-view .anim-fade-up {
+    opacity: 1;
+    transform: none;
+  }
+  {%- endif -%}
+
+  @media (max-width: 767px) {
+    #{{ section_id }} .parallax-section__content {
+      text-align: var(--mob-align, center) !important;
+    }
+    #{{ section_id }} .parallax-section__heading {
+      font-size: var(--text-3xl, 1.875rem);
+    }
+    #{{ section_id }} .parallax-section__img-wrap--1 {
+      width: 58%;
+      top: -4%;
+      left: -6%;
+    }
+    #{{ section_id }} .parallax-section__img-wrap--2 {
+      width: 40%;
+      bottom: -4%;
+      right: -2%;
+    }
+  }
+</style>
+
+{%- comment -%}---- Parallax scroll JS ----{%- endcomment -%}
+{%- if enable_anim -%}
+<script>
+(function () {
+  'use strict';
+
+  var section     = document.getElementById('{{ section_id }}');
+  if (!section) return;
+
+  var imgWraps    = section.querySelectorAll('.parallax-section__img-wrap');
+  var ticking     = false;
+  var baseTransforms = [];
+
+  // Store the initial rotation from inline style so we can compose it
+  imgWraps.forEach(function (wrap, i) {
+    var rot = wrap.style.transform || 'rotate(0deg)';
+    baseTransforms[i] = rot;
+  });
+
+  function update() {
+    var rect     = section.getBoundingClientRect();
+    var vh       = window.innerHeight;
+    // Progress: 0 when top of section hits bottom of viewport, 1 when bottom hits top
+    var progress = 1 - (rect.bottom / (vh + rect.height));
+
+    imgWraps.forEach(function (wrap, i) {
+      var speed   = parseFloat(wrap.getAttribute('data-parallax-speed') || 0.3);
+      var offsetY = progress * speed * 200; // max 200px travel
+      wrap.style.transform = baseTransforms[i] + ' translateY(' + offsetY.toFixed(2) + 'px)';
+    });
+
+    ticking = false;
+  }
+
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(update);
+      ticking = true;
+    }
+  }
+
+  // In-view entrance animation
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    obs.observe(section);
+  } else {
+    section.classList.add('in-view');
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Initial paint
+  update();
+})();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Parallax",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image 1 (desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1_mobile",
+      "label": "Image 1 (mobile override)"
+    },
+    {
+      "type": "url",
+      "id": "image_1_link",
+      "label": "Image 1 link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image 2 (desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2_mobile",
+      "label": "Image 2 (mobile override)"
+    },
+    {
+      "type": "url",
+      "id": "image_2_link",
+      "label": "Image 2 link"
+    },
+    {
+      "type": "header",
+      "content": "Parallax Motion"
+    },
+    {
+      "type": "range",
+      "id": "parallax_speed",
+      "label": "Parallax speed",
+      "min": 0.1,
+      "max": 0.5,
+      "step": 0.05,
+      "default": 0.3,
+      "info": "Higher = more movement on scroll"
+    },
+    {
+      "type": "range",
+      "id": "rotation_1",
+      "label": "Image 1 rotation (deg)",
+      "min": -15,
+      "max": 15,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "rotation_2",
+      "label": "Image 2 rotation (deg)",
+      "min": -15,
+      "max": 15,
+      "step": 1,
+      "default": -5
+    },
+    {
+      "type": "header",
+      "content": "Text Overlay"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Biological diversity research"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Your biology isn't one-size-fits-all."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button label",
+      "default": "Shop Origin"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "default": "primary",
+      "options": [
+        { "value": "primary",   "label": "Primary" },
+        { "value": "secondary", "label": "Secondary" },
+        { "value": "outline",   "label": "Outline" },
+        { "value": "white",     "label": "White" },
+        { "value": "ghost",     "label": "Ghost / text" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Desktop text alignment",
+      "default": "center",
+      "options": [
+        { "value": "left",   "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right",  "label": "Right" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_align_mobile",
+      "label": "Mobile text alignment",
+      "default": "center",
+      "options": [
+        { "value": "left",   "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right",  "label": "Right" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background",
+      "default": "#1C2E23"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#F5F2EC"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top (px)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom (px)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable parallax + entrance animation",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Parallax",
+      "settings": {
+        "subheading": "Biological diversity research",
+        "heading": "Your biology isn't one-size-fits-all.",
+        "button_text": "Shop Origin",
+        "button_link": "/products/origin",
+        "button_style": "white",
+        "text_align": "center",
+        "rotation_1": 5,
+        "rotation_2": -5,
+        "parallax_speed": 0.3,
+        "bg_color": "#1C2E23",
+        "text_color": "#F5F2EC",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "enable_animation": true
+      }
+    }
+  ]
+}
+{% endschema %}

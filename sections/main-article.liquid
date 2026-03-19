@@ -1,27 +1,308 @@
-{%- comment -%}BaseCode Root - main-article{%- endcomment -%}
-<section class="section bg-white">
-  <div class="container container--narrow">
+{%- comment -%}
+  BaseCode Root — main-article
+  Blog article page with featured image, author, date, share buttons, and content width controls.
+  Settings: bg_color, text_color, padding_top/bottom, show_featured_image, show_author,
+            show_date, show_share_buttons, content_width, enable_animation
+{%- endcomment -%}
+
+{%- liquid
+  assign bg              = section.settings.bg_color
+  assign tc              = section.settings.text_color
+  assign pt              = section.settings.padding_top
+  assign pb              = section.settings.padding_bottom
+  assign animate         = section.settings.enable_animation
+  assign show_image      = section.settings.show_featured_image
+  assign show_author     = section.settings.show_author
+  assign show_date       = section.settings.show_date
+  assign show_share      = section.settings.show_share_buttons
+  assign content_w       = section.settings.content_width | default: 'narrow'
+
+  case content_w
+    when 'medium'
+      assign w_cls = 'container--medium'
+    when 'full'
+      assign w_cls = ''
+    else
+      assign w_cls = 'container--narrow'
+  endcase
+
+  assign article_url = shop.url | append: article.url
+  assign encoded_url = article_url | url_encode
+  assign encoded_title = article.title | url_encode
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} .s-article-wrap {
+    background-color: {{ bg }};
+    color: {{ tc }};
+    padding-top: {{ pt }}px;
+    padding-bottom: {{ pb }}px;
+  }
+  #shopify-section-{{ section.id }} .s-article-wrap h1,
+  #shopify-section-{{ section.id }} .s-article-wrap p,
+  #shopify-section-{{ section.id }} .s-article-wrap .rte {
+    color: inherit;
+  }
+  #shopify-section-{{ section.id }} .s-article-back {
+    display: inline-block;
+    margin-bottom: var(--space-4, 1rem);
+    font-size: var(--text-sm, 0.875rem);
+    opacity: 0.7;
+    text-decoration: none;
+  }
+  #shopify-section-{{ section.id }} .s-article-back:hover { opacity: 1; }
+  #shopify-section-{{ section.id }} .s-article-header {
+    text-align: center;
+    margin-bottom: var(--space-10, 2.5rem);
+  }
+  #shopify-section-{{ section.id }} .s-article-header h1 {
+    margin-top: var(--space-4, 1rem);
+    font-size: var(--text-4xl, 2.25rem);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  #shopify-section-{{ section.id }} .s-article-meta {
+    font-size: var(--text-sm, 0.875rem);
+    opacity: 0.65;
+    margin-top: var(--space-3, 0.75rem);
+  }
+  #shopify-section-{{ section.id }} .s-article-featured-img {
+    border-radius: var(--radius-lg, 0.75rem);
+    overflow: hidden;
+    margin-bottom: var(--space-10, 2.5rem);
+  }
+  #shopify-section-{{ section.id }} .s-article-featured-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  #shopify-section-{{ section.id }} .rte {
+    font-size: var(--text-base, 1rem);
+    line-height: 1.8;
+  }
+  #shopify-section-{{ section.id }} .s-article-share {
+    margin-top: var(--space-12, 3rem);
+    padding-top: var(--space-8, 2rem);
+    border-top: 1px solid rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: var(--space-4, 1rem);
+    flex-wrap: wrap;
+  }
+  #shopify-section-{{ section.id }} .s-article-share-label {
+    font-size: var(--text-sm, 0.875rem);
+    font-weight: 600;
+    opacity: 0.7;
+  }
+  #shopify-section-{{ section.id }} .s-article-share-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: var(--radius-full, 9999px);
+    font-size: var(--text-sm, 0.875rem);
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid currentColor;
+    opacity: 0.75;
+    transition: opacity 0.2s;
+  }
+  #shopify-section-{{ section.id }} .s-article-share-link:hover { opacity: 1; }
+  {%- if animate -%}
+  @keyframes sArticleFadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  #shopify-section-{{ section.id }} .s-article-animate {
+    animation: sArticleFadeUp 0.6s ease both;
+  }
+  #shopify-section-{{ section.id }} .s-article-animate-2 {
+    animation: sArticleFadeUp 0.6s ease both;
+    animation-delay: 0.15s;
+  }
+  #shopify-section-{{ section.id }} .s-article-animate-3 {
+    animation: sArticleFadeUp 0.6s ease both;
+    animation-delay: 0.25s;
+  }
+  {%- endif -%}
+</style>
+
+<div class="s-article-wrap">
+  <div class="container {{ w_cls }}">
     <article>
-      <header class="text-center mb-10">
-        <a href="{{ blog.url }}" class="link mb-4" style="display: inline-block;">&larr; {{ 'blog.back_to_blog' | t }}</a>
-        <h1 style="margin-top: var(--space-4);">{{ article.title }}</h1>
-        <p style="font-size: var(--text-sm); color: var(--color-text-light); margin-top: var(--space-3);">
-          {{ 'blog.posted_on' | t: date: article.published_at | date: '%B %d, %Y' }}
-          {%- if article.author -%} &middot; {{ 'blog.by_author' | t: author: article.author }}{%- endif -%}
-        </p>
+
+      <header class="s-article-header{% if animate %} s-article-animate{% endif %}">
+        <a href="{{ blog.url }}" class="s-article-back link">&larr; {{ 'blog.back_to_blog' | t }}</a>
+        <h1>{{ article.title }}</h1>
+        {%- if show_date or show_author -%}
+          <p class="s-article-meta">
+            {%- if show_date -%}
+              {{ article.published_at | date: '%B %d, %Y' }}
+            {%- endif -%}
+            {%- if show_date and show_author and article.author -%}
+              &nbsp;&middot;&nbsp;
+            {%- endif -%}
+            {%- if show_author and article.author -%}
+              {{ 'blog.by_author' | t: author: article.author }}
+            {%- endif -%}
+          </p>
+        {%- endif -%}
       </header>
-      {%- if article.image -%}
-        <div style="border-radius: var(--radius-lg); overflow: hidden; margin-bottom: var(--space-10);">
-          <img src="{{ article.image | image_url: width: 1200 }}" alt="{{ article.image.alt | default: article.title }}" loading="eager" style="width: 100%;">
+
+      {%- if show_image and article.image -%}
+        <div class="s-article-featured-img{% if animate %} s-article-animate-2{% endif %}">
+          <img
+            src="{{ article.image | image_url: width: 1200 }}"
+            alt="{{ article.image.alt | default: article.title }}"
+            loading="eager"
+            width="{{ article.image.width }}"
+            height="{{ article.image.height }}"
+            sizes="(max-width: 768px) 100vw, 800px"
+          >
         </div>
       {%- endif -%}
-      <div class="rte" style="font-size: var(--text-base); line-height: 1.8;">
+
+      <div class="rte{% if animate %} s-article-animate-3{% endif %}">
         {{ article.content }}
       </div>
+
+      {%- if show_share -%}
+        <div class="s-article-share">
+          <span class="s-article-share-label">Share:</span>
+          <a
+            href="https://twitter.com/intent/tweet?url={{ encoded_url }}&text={{ encoded_title }}"
+            class="s-article-share-link"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Share on X (Twitter)"
+          >
+            X / Twitter
+          </a>
+          <a
+            href="https://www.facebook.com/sharer/sharer.php?u={{ encoded_url }}"
+            class="s-article-share-link"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Share on Facebook"
+          >
+            Facebook
+          </a>
+          <a
+            href="mailto:?subject={{ encoded_title }}&body={{ encoded_url }}"
+            class="s-article-share-link"
+            aria-label="Share via email"
+          >
+            Email
+          </a>
+        </div>
+      {%- endif -%}
+
     </article>
   </div>
-</section>
+</div>
 
 {% schema %}
-{ "name": "Article Page", "settings": [] }
+{
+  "name": "Article Page",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#1C2E23"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Display Options"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_featured_image",
+      "label": "Show featured image",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "label": "Show author",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "Show publish date",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_share_buttons",
+      "label": "Show share buttons",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "content_width",
+      "label": "Content width",
+      "options": [
+        { "value": "narrow", "label": "Narrow" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "full",   "label": "Full" }
+      ],
+      "default": "narrow"
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable fade-up animation",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Article Page"
+    }
+  ]
+}
 {% endschema %}

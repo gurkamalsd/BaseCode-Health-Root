@@ -1,155 +1,559 @@
-{%- comment -%}BaseCode Root - footer{%- endcomment -%}
-<footer class="footer" role="contentinfo">
+{%- comment -%}BaseCode Root - footer (Wonder-level customization){%- endcomment -%}
+
+{%- liquid
+  assign footer_bg    = section.settings.bg_color
+  assign footer_text  = section.settings.text_color
+  assign col_count    = section.settings.column_count
+-%}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    background-color: {{ footer_bg }};
+    color: {{ footer_text }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  #shopify-section-{{ section.id }} .footer__heading {
+    color: {{ footer_text }};
+  }
+  #shopify-section-{{ section.id }} .footer__link {
+    color: {{ footer_text | color_modify: 'alpha', 0.7 }};
+  }
+  #shopify-section-{{ section.id }} .footer__link:hover {
+    color: {{ footer_text }};
+  }
+  #shopify-section-{{ section.id }} .footer__separator {
+    border-color: {{ footer_text | color_modify: 'alpha', 0.15 }};
+  }
+  #shopify-section-{{ section.id }} .footer__bottom-text {
+    color: {{ footer_text | color_modify: 'alpha', 0.55 }};
+  }
+  #shopify-section-{{ section.id }} .footer__social-icon {
+    color: {{ footer_text | color_modify: 'alpha', 0.7 }};
+  }
+  #shopify-section-{{ section.id }} .footer__social-icon:hover {
+    color: {{ footer_text }};
+  }
+  #shopify-section-{{ section.id }} .footer__accordion-toggle {
+    color: {{ footer_text }};
+  }
+  #shopify-section-{{ section.id }} .footer__newsletter input[type="email"] {
+    background: {{ footer_bg | color_modify: 'lightness', footer_bg | color_to_hsl | split: ',' | first | append: '%' }};
+    background: color-mix(in srgb, {{ footer_text }} 8%, {{ footer_bg }});
+    color: {{ footer_text }};
+    border-color: {{ footer_text | color_modify: 'alpha', 0.25 }};
+  }
+  #shopify-section-{{ section.id }} .footer__newsletter input[type="email"]::placeholder {
+    color: {{ footer_text | color_modify: 'alpha', 0.4 }};
+  }
+{%- endstyle -%}
+
+<footer class="footer" role="contentinfo" id="shopify-section-{{ section.id }}">
+
+  {%- if section.settings.show_separator -%}
+    <hr class="footer__separator" style="border: 0; border-top: 1px solid; margin: 0;">
+  {%- endif -%}
+
   <div class="container">
-    <div class="footer__grid">
-      <!-- Products Column -->
-      <div>
-        <h3 class="footer__heading hide-mobile">{{ section.settings.col1_heading | default: 'Products' }}</h3>
-        <button class="footer__accordion-toggle hide-desktop" aria-expanded="false" data-accordion-toggle>
-          <span class="footer__heading" style="margin-bottom: 0;">{{ section.settings.col1_heading | default: 'Products' }}</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-        </button>
-        <div class="footer__accordion-content" data-accordion-content>
-          {%- for link in section.settings.col1_menu.links -%}
-            <a href="{{ link.url }}" class="footer__link">{{ link.title }}</a>
-          {%- endfor -%}
-        </div>
-      </div>
 
-      <!-- Info Column -->
-      <div>
-        <h3 class="footer__heading hide-mobile">{{ section.settings.col2_heading | default: 'Info' }}</h3>
-        <button class="footer__accordion-toggle hide-desktop" aria-expanded="false" data-accordion-toggle>
-          <span class="footer__heading" style="margin-bottom: 0;">{{ section.settings.col2_heading | default: 'Info' }}</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-        </button>
-        <div class="footer__accordion-content" data-accordion-content>
-          {%- for link in section.settings.col2_menu.links -%}
-            <a href="{{ link.url }}" class="footer__link">{{ link.title }}</a>
-          {%- endfor -%}
-        </div>
-      </div>
-
-      <!-- Social Column -->
-      <div>
-        <h3 class="footer__heading hide-mobile">{{ section.settings.col3_heading | default: 'Social' }}</h3>
-        <button class="footer__accordion-toggle hide-desktop" aria-expanded="false" data-accordion-toggle>
-          <span class="footer__heading" style="margin-bottom: 0;">{{ section.settings.col3_heading | default: 'Social' }}</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-        </button>
-        <div class="footer__accordion-content" data-accordion-content>
-          {%- if settings.social_instagram != blank -%}
-            <a href="{{ settings.social_instagram }}" class="footer__link" target="_blank" rel="noopener">Instagram</a>
-          {%- endif -%}
-          {%- if settings.social_tiktok != blank -%}
-            <a href="{{ settings.social_tiktok }}" class="footer__link" target="_blank" rel="noopener">TikTok</a>
-          {%- endif -%}
-          {%- if settings.social_facebook != blank -%}
-            <a href="{{ settings.social_facebook }}" class="footer__link" target="_blank" rel="noopener">Facebook</a>
-          {%- endif -%}
-          {%- if settings.social_x != blank -%}
-            <a href="{{ settings.social_x }}" class="footer__link" target="_blank" rel="noopener">X (Twitter)</a>
-          {%- endif -%}
-          {%- if settings.social_youtube != blank -%}
-            <a href="{{ settings.social_youtube }}" class="footer__link" target="_blank" rel="noopener">YouTube</a>
-          {%- endif -%}
-          {%- if settings.social_linkedin != blank -%}
-            <a href="{{ settings.social_linkedin }}" class="footer__link" target="_blank" rel="noopener">LinkedIn</a>
-          {%- endif -%}
-        </div>
-      </div>
-
-      <!-- About Column -->
-      <div>
-        <h3 class="footer__heading">{{ section.settings.col4_heading | default: 'About BaseCode' }}</h3>
-        <p style="font-size: var(--text-sm); color: var(--color-text-light); line-height: 1.7;">
-          {{ section.settings.col4_text | default: 'Supplements informed by biological diversity research. Built in Toronto, backed by science, designed for your unique biology.' }}
-        </p>
-      </div>
-    </div>
-
-    <!-- Bottom Bar -->
-    <div class="footer__bottom">
-      <div class="flex items-center gap-4" style="font-size: var(--text-xs); color: var(--color-text-light);">
-        <span>&copy; {{ 'now' | date: '%Y' }} BaseCode Health. All rights reserved.</span>
-        <a href="/policies/privacy-policy" class="footer__link" style="padding: 0;">Privacy</a>
-        <a href="/policies/terms-of-service" class="footer__link" style="padding: 0;">Terms</a>
-      </div>
-
-      <!-- Social Icons -->
-      <div class="footer__social">
-        {%- if settings.social_facebook != blank -%}
-          <a href="{{ settings.social_facebook }}" target="_blank" rel="noopener" aria-label="Facebook">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+    {%- comment -%} Top row: logo + optional newsletter teaser {%- endcomment -%}
+    {%- if section.settings.footer_logo != blank or section.settings.show_newsletter_top -%}
+      <div class="footer__top" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-6); padding-bottom: var(--space-8); border-bottom: 1px solid {{ footer_text | color_modify: 'alpha', 0.1 }}; margin-bottom: var(--space-10);">
+        {%- if section.settings.footer_logo != blank -%}
+          <a href="/" aria-label="{{ shop.name }}">
+            <img
+              src="{{ section.settings.footer_logo | image_url: width: 400 }}"
+              alt="{{ shop.name }}"
+              width="{{ section.settings.logo_width }}"
+              height="auto"
+              loading="lazy"
+              style="width: {{ section.settings.logo_width }}px; height: auto; display: block;"
+            >
           </a>
-        {%- endif -%}
-        {%- if settings.social_x != blank -%}
-          <a href="{{ settings.social_x }}" target="_blank" rel="noopener" aria-label="X">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          </a>
-        {%- endif -%}
-        {%- if settings.social_instagram != blank -%}
-          <a href="{{ settings.social_instagram }}" target="_blank" rel="noopener" aria-label="Instagram">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        {%- else -%}
+          <a href="/" aria-label="{{ shop.name }}" style="text-decoration: none; color: inherit;">
+            <span style="font-family: var(--font-heading); font-size: var(--text-xl); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;">{{ shop.name }}</span>
           </a>
         {%- endif -%}
       </div>
+    {%- endif -%}
 
-      <!-- Payment Badges -->
-      <div class="footer__payments">
-        {%- for type in shop.enabled_payment_types -%}
-          {{ type | payment_type_svg_tag: class: 'payment-icon' }}
+    {%- comment -%} Columns grid {%- endcomment -%}
+    {%- if section.blocks.size > 0 -%}
+      <div class="footer__grid footer__grid--{{ col_count }}" style="
+        display: grid;
+        grid-template-columns: repeat({{ col_count }}, 1fr);
+        gap: var(--space-10) var(--space-8);
+        margin-bottom: var(--space-12);
+      ">
+        {%- for block in section.blocks -%}
+
+          {%- comment -%} ── MENU COLUMN ── {%- endcomment -%}
+          {%- if block.type == 'menu_column' -%}
+            <div class="footer__column" {{ block.shopify_attributes }}>
+              <h3 class="footer__heading hide-mobile" style="font-size: var(--text-sm); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: var(--space-5);">
+                {{ block.settings.heading }}
+              </h3>
+              {%- if section.settings.mobile_accordion -%}
+                <button
+                  class="footer__accordion-toggle hide-desktop"
+                  aria-expanded="false"
+                  data-accordion-toggle
+                  style="display: flex; align-items: center; justify-content: space-between; width: 100%; background: none; border: none; cursor: pointer; padding: var(--space-3) 0;"
+                >
+                  <span class="footer__heading" style="font-size: var(--text-sm); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0;">{{ block.settings.heading }}</span>
+                  <svg class="footer__accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.25s ease; flex-shrink: 0;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+              {%- else -%}
+                <h3 class="footer__heading hide-desktop" style="font-size: var(--text-sm); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: var(--space-5);">
+                  {{ block.settings.heading }}
+                </h3>
+              {%- endif -%}
+              <div class="footer__accordion-content" data-accordion-content style="display: flex; flex-direction: column; gap: var(--space-3);">
+                {%- for link in block.settings.menu.links -%}
+                  <a href="{{ link.url }}" class="footer__link" style="font-size: var(--text-sm); text-decoration: none; transition: color 0.2s ease; display: inline-block;" {% if link.current %}aria-current="page"{% endif %}>
+                    {{ link.title }}
+                  </a>
+                {%- endfor -%}
+              </div>
+            </div>
+
+          {%- comment -%} ── TEXT COLUMN ── {%- endcomment -%}
+          {%- elsif block.type == 'text_column' -%}
+            <div class="footer__column" {{ block.shopify_attributes }}>
+              {%- if block.settings.heading != blank -%}
+                <h3 class="footer__heading hide-mobile" style="font-size: var(--text-sm); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: var(--space-5);">
+                  {{ block.settings.heading }}
+                </h3>
+                {%- if section.settings.mobile_accordion -%}
+                  <button
+                    class="footer__accordion-toggle hide-desktop"
+                    aria-expanded="false"
+                    data-accordion-toggle
+                    style="display: flex; align-items: center; justify-content: space-between; width: 100%; background: none; border: none; cursor: pointer; padding: var(--space-3) 0;"
+                  >
+                    <span class="footer__heading" style="font-size: var(--text-sm); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0;">{{ block.settings.heading }}</span>
+                    <svg class="footer__accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.25s ease; flex-shrink: 0;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                  </button>
+                {%- else -%}
+                  <h3 class="footer__heading hide-desktop" style="font-size: var(--text-sm); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: var(--space-5);">
+                    {{ block.settings.heading }}
+                  </h3>
+                {%- endif -%}
+              {%- endif -%}
+              <div class="footer__accordion-content rte" data-accordion-content style="font-size: var(--text-sm); line-height: 1.75; color: {{ footer_text | color_modify: 'alpha', 0.7 }};">
+                {{ block.settings.text }}
+              </div>
+            </div>
+
+          {%- comment -%} ── NEWSLETTER COLUMN ── {%- endcomment -%}
+          {%- elsif block.type == 'newsletter_column' -%}
+            {%- if section.settings.show_newsletter -%}
+              <div class="footer__column footer__newsletter" {{ block.shopify_attributes }}>
+                {%- if block.settings.heading != blank -%}
+                  <h3 class="footer__heading" style="font-size: var(--text-sm); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: var(--space-3);">
+                    {{ block.settings.heading }}
+                  </h3>
+                {%- endif -%}
+                {%- if block.settings.subtext != blank -%}
+                  <p style="font-size: var(--text-sm); line-height: 1.6; color: {{ footer_text | color_modify: 'alpha', 0.65 }}; margin-bottom: var(--space-5);">{{ block.settings.subtext }}</p>
+                {%- endif -%}
+                {%- form 'customer', id: 'footer-newsletter-form' -%}
+                  <input type="hidden" name="contact[tags]" value="newsletter,footer-signup">
+                  <div style="display: flex; gap: var(--space-2); flex-wrap: wrap;">
+                    <input
+                      type="email"
+                      name="contact[email]"
+                      id="footer-email-{{ block.id }}"
+                      required
+                      autocorrect="off"
+                      autocapitalize="off"
+                      placeholder="{{ block.settings.email_placeholder | default: 'Your email address' }}"
+                      style="flex: 1; min-width: 0; padding: var(--space-3) var(--space-4); border-radius: var(--radius-sm); border: 1px solid; font-size: var(--text-sm); outline: none;"
+                      aria-label="{{ block.settings.email_placeholder | default: 'Your email address' }}"
+                    >
+                    <button
+                      type="submit"
+                      class="btn btn--primary"
+                      style="white-space: nowrap; padding: var(--space-3) var(--space-5); font-size: var(--text-sm);"
+                    >
+                      {{ block.settings.button_label | default: 'Subscribe' }}
+                    </button>
+                  </div>
+                  {%- if form.posted_successfully? -%}
+                    <p style="font-size: var(--text-sm); color: #4ade80; margin-top: var(--space-3);">{{ 'footer.newsletter.success' | t | default: "You're in. Check your inbox." }}</p>
+                  {%- endif -%}
+                {%- endform -%}
+              </div>
+            {%- endif -%}
+          {%- endif -%}
+
         {%- endfor -%}
       </div>
+    {%- endif -%}
+
+    {%- comment -%} Bottom bar {%- endcomment -%}
+    <div class="footer__bottom" style="
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+      padding-top: var(--space-6);
+      border-top: 1px solid {{ footer_text | color_modify: 'alpha', 0.12 }};
+    ">
+
+      {%- comment -%} Copyright {%- endcomment -%}
+      <p class="footer__bottom-text" style="font-size: var(--text-xs); margin: 0;">
+        &copy; {{ 'now' | date: '%Y' }} {{ section.settings.copyright_text | default: 'BaseCode Health' }}. All rights reserved.
+        {%- if section.settings.show_policy_links -%}
+          &nbsp;&middot;&nbsp;<a href="{{ routes.root_url }}policies/privacy-policy" class="footer__link" style="font-size: var(--text-xs); text-decoration: none;">Privacy</a>
+          &nbsp;&middot;&nbsp;<a href="{{ routes.root_url }}policies/terms-of-service" class="footer__link" style="font-size: var(--text-xs); text-decoration: none;">Terms</a>
+        {%- endif -%}
+      </p>
+
+      {%- comment -%} Social icons {%- endcomment -%}
+      {%- if section.settings.show_social_icons -%}
+        <div class="footer__social" style="display: flex; align-items: center; gap: var(--space-4);">
+          {%- if settings.social_instagram != blank -%}
+            <a href="{{ settings.social_instagram }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="footer__social-icon" style="display: flex; transition: color 0.2s ease;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+          {%- endif -%}
+          {%- if settings.social_tiktok != blank -%}
+            <a href="{{ settings.social_tiktok }}" target="_blank" rel="noopener noreferrer" aria-label="TikTok" class="footer__social-icon" style="display: flex; transition: color 0.2s ease;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg>
+            </a>
+          {%- endif -%}
+          {%- if settings.social_facebook != blank -%}
+            <a href="{{ settings.social_facebook }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="footer__social-icon" style="display: flex; transition: color 0.2s ease;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+          {%- endif -%}
+          {%- if settings.social_x != blank -%}
+            <a href="{{ settings.social_x }}" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" class="footer__social-icon" style="display: flex; transition: color 0.2s ease;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+          {%- endif -%}
+          {%- if settings.social_youtube != blank -%}
+            <a href="{{ settings.social_youtube }}" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="footer__social-icon" style="display: flex; transition: color 0.2s ease;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.97C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.97A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
+            </a>
+          {%- endif -%}
+          {%- if settings.social_linkedin != blank -%}
+            <a href="{{ settings.social_linkedin }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="footer__social-icon" style="display: flex; transition: color 0.2s ease;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- comment -%} Payment badges {%- endcomment -%}
+      {%- if section.settings.show_payment_icons -%}
+        {%- unless shop.enabled_payment_types == empty -%}
+          <div class="footer__payments" style="display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap;">
+            {%- for type in shop.enabled_payment_types -%}
+              {{ type | payment_type_svg_tag: class: 'payment-icon', style: 'height: 24px; width: auto; opacity: 0.7;' }}
+            {%- endfor -%}
+          </div>
+        {%- endunless -%}
+      {%- endif -%}
+
     </div>
   </div>
 </footer>
 
+<style>
+  /* Responsive grid */
+  @media (max-width: 1023px) {
+    .footer__grid--4 {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+    .footer__grid--3 {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+  }
+  @media (max-width: 639px) {
+    .footer__grid--4,
+    .footer__grid--3 {
+      grid-template-columns: 1fr !important;
+      gap: 0 !important;
+    }
+    .footer__column {
+      border-bottom: 1px solid {{ footer_text | color_modify: 'alpha', 0.1 }};
+      padding-bottom: var(--space-1);
+    }
+    .footer__column:last-child {
+      border-bottom: none;
+    }
+  }
+  /* Accordion show/hide */
+  @media (max-width: 767px) {
+    .footer__accordion-content[data-accordion-content] {
+      {% if section.settings.mobile_accordion %}
+        display: none;
+        padding-bottom: var(--space-4);
+      {% endif %}
+    }
+    .footer__accordion-content[data-accordion-content].is-open {
+      display: flex !important;
+    }
+    .footer__accordion-toggle[aria-expanded="true"] .footer__accordion-chevron {
+      transform: rotate(180deg);
+    }
+    .hide-mobile { display: none !important; }
+  }
+  @media (min-width: 768px) {
+    .hide-desktop { display: none !important; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('[data-accordion-toggle]').forEach(function(toggle) {
+    toggle.addEventListener('click', function() {
+      var expanded = this.getAttribute('aria-expanded') === 'true';
+      var content = this.closest('.footer__column').querySelector('[data-accordion-content]');
+      this.setAttribute('aria-expanded', !expanded);
+      if (content) {
+        content.classList.toggle('is-open', !expanded);
+      }
+    });
+  });
+</script>
+
 {% schema %}
 {
   "name": "Footer",
+  "max_blocks": 5,
   "settings": [
     {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#1C2E23"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#F5F2EC"
+    },
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "footer_logo",
+      "label": "Footer logo",
+      "info": "Leave blank to show shop name as text."
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo width",
+      "min": 60,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 120
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "column_count",
+      "label": "Column count",
+      "options": [
+        { "value": "3", "label": "3 columns" },
+        { "value": "4", "label": "4 columns" }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_accordion",
+      "label": "Collapsible columns on mobile",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_separator",
+      "label": "Show separator line above footer",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_newsletter",
+      "label": "Enable newsletter signup in footer",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Bottom bar"
+    },
+    {
       "type": "text",
-      "id": "col1_heading",
-      "label": "Column 1 heading",
-      "default": "Products"
+      "id": "copyright_text",
+      "label": "Copyright name",
+      "default": "BaseCode Health",
+      "info": "Year is added automatically. e.g. \"© 2025 BaseCode Health. All rights reserved.\""
     },
     {
-      "type": "link_list",
-      "id": "col1_menu",
-      "label": "Column 1 menu",
-      "default": "footer"
+      "type": "checkbox",
+      "id": "show_policy_links",
+      "label": "Show Privacy + Terms links",
+      "default": true
     },
     {
-      "type": "text",
-      "id": "col2_heading",
-      "label": "Column 2 heading",
-      "default": "Info"
+      "type": "checkbox",
+      "id": "show_social_icons",
+      "label": "Show social icons",
+      "default": true,
+      "info": "Icons pull from Social media URLs in Theme settings."
     },
     {
-      "type": "link_list",
-      "id": "col2_menu",
-      "label": "Column 2 menu",
-      "default": "footer"
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show accepted payment icons",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu_column",
+      "name": "Menu column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Menu"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu",
+          "default": "footer"
+        }
+      ]
     },
     {
-      "type": "text",
-      "id": "col3_heading",
-      "label": "Column 3 heading",
-      "default": "Social"
+      "type": "text_column",
+      "name": "Text column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "About"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Supplements informed by biological diversity research. Built in Toronto, backed by science.</p>"
+        }
+      ]
     },
     {
-      "type": "text",
-      "id": "col4_heading",
-      "label": "Column 4 heading",
-      "default": "About BaseCode"
-    },
+      "type": "newsletter_column",
+      "name": "Newsletter column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Stay in the loop"
+        },
+        {
+          "type": "text",
+          "id": "subtext",
+          "label": "Subtext",
+          "default": "Research, updates, and early access — no filler."
+        },
+        {
+          "type": "text",
+          "id": "email_placeholder",
+          "label": "Email placeholder",
+          "default": "Your email address"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Subscribe"
+        }
+      ]
+    }
+  ],
+  "presets": [
     {
-      "type": "textarea",
-      "id": "col4_text",
-      "label": "Column 4 text",
-      "default": "Supplements informed by biological diversity research. Built in Toronto, backed by science, designed for your unique biology."
+      "name": "Footer",
+      "blocks": [
+        {
+          "type": "menu_column",
+          "settings": {
+            "heading": "Products",
+            "menu": "footer"
+          }
+        },
+        {
+          "type": "menu_column",
+          "settings": {
+            "heading": "Info",
+            "menu": "footer"
+          }
+        },
+        {
+          "type": "text_column",
+          "settings": {
+            "heading": "About BaseCode",
+            "text": "<p>Supplements informed by biological diversity research. Built in Toronto, backed by science, designed for your unique biology.</p>"
+          }
+        },
+        {
+          "type": "newsletter_column",
+          "settings": {
+            "heading": "Stay in the loop",
+            "subtext": "Research, updates, and early access — no filler."
+          }
+        }
+      ]
     }
   ]
 }

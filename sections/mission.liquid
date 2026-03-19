@@ -1,68 +1,504 @@
 {%- comment -%}BaseCode Root - mission{%- endcomment -%}
-<section class="section bg-white">
-  <div class="container">
-    <div class="mission">
-      <!-- Image -->
-      <div class="mission__image reveal-left">
-        {%- if section.settings.image != blank -%}
+
+{%- liquid
+  assign section_id = 'mission-' | append: section.id
+
+  assign pt = section.settings.padding_top | append: 'px'
+  assign pb = section.settings.padding_bottom | append: 'px'
+
+  assign layout_class = ''
+  if section.settings.layout == 'image_right'
+    assign layout_class = 'mission--image-right'
+  endif
+
+  assign full_width_class = ''
+  if section.settings.full_width
+    assign full_width_class = 'mission--full-width'
+  endif
+
+  assign animation_class = ''
+  if section.settings.enable_animation
+    assign animation_class = 'mission--animated'
+  endif
+
+  assign img_width_pct = section.settings.image_width_pct | default: 50
+
+  assign heading_tag = section.settings.heading_level | default: 'h2'
+-%}
+
+<style>
+  #{{ section_id }} {
+    background-color: {{ section.settings.bg_color }};
+    padding-top: {{ pt }};
+    padding-bottom: {{ pb }};
+  }
+
+  #{{ section_id }} .mission__subtitle {
+    color: {{ section.settings.subheading_color }};
+  }
+
+  #{{ section_id }} .mission__heading {
+    color: {{ section.settings.text_color }};
+  }
+
+  #{{ section_id }} .mission__body {
+    color: {{ section.settings.text_color }};
+  }
+
+  #{{ section_id }} .mission__check-icon {
+    color: {{ section.settings.accent_color }};
+    flex-shrink: 0;
+  }
+
+  #{{ section_id }} .mission__check-item span {
+    color: {{ section.settings.text_color }};
+  }
+
+  #{{ section_id }} .mission__image-wrap {
+    width: {{ img_width_pct }}%;
+  }
+
+  {%- if section.settings.image_ratio == 'portrait' %}
+  #{{ section_id }} .mission__image-wrap .mission__img {
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+  {%- elsif section.settings.image_ratio == 'square' %}
+  #{{ section_id }} .mission__image-wrap .mission__img {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+  {%- else %}
+  #{{ section_id }} .mission__image-wrap .mission__img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  {%- endif %}
+
+  {%- if section.settings.height_mode == 'fixed' %}
+  #{{ section_id }} .mission__image-wrap {
+    height: {{ section.settings.desktop_height }}px;
+    overflow: hidden;
+  }
+  #{{ section_id }} .mission__image-wrap .mission__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  @media (max-width: 767px) {
+    #{{ section_id }} .mission__image-wrap {
+      height: {{ section.settings.mobile_height }}px;
+    }
+  }
+  {%- endif %}
+
+  #{{ section_id }} .mission__content {
+    {%- if section.settings.text_align_desktop == 'center' %}
+    text-align: center;
+    align-items: center;
+    {%- else %}
+    text-align: left;
+    align-items: flex-start;
+    {%- endif %}
+  }
+
+  {%- case section.settings.heading_size %}
+    {%- when 'small' %}
+  #{{ section_id }} .mission__heading { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
+    {%- when 'medium' %}
+  #{{ section_id }} .mission__heading { font-size: clamp(1.5rem, 3vw, 2.25rem); }
+    {%- when 'large' %}
+  #{{ section_id }} .mission__heading { font-size: clamp(1.875rem, 4vw, 3rem); }
+    {%- when 'xlarge' %}
+  #{{ section_id }} .mission__heading { font-size: clamp(2.25rem, 5vw, 3.75rem); }
+  {%- endcase %}
+
+  @media (max-width: 767px) {
+    #{{ section_id }} .mission__inner {
+      flex-direction: column !important;
+    }
+    #{{ section_id }} .mission__image-wrap {
+      width: 100%;
+    }
+    #{{ section_id }} .mission__content {
+      width: 100%;
+    }
+  }
+</style>
+
+<section
+  id="{{ section_id }}"
+  class="mission-section {{ full_width_class }} {{ animation_class }}"
+  aria-label="{{ section.settings.heading | escape }}"
+>
+  {%- if section.settings.full_width %}
+  <div class="mission__outer">
+  {%- else %}
+  <div class="mission__outer" style="max-width: 1280px; margin: 0 auto; padding: 0 1.5rem;">
+  {%- endif %}
+
+    <div
+      class="mission__inner {{ layout_class }}"
+      style="display: flex; gap: 3rem; align-items: center;"
+    >
+
+      <!-- Image Column -->
+      <div class="mission__image-wrap">
+        {%- liquid
+          assign desktop_img = section.settings.image
+          assign mobile_img   = section.settings.mobile_image
+          assign fallback     = section.settings.fallback_asset | default: 'origin-bottle.webp'
+          assign img_alt      = section.settings.image.alt | default: section.settings.heading | escape
+        -%}
+
+        {%- if mobile_img != blank %}
+        <picture>
+          <source
+            media="(max-width: 767px)"
+            srcset="{{ mobile_img | image_url: width: 400 }} 400w, {{ mobile_img | image_url: width: 800 }} 800w"
+            sizes="100vw"
+          >
+          {%- if desktop_img != blank %}
+          <source
+            media="(min-width: 768px)"
+            srcset="{{ desktop_img | image_url: width: 600 }} 600w, {{ desktop_img | image_url: width: 1000 }} 1000w, {{ desktop_img | image_url: width: 1400 }} 1400w"
+            sizes="{{ img_width_pct }}vw"
+          >
           <img
-            src="{{ section.settings.image | image_url: width: 800 }}"
-            srcset="{{ section.settings.image | image_url: width: 400 }} 400w, {{ section.settings.image | image_url: width: 800 }} 800w"
-            sizes="(max-width: 767px) 100vw, 50vw"
-            alt="{{ section.settings.image.alt | default: section.settings.heading }}"
+            class="mission__img"
+            src="{{ desktop_img | image_url: width: 800 }}"
+            alt="{{ img_alt }}"
+            loading="lazy"
+            width="{{ desktop_img.width }}"
+            height="{{ desktop_img.height }}"
+          >
+          {%- else %}
+          <img
+            class="mission__img"
+            src="{{ fallback | asset_url }}"
+            alt="{{ section.settings.heading | escape }}"
             loading="lazy"
           >
-        {%- else -%}
-          <img
-            src="{{ section.settings.fallback_asset | default: 'origin-bottle.webp' | asset_url }}"
-            alt="BaseCode Health Origin"
-            loading="lazy"
-            style="width: 100%; height: 100%; object-fit: cover;"
-          >
-        {%- endif -%}
+          {%- endif %}
+        </picture>
+        {%- elsif desktop_img != blank %}
+        <img
+          class="mission__img"
+          src="{{ desktop_img | image_url: width: 800 }}"
+          srcset="{{ desktop_img | image_url: width: 400 }} 400w, {{ desktop_img | image_url: width: 800 }} 800w, {{ desktop_img | image_url: width: 1200 }} 1200w"
+          sizes="(max-width: 767px) 100vw, {{ img_width_pct }}vw"
+          alt="{{ img_alt }}"
+          loading="lazy"
+          width="{{ desktop_img.width }}"
+          height="{{ desktop_img.height }}"
+        >
+        {%- else %}
+        <img
+          class="mission__img"
+          src="{{ fallback | asset_url }}"
+          alt="{{ section.settings.heading | escape }}"
+          loading="lazy"
+          style="width: 100%; height: 100%; object-fit: cover;"
+        >
+        {%- endif %}
       </div>
+      <!-- /Image Column -->
 
-      <!-- Content -->
-      <div class="reveal-right">
+      <!-- Content Column -->
+      <div class="mission__content" style="flex: 1; display: flex; flex-direction: column; gap: 1.25rem;">
+
         {%- if section.settings.subtitle != blank -%}
-          <p class="mission__subtitle">{{ section.settings.subtitle }}</p>
+          <p class="mission__subtitle" style="font-size: 0.875rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin: 0;">
+            {{ section.settings.subtitle }}
+          </p>
         {%- endif -%}
 
-        <h2 class="mission__heading">{{ section.settings.heading }}</h2>
+        {%- if section.settings.heading != blank -%}
+          <{{ heading_tag }} class="mission__heading" style="margin: 0; line-height: 1.2; font-weight: 700;">
+            {{ section.settings.heading }}
+          </{{ heading_tag }}>
+        {%- endif -%}
 
-        <div class="mission__checklist">
-          {%- for block in section.blocks -%}
-            <div class="mission__check-item" {{ block.shopify_attributes }}>
-              <div class="mission__check-icon">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        {%- if section.settings.body_text != blank -%}
+          <div class="mission__body" style="font-size: 1rem; line-height: 1.6; margin: 0;">
+            {{ section.settings.body_text }}
+          </div>
+        {%- endif -%}
+
+        {%- if section.blocks.size > 0 -%}
+          <div class="mission__checklist" style="display: flex; flex-direction: column; gap: 0.75rem; margin: 0;">
+            {%- for block in section.blocks -%}
+              <div class="mission__check-item" style="display: flex; align-items: flex-start; gap: 0.625rem;" {{ block.shopify_attributes }}>
+                <div class="mission__check-icon" style="margin-top: 0.1em; line-height: 1;">
+                  {%- if section.settings.icon_style == 'bullet' %}
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <circle cx="12" cy="12" r="6"/>
+                    </svg>
+                  {%- else %}
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  {%- endif %}
+                </div>
+                <span style="font-size: 0.9375rem; line-height: 1.5;">{{ block.settings.text }}</span>
               </div>
-              <span>{{ block.settings.text }}</span>
-            </div>
-          {%- endfor -%}
-        </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
 
         {%- if section.settings.button_text != blank -%}
-          <a href="{{ section.settings.button_link }}" class="link">{{ section.settings.button_text }}</a>
+          {%- liquid
+            assign btn_style = section.settings.button_style
+          -%}
+          <div style="margin-top: 0.5rem;">
+            {%- if btn_style == 'primary' %}
+            <a href="{{ section.settings.button_link }}" class="btn btn--primary" style="display: inline-block; padding: 0.75rem 1.75rem; background-color: {{ section.settings.accent_color }}; color: #ffffff; font-weight: 600; text-decoration: none; border-radius: 4px; letter-spacing: 0.03em;">
+              {{ section.settings.button_text }}
+            </a>
+            {%- elsif btn_style == 'secondary' %}
+            <a href="{{ section.settings.button_link }}" class="btn btn--secondary" style="display: inline-block; padding: 0.75rem 1.75rem; background-color: transparent; color: {{ section.settings.accent_color }}; font-weight: 600; text-decoration: none; border-radius: 4px; border: 2px solid {{ section.settings.accent_color }}; letter-spacing: 0.03em;">
+              {{ section.settings.button_text }}
+            </a>
+            {%- else %}
+            <a href="{{ section.settings.button_link }}" class="btn btn--link" style="display: inline-flex; align-items: center; gap: 0.375rem; color: {{ section.settings.accent_color }}; font-weight: 600; text-decoration: none; font-size: 0.9375rem;">
+              {{ section.settings.button_text }}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+            {%- endif %}
+          </div>
         {%- endif -%}
+
       </div>
+      <!-- /Content Column -->
+
     </div>
   </div>
 </section>
 
+{%- if section.settings.enable_animation %}
+<script>
+  (function () {
+    var section = document.getElementById('{{ section_id }}');
+    if (!section) return;
+    var items = section.querySelectorAll('.mission__image-wrap, .mission__content');
+    items.forEach(function (el) {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(24px)';
+      el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+    });
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var delay = 0;
+          items.forEach(function (el) {
+            setTimeout(function () {
+              el.style.opacity = '1';
+              el.style.transform = 'translateY(0)';
+            }, delay);
+            delay += 150;
+          });
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.15 });
+    observer.observe(section);
+  })();
+</script>
+{%- endif %}
+
 {% schema %}
 {
   "name": "Mission",
+  "tag": "section",
+  "class": "section-mission",
   "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Image position",
+      "options": [
+        { "value": "image_left",  "label": "Image left"  },
+        { "value": "image_right", "label": "Image right" }
+      ],
+      "default": "image_left"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#F5F2EC"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#1C2E23"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading color",
+      "default": "#C4783A"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color (icons, buttons)",
+      "default": "#C4783A"
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Image"
+      "label": "Desktop image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile image",
+      "info": "Optional. Falls back to desktop image if not set."
+    },
+    {
+      "type": "text",
+      "id": "fallback_asset",
+      "label": "Fallback asset filename",
+      "default": "origin-bottle.webp",
+      "info": "Theme asset filename used when no image is picked."
+    },
+    {
+      "type": "range",
+      "id": "image_width_pct",
+      "label": "Desktop image width",
+      "min": 30,
+      "max": 70,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "options": [
+        { "value": "adapt",   "label": "Adapt to image" },
+        { "value": "portrait","label": "Portrait (3:4)"  },
+        { "value": "square",  "label": "Square (1:1)"   }
+      ],
+      "default": "adapt"
+    },
+    {
+      "type": "header",
+      "content": "Height"
+    },
+    {
+      "type": "select",
+      "id": "height_mode",
+      "label": "Height mode",
+      "options": [
+        { "value": "adapt", "label": "Adapt to image"  },
+        { "value": "fixed", "label": "Fixed height"    }
+      ],
+      "default": "adapt"
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "label": "Fixed height — desktop",
+      "min": 200,
+      "max": 900,
+      "step": 20,
+      "unit": "px",
+      "default": 560,
+      "info": "Only applies when Height mode is Fixed."
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "label": "Fixed height — mobile",
+      "min": 160,
+      "max": 600,
+      "step": 20,
+      "unit": "px",
+      "default": 320,
+      "info": "Only applies when Height mode is Fixed."
+    },
+    {
+      "type": "header",
+      "content": "Content"
     },
     {
       "type": "text",
       "id": "subtitle",
-      "label": "Subtitle",
+      "label": "Subheading",
       "default": "Our Mission"
+    },
+    {
+      "type": "select",
+      "id": "heading_level",
+      "label": "Heading level",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "small",  "label": "Small"        },
+        { "value": "medium", "label": "Medium"       },
+        { "value": "large",  "label": "Large"        },
+        { "value": "xlarge", "label": "Extra large"  }
+      ],
+      "default": "large"
     },
     {
       "type": "text",
@@ -71,34 +507,82 @@
       "default": "Supplements informed by biological diversity research."
     },
     {
-      "type": "text",
-      "id": "fallback_asset",
-      "label": "Fallback asset filename",
-      "default": "origin-bottle.webp",
-      "info": "Used when no image is picked"
+      "type": "richtext",
+      "id": "body_text",
+      "label": "Body text"
+    },
+    {
+      "type": "select",
+      "id": "text_align_desktop",
+      "label": "Text alignment (desktop)",
+      "options": [
+        { "value": "left",   "label": "Left"   },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Button"
     },
     {
       "type": "text",
       "id": "button_text",
       "label": "Button text",
-      "default": "Read More"
+      "default": "Learn the science"
     },
     {
       "type": "url",
       "id": "button_link",
       "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        { "value": "link",      "label": "Link (text arrow)"    },
+        { "value": "primary",   "label": "Primary (filled)"     },
+        { "value": "secondary", "label": "Secondary (outlined)" }
+      ],
+      "default": "link"
+    },
+    {
+      "type": "header",
+      "content": "Checklist"
+    },
+    {
+      "type": "select",
+      "id": "icon_style",
+      "label": "Check icon style",
+      "options": [
+        { "value": "checkmark", "label": "Checkmark" },
+        { "value": "bullet",    "label": "Bullet"    }
+      ],
+      "default": "checkmark"
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable scroll animation",
+      "default": true
     }
   ],
   "blocks": [
     {
       "type": "item",
       "name": "Checklist item",
+      "limit": 10,
       "settings": [
         {
           "type": "text",
           "id": "text",
           "label": "Text",
-          "default": "Informed by the HELIUS study (2,084 subjects, 6 ethnic groups)."
+          "default": "Add a checklist point here."
         }
       ]
     }
@@ -106,11 +590,33 @@
   "presets": [
     {
       "name": "Mission",
+      "settings": {
+        "subtitle": "Our Mission",
+        "heading": "Supplements informed by biological diversity research.",
+        "button_text": "Learn the science",
+        "button_style": "link",
+        "bg_color": "#F5F2EC",
+        "text_color": "#1C2E23",
+        "subheading_color": "#C4783A",
+        "accent_color": "#C4783A",
+        "layout": "image_left",
+        "image_width_pct": 50,
+        "image_ratio": "adapt",
+        "height_mode": "adapt",
+        "heading_level": "h2",
+        "heading_size": "large",
+        "text_align_desktop": "left",
+        "icon_style": "checkmark",
+        "enable_animation": true,
+        "full_width": false,
+        "padding_top": 60,
+        "padding_bottom": 60
+      },
       "blocks": [
         {
           "type": "item",
           "settings": {
-            "text": "Informed by the HELIUS study (2,084 subjects, 6 ethnic groups)."
+            "text": "Informed by the HELIUS study — 2,084 subjects, 6 ethnic groups."
           }
         },
         {

@@ -1,0 +1,760 @@
+{%- comment -%}BaseCode Root - background-video (Wonder-level customization){%- endcomment -%}
+
+{%- liquid
+  assign bg_type         = section.settings.bg_type          | default: 'youtube'
+  assign video_url       = section.settings.video_url        | default: ''
+  assign autoplay        = section.settings.autoplay
+  assign loop            = section.settings.loop
+  assign show_controls   = section.settings.show_controls
+  assign mobile_image    = section.settings.mobile_image
+  assign height_type     = section.settings.height_type      | default: 'fixed'
+  assign desktop_height  = section.settings.desktop_height   | default: 500
+  assign mobile_height   = section.settings.mobile_height    | default: 400
+  assign full_width      = section.settings.full_width
+  assign subheading      = section.settings.subheading
+  assign heading         = section.settings.heading
+  assign heading_tag     = section.settings.heading_tag      | default: 'h2'
+  assign heading_sz      = section.settings.heading_size     | default: 'medium'
+  assign body_text       = section.settings.text
+  assign text_align_d    = section.settings.text_align_desktop | default: 'center'
+  assign text_align_m    = section.settings.text_align_mobile  | default: 'center'
+  assign overlay_color   = section.settings.overlay_color    | default: '#000000'
+  assign overlay_opacity = section.settings.overlay_opacity  | default: 50
+  assign text_col        = section.settings.text_color       | default: '#FFFFFF'
+  assign pt              = section.settings.padding_top      | default: 0
+  assign pb              = section.settings.padding_bottom   | default: 0
+  assign animate         = section.settings.enable_animation
+
+  comment
+    Parse YouTube / Vimeo IDs from URL
+    YouTube: youtube.com/watch?v=ID  |  youtu.be/ID  |  youtube.com/embed/ID
+    Vimeo:   vimeo.com/ID
+  endcomment
+
+  assign yt_id      = ''
+  assign vimeo_id   = ''
+  assign is_direct  = false
+  assign embed_url  = ''
+
+  if bg_type == 'youtube' and video_url != blank
+    assign yt_parts = video_url | split: 'v='
+    if yt_parts.size > 1
+      assign yt_id = yt_parts[1] | split: '&' | first
+    else
+      assign yt_parts2 = video_url | split: 'youtu.be/'
+      if yt_parts2.size > 1
+        assign yt_id = yt_parts2[1] | split: '?' | first
+      else
+        assign yt_parts3 = video_url | split: '/embed/'
+        if yt_parts3.size > 1
+          assign yt_id = yt_parts3[1] | split: '?' | first
+        endif
+      endif
+    endif
+    if yt_id != blank
+      assign autoplay_param = '0'
+      if autoplay
+        assign autoplay_param = '1'
+      endif
+      assign loop_param = '0'
+      if loop
+        assign loop_param = '1'
+      endif
+      assign controls_param = '0'
+      if show_controls
+        assign controls_param = '1'
+      endif
+      assign embed_url = 'https://www.youtube.com/embed/' | append: yt_id | append: '?autoplay=' | append: autoplay_param | append: '&loop=' | append: loop_param | append: '&playlist=' | append: yt_id | append: '&controls=' | append: controls_param | append: '&mute=1&playsinline=1&rel=0&showinfo=0&modestbranding=1'
+    endif
+  elsif bg_type == 'vimeo' and video_url != blank
+    assign vimeo_parts = video_url | split: 'vimeo.com/'
+    if vimeo_parts.size > 1
+      assign vimeo_id = vimeo_parts[1] | split: '/' | first | split: '?' | first
+    endif
+    if vimeo_id != blank
+      assign autoplay_param = '0'
+      if autoplay
+        assign autoplay_param = '1'
+      endif
+      assign loop_param = '0'
+      if loop
+        assign loop_param = '1'
+      endif
+      assign controls_param = '0'
+      if show_controls
+        assign controls_param = '1'
+      endif
+      assign embed_url = 'https://player.vimeo.com/video/' | append: vimeo_id | append: '?autoplay=' | append: autoplay_param | append: '&loop=' | append: loop_param | append: '&controls=' | append: controls_param | append: '&muted=1&background=1&title=0&byline=0&portrait=0'
+    endif
+  elsif bg_type == 'direct' and video_url != blank
+    assign is_direct = true
+  endif
+-%}
+
+<style>
+  #section-{{ section.id }} {
+    position: relative;
+    overflow: hidden;
+    padding-top: {{ pt }}px;
+    padding-bottom: {{ pb }}px;
+    {%- if height_type == 'fixed' -%}
+      min-height: {{ desktop_height }}px;
+    {%- else -%}
+      min-height: 60vh;
+    {%- endif -%}
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── Video background layer ──────────────────────── */
+  #section-{{ section.id }} .bv__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  /* iframe (YouTube / Vimeo) */
+  #section-{{ section.id }} .bv__iframe-wrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* 16:9 cover trick — oversizes the iframe so it always fills */
+    width: max(100%, calc(100vh * 16 / 9));
+    height: max(100%, calc(100vw * 9 / 16));
+    pointer-events: none;
+  }
+
+  #section-{{ section.id }} .bv__iframe-wrap iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  /* HTML5 <video> */
+  #section-{{ section.id }} .bv__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Mobile fallback image */
+  #section-{{ section.id }} .bv__mobile-fallback {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    display: none;
+  }
+
+  #section-{{ section.id }} .bv__mobile-fallback img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* ── Overlay ─────────────────────────────────────── */
+  #section-{{ section.id }} .bv__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background-color: {{ overlay_color }};
+    opacity: {{ overlay_opacity | divided_by: 100.0 }};
+  }
+
+  /* ── Content ─────────────────────────────────────── */
+  #section-{{ section.id }} .bv__content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    {%- if full_width -%}
+      padding: var(--space-12) var(--container-padding);
+    {%- else -%}
+      max-width: var(--container-max);
+      padding: var(--space-12) var(--container-padding);
+      margin: 0 auto;
+    {%- endif -%}
+    color: {{ text_col }};
+    text-align: {{ text_align_d }};
+  }
+
+  #section-{{ section.id }} .bv__inner {
+    max-width: 700px;
+    {% if text_align_d == 'center' %}
+      margin: 0 auto;
+    {% elsif text_align_d == 'right' %}
+      margin-left: auto;
+    {% else %}
+      margin-right: auto;
+    {% endif %}
+  }
+
+  /* ── Subheading ──────────────────────────────────── */
+  #section-{{ section.id }} .bv__subheading {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.8;
+    margin-bottom: 0.75rem;
+  }
+
+  /* ── Heading ─────────────────────────────────────── */
+  #section-{{ section.id }} .bv__heading {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+    {% if heading_sz == 'small' %}
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+    {% elsif heading_sz == 'medium' %}
+      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    {% elsif heading_sz == 'large' %}
+      font-size: clamp(2.25rem, 4.5vw, 3.75rem);
+    {% elsif heading_sz == 'xlarge' %}
+      font-size: clamp(2.75rem, 6vw, 5rem);
+    {% else %}
+      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    {% endif %}
+  }
+
+  /* ── Body text ───────────────────────────────────── */
+  #section-{{ section.id }} .bv__text {
+    font-size: var(--text-lg);
+    line-height: 1.65;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+    max-width: 560px;
+    {% if text_align_d == 'center' %}
+      margin-left: auto;
+      margin-right: auto;
+    {% endif %}
+  }
+
+  /* ── Buttons ─────────────────────────────────────── */
+  #section-{{ section.id }} .bv__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    {% if text_align_d == 'center' %}
+      justify-content: center;
+    {% elsif text_align_d == 'right' %}
+      justify-content: flex-end;
+    {% endif %}
+  }
+
+  /* ── Animation ───────────────────────────────────── */
+  {%- if animate -%}
+  #section-{{ section.id }} .animate-fade {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  #section-{{ section.id }} .animate-fade.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  {%- endif -%}
+
+  /* ── Mobile ──────────────────────────────────────── */
+  @media (max-width: 767px) {
+    #section-{{ section.id }} {
+      {%- if height_type == 'fixed' -%}
+        min-height: {{ mobile_height }}px;
+      {%- endif -%}
+      text-align: {{ text_align_m }};
+    }
+
+    #section-{{ section.id }} .bv__inner {
+      {% if text_align_m == 'center' %}
+        margin: 0 auto;
+      {% elsif text_align_m == 'right' %}
+        margin-left: auto;
+        margin-right: 0;
+      {% else %}
+        margin-right: auto;
+        margin-left: 0;
+      {% endif %}
+    }
+
+    #section-{{ section.id }} .bv__text {
+      {% if text_align_m == 'center' %}
+        margin-left: auto;
+        margin-right: auto;
+      {% elsif text_align_m == 'right' %}
+        margin-left: auto;
+      {% else %}
+        margin-left: 0;
+        margin-right: auto;
+      {% endif %}
+    }
+
+    #section-{{ section.id }} .bv__buttons {
+      {% if text_align_m == 'center' %}
+        justify-content: center;
+      {% elsif text_align_m == 'right' %}
+        justify-content: flex-end;
+      {% else %}
+        justify-content: flex-start;
+      {% endif %}
+    }
+
+    {%- if mobile_image != blank -%}
+      /* Hide video, show fallback image on mobile */
+      #section-{{ section.id }} .bv__media {
+        display: none;
+      }
+      #section-{{ section.id }} .bv__mobile-fallback {
+        display: block;
+      }
+    {%- endif -%}
+  }
+</style>
+
+<section
+  id="section-{{ section.id }}"
+  class="background-video-section{% if full_width %} background-video-section--full{% endif %}"
+  aria-label="{{ heading | default: 'Background video section' | escape }}"
+>
+
+  {%- comment -%} ── Background video ─────────────────────────────── {%- endcomment -%}
+  <div class="bv__media" aria-hidden="true">
+    {%- if is_direct and video_url != blank -%}
+      <video
+        class="bv__video"
+        {% if autoplay %}autoplay{% endif %}
+        {% if loop %}loop{% endif %}
+        {% if show_controls %}controls{% else %}muted playsinline{% endif %}
+        muted
+        playsinline
+        preload="metadata"
+      >
+        <source src="{{ video_url }}" type="video/mp4">
+      </video>
+    {%- elsif embed_url != blank -%}
+      <div class="bv__iframe-wrap">
+        <iframe
+          src="{{ embed_url }}"
+          title="{{ heading | default: 'Background video' | escape }}"
+          allow="autoplay; fullscreen"
+          loading="lazy"
+        ></iframe>
+      </div>
+    {%- else -%}
+      {%- comment -%} Editor placeholder when no URL is set {%- endcomment -%}
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg, var(--color-primary), var(--color-accent));display:flex;align-items:center;justify-content:center;">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- comment -%} ── Mobile fallback image ─────────────────────────── {%- endcomment -%}
+  {%- if mobile_image != blank -%}
+    <div class="bv__mobile-fallback" aria-hidden="true">
+      <img
+        src="{{ mobile_image | image_url: width: 1200 }}"
+        srcset="{{ mobile_image | image_url: width: 600 }} 600w, {{ mobile_image | image_url: width: 900 }} 900w, {{ mobile_image | image_url: width: 1200 }} 1200w"
+        sizes="100vw"
+        alt="{{ mobile_image.alt | default: heading | escape }}"
+        loading="lazy"
+      >
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} ── Overlay ──────────────────────────────────────────── {%- endcomment -%}
+  <div class="bv__overlay" aria-hidden="true"></div>
+
+  {%- comment -%} ── Content ──────────────────────────────────────────── {%- endcomment -%}
+  <div class="bv__content">
+    <div class="bv__inner">
+
+      {%- if subheading != blank -%}
+        <p class="bv__subheading{% if animate %} animate-fade{% endif %}">
+          {{ subheading | escape }}
+        </p>
+      {%- endif -%}
+
+      {%- if heading != blank -%}
+        <{{ heading_tag }}
+          class="bv__heading{% if animate %} animate-fade{% endif %}"
+          {% if animate %}style="transition-delay: 80ms;"{% endif %}
+        >
+          {{ heading }}
+        </{{ heading_tag }}>
+      {%- endif -%}
+
+      {%- if body_text != blank -%}
+        <p
+          class="bv__text{% if animate %} animate-fade{% endif %}"
+          {% if animate %}style="transition-delay: 160ms;"{% endif %}
+        >
+          {{ body_text }}
+        </p>
+      {%- endif -%}
+
+      {%- if section.settings.button_1_text != blank or section.settings.button_2_text != blank -%}
+        <div
+          class="bv__buttons{% if animate %} animate-fade{% endif %}"
+          {% if animate %}style="transition-delay: 240ms;"{% endif %}
+        >
+          {%- if section.settings.button_1_text != blank -%}
+            <a
+              href="{{ section.settings.button_1_link | default: '#' }}"
+              class="btn btn--{{ section.settings.button_1_style | default: 'white' }} btn--lg"
+            >
+              {{ section.settings.button_1_text | escape }}
+            </a>
+          {%- endif -%}
+
+          {%- if section.settings.button_2_text != blank -%}
+            <a
+              href="{{ section.settings.button_2_link | default: '#' }}"
+              class="btn btn--{{ section.settings.button_2_style | default: 'secondary' }} btn--lg"
+            >
+              {{ section.settings.button_2_text | escape }}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+    </div>
+  </div>
+
+</section>
+
+{%- if animate -%}
+<script>
+(function () {
+  var targets = document.querySelectorAll('#section-{{ section.id }} .animate-fade');
+  if (!targets.length) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('is-visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  targets.forEach(function (el) { io.observe(el); });
+})();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Background Video",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Video Source"
+    },
+    {
+      "type": "select",
+      "id": "bg_type",
+      "label": "Video type",
+      "info": "Choose YouTube, Vimeo, or a direct .mp4 URL",
+      "options": [
+        { "value": "youtube", "label": "YouTube" },
+        { "value": "vimeo",   "label": "Vimeo" },
+        { "value": "direct",  "label": "Direct .mp4 URL" }
+      ],
+      "default": "youtube"
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "Video URL",
+      "info": "YouTube: https://youtu.be/ID or https://www.youtube.com/watch?v=ID | Vimeo: https://vimeo.com/ID | Direct: full .mp4 URL"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay",
+      "default": true,
+      "info": "Browsers only allow autoplay when video is muted"
+    },
+    {
+      "type": "checkbox",
+      "id": "loop",
+      "label": "Loop video",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_controls",
+      "label": "Show video controls",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Mobile Fallback"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile fallback image",
+      "info": "Shown instead of video on mobile. Recommended: 750×1000px."
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "info": "Displayed above the heading in a small caps style"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Your Biology Isn't One-Size-Fits-All."
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "small",  "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large",  "label": "Large" },
+        { "value": "xlarge", "label": "X-Large" }
+      ],
+      "default": "large"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading level (SEO)",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Body text",
+      "default": "Origin is the first probiotic informed by biological diversity research."
+    },
+    {
+      "type": "header",
+      "content": "Button 1"
+    },
+    {
+      "type": "text",
+      "id": "button_1_text",
+      "label": "Button 1 text",
+      "default": "Shop Origin"
+    },
+    {
+      "type": "url",
+      "id": "button_1_link",
+      "label": "Button 1 link"
+    },
+    {
+      "type": "select",
+      "id": "button_1_style",
+      "label": "Button 1 style",
+      "options": [
+        { "value": "white",     "label": "White" },
+        { "value": "primary",   "label": "Primary" },
+        { "value": "secondary", "label": "Secondary" },
+        { "value": "outline",   "label": "Outline" }
+      ],
+      "default": "white"
+    },
+    {
+      "type": "header",
+      "content": "Button 2"
+    },
+    {
+      "type": "text",
+      "id": "button_2_text",
+      "label": "Button 2 text"
+    },
+    {
+      "type": "url",
+      "id": "button_2_link",
+      "label": "Button 2 link"
+    },
+    {
+      "type": "select",
+      "id": "button_2_style",
+      "label": "Button 2 style",
+      "options": [
+        { "value": "white",     "label": "White" },
+        { "value": "primary",   "label": "Primary" },
+        { "value": "secondary", "label": "Secondary" },
+        { "value": "outline",   "label": "Outline" }
+      ],
+      "default": "secondary"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "height_type",
+      "label": "Height mode",
+      "options": [
+        { "value": "fixed",        "label": "Fixed (px)" },
+        { "value": "aspect_ratio", "label": "Aspect ratio (16:9)" }
+      ],
+      "default": "fixed"
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "label": "Desktop height",
+      "min": 300,
+      "max": 800,
+      "step": 20,
+      "default": 500,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "label": "Mobile height",
+      "min": 200,
+      "max": 600,
+      "step": 20,
+      "default": 400,
+      "unit": "px",
+      "info": "Only applies in Fixed height mode"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": true,
+      "info": "Removes max-width container constraint on content"
+    },
+    {
+      "type": "select",
+      "id": "text_align_desktop",
+      "label": "Text alignment — desktop",
+      "options": [
+        { "value": "left",   "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right",  "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "text_align_mobile",
+      "label": "Text alignment — mobile",
+      "options": [
+        { "value": "left",   "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right",  "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Overlay & Colors"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 50,
+      "unit": "%"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable scroll animations",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Background Video",
+      "settings": {
+        "bg_type": "youtube",
+        "autoplay": true,
+        "loop": true,
+        "show_controls": false,
+        "height_type": "fixed",
+        "desktop_height": 500,
+        "mobile_height": 400,
+        "full_width": true,
+        "heading": "Your Biology Isn't One-Size-Fits-All.",
+        "heading_size": "large",
+        "heading_tag": "h2",
+        "text": "Origin is the first probiotic informed by biological diversity research.",
+        "button_1_text": "Shop Origin",
+        "button_1_style": "white",
+        "text_align_desktop": "center",
+        "text_align_mobile": "center",
+        "overlay_color": "#000000",
+        "overlay_opacity": 50,
+        "text_color": "#FFFFFF",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "enable_animation": true
+      }
+    }
+  ]
+}
+{% endschema %}

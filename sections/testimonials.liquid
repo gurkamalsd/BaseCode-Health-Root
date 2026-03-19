@@ -1,74 +1,208 @@
-{%- comment -%}BaseCode Root - testimonials{%- endcomment -%}
-<section class="section bg-white">
+{%- comment -%}BaseCode Root - testimonials (fully customizable){%- endcomment -%}
+{%- liquid
+  assign bg = section.settings.bg_color | default: '#FFFFFF'
+  assign text_col = section.settings.text_color | default: ''
+  assign accent = section.settings.accent_color | default: '#f59e0b'
+  assign pt = section.settings.padding_top | default: 60
+  assign pb = section.settings.padding_bottom | default: 60
+  assign layout = section.settings.layout | default: 'carousel'
+  assign columns = section.settings.columns | default: 3
+  assign auto_play = section.settings.auto_play
+  assign auto_play_speed = section.settings.auto_play_speed | default: 5
+  assign card_style = section.settings.card_style | default: 'minimal'
+  assign enable_animation = section.settings.enable_animation
+-%}
+
+<section
+  class="section"
+  style="background:{{ bg }};padding-top:{{ pt }}px;padding-bottom:{{ pb }}px;{% if text_col != blank %}color:{{ text_col }};{% endif %}"
+>
   <div class="container">
-    {%- if section.settings.heading != blank -%}
-      <h2 class="text-center mb-10 reveal-hidden">{{ section.settings.heading }}</h2>
+    {%- if section.settings.subheading != blank -%}
+      <p class="text-center{% if enable_animation %} reveal-hidden{% endif %}" style="font-family:var(--font-heading);font-size:var(--text-sm);font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-accent);margin-bottom:var(--space-3);">{{ section.settings.subheading }}</p>
     {%- endif -%}
 
-    <div class="testimonials__carousel" data-testimonial-carousel>
-      {%- for block in section.blocks -%}
-        <div class="testimonial {% unless forloop.first %}{% endunless %}" data-testimonial-slide="{{ forloop.index0 }}" {% unless forloop.first %}style="display: none;"{% endunless %} {{ block.shopify_attributes }}>
-          {%- if block.settings.avatar != blank -%}
-            <div class="testimonial__avatar">
-              <img src="{{ block.settings.avatar | image_url: width: 160 }}" alt="{{ block.settings.author }}" width="80" height="80" loading="lazy">
-            </div>
-          {%- else -%}
-            <div class="testimonial__avatar" style="background: var(--color-cream); display: flex; align-items: center; justify-content: center;">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-light)" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-            </div>
-          {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="text-center mb-10{% if enable_animation %} reveal-hidden{% endif %}" style="font-size:var(--{{ section.settings.heading_size | default: 'text-3xl' }});">{{ section.settings.heading }}</h2>
+    {%- endif -%}
 
-          <div class="testimonial__stars">★★★★★</div>
+    {%- if layout == 'carousel' -%}
+      <!-- Carousel Layout -->
+      <div class="testimonials__carousel" data-testimonial-carousel{% if auto_play %} data-auto-play="{{ auto_play_speed }}"{% endif %}>
+        {%- for block in section.blocks -%}
+          <div
+            class="testimonial{% if card_style == 'card' %} testimonial--card{% endif %}"
+            data-testimonial-slide="{{ forloop.index0 }}"
+            {% unless forloop.first %}style="display:none;"{% endunless %}
+            {{ block.shopify_attributes }}
+          >
+            {%- if block.settings.avatar != blank -%}
+              <div class="testimonial__avatar">
+                <img src="{{ block.settings.avatar | image_url: width: 160 }}" alt="{{ block.settings.author }}" width="80" height="80" loading="lazy">
+              </div>
+            {%- else -%}
+              <div class="testimonial__avatar" style="background:var(--color-cream);display:flex;align-items:center;justify-content:center;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-light)" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              </div>
+            {%- endif -%}
 
-          <p class="testimonial__quote">"{{ block.settings.quote }}"</p>
+            {%- if section.settings.show_stars -%}
+              <div class="testimonial__stars" style="color:{{ accent }};">
+                {%- for i in (1..5) -%}
+                  {%- if i <= block.settings.rating -%}★{%- else -%}☆{%- endif -%}
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
 
-          <p class="testimonial__author">{{ block.settings.author }}</p>
-        </div>
-      {%- endfor -%}
+            <p class="testimonial__quote">"{{ block.settings.quote }}"</p>
 
-      {%- if section.blocks.size > 1 -%}
-        <div class="carousel__dots">
-          {%- for block in section.blocks -%}
-            <button class="carousel__dot {% if forloop.first %}is-active{% endif %}" data-testimonial-dot="{{ forloop.index0 }}" aria-label="Testimonial {{ forloop.index }}"></button>
-          {%- endfor -%}
-        </div>
-      {%- endif -%}
-    </div>
+            <p class="testimonial__author">
+              {{ block.settings.author }}
+              {%- if block.settings.role != blank -%}
+                <span style="display:block;font-size:var(--text-xs);color:var(--color-text-light);font-weight:400;margin-top:2px;">{{ block.settings.role }}</span>
+              {%- endif -%}
+            </p>
+          </div>
+        {%- endfor -%}
+
+        {%- if section.blocks.size > 1 -%}
+          <div class="carousel__dots">
+            {%- for block in section.blocks -%}
+              <button class="carousel__dot {% if forloop.first %}is-active{% endif %}" data-testimonial-dot="{{ forloop.index0 }}" aria-label="Testimonial {{ forloop.index }}"></button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+    {%- else -%}
+      <!-- Grid Layout -->
+      <div style="display:grid;grid-template-columns:repeat({{ columns }},1fr);gap:var(--space-8);{% if columns > 1 %}@media(max-width:767px){grid-template-columns:1fr;}{% endif %}">
+        {%- for block in section.blocks -%}
+          <div
+            class="testimonial{% if card_style == 'card' %} testimonial--card{% endif %}{% if enable_animation %} reveal-hidden{% endif %}"
+            style="{% if card_style == 'card' %}background:var(--color-cream);padding:var(--space-8);border-radius:var(--radius-lg);{% endif %}"
+            {{ block.shopify_attributes }}
+          >
+            {%- if block.settings.avatar != blank -%}
+              <div class="testimonial__avatar">
+                <img src="{{ block.settings.avatar | image_url: width: 160 }}" alt="{{ block.settings.author }}" width="80" height="80" loading="lazy">
+              </div>
+            {%- else -%}
+              <div class="testimonial__avatar" style="background:{% if card_style == 'card' %}var(--color-white){% else %}var(--color-cream){% endif %};display:flex;align-items:center;justify-content:center;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-light)" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              </div>
+            {%- endif -%}
+
+            {%- if section.settings.show_stars -%}
+              <div class="testimonial__stars" style="color:{{ accent }};">
+                {%- for i in (1..5) -%}
+                  {%- if i <= block.settings.rating -%}★{%- else -%}☆{%- endif -%}
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+
+            <p class="testimonial__quote">"{{ block.settings.quote }}"</p>
+
+            <p class="testimonial__author">
+              {{ block.settings.author }}
+              {%- if block.settings.role != blank -%}
+                <span style="display:block;font-size:var(--text-xs);color:var(--color-text-light);font-weight:400;margin-top:2px;">{{ block.settings.role }}</span>
+              {%- endif -%}
+            </p>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
   </div>
 </section>
+
+{%- if auto_play and layout == 'carousel' -%}
+<script>
+  (function() {
+    var carousel = document.querySelector('[data-testimonial-carousel][data-auto-play]');
+    if (!carousel) return;
+    var speed = parseInt(carousel.dataset.autoPlay) * 1000;
+    var dots = carousel.querySelectorAll('[data-testimonial-dot]');
+    var slides = carousel.querySelectorAll('[data-testimonial-slide]');
+    var current = 0;
+    setInterval(function() {
+      current = (current + 1) % slides.length;
+      slides.forEach(function(s) { s.style.display = 'none'; });
+      dots.forEach(function(d) { d.classList.remove('is-active'); });
+      slides[current].style.display = '';
+      if (dots[current]) dots[current].classList.add('is-active');
+    }, speed);
+  })();
+</script>
+{%- endif -%}
 
 {% schema %}
 {
   "name": "Testimonials",
   "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "subheading", "label": "Subheading" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What our customers say" },
     {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "What our customers say"
-    }
+      "type": "select", "id": "heading_size", "label": "Heading size", "default": "text-3xl",
+      "options": [
+        { "value": "text-2xl", "label": "Small" },
+        { "value": "text-3xl", "label": "Medium" },
+        { "value": "text-4xl", "label": "Large" }
+      ]
+    },
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "select", "id": "layout", "label": "Layout", "default": "carousel",
+      "options": [
+        { "value": "carousel", "label": "Carousel" },
+        { "value": "grid", "label": "Grid" }
+      ]
+    },
+    {
+      "type": "range", "id": "columns", "label": "Columns (grid)", "min": 1, "max": 4, "step": 1, "default": 3,
+      "info": "Only applies to grid layout"
+    },
+    {
+      "type": "select", "id": "card_style", "label": "Card style", "default": "minimal",
+      "options": [
+        { "value": "minimal", "label": "Minimal (no background)" },
+        { "value": "card", "label": "Card (with background)" }
+      ]
+    },
+    { "type": "header", "content": "Stars" },
+    { "type": "checkbox", "id": "show_stars", "label": "Show star rating", "default": true },
+    { "type": "color", "id": "accent_color", "label": "Star color", "default": "#f59e0b" },
+    { "type": "header", "content": "Auto-play" },
+    { "type": "checkbox", "id": "auto_play", "label": "Auto-play carousel", "default": false },
+    {
+      "type": "range", "id": "auto_play_speed", "label": "Auto-play speed (seconds)", "min": 3, "max": 10, "step": 1, "default": 5
+    },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#FFFFFF" },
+    { "type": "color", "id": "text_color", "label": "Text color" },
+    { "type": "header", "content": "Spacing" },
+    {
+      "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "default": 60, "unit": "px"
+    },
+    {
+      "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "default": 60, "unit": "px"
+    },
+    { "type": "header", "content": "Animation" },
+    { "type": "checkbox", "id": "enable_animation", "label": "Enable scroll animation", "default": true }
   ],
   "blocks": [
     {
       "type": "testimonial",
       "name": "Testimonial",
+      "limit": 12,
       "settings": [
+        { "type": "image_picker", "id": "avatar", "label": "Avatar image" },
+        { "type": "textarea", "id": "quote", "label": "Quote", "default": "Finally, a supplement that actually considers my biology. I noticed a difference within the first week." },
+        { "type": "text", "id": "author", "label": "Author name", "default": "Priya S." },
+        { "type": "text", "id": "role", "label": "Role / location", "info": "e.g. 'Toronto, ON' or 'Verified Buyer'" },
         {
-          "type": "image_picker",
-          "id": "avatar",
-          "label": "Avatar image"
-        },
-        {
-          "type": "textarea",
-          "id": "quote",
-          "label": "Quote",
-          "default": "Finally, a supplement that actually considers my biology. I noticed a difference within the first week."
-        },
-        {
-          "type": "text",
-          "id": "author",
-          "label": "Author name",
-          "default": "Priya S."
+          "type": "range", "id": "rating", "label": "Star rating", "min": 1, "max": 5, "step": 1, "default": 5
         }
       ]
     }
@@ -77,8 +211,9 @@
     {
       "name": "Testimonials",
       "blocks": [
-        { "type": "testimonial", "settings": { "quote": "Finally, a supplement that considers my biology. I noticed a difference within the first week.", "author": "Priya S." } },
-        { "type": "testimonial", "settings": { "quote": "I've tried every probiotic out there. Origin is the first one that actually works for my body.", "author": "Marcus T." } }
+        { "type": "testimonial", "settings": { "quote": "Finally, a supplement that considers my biology. I noticed a difference within the first week.", "author": "Priya S.", "role": "Toronto, ON", "rating": 5 } },
+        { "type": "testimonial", "settings": { "quote": "I've tried every probiotic out there. Origin is the first one that actually works for my body.", "author": "Marcus T.", "role": "Verified Buyer", "rating": 5 } },
+        { "type": "testimonial", "settings": { "quote": "As someone from a South Asian background, this is the first time I feel like a supplement was made with me in mind.", "author": "Anjali R.", "role": "Vancouver, BC", "rating": 5 } }
       ]
     }
   ]

@@ -1,75 +1,87 @@
 {%- comment -%}BaseCode Root - free-report-page{%- endcomment -%}
+
+{%- liquid
+  assign primary_color = section.settings.primary_color
+  assign accent_color  = section.settings.accent_color
+  assign light_color   = section.settings.light_color
+  assign card_bg_color = section.settings.card_bg_color
+
+  assign hero_bullets    = section.blocks | where: "type", "hero_bullet"
+  assign stat_blocks     = section.blocks | where: "type", "stat"
+  assign card_blocks     = section.blocks | where: "type", "card"
+  assign citation_blocks = section.blocks | where: "type", "citation"
+  assign value_bullets   = section.blocks | where: "type", "value_bullet"
+-%}
+
 <!-- ═══════════════════════════════════════════════════════════════
      FREE REPORT PAGE — The Biology Gap
      Two-column layout with form card, stat bar, what's inside,
      pull quote, citations, founder note, bottom CTA
      ═══════════════════════════════════════════════════════════════ -->
 
+<div style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+
 <!-- ────────────────────────────────────────────────────────────
      HERO SECTION
      ──────────────────────────────────────────────────────────── -->
-<section style="background: #1C2E23; padding: 142px 24px 80px;">
+<section style="background: {{ primary_color }}; padding: 142px 24px 80px;">
   <div style="max-width: 1040px; margin: 0 auto;">
     <div class="fr-hero-grid" style="display: grid; gap: 40px; align-items: center;">
 
       <!-- LEFT COLUMN -->
       <div>
-        <p class="font-mono-spec uppercase reveal-hidden" style="font-size: 11px; color: #C4783A; letter-spacing: 0.2em; margin-bottom: 20px;">
-          Free Research Report &middot; No Purchase Required
+        <p class="font-mono-spec uppercase reveal-hidden" style="font-size: 11px; color: {{ accent_color }}; letter-spacing: 0.2em; margin-bottom: 20px;">
+          {{ section.settings.hero_eyebrow }}
         </p>
 
-        <h1 class="font-display font-medium reveal-hidden" style="color: #F5F2EC; font-size: clamp(34px, 5vw, 52px); line-height: 1.1; margin-bottom: 24px;">
-          Your microbiome was shaped by your <em style="color: #D4A97A; font-style: italic;">biology. Not a one-size-fits-all formula.</em>
+        <h1 class="font-display font-medium reveal-hidden" style="color: {{ light_color }}; font-size: clamp(34px, 5vw, 52px); line-height: 1.1; margin-bottom: 24px;">
+          {{ section.settings.hero_heading }}
         </h1>
 
         <p class="font-heading font-light reveal-hidden" style="font-size: 16px; color: rgba(245,242,236,0.60); line-height: 1.7; max-width: 480px; margin-bottom: 28px;">
-          <em style="color: #D4A97A; font-style: italic;">The Biology Gap</em> is a free, six-page research report on why ethnicity determines your microbiome composition more than diet, age, or lifestyle &mdash; and what that means for your health. No wellness pitch. Just the published data.
+          {{ section.settings.hero_body }}
         </p>
 
         <!-- Bullet points -->
+        {%- if hero_bullets.size > 0 -%}
         <ul style="list-style: none; padding: 0; margin: 0 0 32px 0;" class="reveal-hidden">
-          <li style="font-size: 14px; color: rgba(245,242,236,0.55); margin-bottom: 10px; display: flex; align-items: baseline; gap: 10px;">
-            <span style="color: #C4783A; flex-shrink: 0;">&#10022;</span>
-            <span class="font-heading font-light">Free research report delivered instantly</span>
+          {%- for block in hero_bullets -%}
+          <li style="font-size: 14px; color: rgba(245,242,236,0.55); margin-bottom: {% if forloop.last %}0{% else %}10px{% endif %}; display: flex; align-items: baseline; gap: 10px;" {{ block.shopify_attributes }}>
+            <span style="color: {{ accent_color }}; flex-shrink: 0;">&#10022;</span>
+            <span class="font-heading font-light">{{ block.settings.text }}</span>
           </li>
-          <li style="font-size: 14px; color: rgba(245,242,236,0.55); margin-bottom: 10px; display: flex; align-items: baseline; gap: 10px;">
-            <span style="color: #C4783A; flex-shrink: 0;">&#10022;</span>
-            <span class="font-heading font-light">Free report included with every Origin order</span>
-          </li>
-          <li style="font-size: 14px; color: rgba(245,242,236,0.55); display: flex; align-items: baseline; gap: 10px;">
-            <span style="color: #C4783A; flex-shrink: 0;">&#10022;</span>
-            <span class="font-heading font-light">Origin available now &mdash; free report included with purchase</span>
-          </li>
+          {%- endfor -%}
         </ul>
+        {%- endif -%}
 
         <!-- Founder quote -->
-        <div style="border-left: 2px solid #C4783A; padding-left: 20px; margin-bottom: 8px;" class="reveal-hidden">
-          <p class="font-display" style="font-size: 15px; color: #C4783A; font-style: italic; line-height: 1.6;">
-            "Nobody built a probiotic for people like us. So I built one informed by biological diversity research."
+        <div style="border-left: 2px solid {{ accent_color }}; padding-left: 20px; margin-bottom: 8px;" class="reveal-hidden">
+          <p class="font-display" style="font-size: 15px; color: {{ accent_color }}; font-style: italic; line-height: 1.6;">
+            {{ section.settings.hero_quote }}
           </p>
         </div>
         <p class="font-mono-spec reveal-hidden" style="font-size: 11px; color: rgba(245,242,236,0.30); padding-left: 22px;">
-          &mdash; Gurkamal, Founder
+          &mdash; {{ section.settings.hero_quote_author }}
         </p>
       </div>
 
       <!-- RIGHT COLUMN — Form Card -->
-      <div style="background: #F5F2EC; border-radius: 32px; padding: 32px;" class="fr-form-card reveal-hidden" data-lead-wrapper>
+      <div style="background: {{ light_color }}; border-radius: 32px; padding: 32px;" class="fr-form-card reveal-hidden" data-lead-wrapper>
 
         <div data-lead-form-view>
           <p class="font-mono-spec uppercase" style="font-size: 11px; color: #8A9490; letter-spacing: 0.15em; margin-bottom: 12px;">
-            Free Research Report
+            {{ section.settings.form_eyebrow }}
           </p>
 
-          <h2 class="font-heading font-medium" style="font-size: 24px; color: #1C2E23; line-height: 1.25; margin-bottom: 10px;">
-            Get the research. Start restoring today.
+          <h2 class="font-heading font-medium" style="font-size: 24px; color: {{ primary_color }}; line-height: 1.25; margin-bottom: 10px;">
+            {{ section.settings.form_heading }}
           </h2>
 
           <p class="font-heading font-light" style="font-size: 14px; color: #4A5550; line-height: 1.6; margin-bottom: 24px;">
-            Get the free research report now &mdash; plus a free copy included when you order Origin.
+            {{ section.settings.form_body }}
           </p>
 
-          <form data-lead-form data-lead-source="free-report-hero">
+          <form data-lead-form data-lead-source="{{ section.settings.form_source }}">
             <!-- Honeypot -->
             <input type="text" name="website" autocomplete="off" tabindex="-1" aria-hidden="true"
               style="position: absolute; left: -9999px; opacity: 0; height: 0; width: 0;">
@@ -78,27 +90,27 @@
               <input type="text" data-lead-name name="firstName" required
                 placeholder="Full name" aria-label="Full name" autocomplete="name"
                 class="font-heading font-light"
-                style="width: 100%; font-size: 15px; background: #FFFFFF; border: 2px solid #D5CFC6; border-radius: 50px; padding: 16px 24px; color: #1C2E23; outline: none;">
+                style="width: 100%; font-size: 15px; background: #FFFFFF; border: 2px solid #D5CFC6; border-radius: 50px; padding: 16px 24px; color: {{ primary_color }}; outline: none;">
 
               <input type="email" data-lead-email name="email" required
                 placeholder="Your best email" aria-label="Email address" autocomplete="email"
                 class="font-heading font-light"
-                style="width: 100%; font-size: 15px; background: #FFFFFF; border: 2px solid #D5CFC6; border-radius: 50px; padding: 16px 24px; color: #1C2E23; outline: none;">
+                style="width: 100%; font-size: 15px; background: #FFFFFF; border: 2px solid #D5CFC6; border-radius: 50px; padding: 16px 24px; color: {{ primary_color }}; outline: none;">
 
-              <button type="submit" data-default-text="Send My Free Report &rarr;"
+              <button type="submit" data-default-text="{{ section.settings.form_button_text }} &rarr;"
                 class="font-heading font-semibold cta-pulse"
-                style="width: 100%; font-size: 15px; background: linear-gradient(135deg, #C4783A, #D4925A); color: #1C2E23; border: none; border-radius: 50px; padding: 16px 24px; cursor: pointer;">
-                Send My Free Report &rarr;
+                style="width: 100%; font-size: 15px; background: linear-gradient(135deg, {{ accent_color }}, #D4925A); color: {{ primary_color }}; border: none; border-radius: 50px; padding: 16px 24px; cursor: pointer;">
+                {{ section.settings.form_button_text }} &rarr;
               </button>
             </div>
 
-            <p data-lead-error class="font-heading" style="font-size: 14px; color: #C4783A; display: none; margin-top: 12px; text-align: center;" role="alert">
+            <p data-lead-error class="font-heading" style="font-size: 14px; color: {{ accent_color }}; display: none; margin-top: 12px; text-align: center;" role="alert">
               Something went wrong. Please try again.
             </p>
           </form>
 
           <p class="font-mono-spec" style="font-size: 11px; color: #8A9490; margin-top: 16px; text-align: center;">
-            No spam. Unsubscribe any time.
+            {{ section.settings.form_privacy_text }}
           </p>
 
           <p class="font-mono-spec" style="font-size: 10px; color: #B0ABA3; margin-top: 8px; text-align: center;">
@@ -108,26 +120,26 @@
 
         <!-- Success view -->
         <div data-lead-success-view style="display: none; text-align: center;">
-          <p data-success-msg class="font-display italic" style="font-size: 24px; color: #1C2E23; margin-bottom: 8px;">
-            You're in &#10022; Check your inbox for the report.
+          <p data-success-msg class="font-display italic" style="font-size: 24px; color: {{ primary_color }}; margin-bottom: 8px;">
+            {{ section.settings.success_message }}
           </p>
-          <div style="margin: 16px auto; padding: 12px 24px; background: #1C2E23; border-radius: 12px; display: inline-block;">
-            <p class="font-mono-spec uppercase" style="font-size: 11px; color: #C4783A; letter-spacing: 0.15em; margin-bottom: 4px;">Your 20% discount code</p>
-            <p class="font-heading font-semibold" style="font-size: 24px; color: #F5F2EC; letter-spacing: 0.1em;">FOUNDER20</p>
+          <div style="margin: 16px auto; padding: 12px 24px; background: {{ primary_color }}; border-radius: 12px; display: inline-block;">
+            <p class="font-mono-spec uppercase" style="font-size: 11px; color: {{ accent_color }}; letter-spacing: 0.15em; margin-bottom: 4px;">Your 20% discount code</p>
+            <p class="font-heading font-semibold" style="font-size: 24px; color: {{ light_color }}; letter-spacing: 0.1em;">{{ section.settings.discount_code }}</p>
           </div>
           <p class="font-heading" style="font-size: 14px; color: #4A5550; margin-bottom: 16px;">
             20% off is automatically applied at checkout. No code needed.
           </p>
-          <a href="/products/origin" class="inline-block font-heading font-semibold"
-            style="background: #C4783A; color: #1C2E23; padding: 16px 40px; border-radius: 50px; text-decoration: none; font-size: 15px; box-shadow: 0 4px 20px rgba(196,120,58,0.25);">
-            Shop Origin
+          <a href="{{ section.settings.product_link }}" class="inline-block font-heading font-semibold"
+            style="background: {{ accent_color }}; color: {{ primary_color }}; padding: 16px 40px; border-radius: 50px; text-decoration: none; font-size: 15px; box-shadow: 0 4px 20px rgba(196,120,58,0.25);">
+            {{ section.settings.success_shop_text }}
           </a>
         </div>
 
         <!-- Duplicate view -->
         <div data-lead-duplicate-view style="display: none; text-align: center;">
           <p class="font-heading" style="font-size: 16px; color: #4A5550;">
-            You're already on the list &mdash; check your inbox.
+            {{ section.settings.duplicate_message }}
           </p>
         </div>
 
@@ -139,138 +151,79 @@
 <!-- ────────────────────────────────────────────────────────────
      STAT BAR
      ──────────────────────────────────────────────────────────── -->
-<section style="background: #1C2E23; border-top: 1px solid rgba(245,242,236,0.08); padding: 48px 24px;">
+{%- if stat_blocks.size > 0 -%}
+<section style="background: {{ primary_color }}; border-top: 1px solid rgba(245,242,236,0.08); padding: 48px 24px;">
   <div class="fr-stat-grid stagger-children" style="max-width: 900px; margin: 0 auto;">
 
-    <div class="fr-stat-item" style="text-align: center;">
-      <p class="font-mono-spec font-semibold" style="font-size: 24px; color: #C4783A; margin-bottom: 6px;">
-        <span data-count-target="2084" data-count-separator="," data-count-duration="1200">0</span>
+    {%- for block in stat_blocks -%}
+    <div class="fr-stat-item" style="text-align: center;" {{ block.shopify_attributes }}>
+      <p class="font-mono-spec font-semibold" style="font-size: 24px; color: {{ accent_color }}; margin-bottom: 6px;">
+        <span
+          data-count-target="{{ block.settings.number }}"
+          {%- if block.settings.number > 999 %} data-count-separator=","{% endif %}
+          {%- if block.settings.suffix != blank %} data-count-suffix="{{ block.settings.suffix }}"{% endif %}
+          data-count-duration="1000">
+          0{%- if block.settings.suffix != blank %}{{ block.settings.suffix }}{% endif %}
+        </span>
       </p>
       <p class="font-mono-spec uppercase" style="font-size: 11px; color: rgba(245,242,236,0.40); letter-spacing: 0.1em;">
-        HELIUS Subjects
+        {{ block.settings.label }}
       </p>
     </div>
-
-    <div class="fr-stat-item" style="text-align: center;">
-      <p class="font-mono-spec font-semibold" style="font-size: 24px; color: #C4783A; margin-bottom: 6px;">
-        <span data-count-target="6" data-count-duration="800">0</span>
-      </p>
-      <p class="font-mono-spec uppercase" style="font-size: 11px; color: rgba(245,242,236,0.40); letter-spacing: 0.1em;">
-        Ethnic Groups Studied
-      </p>
-    </div>
-
-    <div class="fr-stat-item" style="text-align: center;">
-      <p class="font-mono-spec font-semibold" style="font-size: 24px; color: #C4783A; margin-bottom: 6px;">
-        <span data-count-target="40" data-count-suffix="B" data-count-duration="1000">0B</span>
-      </p>
-      <p class="font-mono-spec uppercase" style="font-size: 11px; color: rgba(245,242,236,0.40); letter-spacing: 0.1em;">
-        Live CFU Delivered
-      </p>
-    </div>
-
-    <div class="fr-stat-item" style="text-align: center;">
-      <p class="font-mono-spec font-semibold" style="font-size: 24px; color: #C4783A; margin-bottom: 6px;">
-        <span data-count-target="4" data-count-duration="800">0</span>
-      </p>
-      <p class="font-mono-spec uppercase" style="font-size: 11px; color: rgba(245,242,236,0.40); letter-spacing: 0.1em;">
-        Targeted Strains
-      </p>
-    </div>
+    {%- endfor -%}
 
   </div>
 </section>
+{%- endif -%}
 
 <!-- ────────────────────────────────────────────────────────────
      WHAT'S INSIDE SECTION
      ──────────────────────────────────────────────────────────── -->
-<section style="background: #F5F2EC; padding: 80px 24px;">
+<section style="background: {{ light_color }}; padding: 80px 24px;">
   <div style="max-width: 900px; margin: 0 auto;">
 
-    <p class="font-mono-spec uppercase reveal-hidden" style="font-size: 11px; color: #C4783A; letter-spacing: 0.2em; margin-bottom: 16px;">
-      What's Inside
+    <p class="font-mono-spec uppercase reveal-hidden" style="font-size: 11px; color: {{ accent_color }}; letter-spacing: 0.2em; margin-bottom: 16px;">
+      {{ section.settings.inside_eyebrow }}
     </p>
 
-    <h2 class="font-heading font-medium reveal-hidden" style="font-size: clamp(28px, 4vw, 40px); color: #1C2E23; line-height: 1.15; margin-bottom: 16px; max-width: 640px;">
-      Six pages. Five findings. A category the industry hasn't built.
+    <h2 class="font-heading font-medium reveal-hidden" style="font-size: clamp(28px, 4vw, 40px); color: {{ primary_color }}; line-height: 1.15; margin-bottom: 16px; max-width: 640px;">
+      {{ section.settings.inside_heading }}
     </h2>
 
     <p class="font-heading font-light reveal-hidden" style="font-size: 16px; color: #4A5550; line-height: 1.7; max-width: 600px; margin-bottom: 40px;">
-      This report distils published research from Nature Medicine, Cell, and the AAPS PharmSciTech into a single, readable brief. No product pitch &mdash; just the data that led us to build Origin.
+      {{ section.settings.inside_body }}
     </p>
 
     <!-- Cards grid -->
+    {%- if card_blocks.size > 0 -%}
     <div class="fr-cards-grid stagger-children">
-
-      <!-- Card 01 -->
-      <div class="card-hover reveal-hidden" style="display: flex; gap: 20px; border-radius: 16px; padding: 28px; background: #EDE8DF; border: 1px solid #D5CFC6;">
-        <span class="font-display" style="font-size: 32px; color: #D5CFC6; flex-shrink: 0; line-height: 1;">01</span>
+      {%- for block in card_blocks -%}
+      <div class="card-hover reveal-hidden" style="display: flex; gap: 20px; border-radius: 16px; padding: 28px; background: {{ card_bg_color }}; border: 1px solid #D5CFC6;" {{ block.shopify_attributes }}>
+        <span class="font-display" style="font-size: 32px; color: #D5CFC6; flex-shrink: 0; line-height: 1;">{{ block.settings.number }}</span>
         <div>
-          <h3 class="font-heading font-semibold" style="font-size: 14px; color: #1C2E23; margin-bottom: 6px;">The Depletion Problem</h3>
+          <h3 class="font-heading font-semibold" style="font-size: 14px; color: {{ primary_color }}; margin-bottom: 6px;">{{ block.settings.title }}</h3>
           <p class="font-heading font-light" style="font-size: 14px; color: #4A5550; line-height: 1.6;">
-            The HELIUS study (n=2,084) found ethnicity determines microbiome composition more than diet, age, sex, or medical history &mdash; combined. What that means for your biology.
+            {{ block.settings.text }}
           </p>
         </div>
       </div>
-
-      <!-- Card 02 -->
-      <div class="card-hover reveal-hidden" style="display: flex; gap: 20px; border-radius: 16px; padding: 28px; background: #EDE8DF; border: 1px solid #D5CFC6;">
-        <span class="font-display" style="font-size: 32px; color: #D5CFC6; flex-shrink: 0; line-height: 1;">02</span>
-        <div>
-          <h3 class="font-heading font-semibold" style="font-size: 14px; color: #1C2E23; margin-bottom: 6px;">The Biology Gap</h3>
-          <p class="font-heading font-light" style="font-size: 14px; color: #4A5550; line-height: 1.6;">
-            What happens to your microbiome when traditional diets change &mdash; and why depletion compounds across generations rather than stabilising.
-          </p>
-        </div>
-      </div>
-
-      <!-- Card 03 -->
-      <div class="card-hover reveal-hidden" style="display: flex; gap: 20px; border-radius: 16px; padding: 28px; background: #EDE8DF; border: 1px solid #D5CFC6;">
-        <span class="font-display" style="font-size: 32px; color: #D5CFC6; flex-shrink: 0; line-height: 1;">03</span>
-        <div>
-          <h3 class="font-heading font-semibold" style="font-size: 14px; color: #1C2E23; margin-bottom: 6px;">The Delivery Problem</h3>
-          <p class="font-heading font-light" style="font-size: 14px; color: #4A5550; line-height: 1.6;">
-            Most probiotic bacteria are destroyed by stomach acid before reaching where they work. Why the number on the bottle is measured at manufacture &mdash; not at delivery.
-          </p>
-        </div>
-      </div>
-
-      <!-- Card 04 -->
-      <div class="card-hover reveal-hidden" style="display: flex; gap: 20px; border-radius: 16px; padding: 28px; background: #EDE8DF; border: 1px solid #D5CFC6;">
-        <span class="font-display" style="font-size: 32px; color: #D5CFC6; flex-shrink: 0; line-height: 1;">04</span>
-        <div>
-          <h3 class="font-heading font-semibold" style="font-size: 14px; color: #1C2E23; margin-bottom: 6px;">The Origin Solution</h3>
-          <p class="font-heading font-light" style="font-size: 14px; color: #4A5550; line-height: 1.6;">
-            Why biological diversity matters for supplementation, and how Origin uses MAKTREK Bi-Pass Technology + FOS prebiotic to solve both the depletion and the delivery problem.
-          </p>
-        </div>
-      </div>
-
-      <!-- Card 05 -->
-      <div class="card-hover reveal-hidden" style="display: flex; gap: 20px; border-radius: 16px; padding: 28px; background: #EDE8DF; border: 1px solid #D5CFC6;">
-        <span class="font-display" style="font-size: 32px; color: #D5CFC6; flex-shrink: 0; line-height: 1;">05</span>
-        <div>
-          <h3 class="font-heading font-semibold" style="font-size: 14px; color: #1C2E23; margin-bottom: 6px;">The Four Strains</h3>
-          <p class="font-heading font-light" style="font-size: 14px; color: #4A5550; line-height: 1.6;">
-            L. acidophilus, B. lactis, L. plantarum, L. paracasei &mdash; why these four strains were selected to address the specific systems that depletion hits hardest.
-          </p>
-        </div>
-      </div>
-
+      {%- endfor -%}
     </div>
+    {%- endif -%}
+
   </div>
 </section>
 
 <!-- ────────────────────────────────────────────────────────────
      PULL QUOTE SECTION
      ──────────────────────────────────────────────────────────── -->
-<section style="background: #1C2E23; padding: 72px 24px;">
+<section style="background: {{ primary_color }}; padding: 72px 24px;">
   <div style="max-width: 760px; margin: 0 auto; text-align: center;">
-    <p class="font-display italic reveal-hidden" style="font-size: clamp(20px, 3vw, 28px); color: #F5F2EC; line-height: 1.5;">
-      "Ethnicity contributed more to explaining interindividual differences in microbiota composition than any other measured factor &mdash; including diet, age, sex, or medical history."
+    <p class="font-display italic reveal-hidden" style="font-size: clamp(20px, 3vw, 28px); color: {{ light_color }}; line-height: 1.5;">
+      {{ section.settings.quote_text }}
     </p>
     <p class="font-mono-spec reveal-hidden" style="font-size: 11px; color: rgba(245,242,236,0.35); margin-top: 24px;">
-      Deschasaux et al. &mdash; Nature Medicine, 2018 &middot; HELIUS Cohort &middot; n=2,084
+      {{ section.settings.quote_source }}
     </p>
   </div>
 </section>
@@ -278,102 +231,70 @@
 <!-- ────────────────────────────────────────────────────────────
      CITATION STRIP
      ──────────────────────────────────────────────────────────── -->
-<section style="background: #1C2E23; border-top: 1px solid rgba(245,242,236,0.08); padding: 56px 24px;">
+{%- if citation_blocks.size > 0 -%}
+<section style="background: {{ primary_color }}; border-top: 1px solid rgba(245,242,236,0.08); padding: 56px 24px;">
   <div style="max-width: 900px; margin: 0 auto;">
 
     <p class="font-mono-spec uppercase" style="font-size: 11px; color: rgba(245,242,236,0.35); letter-spacing: 0.15em; margin-bottom: 24px; text-align: center;">
-      Cited in the report
+      {{ section.settings.citations_heading }}
     </p>
 
     <div class="grid md:grid-cols-3 gap-6">
-
-      <!-- Nature Medicine -->
-      <div class="glass-card" style="background: rgba(245,242,236,0.04); border: 1px solid rgba(245,242,236,0.08); border-radius: 16px; padding: 24px;">
-        <p class="font-mono-spec" style="font-size: 11px; color: #C4783A; margin-bottom: 6px;">Nature Medicine, 2018</p>
+      {%- for block in citation_blocks -%}
+      <div class="glass-card" style="background: rgba(245,242,236,0.04); border: 1px solid rgba(245,242,236,0.08); border-radius: 16px; padding: 24px;" {{ block.shopify_attributes }}>
+        <p class="font-mono-spec" style="font-size: 11px; color: {{ accent_color }}; margin-bottom: 6px;">{{ block.settings.journal }}</p>
         <p class="font-heading font-light" style="font-size: 13px; color: rgba(245,242,236,0.55); line-height: 1.6; margin-bottom: 10px;">
-          HELIUS cohort &mdash; ethnicity vs. microbiome composition (n=2,084)
+          {{ block.settings.description }}
         </p>
-        <a href="https://doi.org/10.1038/s41591-018-0160-1" target="_blank" rel="noopener noreferrer"
-          class="font-mono-spec hover:underline" style="font-size: 11px; color: #C4783A;">
+        {%- if block.settings.url != blank -%}
+        <a href="{{ block.settings.url }}" target="_blank" rel="noopener noreferrer"
+          class="font-mono-spec hover:underline" style="font-size: 11px; color: {{ accent_color }};">
           View Study &rarr;
         </a>
+        {%- endif -%}
       </div>
-
-      <!-- Cell -->
-      <div class="glass-card" style="background: rgba(245,242,236,0.04); border: 1px solid rgba(245,242,236,0.08); border-radius: 16px; padding: 24px;">
-        <p class="font-mono-spec" style="font-size: 11px; color: #C4783A; margin-bottom: 6px;">Cell, 2018</p>
-        <p class="font-heading font-light" style="font-size: 13px; color: rgba(245,242,236,0.55); line-height: 1.6; margin-bottom: 10px;">
-          Vangay et al. &mdash; immigration-driven microbiome depletion across generations
-        </p>
-        <a href="https://doi.org/10.1016/j.cell.2018.10.029" target="_blank" rel="noopener noreferrer"
-          class="font-mono-spec hover:underline" style="font-size: 11px; color: #C4783A;">
-          View Study &rarr;
-        </a>
-      </div>
-
-      <!-- AAPS PharmSciTech -->
-      <div class="glass-card" style="background: rgba(245,242,236,0.04); border: 1px solid rgba(245,242,236,0.08); border-radius: 16px; padding: 24px;">
-        <p class="font-mono-spec" style="font-size: 11px; color: #C4783A; margin-bottom: 6px;">AAPS PharmSciTech, 2014</p>
-        <p class="font-heading font-light" style="font-size: 13px; color: rgba(245,242,236,0.55); line-height: 1.6; margin-bottom: 10px;">
-          Govender et al. &mdash; Probiotic survivability and acid-protected delivery
-        </p>
-        <a href="https://doi.org/10.1208/s12249-013-0027-1" target="_blank" rel="noopener noreferrer"
-          class="font-mono-spec hover:underline" style="font-size: 11px; color: #C4783A;">
-          View Study &rarr;
-        </a>
-      </div>
-
+      {%- endfor -%}
     </div>
+
   </div>
 </section>
+{%- endif -%}
 
 <!-- ────────────────────────────────────────────────────────────
      FOUNDER NOTE
      ──────────────────────────────────────────────────────────── -->
-<section style="background: #F5F2EC; padding: 80px 24px;">
+<section style="background: {{ light_color }}; padding: 80px 24px;">
   <div class="fr-founder-grid" style="max-width: 1040px; margin: 0 auto;">
 
     <!-- Left column -->
     <div>
-      <p class="font-mono-spec uppercase reveal-hidden" style="font-size: 11px; color: #C4783A; letter-spacing: 0.2em; margin-bottom: 16px;">
-        From the Founder
+      <p class="font-mono-spec uppercase reveal-hidden" style="font-size: 11px; color: {{ accent_color }}; letter-spacing: 0.2em; margin-bottom: 16px;">
+        {{ section.settings.founder_eyebrow }}
       </p>
 
-      <h2 class="font-heading font-medium reveal-hidden" style="font-size: clamp(26px, 3.5vw, 36px); color: #1C2E23; line-height: 1.2; margin-bottom: 24px; max-width: 420px;">
-        Why I built this company &mdash; and why this report is free.
+      <h2 class="font-heading font-medium reveal-hidden" style="font-size: clamp(26px, 3.5vw, 36px); color: {{ primary_color }}; line-height: 1.2; margin-bottom: 24px; max-width: 420px;">
+        {{ section.settings.founder_heading }}
       </h2>
 
-      <div style="border-left: 2px solid #C4783A; padding-left: 20px; margin-bottom: 0;" class="reveal-hidden">
-        <p class="font-display italic" style="font-size: 18px; color: #1C2E23; line-height: 1.5;">
-          "I didn't set out to build a supplement company. I set out to answer a question nobody was asking: why is the probiotic industry ignoring the biology of the people who need it most?"
+      <div style="border-left: 2px solid {{ accent_color }}; padding-left: 20px; margin-bottom: 0;" class="reveal-hidden">
+        <p class="font-display italic" style="font-size: 18px; color: {{ primary_color }}; line-height: 1.5;">
+          {{ section.settings.founder_quote }}
         </p>
       </div>
     </div>
 
     <!-- Right column -->
     <div class="reveal-hidden">
-      <p class="font-heading font-light" style="font-size: 15px; color: #4A5550; line-height: 1.7; margin-bottom: 16px;">
-        I grew up in a Punjabi household in Canada. Daal, roti, achaar, lassi &mdash; the foods my family had eaten for generations. But I watched my parents and their friends struggle with digestive issues that nobody could explain. The doctors said "eat more fibre" or "try a probiotic." So they did. Nothing worked.
-      </p>
-
-      <p class="font-heading font-light" style="font-size: 15px; color: #4A5550; line-height: 1.7; margin-bottom: 16px;">
-        Years later, I found the research. The HELIUS study. Vangay. The data was clear: when you move to a Western country, your ancestral microbiome starts to collapse. Within a single generation. And nobody in the supplement industry was building for that.
-      </p>
-
-      <p class="font-heading font-light" style="font-size: 15px; color: #4A5550; line-height: 1.7; margin-bottom: 16px;">
-        Every probiotic on the shelf was formulated for the same generic Western biology. Same strains. Same delivery. Same failure rate. Meanwhile, diaspora communities across the world were losing the bacterial ecosystems their ancestors spent thousands of years cultivating.
-      </p>
-
-      <p class="font-heading font-light" style="font-size: 15px; color: #4A5550; line-height: 1.7; margin-bottom: 24px;">
-        That's why this report is free. Because the science matters more than the sale. And if you read it and decide Origin isn't for you, you'll still understand your biology better than 99% of people who take a probiotic.
-      </p>
+      <div class="font-heading font-light" style="font-size: 15px; color: #4A5550; line-height: 1.7; margin-bottom: 24px;">
+        {{ section.settings.founder_body }}
+      </div>
 
       <p class="font-mono-spec" style="font-size: 12px; color: #8A9490; margin-bottom: 20px;">
-        &mdash; Gurkamal, Founder &middot; BaseCode Health
+        &mdash; {{ section.settings.founder_attribution }}
       </p>
 
-      <a href="#fr-bottom-form" class="font-heading font-medium hover:underline" style="font-size: 15px; color: #C4783A; text-decoration: none;">
-        Get the free report &rarr;
+      <a href="{{ section.settings.founder_cta_link }}" class="font-heading font-medium hover:underline" style="font-size: 15px; color: {{ accent_color }}; text-decoration: none;">
+        {{ section.settings.founder_cta_text }} &rarr;
       </a>
     </div>
 
@@ -383,75 +304,67 @@
 <!-- ────────────────────────────────────────────────────────────
      BOTTOM CTA
      ──────────────────────────────────────────────────────────── -->
-<section id="fr-bottom-form" style="background: #EDE8DF; padding: 64px 24px 80px;">
+<section id="fr-bottom-form" style="background: {{ card_bg_color }}; padding: 64px 24px 80px;">
   <div style="max-width: 680px; margin: 0 auto; text-align: center;">
 
-    <h2 class="font-heading font-medium reveal-hidden" style="font-size: clamp(28px, 4vw, 40px); color: #1C2E23; line-height: 1.15; margin-bottom: 12px;">
-      This report is free. Origin is available now.
+    <h2 class="font-heading font-medium reveal-hidden" style="font-size: clamp(28px, 4vw, 40px); color: {{ primary_color }}; line-height: 1.15; margin-bottom: 12px;">
+      {{ section.settings.bottom_heading }}
     </h2>
 
     <p class="font-heading font-light reveal-hidden" style="font-size: 16px; color: #4A5550; line-height: 1.7; max-width: 520px; margin: 0 auto 28px;">
-      Read the research first. Understand your biology. Then decide if Origin is right for you. No pressure, no pitch &mdash; just published science delivered to your inbox.
+      {{ section.settings.bottom_body }}
     </p>
 
     <!-- Shop CTA -->
-    <a href="/products/origin" class="font-heading font-semibold reveal-hidden"
-      style="display: inline-block; font-size: 16px; background: #1C2E23; color: #F5F2EC; padding: 18px 48px; border-radius: 50px; text-decoration: none; margin-bottom: 32px; box-shadow: 0 4px 20px rgba(28,46,35,0.20);">
-      Shop Origin &mdash; From $34/mo
+    <a href="{{ section.settings.shop_cta_link }}" class="font-heading font-semibold reveal-hidden"
+      style="display: inline-block; font-size: 16px; background: {{ primary_color }}; color: {{ light_color }}; padding: 18px 48px; border-radius: 50px; text-decoration: none; margin-bottom: 32px; box-shadow: 0 4px 20px rgba(28,46,35,0.20);">
+      {{ section.settings.shop_cta_text }}
     </a>
 
     <!-- Transition text -->
     <p class="font-heading font-light reveal-hidden" style="font-size: 14px; color: #8A9490; margin-bottom: 28px;">
-      Or get the research first &mdash; free, no purchase required:
+      {{ section.settings.bottom_transition_text }}
     </p>
 
     <!-- Value stack -->
+    {%- if value_bullets.size > 0 -%}
     <div style="max-width: 400px; margin: 0 auto 32px; text-align: left;" class="reveal-hidden">
-      <div style="display: flex; align-items: baseline; gap: 10px; margin-bottom: 10px;">
-        <span style="color: #C4783A; flex-shrink: 0; font-size: 14px;">&#10022;</span>
-        <span class="font-heading font-light" style="font-size: 14px; color: #4A5550;">Six-page research report delivered instantly</span>
+      {%- for block in value_bullets -%}
+      <div style="display: flex; align-items: baseline; gap: 10px; margin-bottom: {% if forloop.last %}0{% else %}10px{% endif %};" {{ block.shopify_attributes }}>
+        <span style="color: {{ accent_color }}; flex-shrink: 0; font-size: 14px;">&#10022;</span>
+        <span class="font-heading font-light" style="font-size: 14px; color: #4A5550;">{{ block.settings.text }}</span>
       </div>
-      <div style="display: flex; align-items: baseline; gap: 10px; margin-bottom: 10px;">
-        <span style="color: #C4783A; flex-shrink: 0; font-size: 14px;">&#10022;</span>
-        <span class="font-heading font-light" style="font-size: 14px; color: #4A5550;">Peer-reviewed citations from Nature Medicine, Cell, and Gut</span>
-      </div>
-      <div style="display: flex; align-items: baseline; gap: 10px; margin-bottom: 10px;">
-        <span style="color: #C4783A; flex-shrink: 0; font-size: 14px;">&#10022;</span>
-        <span class="font-heading font-light" style="font-size: 14px; color: #4A5550;">Exclusive subscriber pricing on future products</span>
-      </div>
-      <div style="display: flex; align-items: baseline; gap: 10px;">
-        <span style="color: #C4783A; flex-shrink: 0; font-size: 14px;">&#10022;</span>
-        <span class="font-heading font-light" style="font-size: 14px; color: #4A5550;">Free report included with every Origin order</span>
-      </div>
+      {%- endfor -%}
     </div>
+    {%- endif -%}
 
     <!-- Investment line -->
-    <p class="font-heading font-medium reveal-hidden" style="font-size: 14px; color: #1C2E23; margin-bottom: 28px;">
-      Research report + future product access + subscriber pricing. Your investment: <strong>$0.</strong>
+    <p class="font-heading font-medium reveal-hidden" style="font-size: 14px; color: {{ primary_color }}; margin-bottom: 28px;">
+      {{ section.settings.bottom_investment_text }}
     </p>
 
     <!-- Bottom email capture form -->
     <div data-lead-wrapper style="max-width: 520px; margin: 0 auto;">
       <div data-lead-form-view>
-        <form data-lead-form data-lead-source="free-report-bottom">
+        <form data-lead-form data-lead-source="{{ section.settings.bottom_form_source }}">
           <!-- Honeypot -->
           <input type="text" name="website" autocomplete="off" tabindex="-1" aria-hidden="true"
             style="position: absolute; left: -9999px; opacity: 0; height: 0; width: 0;">
 
           <!-- Desktop inline pill -->
-          <div class="fr-bottom-inline" style="border: 2px solid #1C2E23; border-radius: 50px; overflow: hidden;">
+          <div class="fr-bottom-inline" style="border: 2px solid {{ primary_color }}; border-radius: 50px; overflow: hidden;">
             <input type="text" data-lead-name name="firstName" required
               placeholder="Full name" aria-label="Full name" autocomplete="name"
               class="font-heading font-light"
-              style="font-size: 15px; background: #F5F2EC; color: #1C2E23; padding: 16px 20px; border: none; outline: none; min-width: 80px; width: 26%;">
+              style="font-size: 15px; background: {{ light_color }}; color: {{ primary_color }}; padding: 16px 20px; border: none; outline: none; min-width: 80px; width: 26%;">
             <div style="width: 1px; align-self: stretch; background: #D5CFC6;"></div>
             <input type="email" data-lead-email name="email" required
               placeholder="Your best email" aria-label="Email address" autocomplete="email"
               class="font-heading font-light"
-              style="font-size: 15px; background: #F5F2EC; color: #1C2E23; padding: 16px 20px; border: none; outline: none; flex: 1;">
+              style="font-size: 15px; background: {{ light_color }}; color: {{ primary_color }}; padding: 16px 20px; border: none; outline: none; flex: 1;">
             <button type="submit" data-default-text="Send Report"
               class="font-heading font-medium"
-              style="font-size: 14px; background: #1C2E23; color: #F5F2EC; padding: 16px 28px; border: none; border-radius: 0 50px 50px 0; cursor: pointer; white-space: nowrap;">
+              style="font-size: 14px; background: {{ primary_color }}; color: {{ light_color }}; padding: 16px 28px; border: none; border-radius: 0 50px 50px 0; cursor: pointer; white-space: nowrap;">
               Send Report
             </button>
           </div>
@@ -462,20 +375,20 @@
               <input type="text" data-lead-name name="firstNameMobile" required
                 placeholder="Full name" aria-label="Full name" autocomplete="name"
                 class="font-heading font-light"
-                style="width: 100%; font-size: 15px; background: #F5F2EC; border: 2px solid #1C2E23; border-radius: 50px; padding: 16px 24px; color: #1C2E23; outline: none;">
+                style="width: 100%; font-size: 15px; background: {{ light_color }}; border: 2px solid {{ primary_color }}; border-radius: 50px; padding: 16px 24px; color: {{ primary_color }}; outline: none;">
               <input type="email" data-lead-email name="emailMobile" required
                 placeholder="Your best email" aria-label="Email address" autocomplete="email"
                 class="font-heading font-light"
-                style="width: 100%; font-size: 15px; background: #F5F2EC; border: 2px solid #1C2E23; border-radius: 50px; padding: 16px 24px; color: #1C2E23; outline: none;">
-              <button type="submit" data-default-text="Send My Free Report"
+                style="width: 100%; font-size: 15px; background: {{ light_color }}; border: 2px solid {{ primary_color }}; border-radius: 50px; padding: 16px 24px; color: {{ primary_color }}; outline: none;">
+              <button type="submit" data-default-text="{{ section.settings.form_button_text }}"
                 class="font-heading font-medium"
-                style="width: 100%; font-size: 14px; background: #1C2E23; color: #F5F2EC; border: none; border-radius: 50px; padding: 16px 24px; cursor: pointer;">
-                Send My Free Report
+                style="width: 100%; font-size: 14px; background: {{ primary_color }}; color: {{ light_color }}; border: none; border-radius: 50px; padding: 16px 24px; cursor: pointer;">
+                {{ section.settings.form_button_text }}
               </button>
             </div>
           </div>
 
-          <p data-lead-error class="font-heading" style="font-size: 14px; color: #C4783A; display: none; margin-top: 12px;" role="alert">
+          <p data-lead-error class="font-heading" style="font-size: 14px; color: {{ accent_color }}; display: none; margin-top: 12px;" role="alert">
             Something went wrong. Please try again.
           </p>
         </form>
@@ -483,26 +396,26 @@
 
       <!-- Success view -->
       <div data-lead-success-view style="display: none; text-align: center;">
-        <p data-success-msg class="font-display italic" style="font-size: 22px; color: #1C2E23; margin-bottom: 8px;">
-          You're in &#10022; Check your inbox.
+        <p data-success-msg class="font-display italic" style="font-size: 22px; color: {{ primary_color }}; margin-bottom: 8px;">
+          {{ section.settings.success_message }}
         </p>
-        <div style="margin: 16px auto; padding: 12px 24px; background: #1C2E23; border-radius: 12px; display: inline-block;">
-          <p class="font-mono-spec uppercase" style="font-size: 11px; color: #C4783A; letter-spacing: 0.15em; margin-bottom: 4px;">Your 20% discount code</p>
-          <p class="font-heading font-semibold" style="font-size: 24px; color: #F5F2EC; letter-spacing: 0.1em;">FOUNDER20</p>
+        <div style="margin: 16px auto; padding: 12px 24px; background: {{ primary_color }}; border-radius: 12px; display: inline-block;">
+          <p class="font-mono-spec uppercase" style="font-size: 11px; color: {{ accent_color }}; letter-spacing: 0.15em; margin-bottom: 4px;">Your 20% discount code</p>
+          <p class="font-heading font-semibold" style="font-size: 24px; color: {{ light_color }}; letter-spacing: 0.1em;">{{ section.settings.discount_code }}</p>
         </div>
         <p class="font-heading" style="font-size: 14px; color: #4A5550; margin-bottom: 16px;">
           20% off is automatically applied at checkout. No code needed.
         </p>
-        <a href="/products/origin" class="inline-block font-heading font-semibold"
-          style="background: #C4783A; color: #1C2E23; padding: 16px 40px; border-radius: 50px; text-decoration: none; font-size: 15px;">
-          Shop Origin
+        <a href="{{ section.settings.product_link }}" class="inline-block font-heading font-semibold"
+          style="background: {{ accent_color }}; color: {{ primary_color }}; padding: 16px 40px; border-radius: 50px; text-decoration: none; font-size: 15px;">
+          {{ section.settings.success_shop_text }}
         </a>
       </div>
 
       <!-- Duplicate view -->
       <div data-lead-duplicate-view style="display: none; text-align: center;">
         <p class="font-heading" style="font-size: 15px; color: #4A5550;">
-          Already on the list &mdash; check your inbox.
+          {{ section.settings.duplicate_message }}
         </p>
       </div>
     </div>
@@ -519,6 +432,8 @@
 
   </div>
 </section>
+
+</div><!-- end padding wrapper -->
 
 <!-- ────────────────────────────────────────────────────────────
      SCOPED STYLES
@@ -578,8 +493,8 @@
     .fr-cards-grid {
       grid-template-columns: repeat(2, 1fr);
     }
-    /* Last card (05) spans full width if odd */
-    .fr-cards-grid > :nth-child(5) {
+    /* Last card spans full width if odd count */
+    .fr-cards-grid > :nth-child(odd):last-child {
       grid-column: 1 / -1;
     }
   }
@@ -658,6 +573,560 @@
 {
   "name": "Free Report Page",
   "class": "free-report-page-section",
-  "settings": []
+  "settings": [
+    {
+      "type": "header",
+      "content": "Global Colors"
+    },
+    {
+      "type": "color",
+      "id": "primary_color",
+      "label": "Primary color (forest green)",
+      "default": "#1C2E23"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color (ochre)",
+      "default": "#C4783A"
+    },
+    {
+      "type": "color",
+      "id": "light_color",
+      "label": "Light color (cream)",
+      "default": "#F5F2EC"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card background color",
+      "default": "#EDE8DF"
+    },
+    {
+      "type": "header",
+      "content": "Hero — Left Column"
+    },
+    {
+      "type": "text",
+      "id": "hero_eyebrow",
+      "label": "Eyebrow text",
+      "default": "Free Research Report · No Purchase Required"
+    },
+    {
+      "type": "richtext",
+      "id": "hero_heading",
+      "label": "Heading",
+      "default": "<p>Your microbiome was shaped by your <em>biology. Not a one-size-fits-all formula.</em></p>"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_body",
+      "label": "Body text",
+      "default": "The Biology Gap is a free, six-page research report on why ethnicity determines your microbiome composition more than diet, age, or lifestyle — and what that means for your health. No wellness pitch. Just the published data."
+    },
+    {
+      "type": "textarea",
+      "id": "hero_quote",
+      "label": "Founder quote",
+      "default": "\"Nobody built a probiotic for people like us. So I built one informed by biological diversity research.\""
+    },
+    {
+      "type": "text",
+      "id": "hero_quote_author",
+      "label": "Quote attribution",
+      "default": "Gurkamal, Founder"
+    },
+    {
+      "type": "header",
+      "content": "Hero — Form Card"
+    },
+    {
+      "type": "text",
+      "id": "form_eyebrow",
+      "label": "Form eyebrow",
+      "default": "Free Research Report"
+    },
+    {
+      "type": "text",
+      "id": "form_heading",
+      "label": "Form heading",
+      "default": "Get the research. Start restoring today."
+    },
+    {
+      "type": "text",
+      "id": "form_body",
+      "label": "Form subtext",
+      "default": "Get the free research report now — plus a free copy included when you order Origin."
+    },
+    {
+      "type": "text",
+      "id": "form_button_text",
+      "label": "Button text",
+      "default": "Send My Free Report"
+    },
+    {
+      "type": "text",
+      "id": "form_privacy_text",
+      "label": "Privacy note",
+      "default": "No spam. Unsubscribe any time."
+    },
+    {
+      "type": "text",
+      "id": "form_source",
+      "label": "Form source tag",
+      "default": "free-report-hero",
+      "info": "Passed as data-lead-source on the hero form."
+    },
+    {
+      "type": "header",
+      "content": "What's Inside"
+    },
+    {
+      "type": "text",
+      "id": "inside_eyebrow",
+      "label": "Eyebrow text",
+      "default": "What's Inside"
+    },
+    {
+      "type": "text",
+      "id": "inside_heading",
+      "label": "Heading",
+      "default": "Six pages. Five findings. A category the industry hasn't built."
+    },
+    {
+      "type": "textarea",
+      "id": "inside_body",
+      "label": "Body text",
+      "default": "This report distils published research from Nature Medicine, Cell, and the AAPS PharmSciTech into a single, readable brief. No product pitch — just the data that led us to build Origin."
+    },
+    {
+      "type": "header",
+      "content": "Pull Quote"
+    },
+    {
+      "type": "textarea",
+      "id": "quote_text",
+      "label": "Quote text",
+      "default": "\"Ethnicity contributed more to explaining interindividual differences in microbiota composition than any other measured factor — including diet, age, sex, or medical history.\""
+    },
+    {
+      "type": "text",
+      "id": "quote_source",
+      "label": "Quote source",
+      "default": "Deschasaux et al. — Nature Medicine, 2018 · HELIUS Cohort · n=2,084"
+    },
+    {
+      "type": "header",
+      "content": "Citations"
+    },
+    {
+      "type": "text",
+      "id": "citations_heading",
+      "label": "Section heading",
+      "default": "Cited in the report"
+    },
+    {
+      "type": "header",
+      "content": "Founder Note"
+    },
+    {
+      "type": "text",
+      "id": "founder_eyebrow",
+      "label": "Eyebrow text",
+      "default": "From the Founder"
+    },
+    {
+      "type": "text",
+      "id": "founder_heading",
+      "label": "Heading",
+      "default": "Why I built this company — and why this report is free."
+    },
+    {
+      "type": "textarea",
+      "id": "founder_quote",
+      "label": "Pull quote",
+      "default": "\"I didn't set out to build a supplement company. I set out to answer a question nobody was asking: why is the probiotic industry ignoring the biology of the people who need it most?\""
+    },
+    {
+      "type": "richtext",
+      "id": "founder_body",
+      "label": "Body (multiple paragraphs)",
+      "default": "<p>I grew up in a Punjabi household in Canada. Daal, roti, achaar, lassi — the foods my family had eaten for generations. But I watched my parents and their friends struggle with digestive issues that nobody could explain. The doctors said \"eat more fibre\" or \"try a probiotic.\" So they did. Nothing worked.</p><p>Years later, I found the research. The HELIUS study. Vangay. The data was clear: when you move to a Western country, your ancestral microbiome starts to collapse. Within a single generation. And nobody in the supplement industry was building for that.</p><p>Every probiotic on the shelf was formulated for the same generic Western biology. Same strains. Same delivery. Same failure rate. Meanwhile, diaspora communities across the world were losing the bacterial ecosystems their ancestors spent thousands of years cultivating.</p><p>That's why this report is free. Because the science matters more than the sale. And if you read it and decide Origin isn't for you, you'll still understand your biology better than 99% of people who take a probiotic.</p>"
+    },
+    {
+      "type": "text",
+      "id": "founder_attribution",
+      "label": "Attribution",
+      "default": "Gurkamal, Founder · BaseCode Health"
+    },
+    {
+      "type": "text",
+      "id": "founder_cta_text",
+      "label": "CTA link text",
+      "default": "Get the free report"
+    },
+    {
+      "type": "url",
+      "id": "founder_cta_link",
+      "label": "CTA link URL",
+      "default": "#fr-bottom-form"
+    },
+    {
+      "type": "header",
+      "content": "Bottom CTA"
+    },
+    {
+      "type": "text",
+      "id": "bottom_heading",
+      "label": "Heading",
+      "default": "This report is free. Origin is available now."
+    },
+    {
+      "type": "textarea",
+      "id": "bottom_body",
+      "label": "Body text",
+      "default": "Read the research first. Understand your biology. Then decide if Origin is right for you. No pressure, no pitch — just published science delivered to your inbox."
+    },
+    {
+      "type": "text",
+      "id": "shop_cta_text",
+      "label": "Shop CTA text",
+      "default": "Shop Origin — From $34/mo"
+    },
+    {
+      "type": "url",
+      "id": "shop_cta_link",
+      "label": "Shop CTA link"
+    },
+    {
+      "type": "text",
+      "id": "bottom_transition_text",
+      "label": "Transition text (above form)",
+      "default": "Or get the research first — free, no purchase required:"
+    },
+    {
+      "type": "text",
+      "id": "bottom_investment_text",
+      "label": "Investment line",
+      "default": "Research report + future product access + subscriber pricing. Your investment: $0."
+    },
+    {
+      "type": "text",
+      "id": "bottom_form_source",
+      "label": "Bottom form source tag",
+      "default": "free-report-bottom",
+      "info": "Passed as data-lead-source on the bottom form."
+    },
+    {
+      "type": "header",
+      "content": "Success & Error States"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "You're in ✺ Check your inbox for the report."
+    },
+    {
+      "type": "text",
+      "id": "success_shop_text",
+      "label": "Success CTA button text",
+      "default": "Shop Origin"
+    },
+    {
+      "type": "text",
+      "id": "duplicate_message",
+      "label": "Already subscribed message",
+      "default": "You're already on the list — check your inbox."
+    },
+    {
+      "type": "header",
+      "content": "Discount & Product"
+    },
+    {
+      "type": "text",
+      "id": "discount_code",
+      "label": "Discount code",
+      "default": "FOUNDER20"
+    },
+    {
+      "type": "url",
+      "id": "product_link",
+      "label": "Product page link"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero_bullet",
+      "name": "Hero Bullet",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Bullet text",
+          "default": "Free research report delivered instantly"
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "name": "Stat",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number (digits only)",
+          "default": "2084",
+          "info": "Enter digits only. Use the suffix field for letters like B, K, +."
+        },
+        {
+          "type": "text",
+          "id": "suffix",
+          "label": "Suffix (optional)",
+          "info": "e.g. B, K, +. Leave blank for none.",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "HELIUS Subjects"
+        }
+      ]
+    },
+    {
+      "type": "card",
+      "name": "Inside Card",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Card number label",
+          "default": "01"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Card title",
+          "default": "The Depletion Problem"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Card body text",
+          "default": "The HELIUS study (n=2,084) found ethnicity determines microbiome composition more than diet, age, sex, or medical history — combined. What that means for your biology."
+        }
+      ]
+    },
+    {
+      "type": "citation",
+      "name": "Citation",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "text",
+          "id": "journal",
+          "label": "Journal and year",
+          "default": "Nature Medicine, 2018"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Study description",
+          "default": "HELIUS cohort — ethnicity vs. microbiome composition (n=2,084)"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "DOI / Study URL"
+        }
+      ]
+    },
+    {
+      "type": "value_bullet",
+      "name": "Value Bullet",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Bullet text",
+          "default": "Six-page research report delivered instantly"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Free Report Page",
+      "blocks": [
+        {
+          "type": "hero_bullet",
+          "settings": {
+            "text": "Free research report delivered instantly"
+          }
+        },
+        {
+          "type": "hero_bullet",
+          "settings": {
+            "text": "Free report included with every Origin order"
+          }
+        },
+        {
+          "type": "hero_bullet",
+          "settings": {
+            "text": "Origin available now — free report included with purchase"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "2084",
+            "suffix": "",
+            "label": "HELIUS Subjects"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "6",
+            "suffix": "",
+            "label": "Ethnic Groups Studied"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "40",
+            "suffix": "B",
+            "label": "Live CFU Delivered"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "4",
+            "suffix": "",
+            "label": "Targeted Strains"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "number": "01",
+            "title": "The Depletion Problem",
+            "text": "The HELIUS study (n=2,084) found ethnicity determines microbiome composition more than diet, age, sex, or medical history — combined. What that means for your biology."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "number": "02",
+            "title": "The Biology Gap",
+            "text": "What happens to your microbiome when traditional diets change — and why depletion compounds across generations rather than stabilising."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "number": "03",
+            "title": "The Delivery Problem",
+            "text": "Most probiotic bacteria are destroyed by stomach acid before reaching where they work. Why the number on the bottle is measured at manufacture — not at delivery."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "number": "04",
+            "title": "The Origin Solution",
+            "text": "Why biological diversity matters for supplementation, and how Origin uses MAKTREK Bi-Pass Technology + FOS prebiotic to solve both the depletion and the delivery problem."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "number": "05",
+            "title": "The Four Strains",
+            "text": "L. acidophilus, B. lactis, L. plantarum, L. paracasei — why these four strains were selected to address the specific systems that depletion hits hardest."
+          }
+        },
+        {
+          "type": "citation",
+          "settings": {
+            "journal": "Nature Medicine, 2018",
+            "description": "HELIUS cohort — ethnicity vs. microbiome composition (n=2,084)",
+            "url": "https://doi.org/10.1038/s41591-018-0160-1"
+          }
+        },
+        {
+          "type": "citation",
+          "settings": {
+            "journal": "Cell, 2018",
+            "description": "Vangay et al. — immigration-driven microbiome depletion across generations",
+            "url": "https://doi.org/10.1016/j.cell.2018.10.029"
+          }
+        },
+        {
+          "type": "citation",
+          "settings": {
+            "journal": "AAPS PharmSciTech, 2014",
+            "description": "Govender et al. — Probiotic survivability and acid-protected delivery",
+            "url": "https://doi.org/10.1208/s12249-013-0027-1"
+          }
+        },
+        {
+          "type": "value_bullet",
+          "settings": {
+            "text": "Six-page research report delivered instantly"
+          }
+        },
+        {
+          "type": "value_bullet",
+          "settings": {
+            "text": "Peer-reviewed citations from Nature Medicine, Cell, and Gut"
+          }
+        },
+        {
+          "type": "value_bullet",
+          "settings": {
+            "text": "Exclusive subscriber pricing on future products"
+          }
+        },
+        {
+          "type": "value_bullet",
+          "settings": {
+            "text": "Free report included with every Origin order"
+          }
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}

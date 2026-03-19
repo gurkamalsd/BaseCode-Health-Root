@@ -1,79 +1,520 @@
-{%- comment -%}BaseCode Root - image-with-text{%- endcomment -%}
-<section class="section" style="background:{{ section.settings.bg_color | default: '#FFFFFF' }};">
+{%- comment -%}BaseCode Root - image-with-text — Wonder-level customization{%- endcomment -%}
+
+{%- liquid
+  assign img_width_pct = section.settings.image_width_pct | default: 50
+  assign text_width_pct = 100 | minus: img_width_pct
+  assign pt = section.settings.padding_top | default: 60
+  assign pb = section.settings.padding_bottom | default: 60
+  assign enable_anim = section.settings.enable_animation
+-%}
+
+<section
+  id="image-with-text-{{ section.id }}"
+  class="image-with-text-section{% if enable_anim %} anim-enabled{% endif %}"
+  style="
+    background-color: {{ section.settings.bg_color | default: '#FFFFFF' }};
+    color: {{ section.settings.text_color | default: '#1C2E23' }};
+    padding-top: {{ pt }}px;
+    padding-bottom: {{ pb }}px;
+  "
+>
   <div class="{% if section.settings.full_width %}container--wide{% else %}container{% endif %}">
-    <div class="image-text {% if section.settings.layout == 'text_first' %}image-text--reverse{% endif %}">
-      <!-- Image -->
-      <div class="image-text__media reveal-{% if section.settings.layout == 'text_first' %}right{% else %}left{% endif %}"
-        style="{% if section.settings.image_ratio != blank %}aspect-ratio:{{ section.settings.image_ratio }};{% endif %}">
-        {%- if section.settings.image != blank -%}
+
+    {%- comment -%}---- Desktop height mode styles ----{%- endcomment -%}
+    {%- if section.settings.height_mode == 'fixed' -%}
+      {%- assign desktop_min_height = section.settings.desktop_height | default: 500 -%}
+      {%- assign mobile_min_height = section.settings.mobile_height | default: 300 -%}
+    {%- endif -%}
+
+    <div
+      class="image-text{% if section.settings.layout == 'text_first' %} image-text--reverse{% endif %}"
+      style="
+        display: flex;
+        flex-wrap: wrap;
+        align-items: {{ section.settings.vertical_align | default: 'center' }};
+        gap: 0;
+      "
+    >
+
+      {%- comment -%}---- IMAGE COLUMN ----{%- endcomment -%}
+      <div
+        class="image-text__media reveal-{% if section.settings.layout == 'text_first' %}right{% else %}left{% endif %}"
+        style="
+          flex: 0 0 {{ img_width_pct }}%;
+          max-width: {{ img_width_pct }}%;
+          {%- if section.settings.height_mode == 'fixed' -%}
+            min-height: {{ desktop_min_height }}px;
+          {%- endif -%}
+          overflow: hidden;
+          position: relative;
+        "
+      >
+        {%- comment -%} Desktop image; fall back to shared image if desktop-specific not set {%- endcomment -%}
+        {%- assign desktop_img = section.settings.image_desktop | default: section.settings.image -%}
+        {%- assign mobile_img = section.settings.image_mobile | default: desktop_img -%}
+
+        {%- if desktop_img != blank -%}
+          {%- comment -%} Mobile image — shown on small screens via CSS {%- endcomment -%}
+          {%- if mobile_img != blank and mobile_img != desktop_img -%}
+            <img
+              class="image-text__img image-text__img--mobile"
+              src="{{ mobile_img | image_url: width: 800 }}"
+              srcset="{{ mobile_img | image_url: width: 400 }} 400w, {{ mobile_img | image_url: width: 800 }} 800w"
+              sizes="100vw"
+              alt="{{ mobile_img.alt | default: '' }}"
+              loading="lazy"
+              width="{{ mobile_img.width }}"
+              height="{{ mobile_img.height }}"
+            >
+          {%- endif -%}
+
+          {%- comment -%} Desktop image {%- endcomment -%}
           <img
-            src="{{ section.settings.image | image_url: width: 1200 }}"
-            srcset="{{ section.settings.image | image_url: width: 600 }} 600w, {{ section.settings.image | image_url: width: 1200 }} 1200w"
-            sizes="(max-width: 767px) 100vw, 50vw"
-            alt="{{ section.settings.image.alt | default: section.settings.heading }}"
+            class="image-text__img image-text__img--desktop{% if mobile_img != blank and mobile_img != desktop_img %} image-text__img--hide-mobile{% endif %}"
+            src="{{ desktop_img | image_url: width: 1400 }}"
+            srcset="
+              {{ desktop_img | image_url: width: 600 }} 600w,
+              {{ desktop_img | image_url: width: 900 }} 900w,
+              {{ desktop_img | image_url: width: 1200 }} 1200w,
+              {{ desktop_img | image_url: width: 1400 }} 1400w
+            "
+            sizes="(max-width: 767px) 100vw, {{ img_width_pct }}vw"
+            alt="{{ desktop_img.alt | default: '' }}"
             loading="lazy"
+            width="{{ desktop_img.width }}"
+            height="{{ desktop_img.height }}"
+            style="
+              width: 100%;
+              height: 100%;
+              {%- if section.settings.height_mode == 'fixed' -%}
+                object-fit: cover;
+                position: absolute;
+                inset: 0;
+              {%- elsif section.settings.image_ratio != blank -%}
+                aspect-ratio: {{ section.settings.image_ratio }};
+                display: block;
+              {%- else -%}
+                display: block;
+              {%- endif -%}
+            "
           >
+
+          {%- comment -%} Aspect ratio wrapper when not fixed height {%- endcomment -%}
         {%- else -%}
-          <div style="width:100%;height:100%;min-height:400px;background:var(--color-cream);display:flex;align-items:center;justify-content:center;">
-            <span style="color:var(--color-text-light);">Upload image</span>
+          <div style="
+            width: 100%;
+            aspect-ratio: {{ section.settings.image_ratio | default: '4/5' }};
+            {%- if section.settings.height_mode == 'fixed' -%}min-height: {{ desktop_min_height }}px;{%- endif -%}
+            background: var(--color-cream, #F5F2EC);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          ">
+            <span style="color: var(--color-text-light, #888); font-size: 0.875rem;">Upload image</span>
           </div>
         {%- endif -%}
       </div>
 
-      <!-- Text -->
-      <div class="reveal-{% if section.settings.layout == 'text_first' %}left{% else %}right{% endif %}"
-        style="display:flex;flex-direction:column;justify-content:{{ section.settings.vertical_align | default: 'center' }};padding:var(--space-6) 0;{% if section.settings.text_align %}text-align:{{ section.settings.text_align }};{% endif %}">
+      {%- comment -%}---- TEXT COLUMN ----{%- endcomment -%}
+      {%- assign text_bg = section.settings.text_container_bg | default: '' -%}
+      {%- assign text_bg_opacity = section.settings.text_container_bg_opacity | default: 0 -%}
+      <div
+        class="image-text__content reveal-{% if section.settings.layout == 'text_first' %}left{% else %}right{% endif %}"
+        style="
+          flex: 0 0 {{ text_width_pct }}%;
+          max-width: {{ text_width_pct }}%;
+          display: flex;
+          flex-direction: column;
+          justify-content: {{ section.settings.vertical_align | default: 'center' }};
+          padding: var(--space-8, 2rem) var(--space-10, 2.5rem);
+          text-align: {{ section.settings.text_align | default: 'left' }};
+          {%- if section.settings.height_mode == 'fixed' -%}
+            min-height: {{ desktop_min_height }}px;
+          {%- endif -%}
+          {%- if text_bg != '' and text_bg_opacity > 0 -%}
+            background-color: {{ text_bg }};
+            {%- comment -%}Opacity applied inline via rgba trick below{%- endcomment -%}
+          {%- endif -%}
+        "
+      >
 
         {%- for block in section.blocks -%}
           {%- case block.type -%}
+
             {%- when 'subheading' -%}
-              <p style="font-family:var(--font-heading);font-size:var(--text-sm);font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:{{ block.settings.color | default: 'var(--color-accent)' }};margin-bottom:var(--space-3);" {{ block.shopify_attributes }}>
+              <p
+                class="image-text__subheading{% if enable_anim %} anim-fade-up{% endif %}"
+                style="
+                  font-family: var(--font-heading);
+                  font-size: var(--text-sm, 0.875rem);
+                  font-weight: 600;
+                  text-transform: uppercase;
+                  letter-spacing: 0.1em;
+                  color: {{ block.settings.color | default: 'var(--color-accent, #C4783A)' }};
+                  margin-bottom: var(--space-3, 0.75rem);
+                "
+                {{ block.shopify_attributes }}
+              >
                 {{ block.settings.text }}
               </p>
+
             {%- when 'heading' -%}
-              <h2 style="font-size:var(--text-3xl);margin-bottom:var(--space-4);" {{ block.shopify_attributes }}>
+              {%- assign h_tag = block.settings.heading_level | default: 'h2' -%}
+              {%- assign h_size = block.settings.heading_size | default: 'h2' -%}
+              {%- case h_size -%}
+                {%- when 'h1' -%}{%- assign h_fs = 'var(--text-5xl, 3rem)' -%}
+                {%- when 'h2' -%}{%- assign h_fs = 'var(--text-4xl, 2.25rem)' -%}
+                {%- when 'h3' -%}{%- assign h_fs = 'var(--text-3xl, 1.875rem)' -%}
+                {%- when 'h4' -%}{%- assign h_fs = 'var(--text-2xl, 1.5rem)' -%}
+                {%- when 'h5' -%}{%- assign h_fs = 'var(--text-xl, 1.25rem)' -%}
+                {%- when 'h6' -%}{%- assign h_fs = 'var(--text-lg, 1.125rem)' -%}
+                {%- else -%}{%- assign h_fs = 'var(--text-4xl, 2.25rem)' -%}
+              {%- endcase -%}
+              <{{ h_tag }}
+                class="image-text__heading{% if enable_anim %} anim-fade-up{% endif %}"
+                style="font-size: {{ h_fs }}; line-height: 1.15; margin-bottom: var(--space-4, 1rem);"
+                {{ block.shopify_attributes }}
+              >
                 {{ block.settings.text }}
-              </h2>
+              </{{ h_tag }}>
+
             {%- when 'text' -%}
-              <div style="font-size:var(--text-base);color:var(--color-text-light);line-height:1.7;margin-bottom:var(--space-6);max-width:520px;" {{ block.shopify_attributes }}>
+              <div
+                class="image-text__text{% if enable_anim %} anim-fade-up{% endif %}"
+                style="
+                  font-size: {{ block.settings.text_size | default: 'var(--text-base, 1rem)' }};
+                  color: {{ block.settings.text_color | default: 'var(--color-text-light, #666)' }};
+                  line-height: 1.7;
+                  margin-bottom: var(--space-6, 1.5rem);
+                  max-width: 520px;
+                  {%- if section.settings.text_align == 'center' -%}margin-left: auto; margin-right: auto;{%- endif -%}
+                "
+                {{ block.shopify_attributes }}
+              >
                 {{ block.settings.text }}
               </div>
+
             {%- when 'button' -%}
-              <div {{ block.shopify_attributes }}>
-                <a href="{{ block.settings.link | default: '#' }}" class="btn btn--{{ block.settings.style | default: 'primary' }}">
-                  {{ block.settings.text | default: 'Learn More' }}
-                </a>
+              <div
+                class="image-text__buttons{% if enable_anim %} anim-fade-up{% endif %}"
+                style="display: flex; flex-wrap: wrap; gap: var(--space-3, 0.75rem); align-items: center; {% if section.settings.text_align == 'center' %}justify-content: center;{% endif %}"
+                {{ block.shopify_attributes }}
+              >
+                {%- if block.settings.text != blank -%}
+                  <a
+                    href="{{ block.settings.link | default: '#' }}"
+                    class="btn btn--{{ block.settings.style | default: 'primary' }}"
+                  >
+                    {{ block.settings.text }}
+                  </a>
+                {%- endif -%}
+                {%- if block.settings.text_2 != blank -%}
+                  <a
+                    href="{{ block.settings.link_2 | default: '#' }}"
+                    class="btn btn--{{ block.settings.style_2 | default: 'secondary' }}"
+                  >
+                    {{ block.settings.text_2 }}
+                  </a>
+                {%- endif -%}
               </div>
+
+            {%- when 'countdown' -%}
+              {%- if block.settings.end_date != blank -%}
+                <div
+                  class="image-text__countdown{% if enable_anim %} anim-fade-up{% endif %}"
+                  style="margin-bottom: var(--space-6, 1.5rem);"
+                  {{ block.shopify_attributes }}
+                >
+                  {%- if block.settings.label != blank -%}
+                    <p style="font-size: var(--text-sm, 0.875rem); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: {{ block.settings.label_color | default: 'var(--color-accent, #C4783A)' }}; margin-bottom: var(--space-2, 0.5rem);">
+                      {{ block.settings.label }}
+                    </p>
+                  {%- endif -%}
+                  <div
+                    class="countdown-timer"
+                    data-countdown="{{ block.settings.end_date }}"
+                    style="display: flex; gap: var(--space-3, 0.75rem); {% if section.settings.text_align == 'center' %}justify-content: center;{% endif %}"
+                  >
+                    {%- for unit in 'days,hours,mins,secs' | split: ',' -%}
+                      <div style="text-align: center; min-width: 56px;">
+                        <div
+                          class="countdown-timer__value countdown-timer__{{ unit }}"
+                          style="
+                            font-family: var(--font-mono, monospace);
+                            font-size: var(--text-3xl, 1.875rem);
+                            font-weight: 700;
+                            line-height: 1;
+                            color: {{ block.settings.number_color | default: 'inherit' }};
+                          "
+                        >00</div>
+                        <div style="font-size: var(--text-xs, 0.75rem); text-transform: uppercase; letter-spacing: 0.08em; margin-top: var(--space-1, 0.25rem); opacity: 0.7;">
+                          {{ unit }}
+                        </div>
+                      </div>
+                      {%- unless forloop.last -%}
+                        <div style="font-size: var(--text-2xl, 1.5rem); font-weight: 700; align-self: flex-start; padding-top: 2px;">:</div>
+                      {%- endunless -%}
+                    {%- endfor -%}
+                  </div>
+                </div>
+              {%- endif -%}
+
+            {%- when 'spacer' -%}
+              <div
+                style="height: {{ block.settings.height | default: 24 }}px;"
+                {{ block.shopify_attributes }}
+              ></div>
+
+            {%- when 'icon_text' -%}
+              <div
+                class="image-text__icon-text{% if enable_anim %} anim-fade-up{% endif %}"
+                style="
+                  display: flex;
+                  align-items: {{ block.settings.vertical_align | default: 'flex-start' }};
+                  gap: var(--space-3, 0.75rem);
+                  margin-bottom: var(--space-4, 1rem);
+                "
+                {{ block.shopify_attributes }}
+              >
+                {%- if block.settings.icon != blank -%}
+                  <span
+                    style="
+                      font-size: {{ block.settings.icon_size | default: 24 }}px;
+                      line-height: 1;
+                      flex-shrink: 0;
+                      color: {{ block.settings.icon_color | default: 'var(--color-accent, #C4783A)' }};
+                    "
+                    aria-hidden="true"
+                  >{{ block.settings.icon }}</span>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  <span style="font-size: var(--text-base, 1rem); line-height: 1.6;">{{ block.settings.text }}</span>
+                {%- endif -%}
+              </div>
+
+            {%- when 'table' -%}
+              {%- if block.settings.rows != blank -%}
+                <div
+                  class="image-text__table{% if enable_anim %} anim-fade-up{% endif %}"
+                  style="margin-bottom: var(--space-6, 1.5rem); overflow-x: auto;"
+                  {{ block.shopify_attributes }}
+                >
+                  {%- if block.settings.caption != blank -%}
+                    <p style="font-size: var(--text-sm, 0.875rem); font-weight: 600; margin-bottom: var(--space-2, 0.5rem);">{{ block.settings.caption }}</p>
+                  {%- endif -%}
+                  <table style="width: 100%; border-collapse: collapse; font-size: var(--text-sm, 0.875rem);">
+                    {%- assign rows = block.settings.rows | newline_to_br | split: '<br />' -%}
+                    {%- for row in rows -%}
+                      {%- assign row_stripped = row | strip -%}
+                      {%- if row_stripped != blank -%}
+                        {%- assign cols = row_stripped | split: '|' -%}
+                        <tr style="border-bottom: 1px solid var(--color-border, #E5E7EB);">
+                          {%- for col in cols -%}
+                            <td style="padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem); {% if forloop.first %}font-weight: 600; opacity: 0.75;{% endif %}">
+                              {{ col | strip }}
+                            </td>
+                          {%- endfor -%}
+                        </tr>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </table>
+                </div>
+              {%- endif -%}
+
           {%- endcase -%}
         {%- endfor -%}
-      </div>
-    </div>
-  </div>
+
+      </div>{%- comment -%}end text column{%- endcomment -%}
+    </div>{%- comment -%}end flex row{%- endcomment -%}
+  </div>{%- comment -%}end container{%- endcomment -%}
 </section>
+
+{%- comment -%}---- Countdown JS ----{%- endcomment -%}
+{%- for block in section.blocks -%}
+  {%- if block.type == 'countdown' and block.settings.end_date != blank -%}
+    <script>
+    (function() {
+      var timers = document.querySelectorAll('#image-with-text-{{ section.id }} .countdown-timer[data-countdown]');
+      timers.forEach(function(el) {
+        var endDate = new Date(el.getAttribute('data-countdown')).getTime();
+        function tick() {
+          var now = Date.now();
+          var diff = endDate - now;
+          if (diff <= 0) { diff = 0; }
+          var days  = Math.floor(diff / 86400000);
+          var hours = Math.floor((diff % 86400000) / 3600000);
+          var mins  = Math.floor((diff % 3600000) / 60000);
+          var secs  = Math.floor((diff % 60000) / 1000);
+          function pad(n) { return String(n).padStart(2, '0'); }
+          var d = el.querySelector('.countdown-timer__days');
+          var h = el.querySelector('.countdown-timer__hours');
+          var m = el.querySelector('.countdown-timer__mins');
+          var s = el.querySelector('.countdown-timer__secs');
+          if (d) d.textContent = pad(days);
+          if (h) h.textContent = pad(hours);
+          if (m) m.textContent = pad(mins);
+          if (s) s.textContent = pad(secs);
+        }
+        tick();
+        setInterval(tick, 1000);
+      });
+    })();
+    </script>
+    {%- break -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- comment -%}---- Mobile responsive + animation CSS ----{%- endcomment -%}
+<style>
+  #image-with-text-{{ section.id }} .image-text__img--hide-mobile { display: block; }
+  #image-with-text-{{ section.id }} .image-text__img--mobile      { display: none; }
+
+  @media (max-width: 767px) {
+    #image-with-text-{{ section.id }} .image-text {
+      flex-direction: column !important;
+    }
+    #image-with-text-{{ section.id }} .image-text__media,
+    #image-with-text-{{ section.id }} .image-text__content {
+      flex: 0 0 100% !important;
+      max-width: 100% !important;
+      {%- if section.settings.height_mode == 'fixed' -%}
+      min-height: {{ mobile_min_height | default: 300 }}px !important;
+      {%- endif -%}
+    }
+    #image-with-text-{{ section.id }} .image-text__content {
+      padding: var(--space-6, 1.5rem) var(--space-4, 1rem) !important;
+    }
+    #image-with-text-{{ section.id }} .image-text__img--hide-mobile { display: none; }
+    #image-with-text-{{ section.id }} .image-text__img--mobile      { display: block; }
+  }
+
+  {%- if section.settings.enable_animation -%}
+  #image-with-text-{{ section.id }} .anim-fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  #image-with-text-{{ section.id }}.in-view .anim-fade-up {
+    opacity: 1;
+    transform: none;
+  }
+  #image-with-text-{{ section.id }}.in-view .anim-fade-up:nth-child(1) { transition-delay: 0.05s; }
+  #image-with-text-{{ section.id }}.in-view .anim-fade-up:nth-child(2) { transition-delay: 0.15s; }
+  #image-with-text-{{ section.id }}.in-view .anim-fade-up:nth-child(3) { transition-delay: 0.25s; }
+  #image-with-text-{{ section.id }}.in-view .anim-fade-up:nth-child(4) { transition-delay: 0.35s; }
+  #image-with-text-{{ section.id }}.in-view .anim-fade-up:nth-child(5) { transition-delay: 0.45s; }
+  #image-with-text-{{ section.id }}.in-view .anim-fade-up:nth-child(6) { transition-delay: 0.55s; }
+  {%- endif -%}
+</style>
+
+{%- if section.settings.enable_animation -%}
+<script>
+(function() {
+  var el = document.getElementById('image-with-text-{{ section.id }}');
+  if (!el) return;
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('in-view'); obs.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    obs.observe(el);
+  } else {
+    el.classList.add('in-view');
+  }
+})();
+</script>
+{%- endif -%}
 
 {% schema %}
 {
   "name": "Image with Text",
+  "max_blocks": 10,
   "settings": [
     {
-      "type": "image_picker", "id": "image", "label": "Image"
+      "type": "header",
+      "content": "Images"
     },
     {
-      "type": "select", "id": "layout", "label": "Layout", "default": "image_first",
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "Desktop image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile image (optional — falls back to desktop)"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Image position",
+      "default": "image_first",
       "options": [
-        { "value": "image_first", "label": "Image first" },
-        { "value": "text_first", "label": "Text first" }
+        { "value": "image_first", "label": "Image left" },
+        { "value": "text_first", "label": "Image right" }
       ]
     },
     {
-      "type": "select", "id": "text_align", "label": "Text alignment", "default": "left",
+      "type": "range",
+      "id": "image_width_pct",
+      "label": "Desktop image width (%)",
+      "min": 30,
+      "max": 70,
+      "step": 5,
+      "default": 50,
+      "info": "Text column takes the remaining percentage"
+    },
+    {
+      "type": "select",
+      "id": "height_mode",
+      "label": "Height mode",
+      "default": "adapt",
       "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Center" }
+        { "value": "adapt", "label": "Adapt to image" },
+        { "value": "fixed", "label": "Fixed height" }
       ]
     },
     {
-      "type": "select", "id": "vertical_align", "label": "Vertical align", "default": "center",
+      "type": "range",
+      "id": "desktop_height",
+      "label": "Desktop fixed height (px)",
+      "min": 300,
+      "max": 900,
+      "step": 20,
+      "default": 500,
+      "info": "Only applies when Height mode is set to Fixed"
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "label": "Mobile fixed height (px)",
+      "min": 200,
+      "max": 600,
+      "step": 20,
+      "default": 320,
+      "info": "Only applies when Height mode is set to Fixed"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio (Adapt mode)",
+      "default": "4/5",
+      "options": [
+        { "value": "1/1", "label": "Square 1:1" },
+        { "value": "4/5", "label": "Portrait 4:5" },
+        { "value": "3/4", "label": "Tall portrait 3:4" },
+        { "value": "16/9", "label": "Landscape 16:9" },
+        { "value": "3/2", "label": "Landscape 3:2" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "vertical_align",
+      "label": "Vertical alignment",
+      "default": "center",
       "options": [
         { "value": "flex-start", "label": "Top" },
         { "value": "center", "label": "Center" },
@@ -81,60 +522,356 @@
       ]
     },
     {
-      "type": "select", "id": "image_ratio", "label": "Image ratio", "default": "4/5",
+      "type": "select",
+      "id": "text_align",
+      "label": "Text alignment",
+      "default": "left",
       "options": [
-        { "value": "1/1", "label": "Square" },
-        { "value": "4/5", "label": "Portrait" },
-        { "value": "3/4", "label": "Tall portrait" },
-        { "value": "16/9", "label": "Landscape" }
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
       ]
     },
-    { "type": "color", "id": "bg_color", "label": "Background", "default": "#FFFFFF" },
-    { "type": "checkbox", "id": "full_width", "label": "Full width", "default": false }
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#1C2E23"
+    },
+    {
+      "type": "color",
+      "id": "text_container_bg",
+      "label": "Text column background",
+      "default": "#FFFFFF",
+      "info": "Set opacity below to activate"
+    },
+    {
+      "type": "range",
+      "id": "text_container_bg_opacity",
+      "label": "Text column background opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 0,
+      "info": "0 = transparent, 100 = solid"
+    },
+    {
+      "type": "header",
+      "content": "Container"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top (px)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom (px)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable scroll animations",
+      "default": true
+    }
   ],
   "blocks": [
     {
-      "type": "subheading", "name": "Subheading",
+      "type": "subheading",
+      "name": "Subheading",
       "settings": [
-        { "type": "text", "id": "text", "label": "Text", "default": "Our Story" },
-        { "type": "color", "id": "color", "label": "Color", "default": "#C4783A" }
-      ]
-    },
-    {
-      "type": "heading", "name": "Heading",
-      "settings": [
-        { "type": "text", "id": "text", "label": "Text", "default": "Built from biology outward." }
-      ]
-    },
-    {
-      "type": "text", "name": "Text",
-      "settings": [
-        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Our founder dreamed of creating supplements that actually account for biological diversity. The result is Origin.</p>" }
-      ]
-    },
-    {
-      "type": "button", "name": "Button",
-      "settings": [
-        { "type": "text", "id": "text", "label": "Label", "default": "Learn More" },
-        { "type": "url", "id": "link", "label": "Link" },
         {
-          "type": "select", "id": "style", "label": "Style", "default": "primary",
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Our Story"
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Color",
+          "default": "#C4783A"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Built from biology outward."
+        },
+        {
+          "type": "select",
+          "id": "heading_level",
+          "label": "Heading level (SEO)",
+          "default": "h2",
+          "options": [
+            { "value": "h1", "label": "H1" },
+            { "value": "h2", "label": "H2" },
+            { "value": "h3", "label": "H3" },
+            { "value": "h4", "label": "H4" },
+            { "value": "h5", "label": "H5" },
+            { "value": "h6", "label": "H6" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "label": "Heading size",
+          "default": "h2",
+          "options": [
+            { "value": "h1", "label": "Extra large (H1 size)" },
+            { "value": "h2", "label": "Large (H2 size)" },
+            { "value": "h3", "label": "Medium (H3 size)" },
+            { "value": "h4", "label": "Small (H4 size)" },
+            { "value": "h5", "label": "Extra small (H5 size)" },
+            { "value": "h6", "label": "Tiny (H6 size)" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Our founder dreamed of creating supplements that actually account for biological diversity. The result is Origin.</p>"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color",
+          "default": "#666666"
+        },
+        {
+          "type": "select",
+          "id": "text_size",
+          "label": "Text size",
+          "default": "var(--text-base, 1rem)",
+          "options": [
+            { "value": "var(--text-sm, 0.875rem)", "label": "Small" },
+            { "value": "var(--text-base, 1rem)", "label": "Base" },
+            { "value": "var(--text-lg, 1.125rem)", "label": "Large" },
+            { "value": "var(--text-xl, 1.25rem)", "label": "Extra large" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button(s)",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Primary button"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Label",
+          "default": "Learn More"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Style",
+          "default": "primary",
           "options": [
             { "value": "primary", "label": "Primary" },
-            { "value": "secondary", "label": "Secondary" }
+            { "value": "secondary", "label": "Secondary" },
+            { "value": "outline", "label": "Outline" },
+            { "value": "ghost", "label": "Ghost / text" }
           ]
+        },
+        {
+          "type": "header",
+          "content": "Second button (optional)"
+        },
+        {
+          "type": "text",
+          "id": "text_2",
+          "label": "Label"
+        },
+        {
+          "type": "url",
+          "id": "link_2",
+          "label": "Link"
+        },
+        {
+          "type": "select",
+          "id": "style_2",
+          "label": "Style",
+          "default": "secondary",
+          "options": [
+            { "value": "primary", "label": "Primary" },
+            { "value": "secondary", "label": "Secondary" },
+            { "value": "outline", "label": "Outline" },
+            { "value": "ghost", "label": "Ghost / text" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "countdown",
+      "name": "Countdown timer",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label above timer",
+          "default": "Offer ends in:"
+        },
+        {
+          "type": "text",
+          "id": "end_date",
+          "label": "End date & time",
+          "info": "Format: YYYY-MM-DDTHH:MM:SS — e.g. 2026-04-01T23:59:00",
+          "default": "2026-04-01T23:59:00"
+        },
+        {
+          "type": "color",
+          "id": "label_color",
+          "label": "Label color",
+          "default": "#C4783A"
+        },
+        {
+          "type": "color",
+          "id": "number_color",
+          "label": "Number color",
+          "default": "#1C2E23"
+        }
+      ]
+    },
+    {
+      "type": "spacer",
+      "name": "Spacer",
+      "settings": [
+        {
+          "type": "range",
+          "id": "height",
+          "label": "Height (px)",
+          "min": 4,
+          "max": 80,
+          "step": 4,
+          "default": 24
+        }
+      ]
+    },
+    {
+      "type": "icon_text",
+      "name": "Icon with text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (emoji or HTML entity)",
+          "default": "✓",
+          "info": "Use an emoji (e.g. ✓ ✔ 🌿 🔬) or a symbol"
+        },
+        {
+          "type": "range",
+          "id": "icon_size",
+          "label": "Icon size (px)",
+          "min": 16,
+          "max": 48,
+          "step": 2,
+          "default": 24
+        },
+        {
+          "type": "color",
+          "id": "icon_color",
+          "label": "Icon color",
+          "default": "#C4783A"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Clinically researched strains"
+        },
+        {
+          "type": "select",
+          "id": "vertical_align",
+          "label": "Icon vertical alignment",
+          "default": "flex-start",
+          "options": [
+            { "value": "flex-start", "label": "Top" },
+            { "value": "center", "label": "Center" },
+            { "value": "flex-end", "label": "Bottom" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "name": "Two-column table",
+      "settings": [
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Table caption (optional)",
+          "default": "Ingredients"
+        },
+        {
+          "type": "textarea",
+          "id": "rows",
+          "label": "Table rows",
+          "default": "L. acidophilus | Gut barrier & digestion\nB. lactis | Immune function\nL. plantarum | Anti-inflammatory\nL. paracasei | Gut-brain axis",
+          "info": "One row per line. Separate columns with a pipe | character."
         }
       ]
     }
   ],
-  "presets": [{
-    "name": "Image with Text",
-    "blocks": [
-      { "type": "subheading", "settings": { "text": "Meet the Founder" } },
-      { "type": "heading", "settings": { "text": "Built from biology outward." } },
-      { "type": "text", "settings": { "text": "<p>Gurkamal started BaseCode Health because the supplements he tried were never built for his biology. So he built one.</p>" } },
-      { "type": "button", "settings": { "text": "Read Our Story" } }
-    ]
-  }]
+  "presets": [
+    {
+      "name": "Image with Text",
+      "blocks": [
+        { "type": "subheading", "settings": { "text": "Meet the Founder" } },
+        { "type": "heading",    "settings": { "text": "Built from biology outward.", "heading_level": "h2", "heading_size": "h2" } },
+        { "type": "text",       "settings": { "text": "<p>Gurkamal started BaseCode Health because the supplements he tried were never built for his biology. So he built one.</p>" } },
+        { "type": "button",     "settings": { "text": "Read Our Story", "text_2": "Shop Origin" } }
+      ]
+    }
+  ]
 }
 {% endschema %}

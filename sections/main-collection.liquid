@@ -1,49 +1,331 @@
-{%- comment -%}BaseCode Root - main-collection{%- endcomment -%}
-<section class="section bg-white">
+{%- comment -%}BaseCode Root - main-collection — Wonder-level customization{%- endcomment -%}
+
+{%- liquid
+  assign pt = section.settings.padding_top | default: 60
+  assign pb = section.settings.padding_bottom | default: 60
+  assign enable_anim = section.settings.enable_animation
+  assign cols_desktop = section.settings.columns_desktop | default: 3
+  assign cols_mobile  = section.settings.columns_mobile  | default: 2
+  assign image_ratio  = section.settings.image_ratio     | default: 'adapt'
+  assign products_per_page = section.settings.products_per_page | default: 16
+-%}
+
+{%- paginate collection.products by products_per_page -%}
+
+<section
+  id="main-collection-{{ section.id }}"
+  class="main-collection-section{% if enable_anim %} anim-enabled{% endif %}"
+  style="
+    background-color: {{ section.settings.bg_color | default: '#FFFFFF' }};
+    color: {{ section.settings.text_color | default: '#1C2E23' }};
+    padding-top: {{ pt }}px;
+    padding-bottom: {{ pb }}px;
+  "
+>
   <div class="container">
-    <!-- Collection Header -->
-    <div class="text-center mb-12">
-      <h1>{{ collection.title | default: 'All Products' }}</h1>
-      {%- if collection.description != blank -%}
-        <p style="font-size: var(--text-lg); color: var(--color-text-light); margin-top: var(--space-3); max-width: 600px; margin-left: auto; margin-right: auto;">
+
+    {%- comment -%}---- Collection header ----{%- endcomment -%}
+    <div
+      class="collection-header text-center{% if enable_anim %} anim-fade-up{% endif %}"
+      style="margin-bottom: var(--space-10, 2.5rem);"
+    >
+      <h1 style="margin-bottom: var(--space-3, 0.75rem);">
+        {{ collection.title | default: 'All Products' }}
+      </h1>
+
+      {%- comment -%} Collection description — conditionally shown {%- endcomment -%}
+      {%- if section.settings.show_collection_description and collection.description != blank -%}
+        <div
+          style="
+            font-size: var(--text-lg, 1.125rem);
+            color: var(--color-text-light, #666);
+            margin-top: var(--space-3, 0.75rem);
+            max-width: 640px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+          "
+        >
           {{ collection.description }}
+        </div>
+      {%- endif -%}
+
+      {%- comment -%} Product count {%- endcomment -%}
+      {%- if section.settings.show_product_count -%}
+        <p style="font-size: var(--text-sm, 0.875rem); color: var(--color-text-light, #666); margin-top: var(--space-2, 0.5rem);">
+          {{ 'collection.products_count' | t: count: collection.products_count }}
         </p>
       {%- endif -%}
-      <p style="font-size: var(--text-sm); color: var(--color-text-light); margin-top: var(--space-2);">
-        {{ 'collection.products_count' | t: count: collection.products_count }}
-      </p>
     </div>
 
-    <!-- Sort -->
-    <div class="flex justify-between items-center mb-8" style="border-bottom: 1px solid var(--color-border); padding-bottom: var(--space-4);">
-      <span style="font-size: var(--text-sm); color: var(--color-text-light);">
-        {{ 'collection.products_count' | t: count: collection.products_count }}
-      </span>
-      <div class="flex items-center gap-2">
-        <label for="sort-select" style="font-size: var(--text-sm); font-weight: 500;">{{ 'collection.sort' | t }}:</label>
-        <select id="sort-select" class="form-input" style="width: auto; padding: var(--space-2) var(--space-4); font-size: var(--text-sm);" onchange="window.location.href = this.value;">
-          {%- for option in collection.sort_options -%}
-            <option value="{{ collection.url }}?sort_by={{ option.value }}" {% if collection.sort_by == option.value %}selected{% endif %}>
-              {{ option.name }}
-            </option>
-          {%- endfor -%}
-        </select>
+    {%- comment -%}---- Sort bar ----{%- endcomment -%}
+    {%- if section.settings.show_sort -%}
+      <div
+        class="collection-toolbar{% if enable_anim %} anim-fade-up{% endif %}"
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-bottom: 1px solid var(--color-border, #E5E7EB);
+          padding-bottom: var(--space-4, 1rem);
+          margin-bottom: var(--space-8, 2rem);
+          flex-wrap: wrap;
+          gap: var(--space-3, 0.75rem);
+        "
+      >
+        {%- if section.settings.show_product_count -%}
+          <span style="font-size: var(--text-sm, 0.875rem); color: var(--color-text-light, #666);">
+            {{ 'collection.products_count' | t: count: collection.products_count }}
+          </span>
+        {%- else -%}
+          <span></span>
+        {%- endif -%}
+
+        <div style="display: flex; align-items: center; gap: var(--space-2, 0.5rem);">
+          <label
+            for="sort-select-{{ section.id }}"
+            style="font-size: var(--text-sm, 0.875rem); font-weight: 500; white-space: nowrap;"
+          >
+            {{ 'collection.sort' | t }}:
+          </label>
+          <select
+            id="sort-select-{{ section.id }}"
+            class="form-input"
+            style="width: auto; padding: var(--space-2, 0.5rem) var(--space-4, 1rem); font-size: var(--text-sm, 0.875rem);"
+            onchange="window.location.href = this.value;"
+          >
+            {%- for option in collection.sort_options -%}
+              <option
+                value="{{ collection.url }}?sort_by={{ option.value }}"
+                {% if collection.sort_by == option.value %}selected{% endif %}
+              >
+                {{ option.name }}
+              </option>
+            {%- endfor -%}
+          </select>
+        </div>
       </div>
-    </div>
+    {%- endif -%}
 
-    <!-- Product Grid -->
+    {%- comment -%}---- Product grid ----{%- endcomment -%}
     {%- if collection.products.size > 0 -%}
-      <div class="collection-grid">
+
+      <div
+        class="collection-grid"
+        style="
+          display: grid;
+          grid-template-columns: repeat({{ cols_desktop }}, 1fr);
+          gap: var(--space-6, 1.5rem);
+        "
+      >
         {%- for product in collection.products -%}
-          <div class="reveal-hidden reveal-delay-{{ forloop.index | modulo: 4 | plus: 1 }}">
-            {% render 'product-card', product: product, show_atc: true %}
+          <div
+            class="collection-grid__item{% if enable_anim %} anim-fade-up{% endif %}"
+            style="animation-delay: {{ forloop.index0 | modulo: cols_desktop | times: 60 }}ms;"
+          >
+
+            {%- comment -%}
+              Inline product card with all toggle options.
+              The render tag passes flags down; we build the card inline here
+              so we can respect the section-level settings without relying on
+              a separate snippet that may not exist.
+            {%- endcomment -%}
+
+            {%- assign card_product = product -%}
+            {%- assign card_image_ratio = image_ratio -%}
+
+            <div class="product-card" style="position: relative;">
+
+              {%- comment -%} Image container {%- endcomment -%}
+              <a
+                href="{{ card_product.url }}"
+                class="product-card__image-wrap"
+                style="
+                  display: block;
+                  overflow: hidden;
+                  border-radius: var(--radius-md, 0.5rem);
+                  background: var(--color-cream, #F5F2EC);
+                  position: relative;
+                  {%- case card_image_ratio -%}
+                    {%- when 'portrait' -%}aspect-ratio: 3/4;
+                    {%- when 'square' -%}aspect-ratio: 1/1;
+                    {%- else -%}{%- comment -%}adapt{%- endcomment -%}
+                  {%- endcase -%}
+                "
+              >
+                {%- if card_product.featured_image -%}
+                  {%- comment -%} Primary image {%- endcomment -%}
+                  <img
+                    class="product-card__img product-card__img--primary"
+                    src="{{ card_product.featured_image | image_url: width: 800 }}"
+                    srcset="
+                      {{ card_product.featured_image | image_url: width: 400 }} 400w,
+                      {{ card_product.featured_image | image_url: width: 800 }} 800w
+                    "
+                    sizes="(max-width: 767px) {{ 100 | divided_by: cols_mobile }}vw, {{ 100 | divided_by: cols_desktop }}vw"
+                    alt="{{ card_product.featured_image.alt | default: card_product.title | escape }}"
+                    loading="lazy"
+                    width="{{ card_product.featured_image.width }}"
+                    height="{{ card_product.featured_image.height }}"
+                    style="
+                      width: 100%;
+                      display: block;
+                      transition: transform 0.4s ease;
+                      {%- if card_image_ratio != 'adapt' -%}
+                        height: 100%;
+                        object-fit: cover;
+                        position: absolute;
+                        inset: 0;
+                      {%- endif -%}
+                    "
+                  >
+
+                  {%- comment -%} Secondary hover image {%- endcomment -%}
+                  {%- if section.settings.show_secondary_image and card_product.images.size > 1 -%}
+                    {%- assign secondary_image = card_product.images[1] -%}
+                    <img
+                      class="product-card__img product-card__img--secondary"
+                      src="{{ secondary_image | image_url: width: 800 }}"
+                      srcset="
+                        {{ secondary_image | image_url: width: 400 }} 400w,
+                        {{ secondary_image | image_url: width: 800 }} 800w
+                      "
+                      sizes="(max-width: 767px) {{ 100 | divided_by: cols_mobile }}vw, {{ 100 | divided_by: cols_desktop }}vw"
+                      alt="{{ secondary_image.alt | default: card_product.title | escape }}"
+                      loading="lazy"
+                      width="{{ secondary_image.width }}"
+                      height="{{ secondary_image.height }}"
+                      style="
+                        width: 100%;
+                        display: block;
+                        position: absolute;
+                        inset: 0;
+                        object-fit: cover;
+                        opacity: 0;
+                        transition: opacity 0.35s ease;
+                        height: 100%;
+                      "
+                    >
+                  {%- endif -%}
+                {%- else -%}
+                  <div style="width: 100%; aspect-ratio: 1/1; background: var(--color-cream, #F5F2EC);"></div>
+                {%- endif -%}
+
+                {%- comment -%} Sale badge {%- endcomment -%}
+                {%- if card_product.compare_at_price > card_product.price -%}
+                  <span style="
+                    position: absolute;
+                    top: var(--space-2, 0.5rem);
+                    left: var(--space-2, 0.5rem);
+                    background: var(--color-accent, #C4783A);
+                    color: #fff;
+                    font-size: var(--text-xs, 0.75rem);
+                    font-weight: 700;
+                    padding: 2px 8px;
+                    border-radius: 99px;
+                    text-transform: uppercase;
+                    letter-spacing: 0.06em;
+                  ">Sale</span>
+                {%- endif -%}
+
+                {%- comment -%} Quick add button {%- endcomment -%}
+                {%- if section.settings.show_quick_add -%}
+                  {%- if card_product.available -%}
+                    <div
+                      class="product-card__quick-add"
+                      style="
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+                        padding: var(--space-2, 0.5rem);
+                        opacity: 0;
+                        transform: translateY(4px);
+                        transition: opacity 0.25s ease, transform 0.25s ease;
+                      "
+                    >
+                      <a
+                        href="{{ card_product.url }}?variant={{ card_product.first_available_variant.id }}"
+                        class="btn btn--primary btn--full btn--sm"
+                      >
+                        {%- if card_product.variants.size == 1 -%}
+                          Quick add
+                        {%- else -%}
+                          View options
+                        {%- endif -%}
+                      </a>
+                    </div>
+                  {%- endif -%}
+                {%- endif -%}
+
+              </a>
+
+              {%- comment -%} Card body {%- endcomment -%}
+              <div style="padding: var(--space-3, 0.75rem) 0 var(--space-2, 0.5rem);">
+
+                {%- if section.settings.show_vendor and card_product.vendor != blank -%}
+                  <p style="font-size: var(--text-xs, 0.75rem); text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-light, #666); margin-bottom: var(--space-1, 0.25rem);">
+                    {{ card_product.vendor }}
+                  </p>
+                {%- endif -%}
+
+                <a
+                  href="{{ card_product.url }}"
+                  style="font-weight: 600; font-size: var(--text-base, 1rem); display: block; margin-bottom: var(--space-1, 0.25rem);"
+                >
+                  {{ card_product.title }}
+                </a>
+
+                {%- comment -%} Rating placeholder — expects metafield {%- endcomment -%}
+                {%- if section.settings.show_rating -%}
+                  {%- if card_product.metafields.reviews.rating.value != blank -%}
+                    {%- assign rating_val = card_product.metafields.reviews.rating.value | times: 1.0 -%}
+                    {%- assign rating_count = card_product.metafields.reviews.rating_count.value | default: 0 -%}
+                    <div style="display: flex; align-items: center; gap: var(--space-1, 0.25rem); margin-bottom: var(--space-1, 0.25rem);">
+                      <span style="color: #F59E0B; font-size: 0.85em;">
+                        {%- for i in (1..5) -%}
+                          {%- if i <= rating_val -%}★{%- else -%}☆{%- endif -%}
+                        {%- endfor -%}
+                      </span>
+                      {%- if rating_count > 0 -%}
+                        <span style="font-size: var(--text-xs, 0.75rem); color: var(--color-text-light, #666);">({{ rating_count }})</span>
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+                {%- endif -%}
+
+                <div style="display: flex; align-items: baseline; gap: var(--space-2, 0.5rem);">
+                  <span style="font-family: var(--font-mono, monospace); font-weight: 700; font-size: var(--text-base, 1rem);">
+                    {{ card_product.price | money }}
+                  </span>
+                  {%- if card_product.compare_at_price > card_product.price -%}
+                    <del style="font-size: var(--text-sm, 0.875rem); color: var(--color-text-light, #666);">
+                      {{ card_product.compare_at_price | money }}
+                    </del>
+                  {%- endif -%}
+                </div>
+
+                {%- unless card_product.available -%}
+                  <p style="font-size: var(--text-xs, 0.75rem); color: var(--color-text-light, #666); margin-top: var(--space-1, 0.25rem);">
+                    {{ 'collection.sold_out' | t | default: 'Sold out' }}
+                  </p>
+                {%- endunless -%}
+
+              </div>
+            </div>
+
           </div>
         {%- endfor -%}
       </div>
 
-      <!-- Pagination -->
+      {%- comment -%}---- Pagination ----{%- endcomment -%}
       {%- if paginate.pages > 1 -%}
-        <nav class="flex justify-center gap-2 mt-12" role="navigation" aria-label="Pagination">
+        <nav
+          class="flex justify-center gap-2"
+          style="margin-top: var(--space-12, 3rem);"
+          role="navigation"
+          aria-label="Pagination"
+        >
           {%- if paginate.previous -%}
             <a href="{{ paginate.previous.url }}" class="btn btn--secondary btn--sm">&laquo; Previous</a>
           {%- endif -%}
@@ -59,27 +341,252 @@
           {%- endif -%}
         </nav>
       {%- endif -%}
+
     {%- else -%}
-      <div class="text-center" style="padding: var(--space-16) 0;">
-        <p style="font-size: var(--text-lg); color: var(--color-text-light);">{{ 'collection.no_products' | t }}</p>
-        <a href="/collections/all" class="btn btn--primary mt-6">{{ 'cart.continue_shopping' | t }}</a>
+
+      {%- comment -%}---- Empty collection ----{%- endcomment -%}
+      <div class="text-center" style="padding: var(--space-16, 4rem) 0;">
+        <p style="font-size: var(--text-lg, 1.125rem); color: var(--color-text-light, #666);">
+          {{ 'collection.no_products' | t }}
+        </p>
+        <a href="/collections/all" class="btn btn--primary" style="margin-top: var(--space-6, 1.5rem);">
+          {{ 'cart.continue_shopping' | t }}
+        </a>
       </div>
+
     {%- endif -%}
+
   </div>
 </section>
+
+{%- endpaginate -%}
+
+{%- comment -%}---- Grid CSS (responsive columns + hover effects) ----{%- endcomment -%}
+<style>
+  #main-collection-{{ section.id }} .collection-grid {
+    grid-template-columns: repeat({{ cols_desktop }}, 1fr);
+  }
+
+  @media (max-width: 767px) {
+    #main-collection-{{ section.id }} .collection-grid {
+      grid-template-columns: repeat({{ cols_mobile }}, 1fr);
+      gap: var(--space-4, 1rem);
+    }
+  }
+
+  {%- if section.settings.show_secondary_image -%}
+  #main-collection-{{ section.id }} .product-card__image-wrap:hover .product-card__img--primary {
+    opacity: 0;
+  }
+  #main-collection-{{ section.id }} .product-card__image-wrap:hover .product-card__img--secondary {
+    opacity: 1 !important;
+  }
+  {%- endif -%}
+
+  {%- if section.settings.show_quick_add -%}
+  #main-collection-{{ section.id }} .product-card__image-wrap:hover .product-card__quick-add {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+  {%- endif -%}
+
+  {%- if section.settings.enable_animation -%}
+  #main-collection-{{ section.id }} .anim-fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  #main-collection-{{ section.id }}.in-view .collection-header.anim-fade-up,
+  #main-collection-{{ section.id }}.in-view .collection-toolbar.anim-fade-up {
+    opacity: 1;
+    transform: none;
+  }
+  #main-collection-{{ section.id }}.in-view .collection-grid__item.anim-fade-up {
+    opacity: 1;
+    transform: none;
+  }
+  {%- endif -%}
+</style>
+
+{%- if section.settings.enable_animation -%}
+<script>
+(function() {
+  var section = document.getElementById('main-collection-{{ section.id }}');
+  if (!section) return;
+
+  function triggerAnim() {
+    section.classList.add('in-view');
+    var items = section.querySelectorAll('.collection-grid__item.anim-fade-up');
+    items.forEach(function(item, i) {
+      item.style.transitionDelay = (i * 55) + 'ms';
+    });
+  }
+
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { triggerAnim(); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.05 });
+    obs.observe(section);
+  } else {
+    triggerAnim();
+  }
+})();
+</script>
+{%- endif -%}
 
 {% schema %}
 {
   "name": "Collection Page",
   "settings": [
     {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#1C2E23"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top (px)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom (px)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Grid layout"
+    },
+    {
+      "type": "select",
+      "id": "columns_desktop",
+      "label": "Columns — desktop",
+      "default": "3",
+      "options": [
+        { "value": "2", "label": "2 columns" },
+        { "value": "3", "label": "3 columns" },
+        { "value": "4", "label": "4 columns" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns — mobile",
+      "default": "2",
+      "options": [
+        { "value": "1", "label": "1 column" },
+        { "value": "2", "label": "2 columns" }
+      ]
+    },
+    {
       "type": "range",
       "id": "products_per_page",
       "label": "Products per page",
-      "min": 8,
-      "max": 32,
+      "min": 4,
+      "max": 48,
       "step": 4,
       "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Product card"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "default": "adapt",
+      "options": [
+        { "value": "adapt", "label": "Adapt to image" },
+        { "value": "portrait", "label": "Portrait (3:4)" },
+        { "value": "square", "label": "Square (1:1)" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "label": "Show secondary image on hover",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quick_add",
+      "label": "Show quick add button on hover",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show product vendor",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show product rating",
+      "default": true,
+      "info": "Reads from metafield reviews.rating — requires a reviews app (Judge.me, etc.)"
+    },
+    {
+      "type": "header",
+      "content": "Collection header"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_description",
+      "label": "Show collection description",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product_count",
+      "label": "Show product count",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Sort bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sort",
+      "label": "Show sort dropdown",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable scroll animations",
+      "default": true
     }
   ]
 }

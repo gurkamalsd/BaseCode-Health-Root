@@ -1,0 +1,31 @@
+{%- comment -%}Featured product text content snippet{%- endcomment -%}
+{%- if show_subtitle and section.settings.subtitle != blank -%}
+  <p style="font-size:var(--text-sm);text-transform:uppercase;letter-spacing:0.1em;opacity:0.8;margin-bottom:var(--space-2);">
+    {{ section.settings.subtitle }}
+  </p>
+{%- endif -%}
+
+<{{ heading_level }} style="font-size:var(--{{ heading_size }});margin-bottom:var(--space-4);">
+  {{ section.settings.heading | default: featured.title | default: 'Origin — The First Ethnobiotic' }}
+</{{ heading_level }}>
+
+{%- if section.settings.text != blank -%}
+  <p style="font-size:var(--text-lg);opacity:0.9;margin-bottom:var(--space-6);max-width:500px;{% if section.settings.text_align == 'center' %}margin-left:auto;margin-right:auto;{% endif %}">
+    {{ section.settings.text }}
+  </p>
+{%- endif -%}
+
+{%- if show_price and featured -%}
+  <p style="font-family:var(--font-mono);font-size:var(--text-2xl);margin-bottom:var(--space-6);">
+    {{ featured.price | money }}
+    {%- if featured.selling_plan_groups.size > 0 -%}
+      <span style="font-size:var(--text-sm);">{{ 'product.per_month' | t }}</span>
+    {%- endif -%}
+  </p>
+{%- endif -%}
+
+{%- if section.settings.button_text != blank -%}
+  <a href="{{ featured.url | default: section.settings.button_link | default: '/products/origin' }}" class="btn btn--{{ button_style }} btn--lg">
+    {{ section.settings.button_text }}
+  </a>
+{%- endif -%}

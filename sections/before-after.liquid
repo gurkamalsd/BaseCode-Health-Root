@@ -1,0 +1,832 @@
+{%- comment -%}BaseCode Root - before-after{%- endcomment -%}
+
+{%- liquid
+  assign section_id    = 'before-after-' | append: section.id
+  assign pt            = section.settings.padding_top   | default: 60
+  assign pb            = section.settings.padding_bottom | default: 60
+  assign img_width_pct = section.settings.image_width_pct | default: 60
+  assign text_width_pct = 100 | minus: img_width_pct
+  assign enable_anim   = section.settings.enable_animation
+  assign layout        = section.settings.layout | default: 'image_first'
+  assign height_mode   = section.settings.height_mode | default: 'adapt'
+  assign desktop_h     = section.settings.desktop_height | default: 500
+  assign mobile_h      = section.settings.mobile_height  | default: 340
+  assign before_label  = section.settings.before_label | default: 'Before'
+  assign after_label   = section.settings.after_label  | default: 'After'
+  assign has_before    = false
+  assign has_after     = false
+  if section.settings.before_image != blank
+    assign has_before = true
+  endif
+  if section.settings.after_image != blank
+    assign has_after = true
+  endif
+  assign has_blocks = false
+  if section.blocks.size > 0
+    assign has_blocks = true
+  endif
+-%}
+
+<section
+  id="{{ section_id }}"
+  class="before-after-section{% if enable_anim %} anim-enabled{% endif %}"
+  style="
+    background-color: {{ section.settings.bg_color | default: '#FFFFFF' }};
+    color: {{ section.settings.text_color | default: '#1C2E23' }};
+    padding-top: {{ pt }}px;
+    padding-bottom: {{ pb }}px;
+  "
+>
+  <div class="{% if section.settings.full_width %}container--wide{% else %}container{% endif %}">
+
+    <div
+      class="before-after__row{% if layout == 'text_first' %} before-after__row--reverse{% endif %}"
+    >
+
+      {%- comment -%}---- COMPARISON SLIDER COLUMN ----{%- endcomment -%}
+      <div
+        class="before-after__media reveal-{% if layout == 'text_first' %}right{% else %}left{% endif %}"
+        style="
+          flex: 0 0 {{ img_width_pct }}%;
+          max-width: {{ img_width_pct }}%;
+          {%- if height_mode == 'fixed' -%}min-height: {{ desktop_h }}px;{%- endif -%}
+        "
+      >
+        <div
+          class="ba-slider"
+          id="ba-slider-{{ section.id }}"
+          data-ba-slider
+          aria-label="Before and after image comparison"
+          style="
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            {%- if height_mode == 'fixed' -%}
+              height: {{ desktop_h }}px;
+            {%- else -%}
+              aspect-ratio: {{ section.settings.image_ratio | default: '4/5' }};
+            {%- endif -%}
+            user-select: none;
+            touch-action: pan-y;
+            cursor: col-resize;
+            border-radius: {{ section.settings.border_radius | default: 0 }}px;
+            overflow: hidden;
+          "
+        >
+
+          {%- comment -%} AFTER image — full-width base layer {%- endcomment -%}
+          <div class="ba-slider__after" style="position: absolute; inset: 0; overflow: hidden;">
+            {%- if has_after -%}
+              <img
+                src="{{ section.settings.after_image | image_url: width: 1400 }}"
+                srcset="
+                  {{ section.settings.after_image | image_url: width: 600 }} 600w,
+                  {{ section.settings.after_image | image_url: width: 900 }} 900w,
+                  {{ section.settings.after_image | image_url: width: 1200 }} 1200w,
+                  {{ section.settings.after_image | image_url: width: 1400 }} 1400w
+                "
+                sizes="(max-width: 767px) 100vw, {{ img_width_pct }}vw"
+                alt="{{ section.settings.after_image.alt | default: after_label }}"
+                loading="lazy"
+                draggable="false"
+                style="display: block; width: 100%; height: 100%; object-fit: cover; pointer-events: none;"
+              >
+            {%- else -%}
+              <div style="width: 100%; height: 100%; background: var(--color-cream, #F5F2EC); display: flex; align-items: center; justify-content: center;">
+                <span style="color: var(--color-text-light, #888); font-size: 0.875rem;">After image</span>
+              </div>
+            {%- endif -%}
+
+            {%- comment -%} After label badge {%- endcomment -%}
+            <span
+              class="ba-slider__badge ba-slider__badge--after"
+              aria-hidden="true"
+              style="
+                position: absolute;
+                bottom: 16px;
+                right: 16px;
+                background: rgba(0,0,0,0.55);
+                color: #fff;
+                font-size: 0.75rem;
+                font-weight: 700;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                padding: 4px 10px;
+                border-radius: 4px;
+                pointer-events: none;
+                white-space: nowrap;
+              "
+            >{{ after_label }}</span>
+          </div>
+
+          {%- comment -%} BEFORE image — clipped reveal layer (left side) {%- endcomment -%}
+          <div
+            class="ba-slider__before"
+            style="
+              position: absolute;
+              inset: 0;
+              overflow: hidden;
+              clip-path: inset(0 50% 0 0);
+            "
+          >
+            {%- if has_before -%}
+              <img
+                src="{{ section.settings.before_image | image_url: width: 1400 }}"
+                srcset="
+                  {{ section.settings.before_image | image_url: width: 600 }} 600w,
+                  {{ section.settings.before_image | image_url: width: 900 }} 900w,
+                  {{ section.settings.before_image | image_url: width: 1200 }} 1200w,
+                  {{ section.settings.before_image | image_url: width: 1400 }} 1400w
+                "
+                sizes="(max-width: 767px) 100vw, {{ img_width_pct }}vw"
+                alt="{{ section.settings.before_image.alt | default: before_label }}"
+                loading="lazy"
+                draggable="false"
+                style="display: block; width: 100%; height: 100%; object-fit: cover; pointer-events: none;"
+              >
+            {%- else -%}
+              <div style="width: 100%; height: 100%; background: var(--color-green, #1C2E23); display: flex; align-items: center; justify-content: center;">
+                <span style="color: rgba(255,255,255,0.5); font-size: 0.875rem;">Before image</span>
+              </div>
+            {%- endif -%}
+
+            {%- comment -%} Before label badge {%- endcomment -%}
+            <span
+              class="ba-slider__badge ba-slider__badge--before"
+              aria-hidden="true"
+              style="
+                position: absolute;
+                bottom: 16px;
+                left: 16px;
+                background: rgba(0,0,0,0.55);
+                color: #fff;
+                font-size: 0.75rem;
+                font-weight: 700;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                padding: 4px 10px;
+                border-radius: 4px;
+                pointer-events: none;
+                white-space: nowrap;
+              "
+            >{{ before_label }}</span>
+          </div>
+
+          {%- comment -%} DIVIDER handle {%- endcomment -%}
+          <div
+            class="ba-slider__divider"
+            aria-hidden="true"
+            style="
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              left: 50%;
+              transform: translateX(-50%);
+              width: 3px;
+              background: #fff;
+              box-shadow: 0 0 6px rgba(0,0,0,0.35);
+              pointer-events: none;
+              z-index: 4;
+            "
+          >
+            {%- comment -%} Circular grip icon {%- endcomment -%}
+            <div
+              class="ba-slider__handle"
+              style="
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 44px;
+                height: 44px;
+                background: #fff;
+                border-radius: 50%;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                pointer-events: none;
+              "
+            >
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M6 3L2 9L6 15" stroke="#1C2E23" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 3L16 9L12 15" stroke="#1C2E23" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+
+        </div>{%- comment -%}end .ba-slider{%- endcomment -%}
+      </div>{%- comment -%}end .before-after__media{%- endcomment -%}
+
+      {%- comment -%}---- TEXT COLUMN (blocks) ----{%- endcomment -%}
+      {%- if has_blocks -%}
+        <div
+          class="before-after__content reveal-{% if layout == 'text_first' %}left{% else %}right{% endif %}"
+          style="
+            flex: 0 0 {{ text_width_pct }}%;
+            max-width: {{ text_width_pct }}%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: var(--space-8, 2rem) var(--space-10, 2.5rem);
+            text-align: {{ section.settings.text_align | default: 'left' }};
+            {%- if height_mode == 'fixed' -%}min-height: {{ desktop_h }}px;{%- endif -%}
+          "
+        >
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+
+              {%- when 'subheading' -%}
+                <p
+                  class="before-after__subheading{% if enable_anim %} anim-fade-up{% endif %}"
+                  style="
+                    font-family: var(--font-heading);
+                    font-size: var(--text-sm, 0.875rem);
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    color: {{ block.settings.color | default: 'var(--color-accent, #C4783A)' }};
+                    margin-bottom: var(--space-3, 0.75rem);
+                  "
+                  {{ block.shopify_attributes }}
+                >{{ block.settings.text }}</p>
+
+              {%- when 'heading' -%}
+                {%- assign h_tag  = block.settings.heading_level | default: 'h2' -%}
+                {%- assign h_size = block.settings.heading_size  | default: 'h2' -%}
+                {%- case h_size -%}
+                  {%- when 'h1' -%}{%- assign h_fs = 'var(--text-5xl, 3rem)' -%}
+                  {%- when 'h2' -%}{%- assign h_fs = 'var(--text-4xl, 2.25rem)' -%}
+                  {%- when 'h3' -%}{%- assign h_fs = 'var(--text-3xl, 1.875rem)' -%}
+                  {%- when 'h4' -%}{%- assign h_fs = 'var(--text-2xl, 1.5rem)' -%}
+                  {%- when 'h5' -%}{%- assign h_fs = 'var(--text-xl, 1.25rem)' -%}
+                  {%- when 'h6' -%}{%- assign h_fs = 'var(--text-lg, 1.125rem)' -%}
+                  {%- else -%}{%- assign h_fs = 'var(--text-4xl, 2.25rem)' -%}
+                {%- endcase -%}
+                <{{ h_tag }}
+                  class="before-after__heading{% if enable_anim %} anim-fade-up{% endif %}"
+                  style="font-size: {{ h_fs }}; line-height: 1.15; margin-bottom: var(--space-4, 1rem);"
+                  {{ block.shopify_attributes }}
+                >{{ block.settings.text }}</{{ h_tag }}>
+
+              {%- when 'text' -%}
+                <div
+                  class="before-after__text{% if enable_anim %} anim-fade-up{% endif %}"
+                  style="
+                    font-size: {{ block.settings.text_size | default: 'var(--text-base, 1rem)' }};
+                    color: {{ block.settings.text_color | default: 'var(--color-text-light, #666)' }};
+                    line-height: 1.7;
+                    margin-bottom: var(--space-6, 1.5rem);
+                    max-width: 520px;
+                    {%- if section.settings.text_align == 'center' -%}margin-left: auto; margin-right: auto;{%- endif -%}
+                  "
+                  {{ block.shopify_attributes }}
+                >{{ block.settings.text }}</div>
+
+              {%- when 'button' -%}
+                <div
+                  class="before-after__buttons{% if enable_anim %} anim-fade-up{% endif %}"
+                  style="display: flex; flex-wrap: wrap; gap: var(--space-3, 0.75rem); align-items: center; {% if section.settings.text_align == 'center' %}justify-content: center;{% endif %}"
+                  {{ block.shopify_attributes }}
+                >
+                  {%- if block.settings.text != blank -%}
+                    <a href="{{ block.settings.link | default: '#' }}" class="btn btn--{{ block.settings.style | default: 'primary' }}">
+                      {{ block.settings.text }}
+                    </a>
+                  {%- endif -%}
+                  {%- if block.settings.text_2 != blank -%}
+                    <a href="{{ block.settings.link_2 | default: '#' }}" class="btn btn--{{ block.settings.style_2 | default: 'secondary' }}">
+                      {{ block.settings.text_2 }}
+                    </a>
+                  {%- endif -%}
+                </div>
+
+            {%- endcase -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+    </div>{%- comment -%}end .before-after__row{%- endcomment -%}
+  </div>{%- comment -%}end container{%- endcomment -%}
+</section>
+
+{%- comment -%}---- Section-scoped CSS ----{%- endcomment -%}
+<style>
+  #{{ section_id }} .before-after__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0;
+  }
+
+  #{{ section_id }} .before-after__row--reverse {
+    flex-direction: row-reverse;
+  }
+
+  /* When there are no blocks the slider takes full width */
+  #{{ section_id }} .before-after__media:only-child {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Cursor active state while dragging */
+  #{{ section_id }} .ba-slider.is-dragging {
+    cursor: col-resize !important;
+    user-select: none !important;
+  }
+
+  @media (max-width: 767px) {
+    #{{ section_id }} .before-after__row,
+    #{{ section_id }} .before-after__row--reverse {
+      flex-direction: column !important;
+    }
+    #{{ section_id }} .before-after__media,
+    #{{ section_id }} .before-after__content {
+      flex: 0 0 100% !important;
+      max-width: 100% !important;
+      {%- if height_mode == 'fixed' -%}
+      min-height: {{ mobile_h }}px !important;
+      {%- endif -%}
+    }
+    #{{ section_id }} .ba-slider {
+      {%- if height_mode == 'fixed' -%}
+      height: {{ mobile_h }}px !important;
+      aspect-ratio: unset !important;
+      {%- endif -%}
+    }
+    #{{ section_id }} .before-after__content {
+      padding: var(--space-6, 1.5rem) var(--space-4, 1rem) !important;
+    }
+  }
+
+  {%- if enable_anim -%}
+  #{{ section_id }} .anim-fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  #{{ section_id }}.in-view .anim-fade-up {
+    opacity: 1;
+    transform: none;
+  }
+  #{{ section_id }}.in-view .anim-fade-up:nth-child(1) { transition-delay: 0.05s; }
+  #{{ section_id }}.in-view .anim-fade-up:nth-child(2) { transition-delay: 0.15s; }
+  #{{ section_id }}.in-view .anim-fade-up:nth-child(3) { transition-delay: 0.25s; }
+  #{{ section_id }}.in-view .anim-fade-up:nth-child(4) { transition-delay: 0.35s; }
+  #{{ section_id }}.in-view .anim-fade-up:nth-child(5) { transition-delay: 0.45s; }
+  {%- endif -%}
+</style>
+
+{%- comment -%}---- Self-contained slider JS ----{%- endcomment -%}
+<script>
+(function () {
+  'use strict';
+
+  function initSlider(wrapper) {
+    var beforeLayer = wrapper.querySelector('.ba-slider__before');
+    var divider     = wrapper.querySelector('.ba-slider__divider');
+    if (!beforeLayer || !divider) return;
+
+    var isDragging = false;
+    var currentPct = 50; // percent from left
+
+    function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+    function applyPosition(pct) {
+      currentPct = clamp(pct, 0, 100);
+      var pctStr = currentPct.toFixed(2) + '%';
+      // Clip the before layer to [0, pct] of the slider width
+      beforeLayer.style.clipPath = 'inset(0 ' + (100 - currentPct).toFixed(2) + '% 0 0)';
+      // Move the divider line
+      divider.style.left = pctStr;
+    }
+
+    function pctFromEvent(e) {
+      var rect = wrapper.getBoundingClientRect();
+      var clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      return ((clientX - rect.left) / rect.width) * 100;
+    }
+
+    // Mouse events
+    wrapper.addEventListener('mousedown', function (e) {
+      e.preventDefault();
+      isDragging = true;
+      wrapper.classList.add('is-dragging');
+      applyPosition(pctFromEvent(e));
+    });
+
+    document.addEventListener('mousemove', function (e) {
+      if (!isDragging) return;
+      applyPosition(pctFromEvent(e));
+    });
+
+    document.addEventListener('mouseup', function () {
+      if (!isDragging) return;
+      isDragging = false;
+      wrapper.classList.remove('is-dragging');
+    });
+
+    // Touch events
+    wrapper.addEventListener('touchstart', function (e) {
+      isDragging = true;
+      applyPosition(pctFromEvent(e));
+    }, { passive: true });
+
+    wrapper.addEventListener('touchmove', function (e) {
+      if (!isDragging) return;
+      applyPosition(pctFromEvent(e));
+    }, { passive: true });
+
+    wrapper.addEventListener('touchend', function () {
+      isDragging = false;
+    }, { passive: true });
+
+    // Keyboard accessibility: left/right arrow keys adjust by 5%
+    wrapper.setAttribute('tabindex', '0');
+    wrapper.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); applyPosition(currentPct - 5); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); applyPosition(currentPct + 5); }
+    });
+
+    // Set initial position
+    applyPosition(50);
+  }
+
+  function boot() {
+    var slider = document.getElementById('ba-slider-{{ section.id }}');
+    if (slider) initSlider(slider);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+})();
+</script>
+
+{%- if enable_anim -%}
+<script>
+(function () {
+  var el = document.getElementById('{{ section_id }}');
+  if (!el) return;
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in-view'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    obs.observe(el);
+  } else {
+    el.classList.add('in-view');
+  }
+})();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Before / After Slider",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "before_image",
+      "label": "Before image"
+    },
+    {
+      "type": "image_picker",
+      "id": "after_image",
+      "label": "After image"
+    },
+    {
+      "type": "text",
+      "id": "before_label",
+      "label": "Before badge label",
+      "default": "Before"
+    },
+    {
+      "type": "text",
+      "id": "after_label",
+      "label": "After badge label",
+      "default": "After"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Desktop layout",
+      "default": "image_first",
+      "options": [
+        { "value": "image_first", "label": "Slider left, text right" },
+        { "value": "text_first",  "label": "Text left, slider right" }
+      ],
+      "info": "Only applies when content blocks are added"
+    },
+    {
+      "type": "range",
+      "id": "image_width_pct",
+      "label": "Desktop slider width (%)",
+      "min": 30,
+      "max": 70,
+      "step": 5,
+      "default": 60,
+      "info": "Text column takes the remaining percentage"
+    },
+    {
+      "type": "select",
+      "id": "height_mode",
+      "label": "Height mode",
+      "default": "adapt",
+      "options": [
+        { "value": "adapt", "label": "Adapt to image (aspect ratio)" },
+        { "value": "fixed", "label": "Fixed height" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Aspect ratio (Adapt mode)",
+      "default": "4/5",
+      "options": [
+        { "value": "1/1",  "label": "Square 1:1" },
+        { "value": "4/5",  "label": "Portrait 4:5" },
+        { "value": "3/4",  "label": "Tall portrait 3:4" },
+        { "value": "16/9", "label": "Landscape 16:9" },
+        { "value": "3/2",  "label": "Landscape 3:2" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "label": "Desktop fixed height (px)",
+      "min": 300,
+      "max": 900,
+      "step": 20,
+      "default": 500,
+      "info": "Only applies when Height mode is Fixed"
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "label": "Mobile fixed height (px)",
+      "min": 200,
+      "max": 600,
+      "step": 20,
+      "default": 340,
+      "info": "Only applies when Height mode is Fixed"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Slider corner radius (px)",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text alignment",
+      "default": "left",
+      "options": [
+        { "value": "left",   "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#1C2E23"
+    },
+    {
+      "type": "header",
+      "content": "Container"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top (px)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom (px)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable scroll animations",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "subheading",
+      "name": "Subheading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Real Results"
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Color",
+          "default": "#C4783A"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "See the difference Origin makes."
+        },
+        {
+          "type": "select",
+          "id": "heading_level",
+          "label": "Heading level (SEO)",
+          "default": "h2",
+          "options": [
+            { "value": "h1", "label": "H1" },
+            { "value": "h2", "label": "H2" },
+            { "value": "h3", "label": "H3" },
+            { "value": "h4", "label": "H4" },
+            { "value": "h5", "label": "H5" },
+            { "value": "h6", "label": "H6" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "label": "Heading size",
+          "default": "h2",
+          "options": [
+            { "value": "h1", "label": "Extra large (H1 size)" },
+            { "value": "h2", "label": "Large (H2 size)" },
+            { "value": "h3", "label": "Medium (H3 size)" },
+            { "value": "h4", "label": "Small (H4 size)" },
+            { "value": "h5", "label": "Extra small (H5 size)" },
+            { "value": "h6", "label": "Tiny (H6 size)" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Origin is formulated around what the science actually shows — that your gut microbiome reflects your ancestry. Most probiotics skip that part.</p>"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color",
+          "default": "#666666"
+        },
+        {
+          "type": "select",
+          "id": "text_size",
+          "label": "Text size",
+          "default": "var(--text-base, 1rem)",
+          "options": [
+            { "value": "var(--text-sm, 0.875rem)",  "label": "Small" },
+            { "value": "var(--text-base, 1rem)",     "label": "Base" },
+            { "value": "var(--text-lg, 1.125rem)",   "label": "Large" },
+            { "value": "var(--text-xl, 1.25rem)",    "label": "Extra large" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button(s)",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Primary button"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Label",
+          "default": "Shop Origin"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Style",
+          "default": "primary",
+          "options": [
+            { "value": "primary",   "label": "Primary" },
+            { "value": "secondary", "label": "Secondary" },
+            { "value": "outline",   "label": "Outline" },
+            { "value": "ghost",     "label": "Ghost / text" }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Second button (optional)"
+        },
+        {
+          "type": "text",
+          "id": "text_2",
+          "label": "Label"
+        },
+        {
+          "type": "url",
+          "id": "link_2",
+          "label": "Link"
+        },
+        {
+          "type": "select",
+          "id": "style_2",
+          "label": "Style",
+          "default": "secondary",
+          "options": [
+            { "value": "primary",   "label": "Primary" },
+            { "value": "secondary", "label": "Secondary" },
+            { "value": "outline",   "label": "Outline" },
+            { "value": "ghost",     "label": "Ghost / text" }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Before / After Slider",
+      "settings": {
+        "before_label": "Before Origin",
+        "after_label": "After Origin",
+        "layout": "image_first",
+        "image_width_pct": 60,
+        "height_mode": "adapt",
+        "image_ratio": "4/5",
+        "bg_color": "#F5F2EC",
+        "text_color": "#1C2E23",
+        "enable_animation": true
+      },
+      "blocks": [
+        { "type": "subheading", "settings": { "text": "The Difference" } },
+        { "type": "heading",    "settings": { "text": "See the difference Origin makes.", "heading_level": "h2", "heading_size": "h2" } },
+        { "type": "text",       "settings": { "text": "<p>Origin is formulated around what the science actually shows — your gut microbiome reflects your ancestry. Most probiotics ignore that.</p>" } },
+        { "type": "button",     "settings": { "text": "Shop Origin", "link": "/products/origin" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

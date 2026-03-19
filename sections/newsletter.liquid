@@ -1,40 +1,335 @@
 {%- comment -%}BaseCode Root - newsletter{%- endcomment -%}
-<section class="section" style="background-color: {{ section.settings.bg_color | default: '#1C2E23' }}; color: {{ section.settings.text_color | default: '#F5F2EC' }};">
-  <div class="container container--narrow text-center">
-    <h2 class="mb-4 reveal-hidden">{{ section.settings.heading | default: 'Stay in the loop' }}</h2>
-    {%- if section.settings.text != blank -%}
-      <p style="font-size: var(--text-lg); opacity: 0.8; margin-bottom: var(--space-8);" class="reveal-hidden">{{ section.settings.text }}</p>
+
+{%- liquid
+  assign pt = section.settings.padding_top
+  assign pb = section.settings.padding_bottom
+  assign bg = section.settings.bg_color | default: '#1C2E23'
+  assign tc = section.settings.text_color | default: '#F5F2EC'
+  assign opacity_val = section.settings.bg_opacity | default: 100
+  assign opacity_decimal = opacity_val | divided_by: 100.0
+
+  case section.settings.content_width
+    when 'narrow'
+      assign width_class = 'container container--narrow'
+    when 'full'
+      assign width_class = 'container--full'
+    else
+      assign width_class = 'container container--medium'
+  endcase
+
+  case section.settings.text_align
+    when 'left'
+      assign align_class = 'text-left'
+      assign form_align = 'flex-start'
+    when 'right'
+      assign align_class = 'text-right'
+      assign form_align = 'flex-end'
+    else
+      assign align_class = 'text-center'
+      assign form_align = 'center'
+  endcase
+
+  assign has_bg_image = false
+  if section.settings.desktop_image != blank or section.settings.mobile_image != blank
+    assign has_bg_image = true
+  endif
+
+  assign button_style = section.settings.button_style | default: 'primary'
+  case button_style
+    when 'secondary'
+      assign btn_class = 'btn btn--secondary'
+    when 'white'
+      assign btn_class = 'btn btn--white'
+    when 'link'
+      assign btn_class = 'btn btn--link'
+    else
+      assign btn_class = 'btn btn--accent'
+  endcase
+-%}
+
+{%- style -%}
+  #section-{{ section.id }} {
+    position: relative;
+    overflow: hidden;
+    padding-top: {{ pt }}px;
+    padding-bottom: {{ pb }}px;
+    color: {{ tc }};
+  }
+  #section-{{ section.id }} .newsletter__bg {
+    position: absolute;
+    inset: 0;
+    background-color: {{ bg }};
+    opacity: {{ opacity_decimal }};
+    z-index: 0;
+  }
+  {%- if has_bg_image -%}
+  #section-{{ section.id }} .newsletter__bg-media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  {%- if section.settings.height_mode == 'fixed' -%}
+  #section-{{ section.id }} {
+    min-height: {{ section.settings.desktop_height | default: 480 }}px;
+    display: flex;
+    align-items: center;
+  }
+  @media (max-width: 767px) {
+    #section-{{ section.id }} {
+      min-height: {{ section.settings.mobile_height | default: 360 }}px;
+    }
+  }
+  {%- endif -%}
+  #section-{{ section.id }} .newsletter__bg-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  #section-{{ section.id }} .newsletter__bg-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: {{ bg }};
+    opacity: {{ opacity_decimal }};
+    z-index: 1;
+  }
+  {%- endif -%}
+
+  #section-{{ section.id }} .newsletter__inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+  }
+  #section-{{ section.id }} .newsletter__form {
+    display: flex;
+    gap: 12px;
+    margin-top: 28px;
+    justify-content: {{ form_align }};
+    flex-wrap: wrap;
+  }
+  #section-{{ section.id }} .newsletter__form--stacked {
+    flex-direction: column;
+    align-items: {% if section.settings.text_align == 'center' %}center{% elsif section.settings.text_align == 'right' %}flex-end{% else %}flex-start{% endif %};
+    max-width: 480px;
+    margin-left: {% if section.settings.text_align == 'center' %}auto{% else %}0{% endif %};
+    margin-right: {% if section.settings.text_align == 'center' %}auto{% else %}0{% endif %};
+  }
+  #section-{{ section.id }} .newsletter__form--stacked .newsletter__input,
+  #section-{{ section.id }} .newsletter__form--stacked .btn {
+    width: 100%;
+  }
+  #section-{{ section.id }} .newsletter__form--inline .newsletter__input {
+    flex: 1 1 200px;
+    min-width: 160px;
+  }
+  #section-{{ section.id }} .newsletter__input {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: {{ tc }};
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: var(--text-base);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  #section-{{ section.id }} .newsletter__input::placeholder {
+    color: {{ tc }};
+    opacity: 0.5;
+  }
+  #section-{{ section.id }} .newsletter__input:focus {
+    border-color: {{ tc }};
+  }
+  #section-{{ section.id }} .newsletter__footnote {
+    font-size: var(--text-xs);
+    opacity: 0.5;
+    margin-top: 12px;
+  }
+  #section-{{ section.id }} .newsletter__success {
+    display: none;
+    padding: 32px 0;
+  }
+  #section-{{ section.id }} .newsletter__success p {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    margin: 0 0 8px;
+  }
+
+  {%- if section.settings.enable_animation -%}
+  #section-{{ section.id }} [data-animate] {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  #section-{{ section.id }} [data-animate].is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  {%- endif -%}
+{%- endstyle -%}
+
+<section id="section-{{ section.id }}" class="newsletter-section">
+
+  {%- comment -%} Background layer {%- endcomment -%}
+  {%- if has_bg_image -%}
+    <div class="newsletter__bg-media">
+      {%- if section.settings.mobile_image != blank -%}
+        <picture>
+          <source media="(max-width: 767px)" srcset="{{ section.settings.mobile_image | image_url: width: 767 }}">
+          {%- if section.settings.desktop_image != blank -%}
+            <img src="{{ section.settings.desktop_image | image_url: width: 1800 }}"
+                 alt="{{ section.settings.desktop_image.alt | escape }}"
+                 loading="lazy"
+                 width="{{ section.settings.desktop_image.width }}"
+                 height="{{ section.settings.desktop_image.height }}">
+          {%- else -%}
+            <img src="{{ section.settings.mobile_image | image_url: width: 767 }}"
+                 alt="{{ section.settings.mobile_image.alt | escape }}"
+                 loading="lazy">
+          {%- endif -%}
+        </picture>
+      {%- elsif section.settings.desktop_image != blank -%}
+        <img src="{{ section.settings.desktop_image | image_url: width: 1800 }}"
+             alt="{{ section.settings.desktop_image.alt | escape }}"
+             loading="lazy"
+             width="{{ section.settings.desktop_image.width }}"
+             height="{{ section.settings.desktop_image.height }}">
+      {%- endif -%}
+    </div>
+    <div class="newsletter__bg-overlay"></div>
+  {%- else -%}
+    <div class="newsletter__bg"></div>
+  {%- endif -%}
+
+  <div class="{{ width_class }} newsletter__inner {{ align_class }}">
+
+    {%- if section.settings.heading != blank -%}
+      {%- assign h_level = section.settings.heading_level | default: 'h2' -%}
+      {%- assign h_size = section.settings.heading_size | default: 'h2' -%}
+      <{{ h_level }} class="newsletter__heading heading--{{ h_size }}"
+         style="margin-bottom: 12px; color: {{ tc }};"
+         {% if section.settings.enable_animation %}data-animate{% endif %}>
+        {{ section.settings.heading | escape }}
+      </{{ h_level }}>
     {%- endif -%}
 
-    <form class="newsletter__form reveal-hidden" data-lead-form data-source="newsletter">
+    {%- if section.settings.text != blank -%}
+      <p class="newsletter__body"
+         style="font-size: var(--text-lg); opacity: 0.85; margin-bottom: 0; color: {{ tc }};"
+         {% if section.settings.enable_animation %}data-animate style="transition-delay: 80ms;"{% endif %}>
+        {{ section.settings.text | escape }}
+      </p>
+    {%- endif -%}
+
+    <form class="newsletter__form newsletter__form--{{ section.settings.form_layout | default: 'stacked' }}"
+          data-lead-form
+          data-source="newsletter"
+          {% if section.settings.enable_animation %}data-animate style="transition-delay: 160ms;"{% endif %}>
+
       <div style="position: absolute; left: -9999px;" aria-hidden="true">
         <input type="text" name="website" tabindex="-1" autocomplete="off">
       </div>
-      <input type="text" name="firstName" class="newsletter__input" placeholder="{{ 'forms.name_placeholder' | t }}" style="flex: 0.6;">
-      <input type="email" name="email" class="newsletter__input" placeholder="{{ 'forms.email_placeholder' | t }}" required>
-      <button type="submit" class="btn btn--accent">{{ section.settings.button_text | default: 'Subscribe' }}</button>
+
+      {%- if section.settings.show_name_field -%}
+        <input type="text"
+               name="firstName"
+               class="newsletter__input"
+               placeholder="{{ 'forms.name_placeholder' | t | default: 'First name' }}"
+               autocomplete="given-name">
+      {%- endif -%}
+
+      <input type="email"
+             name="email"
+             class="newsletter__input"
+             placeholder="{{ 'forms.email_placeholder' | t | default: 'Your email address' }}"
+             autocomplete="email"
+             required>
+
+      <button type="submit" class="{{ btn_class }}">
+        {{ section.settings.button_text | default: 'Subscribe' | escape }}
+      </button>
     </form>
 
-    <p style="font-size: var(--text-xs); opacity: 0.5; margin-top: var(--space-4);">{{ 'forms.no_spam' | t }}</p>
+    <p class="newsletter__footnote"
+       {% if section.settings.enable_animation %}data-animate style="transition-delay: 220ms;"{% endif %}>
+      {{ 'forms.no_spam' | t | default: 'No spam. Unsubscribe any time.' }}
+    </p>
 
-    <div data-form-success style="display: none; padding: var(--space-6) 0;">
-      <p style="font-size: var(--text-lg); font-weight: 600;">{{ 'forms.success' | t }}</p>
-      {%- if settings.discount_code != blank -%}
-        <p style="margin-top: var(--space-2);">Use code <strong style="font-family: var(--font-mono);">{{ settings.discount_code }}</strong> for {{ settings.discount_description }}.</p>
+    <div class="newsletter__success {{ align_class }}"
+         data-form-success>
+      {%- if section.settings.success_heading != blank -%}
+        <p>{{ section.settings.success_heading | escape }}</p>
+      {%- else -%}
+        <p>{{ 'forms.success' | t | default: "You're in." }}</p>
+      {%- endif -%}
+      {%- if section.settings.success_text != blank -%}
+        <p style="font-size: var(--text-base); font-weight: 400; opacity: 0.8;">{{ section.settings.success_text | escape }}</p>
+      {%- elsif settings.discount_code != blank -%}
+        <p style="font-size: var(--text-base); font-weight: 400; opacity: 0.8;">
+          Use code <strong style="font-family: var(--font-mono);">{{ settings.discount_code }}</strong> for {{ settings.discount_description }}.
+        </p>
       {%- endif -%}
     </div>
+
   </div>
 </section>
+
+{%- if section.settings.enable_animation -%}
+<script>
+  (function() {
+    var items = document.querySelectorAll('#section-{{ section.id }} [data-animate]');
+    if (!items.length) return;
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    items.forEach(function(el) { observer.observe(el); });
+  })();
+</script>
+{%- endif -%}
 
 {% schema %}
 {
   "name": "Newsletter",
   "settings": [
     {
+      "type": "header",
+      "content": "Content"
+    },
+    {
       "type": "text",
       "id": "heading",
       "label": "Heading",
       "default": "Stay in the loop"
+    },
+    {
+      "type": "select",
+      "id": "heading_level",
+      "label": "Heading level (SEO)",
+      "default": "h2",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" },
+        { "value": "h4", "label": "H4" },
+        { "value": "h5", "label": "H5" },
+        { "value": "h6", "label": "H6" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "default": "h2",
+      "options": [
+        { "value": "h1", "label": "Extra large" },
+        { "value": "h2", "label": "Large" },
+        { "value": "h3", "label": "Medium" },
+        { "value": "h4", "label": "Small" }
+      ]
     },
     {
       "type": "textarea",
@@ -43,10 +338,116 @@
       "default": "Get research updates, product launches, and biology tips. No spam."
     },
     {
+      "type": "header",
+      "content": "Form"
+    },
+    {
+      "type": "select",
+      "id": "form_layout",
+      "label": "Form layout",
+      "default": "stacked",
+      "options": [
+        { "value": "stacked", "label": "Stacked (email then button below)" },
+        { "value": "inline", "label": "Inline (email and button side by side)" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_name_field",
+      "label": "Show first name field",
+      "default": false
+    },
+    {
       "type": "text",
       "id": "button_text",
       "label": "Button text",
       "default": "Subscribe"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "default": "primary",
+      "options": [
+        { "value": "primary", "label": "Primary (accent)" },
+        { "value": "secondary", "label": "Secondary" },
+        { "value": "white", "label": "White" },
+        { "value": "link", "label": "Link / Text" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Success message"
+    },
+    {
+      "type": "text",
+      "id": "success_heading",
+      "label": "Success heading",
+      "default": "You're in.",
+      "info": "Shown after form submission."
+    },
+    {
+      "type": "text",
+      "id": "success_text",
+      "label": "Success body text",
+      "default": "Check your inbox — the report is on its way.",
+      "info": "Leave blank to show discount code from theme settings."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "content_width",
+      "label": "Content width",
+      "default": "narrow",
+      "options": [
+        { "value": "narrow", "label": "Narrow" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "full", "label": "Full width" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width section",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
     },
     {
       "type": "color",
@@ -55,12 +456,93 @@
       "default": "#1C2E23"
     },
     {
+      "type": "range",
+      "id": "bg_opacity",
+      "label": "Background opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 100,
+      "unit": "%",
+      "info": "Use with background image to create overlays"
+    },
+    {
       "type": "color",
       "id": "text_color",
       "label": "Text color",
       "default": "#F5F2EC"
+    },
+    {
+      "type": "header",
+      "content": "Background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_image",
+      "label": "Desktop background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile background image"
+    },
+    {
+      "type": "select",
+      "id": "height_mode",
+      "label": "Section height (with background image)",
+      "default": "adapt",
+      "options": [
+        { "value": "adapt", "label": "Adapt to content" },
+        { "value": "fixed", "label": "Fixed height" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "label": "Desktop height",
+      "min": 200,
+      "max": 800,
+      "step": 20,
+      "default": 480,
+      "unit": "px",
+      "info": "Only applies when height mode is fixed"
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "label": "Mobile height",
+      "min": 200,
+      "max": 600,
+      "step": 20,
+      "default": 360,
+      "unit": "px",
+      "info": "Only applies when height mode is fixed"
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable scroll animations",
+      "default": true
     }
   ],
-  "presets": [{ "name": "Newsletter" }]
+  "presets": [
+    {
+      "name": "Newsletter",
+      "settings": {
+        "heading": "Stay in the loop",
+        "text": "Get research updates, product launches, and biology tips. No spam.",
+        "button_text": "Subscribe",
+        "button_style": "primary",
+        "form_layout": "stacked",
+        "text_align": "center",
+        "bg_color": "#1C2E23",
+        "text_color": "#F5F2EC"
+      }
+    }
+  ]
 }
 {% endschema %}

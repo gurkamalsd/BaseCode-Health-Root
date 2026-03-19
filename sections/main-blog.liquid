@@ -1,37 +1,332 @@
-{%- comment -%}BaseCode Root - main-blog{%- endcomment -%}
-<section class="section bg-white">
+{%- comment -%}
+  BaseCode Root — main-blog
+  Blog listing with configurable posts-per-page, grid columns, image ratio, date/excerpt toggles,
+  full color/padding controls, and animation.
+  Settings: bg_color, text_color, padding_top/bottom, posts_per_page, grid_columns,
+            show_date, show_excerpt, image_ratio, enable_animation
+{%- endcomment -%}
+
+{%- liquid
+  assign bg          = section.settings.bg_color
+  assign tc          = section.settings.text_color
+  assign pt          = section.settings.padding_top
+  assign pb          = section.settings.padding_bottom
+  assign animate     = section.settings.enable_animation
+  assign per_page    = section.settings.posts_per_page | default: 9
+  assign cols        = section.settings.grid_columns   | default: '3'
+  assign show_date   = section.settings.show_date
+  assign show_excerpt = section.settings.show_excerpt
+  assign img_ratio   = section.settings.image_ratio    | default: 'portrait'
+
+  case img_ratio
+    when 'square'
+      assign ratio_val = '100%'
+    when 'adapt'
+      assign ratio_val = 'auto'
+    else
+      assign ratio_val = '133%'
+  endcase
+
+  assign grid_template = '1fr'
+  if cols == '2'
+    assign grid_template = 'repeat(2, 1fr)'
+  else
+    assign grid_template = 'repeat(3, 1fr)'
+  endif
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} .s-blog-wrap {
+    background-color: {{ bg }};
+    color: {{ tc }};
+    padding-top: {{ pt }}px;
+    padding-bottom: {{ pb }}px;
+  }
+  #shopify-section-{{ section.id }} .s-blog-wrap h1,
+  #shopify-section-{{ section.id }} .s-blog-wrap h3,
+  #shopify-section-{{ section.id }} .s-blog-wrap p {
+    color: inherit;
+  }
+  #shopify-section-{{ section.id }} .s-blog-title {
+    text-align: center;
+    font-size: var(--text-4xl, 2.25rem);
+    font-weight: 700;
+    margin-bottom: var(--space-10, 2.5rem);
+  }
+  #shopify-section-{{ section.id }} .s-blog-grid {
+    display: grid;
+    grid-template-columns: {{ grid_template }};
+    gap: var(--space-8, 2rem);
+  }
+  @media (max-width: 1023px) {
+    #shopify-section-{{ section.id }} .s-blog-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 639px) {
+    #shopify-section-{{ section.id }} .s-blog-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  #shopify-section-{{ section.id }} .s-blog-card {
+    display: flex;
+    flex-direction: column;
+  }
+  #shopify-section-{{ section.id }} .s-blog-card__img-wrap {
+    display: block;
+    overflow: hidden;
+    border-radius: var(--radius-lg, 0.75rem);
+    margin-bottom: var(--space-4, 1rem);
+    {%- if img_ratio != 'adapt' -%}
+    position: relative;
+    padding-bottom: {{ ratio_val }};
+    {%- endif -%}
+  }
+  #shopify-section-{{ section.id }} .s-blog-card__img-wrap img {
+    {%- if img_ratio == 'adapt' -%}
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius-lg, 0.75rem);
+    {%- else -%}
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    {%- endif -%}
+    transition: transform 0.35s ease;
+  }
+  #shopify-section-{{ section.id }} .s-blog-card__img-wrap:hover img {
+    transform: scale(1.04);
+  }
+  #shopify-section-{{ section.id }} .s-blog-card__date {
+    font-size: var(--text-xs, 0.75rem);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    opacity: 0.55;
+    margin-bottom: var(--space-2, 0.5rem);
+  }
+  #shopify-section-{{ section.id }} .s-blog-card__heading {
+    font-size: var(--text-xl, 1.25rem);
+    font-weight: 600;
+    line-height: 1.35;
+    margin-bottom: var(--space-3, 0.75rem);
+  }
+  #shopify-section-{{ section.id }} .s-blog-card__heading a {
+    color: inherit;
+    text-decoration: none;
+  }
+  #shopify-section-{{ section.id }} .s-blog-card__heading a:hover {
+    text-decoration: underline;
+  }
+  #shopify-section-{{ section.id }} .s-blog-card__excerpt {
+    font-size: var(--text-sm, 0.875rem);
+    opacity: 0.7;
+    line-height: 1.65;
+    margin-bottom: var(--space-4, 1rem);
+    flex: 1;
+  }
+  #shopify-section-{{ section.id }} .s-blog-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-2, 0.5rem);
+    margin-top: var(--space-12, 3rem);
+    flex-wrap: wrap;
+  }
+  {%- if animate -%}
+  @keyframes sBlogFadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  #shopify-section-{{ section.id }} .s-blog-card {
+    animation: sBlogFadeUp 0.55s ease both;
+  }
+  {%- for i in (1..24) -%}
+  #shopify-section-{{ section.id }} .s-blog-card:nth-child({{ i }}) {
+    animation-delay: {{ i | minus: 1 | times: 0.07 }}s;
+  }
+  {%- endfor -%}
+  {%- endif -%}
+</style>
+
+<div class="s-blog-wrap">
   <div class="container">
-    <h1 class="text-center mb-10">{{ blog.title | default: 'Blog' }}</h1>
-    {%- paginate blog.articles by 9 -%}
-      <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+
+    <h1 class="s-blog-title">{{ blog.title | default: 'Blog' }}</h1>
+
+    {%- paginate blog.articles by per_page -%}
+
+      <div class="s-blog-grid">
         {%- for article in blog.articles -%}
-          <article class="blog-card reveal-hidden">
+          <article class="s-blog-card">
+
             {%- if article.image -%}
-              <a href="{{ article.url }}" class="blog-card__image">
-                <img src="{{ article.image | image_url: width: 600 }}" alt="{{ article.image.alt | default: article.title }}" loading="lazy" sizes="(max-width: 767px) 100vw, 33vw">
+              <a href="{{ article.url }}" class="s-blog-card__img-wrap" aria-label="{{ article.title }}">
+                <img
+                  src="{{ article.image | image_url: width: 700 }}"
+                  alt="{{ article.image.alt | default: article.title }}"
+                  loading="lazy"
+                  width="{{ article.image.width }}"
+                  height="{{ article.image.height }}"
+                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                >
               </a>
             {%- endif -%}
-            <p class="blog-card__date">{{ article.published_at | date: '%B %d, %Y' }}</p>
-            <h3 class="blog-card__title"><a href="{{ article.url }}">{{ article.title }}</a></h3>
-            <p class="blog-card__excerpt">{{ article.excerpt_or_content | strip_html | truncate: 160 }}</p>
-            <a href="{{ article.url }}" class="link">{{ 'blog.read_more' | t }}</a>
+
+            {%- if show_date -%}
+              <p class="s-blog-card__date">{{ article.published_at | date: '%B %d, %Y' }}</p>
+            {%- endif -%}
+
+            <h3 class="s-blog-card__heading">
+              <a href="{{ article.url }}">{{ article.title }}</a>
+            </h3>
+
+            {%- if show_excerpt -%}
+              <p class="s-blog-card__excerpt">{{ article.excerpt_or_content | strip_html | truncate: 160 }}</p>
+            {%- endif -%}
+
+            <a href="{{ article.url }}" class="link" style="font-size: var(--text-sm, 0.875rem); font-weight: 500;">
+              {{ 'blog.read_more' | t }} &rarr;
+            </a>
+
           </article>
         {%- endfor -%}
       </div>
+
       {%- if paginate.pages > 1 -%}
-        <nav class="flex justify-center gap-2 mt-12">
-          {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}" class="btn btn--secondary btn--sm">&laquo;</a>{%- endif -%}
+        <nav class="s-blog-pagination" aria-label="Pagination">
+          {%- if paginate.previous -%}
+            <a href="{{ paginate.previous.url }}" class="btn btn--secondary btn--sm">&laquo; Prev</a>
+          {%- endif -%}
           {%- for part in paginate.parts -%}
-            {%- if part.is_link -%}<a href="{{ part.url }}" class="btn btn--secondary btn--sm">{{ part.title }}</a>
-            {%- else -%}<span class="btn btn--primary btn--sm">{{ part.title }}</span>{%- endif -%}
+            {%- if part.is_link -%}
+              <a href="{{ part.url }}" class="btn btn--secondary btn--sm">{{ part.title }}</a>
+            {%- else -%}
+              <span class="btn btn--primary btn--sm">{{ part.title }}</span>
+            {%- endif -%}
           {%- endfor -%}
-          {%- if paginate.next -%}<a href="{{ paginate.next.url }}" class="btn btn--secondary btn--sm">&raquo;</a>{%- endif -%}
+          {%- if paginate.next -%}
+            <a href="{{ paginate.next.url }}" class="btn btn--secondary btn--sm">Next &raquo;</a>
+          {%- endif -%}
         </nav>
       {%- endif -%}
+
     {%- endpaginate -%}
+
   </div>
-</section>
+</div>
 
 {% schema %}
-{ "name": "Blog Page", "settings": [] }
+{
+  "name": "Blog Page",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#1C2E23"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Grid"
+    },
+    {
+      "type": "range",
+      "id": "posts_per_page",
+      "label": "Posts per page",
+      "min": 6,
+      "max": 24,
+      "step": 3,
+      "default": 9
+    },
+    {
+      "type": "select",
+      "id": "grid_columns",
+      "label": "Grid columns (desktop)",
+      "options": [
+        { "value": "2", "label": "2 columns" },
+        { "value": "3", "label": "3 columns" }
+      ],
+      "default": "3"
+    },
+    {
+      "type": "header",
+      "content": "Card Display"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "Show publish date",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_excerpt",
+      "label": "Show excerpt",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "options": [
+        { "value": "adapt",    "label": "Adapt to image" },
+        { "value": "portrait", "label": "Portrait (3:4)" },
+        { "value": "square",   "label": "Square (1:1)" }
+      ],
+      "default": "portrait"
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "label": "Enable staggered fade-in",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blog Page"
+    }
+  ]
+}
 {% endschema %}
