@@ -28,7 +28,7 @@
           <p class="mission__subtitle">{{ section.settings.subtitle }}</p>
         {%- endif -%}
 
-        <h2 class="mission__heading">{{ section.settings.heading | default: 'There\'s a science to the science.' }}</h2>
+        <h2 class="mission__heading">{{ section.settings.heading }}</h2>
 
         <div class="mission__checklist">
           {%- for block in section.blocks -%}
@@ -86,8 +86,7 @@
     {
       "type": "url",
       "id": "button_link",
-      "label": "Button link",
-      "default": "/pages/science"
+      "label": "Button link"
     }
   ],
   "blocks": [
@@ -108,9 +107,24 @@
     {
       "name": "Mission",
       "blocks": [
-        { "type": "item", "settings": { "text": "Informed by the HELIUS study (2,084 subjects, 6 ethnic groups)." } },
-        { "type": "item", "settings": { "text": "Strains selected for biological diversity, not generic formulas." } },
-        { "type": "item", "settings": { "text": "MAKTREK acid-protection ensures bacteria arrive alive." } }
+        {
+          "type": "item",
+          "settings": {
+            "text": "Informed by the HELIUS study (2,084 subjects, 6 ethnic groups)."
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "text": "Strains selected for biological diversity, not generic formulas."
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "text": "MAKTREK acid-protection ensures bacteria arrive alive."
+          }
+        }
       ]
     }
   ]
