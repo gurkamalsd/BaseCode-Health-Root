@@ -1,0 +1,29 @@
+{%- comment -%}
+  Floating discount pill — bottom-left on desktop only.
+  Hidden on mobile to prevent overlapping content.
+  JS logic in theme.js (initFloatingPill)
+{%- endcomment -%}
+
+<div id="floating-discount-pill" class="floating-pill" style="display: none;">
+  <button data-pill-open class="floating-pill__inner" aria-label="Get 20% off">
+    <span class="font-heading text-13 font-medium" style="color: #F5F2EC;">
+      Get <span style="color: #1C2E23; font-weight: 700;">20% Off</span>
+    </span>
+    <span
+      data-pill-dismiss
+      role="button"
+      tabindex="0"
+      aria-label="Dismiss"
+      style="margin-left: 4px; padding: 2px; border-radius: 50%; display: inline-flex;"
+    >
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(245,242,236,0.5)" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </span>
+  </button>
+</div>
+
+<style>
+  /* Hide floating pill on mobile — it overlaps content */
+  @media (max-width: 767px) {
+    #floating-discount-pill { display: none !important; }
+  }
+</style>

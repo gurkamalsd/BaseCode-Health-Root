@@ -1,0 +1,77 @@
+<section id="certifications" class="py-14 md:py-20 px-6 md:px-20" style="background: #1C2E23;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div class="text-center mb-10 md:mb-16 reveal-hidden">
+      <p class="font-mono-spec text-11 uppercase mb-4" style="color: #C4783A; letter-spacing: 0.2em;">Quality & Standards</p>
+      <h2 class="font-heading text-28 md:text-48 font-medium" style="color: #F5F2EC;">
+        Built to a standard most brands can't meet.
+      </h2>
+      <p class="font-heading text-16 md:text-18 font-light mt-4 mx-auto" style="color: rgba(245,242,236,0.65); max-width: 600px;">
+        Every claim is verifiable. Every batch is tested.
+      </p>
+    </div>
+
+    <!-- Mobile: 2-col compact grid. Desktop: 5-col -->
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-10 text-center stagger-children">
+      {%- assign cert_displays = "cGMP|MAKTREK|40B|4|3" | split: "|" -%}
+      {%- assign cert_heads = "Manufacturing|Bi-Pass Delivery|CFU Guaranteed|Studied Strains|Wellness Pathways" | split: "|" -%}
+      {%- assign cert_bodies_short = "cGMP-certified, FDA-registered facility. USA manufactured.|Marine polysaccharide shield. Bacteria arrive alive.|40 billion CFU at manufacture. Stability-tested overage.|4 strains selected for specific biological functions.|3 pathways. Inflammation, energy, metabolism." | split: "|" -%}
+
+      {%- for display in cert_displays -%}
+        <div class="reveal-hidden{% if forloop.index == 5 %} col-span-2 md:col-span-1{% endif %}">
+          <p class="font-heading text-28 md:text-48 font-semibold mb-2" style="color: {% if forloop.index == 3 or forloop.index == 5 %}#C4783A{% else %}#F5F2EC{% endif %};">
+            {%- if display == '40B' -%}
+              <span data-count-target="40" data-count-suffix="B" data-count-duration="1200">0B</span>
+            {%- elsif display == '4' -%}
+              <span data-count-target="4" data-count-duration="1200">0</span>
+            {%- elsif display == '3' -%}
+              <span data-count-target="3" data-count-duration="1200">0</span>
+            {%- else -%}
+              {{ display }}
+            {%- endif -%}
+          </p>
+          <h3 class="font-heading text-14 md:text-18 font-medium mb-2" style="color: #F5F2EC;">{{ cert_heads[forloop.index0] }}</h3>
+          <p class="font-heading text-12 md:text-14 font-light" style="color: rgba(245,242,236,0.50); line-height: 1.6;">{{ cert_bodies_short[forloop.index0] }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-3 mt-16 reveal-hidden">
+      {%- assign badges = "cGMP Manufactured|Non-GMO Verified|Vegan|Manufactured in the USA" | split: "|" -%}
+      {%- for badge in badges -%}
+        <span class="font-mono-spec text-12 px-6 py-2.5 rounded-full" style="border: 1px solid rgba(255,255,255,0.20); color: rgba(245,242,236,0.65);">
+          <span style="color: #C4783A;">✓</span>&nbsp;&nbsp;{{ badge }}
+        </span>
+      {%- endfor -%}
+    </div>
+
+    <div class="text-center mt-14 reveal-hidden">
+      <a href="/products/origin" class="btn btn--primary inline-block">
+        Start Feeling Better — $34/mo
+      </a>
+      <p class="font-heading text-13 font-light mt-3" style="color: rgba(245,242,236,0.40);">
+        30-day supply. Free research report. Cancel anytime.
+      </p>
+    </div>
+
+    <div class="mt-12 pt-8 mx-auto reveal-hidden" style="border-top: 1px solid rgba(255,255,255,0.10); max-width: 800px;">
+      {%- assign cite_texts = "¹ Deschasaux et al. Nature Medicine, 2018. HELIUS Cohort. n=2,084.|² Vangay et al. Cell, 2018. Immigration-microbiome study.|³ Govender et al. AAPS PharmSciTech, 2014. Probiotic survivability.|⁴ Huang et al. Nutrients, 2019. L. plantarum TWK10." | split: "|" -%}
+      {%- assign cite_dois = "https://doi.org/10.1038/s41591-018-0160-1|https://doi.org/10.1016/j.cell.2018.10.029|https://doi.org/10.1208/s12249-013-0027-1|https://doi.org/10.3390/nu11020353" | split: "|" -%}
+      {%- for text in cite_texts -%}
+        <p class="font-mono-spec text-11" style="color: rgba(245,242,236,0.35); line-height: 1.8;">
+          {{ text }}
+          <a href="{{ cite_dois[forloop.index0] }}" target="_blank" rel="noopener noreferrer" class="transition hover:underline" style="color: #C4783A;">
+            View Study →
+          </a>
+        </p>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Certifications",
+  "class": "certifications-section",
+  "settings": []
+}
+{% endschema %}

@@ -1,443 +1,133 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "hero": {
-      "type": "hero",
+    "landing": {
+      "type": "landing-page",
       "settings": {
-        "show_social_proof": true,
-        "social_proof_text": "Backed by biological diversity research",
-        "subtitle": "Cognitive Function & Your Microbiome",
-        "heading": "Brain fog isn't burnout. It's your gut leaking inflammation into your brain.",
-        "text": "Your gut produces 90% of your body's serotonin and communicates directly with your brain through the vagus nerve. When ancestral bacteria deplete, bacterial endotoxins leak through a weakened gut barrier, cross the blood-brain barrier, and trigger neuroinflammation. That mental haze, the word-finding failures, the inability to hold a thought — it's not stress. It's a disrupted gut-brain axis. Origin restores the connection.",
-        "button_text": "Get Your Mind Back — $34/mo",
-        "button_link": "/products/origin",
-        "guarantee_text": "30-Day Money-Back Guarantee",
-        "text_align": "left",
-        "overlay_opacity": 55,
-        "height": 100,
-        "mobile_height": 85,
-        "text_color": "#FFFFFF"
-      }
-    },
-    "features-banner": {
-      "type": "features-banner",
-      "settings": {
-        "bg_color": "#F5F2EC",
-        "text_color": "#1C2E23",
-        "icon_color": "#C4783A",
-        "layout": "inline",
-        "desktop_columns": "4",
-        "mobile_layout": "slider",
-        "show_dividers": true,
-        "padding_top": 24,
-        "padding_bottom": 24,
-        "enable_animation": true
+        "symptom_slug": "brain-fog",
+        "eyebrow": "Cognitive Function & Your Microbiome",
+        "headline": "Brain fog isn't burnout. It's your gut leaking inflammation into your brain.",
+        "subheadline": "Your gut produces 90% of your body's serotonin and communicates directly with your brain through the vagus nerve. When ancestral bacteria deplete, bacterial endotoxins leak through a weakened gut barrier, cross the blood-brain barrier, and trigger neuroinflammation. That mental haze, the word-finding failures, the inability to hold a thought — it's not stress. It's a disrupted gut-brain axis. Origin restores the connection.",
+        "cta_text": "Get Your Mind Back — $34/mo",
+        "agitate_eyebrow": "Why Caffeine and Nootropics Keep Failing",
+        "agitate_headline": "You were sharp once. The problem isn't your brain — it's the bacteria that used to protect it.",
+        "agitate_body": "You used to be the sharpest person in the room. Quick recall, effortless focus, complex ideas held in working memory like it was nothing. Now you walk into rooms and stand there. You read the same paragraph three times and absorb nothing. You lose words mid-sentence — words you've used a thousand times. You used to remember names, dates, conversations. Now your phone is full of reminders for things your brain should just know.||Your nootropic stack keeps growing. Lion's mane, alpha-GPC, L-theanine, modafinil, microdosing protocols — you've tried them all. They work for a day, maybe two, then the fog rolls back in thicker than before. You've doubled your caffeine just to reach a baseline your brain used to hit on its own. Your doctor ran bloodwork. Normal. 'Maybe it's stress.' It's not stress.||Here's what nobody is connecting: your gut microbiome produces neurotransmitter precursors — serotonin, GABA, dopamine — and regulates the inflammatory cascade that reaches your brain. When key bacterial populations deplete, endotoxins leak through a compromised gut barrier into circulation, cross the blood-brain barrier, and activate microglia — your brain's immune cells. That activation is neuroinflammation. That neuroinflammation is your brain fog. Every nootropic you take is fighting downstream of a gut problem.",
+        "cost_headline": "Nootropic stacks, brain supplements, and cognitive testing: $80–200/month chasing symptoms. Origin: $34/month addressing the source.",
+        "cost_body": "The cognitive enhancement market is $8 billion because millions of people are desperate to think clearly again. Lion's mane subscriptions. Racetam protocols. Focus apps. Brain training games. None of them address why your brain is inflamed in the first place. They stimulate a system that's under siege. For $1.13/day, Origin restores the gut-brain axis that regulates neuroinflammation and neurotransmitter production. You don't need more stimulation. You need less inflammation.",
+        "bridge_headline": "The gut-brain axis: your microbiome controls more of your cognition than any supplement ever will.",
+        "bridge_body": "Research in Nature Reviews Neuroscience demonstrates that gut bacteria directly modulate brain function through the vagus nerve, immune signaling, and neurotransmitter production. When L. plantarum and L. paracasei populations decline, BDNF (brain-derived neurotrophic factor) decreases, inflammatory cytokines IL-6 and TNF-alpha increase, and cognitive performance measurably drops. The blood-brain barrier — designed to be impermeable — becomes compromised when gut-derived systemic inflammation rises. Endotoxins that should never reach your central nervous system flood in and trigger the microglial activation that presents as brain fog.",
+        "citation": "Cryan & Dinan, Nature Reviews Neuroscience, 2012 · Bravo et al., PNAS, 2011 · Sampson & Mazmanian, Cell Host & Microbe, 2015",
+        "solution_headline": "Origin restores the gut-brain axis. The fog lifts because the inflammation drops.",
+        "solution_body": "L. paracasei modulates vagus nerve signaling — the direct communication highway between your gut and your brain. L. plantarum reduces the inflammatory cytokines (IL-6, TNF-alpha) that cross the blood-brain barrier and activate microglia. L. acidophilus seals the intestinal barrier to stop endotoxin leakage at the source — so inflammation never enters circulation. B. lactis supports the regulatory immune function that keeps neuroinflammation in check. MAKTREK Bi-Pass delivery ensures all four strains survive stomach acid and arrive alive. FOS prebiotic feeds them on impact. The result: cognitive clarity that comes from resolution, not stimulation.",
+        "lead_headline": "The gut-brain research that explains why you can't think straight anymore.",
+        "closing_quote": "Your father made decisions that built a life in a new country — without brain supplements, without nootropics, without four cups of coffee. The difference isn't discipline. It's the microbiome that kept his gut-brain axis intact."
       },
       "blocks": {
-        "badge-1": {
-          "type": "feature",
+        "pathway_1": {
+          "type": "pathway",
           "settings": {
-            "icon": "flask",
-            "text": "Gut-Brain Axis Research",
-            "subtext": "Vagus nerve + neurotransmitter support"
-          }
-        },
-        "badge-2": {
-          "type": "feature",
-          "settings": {
-            "icon": "shield",
-            "text": "MAKTREK Bi-Pass Delivery",
-            "subtext": "Bacteria arrive alive"
-          }
-        },
-        "badge-3": {
-          "type": "feature",
-          "settings": {
-            "icon": "leaf",
-            "text": "Vegan & Clean",
-            "subtext": "HPMC veggie capsule, no gelatin"
-          }
-        },
-        "badge-4": {
-          "type": "feature",
-          "settings": {
-            "icon": "refresh",
-            "text": "30-Day Guarantee",
-            "subtext": "Full refund, no questions asked"
-          }
-        }
-      },
-      "block_order": ["badge-1", "badge-2", "badge-3", "badge-4"]
-    },
-    "rich-text": {
-      "type": "rich-text",
-      "settings": {
-        "bg_color": "#FFFFFF",
-        "text_color": "#1C2E23",
-        "content_width": "medium",
-        "text_align": "left",
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "enable_animation": true
-      },
-      "blocks": {
-        "eyebrow": {
-          "type": "subheading",
-          "settings": {
-            "subheading": "Why Caffeine and Nootropics Keep Failing",
-            "subheading_color": "#C4783A"
-          }
-        },
-        "headline": {
-          "type": "heading",
-          "settings": {
-            "heading": "You were sharp once. The problem isn't your brain — it's the bacteria that used to protect it.",
-            "heading_level": "h2",
-            "heading_size": "h2"
-          }
-        },
-        "body": {
-          "type": "text",
-          "settings": {
-            "text": "<p>You used to be the sharpest person in the room. Quick recall, effortless focus, complex ideas held in working memory like it was nothing. Now you walk into rooms and stand there. You read the same paragraph three times and absorb nothing. You lose words mid-sentence — words you've used a thousand times.</p><p>Your nootropic stack keeps growing. Lion's mane, alpha-GPC, L-theanine, modafinil, microdosing protocols — you've tried them all. They work for a day, maybe two, then the fog rolls back in thicker than before. You've doubled your caffeine just to reach a baseline your brain used to hit on its own. Your doctor ran bloodwork. Normal. 'Maybe it's stress.' It's not stress.</p><p>Here's what nobody is connecting: your gut microbiome produces neurotransmitter precursors — serotonin, GABA, dopamine — and regulates the inflammatory cascade that reaches your brain. When key bacterial populations deplete, endotoxins leak through a compromised gut barrier into circulation, cross the blood-brain barrier, and activate microglia — your brain's immune cells. That activation is neuroinflammation. That neuroinflammation is your brain fog. Every nootropic you take is fighting downstream of a gut problem.</p>"
-          }
-        },
-        "cost-cta": {
-          "type": "button",
-          "settings": {
-            "button_text": "Get Your Mind Back — $34/mo",
-            "button_link": "/products/origin",
-            "button_style": "primary"
-          }
-        }
-      },
-      "block_order": ["eyebrow", "headline", "body", "cost-cta"]
-    },
-    "image-with-text": {
-      "type": "image-with-text",
-      "settings": {
-        "bg_color": "#F5F2EC",
-        "text_color": "#1C2E23",
-        "layout": "image_first",
-        "image_width_pct": 50,
-        "text_align": "left",
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "enable_animation": true
-      },
-      "blocks": {
-        "sub": {
-          "type": "subheading",
-          "settings": {
-            "text": "The Science",
-            "color": "#C4783A"
-          }
-        },
-        "head": {
-          "type": "heading",
-          "settings": {
-            "text": "The gut-brain axis: your microbiome controls more of your cognition than any supplement ever will.",
-            "heading_level": "h2",
-            "heading_size": "h2"
-          }
-        },
-        "body": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Research in Nature Reviews Neuroscience demonstrates that gut bacteria directly modulate brain function through the vagus nerve, immune signaling, and neurotransmitter production. When L. plantarum and L. paracasei populations decline, BDNF (brain-derived neurotrophic factor) decreases, inflammatory cytokines IL-6 and TNF-alpha increase, and cognitive performance measurably drops. The blood-brain barrier — designed to be impermeable — becomes compromised when gut-derived systemic inflammation rises. Endotoxins that should never reach your central nervous system flood in and trigger the microglial activation that presents as brain fog.</p><p><em>Cryan &amp; Dinan, Nature Reviews Neuroscience, 2012 · Bravo et al., PNAS, 2011 · Sampson &amp; Mazmanian, Cell Host &amp; Microbe, 2015</em></p>"
-          }
-        },
-        "btn": {
-          "type": "button",
-          "settings": {
-            "text": "Get Origin — $34/mo",
-            "link": "/products/origin",
-            "style": "primary"
-          }
-        }
-      },
-      "block_order": ["sub", "head", "body", "btn"]
-    },
-    "research-highlight": {
-      "type": "research-highlight",
-      "settings": {
-        "subtitle": "How It Works",
-        "heading": "Three steps from leaky gut to cognitive clarity.",
-        "bg_color": "#1C2E23",
-        "text_color": "#F5F2EC",
-        "accent_color": "#C4783A",
-        "card_bg_color": "#243D2B",
-        "icon_bg_color": "#C4783A",
-        "columns": "3",
-        "card_style": "vertical",
-        "button_text": "Get Origin — $34/mo",
-        "button_link": "/products/origin",
-        "button_style": "primary",
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "enable_animation": true
-      },
-      "blocks": {
-        "step-1": {
-          "type": "stat",
-          "settings": {
-            "icon_style": "number",
-            "stat": "01",
+            "step": "01 — Barrier Breach",
             "title": "Your gut wall breaks down and endotoxins enter circulation",
-            "text": "When ancestral bacteria deplete, the intestinal tight junctions weaken. Bacterial lipopolysaccharides (LPS) leak through the gut wall into your bloodstream. Your immune system launches a systemic inflammatory response. That inflammation doesn't stay in your gut. It travels.",
-            "source": "Step 01 — Barrier Breach"
+            "body": "When ancestral bacteria deplete — a documented pattern in diaspora communities — the intestinal tight junctions weaken. Bacterial lipopolysaccharides (LPS) leak through the gut wall into your bloodstream. Your immune system launches a systemic inflammatory response. That inflammation doesn't stay in your gut. It travels."
           }
         },
-        "step-2": {
-          "type": "stat",
+        "pathway_2": {
+          "type": "pathway",
           "settings": {
-            "icon_style": "number",
-            "stat": "02",
+            "step": "02 — Neuroinflammation",
             "title": "Inflammation crosses the blood-brain barrier and activates microglia",
-            "text": "Chronic systemic inflammation degrades the blood-brain barrier. Inflammatory cytokines and endotoxins enter. Microglia — your brain's immune cells — activate and stay activated. Neurotransmitter production drops. BDNF decreases. Processing speed, working memory, focus, and recall all measurably decline.",
-            "source": "Step 02 — Neuroinflammation"
+            "body": "Chronic systemic inflammation degrades the blood-brain barrier — a structure designed to protect your central nervous system. Inflammatory cytokines and endotoxins enter. Microglia — your brain's immune cells — activate and stay activated. Neurotransmitter production drops. BDNF decreases. Processing speed, working memory, focus, and recall all measurably decline. That's your brain fog."
           }
         },
-        "step-3": {
-          "type": "stat",
+        "pathway_3": {
+          "type": "pathway",
           "settings": {
-            "icon_style": "number",
-            "stat": "03",
+            "step": "03 — Origin Restores the Axis",
             "title": "Seal the gut, silence the inflammation, clear the brain",
-            "text": "L. acidophilus and L. plantarum restore gut barrier integrity — endotoxin leakage stops at the source. Systemic inflammation decreases. The blood-brain barrier recovers. L. paracasei restores vagus nerve signaling. Neurotransmitter production normalizes. Cognitive clarity returns from resolution, not stimulation.",
-            "source": "Step 03 — Origin Restores the Axis"
-          }
-        }
-      },
-      "block_order": ["step-1", "step-2", "step-3"]
-    },
-    "benefits-product": {
-      "type": "benefits-product",
-      "settings": {
-        "heading": "What thinking clearly again feels like.",
-        "subheading": "Origin Results",
-        "bg_color": "#C4783A",
-        "text_color": "#FFFFFF",
-        "accent_color": "#1C2E23",
-        "button_text": "Get Origin — $34/mo",
-        "button_link": "/products/origin",
-        "button_style": "primary",
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "enable_animation": true
-      },
-      "blocks": {
-        "benefit-1": {
-          "type": "benefit",
-          "settings": {
-            "icon": "check",
-            "heading": "Think in complete thoughts again",
-            "text": "No more mid-sentence blanks. No more groping for a word you've used a thousand times. When neuroinflammation drops, your cognitive processing speed returns to what it was before the fog."
+            "body": "L. acidophilus and L. plantarum restore gut barrier integrity — endotoxin leakage stops at the source. Systemic inflammation decreases. The blood-brain barrier recovers. L. paracasei restores vagus nerve signaling. Neurotransmitter production normalizes. Cognitive clarity returns — not from stimulation, but from removing the inflammatory assault on your brain."
           }
         },
-        "benefit-2": {
-          "type": "benefit",
+        "outcome_1": {
+          "type": "dream_outcome",
           "settings": {
-            "icon": "star",
-            "heading": "Lock into deep focus without chemical crutches",
-            "text": "You shouldn't need four coffees, a nootropic stack, and a focus playlist just to function at 70%. When your gut-brain axis recovers, your natural attention and focus systems come back online."
+            "title": "Think in complete thoughts again",
+            "body": "No more mid-sentence blanks. No more groping for a word you've used a thousand times. No more feeling like your brain is running on dial-up. When neuroinflammation drops, your cognitive processing speed returns to what it was before the fog."
           }
         },
-        "benefit-3": {
-          "type": "benefit",
+        "outcome_2": {
+          "type": "dream_outcome",
           "settings": {
-            "icon": "heart",
-            "heading": "Hold conversations and actually remember them",
-            "text": "Short-term memory issues at 30 aren't aging. They're neuroinflammation suppressing hippocampal function. When the inflammatory load lifts, names, dates, conversations — they stick again."
+            "title": "Lock into deep focus without chemical crutches",
+            "body": "You shouldn't need four coffees, a nootropic stack, and a focus playlist just to function at 70%. When your gut-brain axis recovers, your natural attention and focus systems come back online. Deep work becomes possible again — without the ritual."
           }
         },
-        "benefit-4": {
-          "type": "benefit",
+        "outcome_3": {
+          "type": "dream_outcome",
           "settings": {
-            "icon": "refresh",
-            "heading": "Ditch the nootropic stack for good",
-            "text": "Lion's mane. Alpha-GPC. L-theanine. Racetams. Modafinil. You've been stacking cognitive supplements that stimulate a brain under inflammatory siege. Origin removes the siege."
+            "title": "Hold conversations and actually remember them",
+            "body": "Short-term memory issues at 30 aren't aging. They're neuroinflammation suppressing hippocampal function. When the inflammatory load lifts, you stop needing to write everything down. Names, dates, conversations — they stick again."
           }
         },
-        "benefit-5": {
-          "type": "benefit",
+        "outcome_4": {
+          "type": "dream_outcome",
           "settings": {
-            "icon": "flask",
-            "heading": "40 Billion CFU, 4 targeted strains",
-            "text": "MAKTREK Bi-Pass delivery ensures the bacteria that restore your gut-brain axis actually arrive in your gut alive."
+            "title": "Ditch the nootropic stack for good",
+            "body": "Lion's mane. Alpha-GPC. L-theanine. Racetams. Modafinil. You've been stacking cognitive supplements that stimulate a brain under inflammatory siege. Origin removes the siege. When the cause resolves, the workarounds become unnecessary."
           }
         },
-        "benefit-6": {
-          "type": "benefit",
-          "settings": {
-            "icon": "shield",
-            "heading": "30-Day Money-Back Guarantee",
-            "text": "Try Origin for 30 days. If the fog doesn't lift, we'll refund you in full. No questions asked."
-          }
-        }
-      },
-      "block_order": ["benefit-1", "benefit-2", "benefit-3", "benefit-4", "benefit-5", "benefit-6"]
-    },
-    "image-banner": {
-      "type": "image-banner",
-      "settings": {
-        "heading": "Your father made decisions that built a life in a new country — without nootropics, without four cups of coffee. The difference isn't discipline. It's the microbiome that kept his gut-brain axis intact.",
-        "heading_size": "text-3xl",
-        "button_text": "Get Origin — $34/mo",
-        "button_link": "/products/origin",
-        "button_style": "white",
-        "overlay_color": "#1C2E23",
-        "overlay_opacity": 65,
-        "text_color": "#FFFFFF",
-        "text_align": "center",
-        "height": 400,
-        "mobile_height": 300,
-        "full_width": true,
-        "enable_animation": true
-      }
-    },
-    "testimonials": {
-      "type": "testimonials",
-      "settings": {
-        "heading": "Real results from real people.",
-        "subheading": "Customer Stories",
-        "bg_color": "#FFFFFF",
-        "layout": "carousel",
-        "card_style": "card",
-        "show_stars": true,
-        "accent_color": "#f59e0b",
-        "auto_play": true,
-        "auto_play_speed": 6,
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "enable_animation": true
-      },
-      "blocks": {
-        "review-1": {
-          "type": "testimonial",
+        "review_1": {
+          "type": "review",
           "settings": {
             "quote": "I'm a software engineer and I was about to quit. Couldn't hold architecture in my head anymore. Couldn't debug without writing every step down. I thought I was done at 33. Three weeks on Origin and I shipped more clean code in one sprint than I had in three months. It was never my brain. It was my gut.",
-            "author": "Ravi M.",
-            "role": "Seattle, WA",
-            "rating": 5
+            "name": "Ravi M. — Seattle, WA"
           }
         },
-        "review-2": {
-          "type": "testimonial",
+        "review_2": {
+          "type": "review",
           "settings": {
             "quote": "The brain fog got so bad I paid $4,000 for a full neurological workup. MRI, EEG, cognitive testing — everything normal. 'Probably stress.' Two weeks on Origin and I could read a chapter without re-reading every page. I feel like I got five years of my mind back.",
-            "author": "Amara O.",
-            "role": "Houston, TX",
-            "rating": 5
+            "name": "Amara O. — Houston, TX"
           }
         },
-        "review-3": {
-          "type": "testimonial",
+        "review_3": {
+          "type": "review",
           "settings": {
-            "quote": "I teach high school chemistry and I was forgetting my own lesson plans mid-class. I'd look at my students and blank on what came next. I was terrified. My mom suggested it might be a gut issue. Started Origin and within a month the mental clarity was back. I'm myself again.",
-            "author": "Maria C.",
-            "role": "Chicago, IL",
-            "rating": 5
+            "quote": "I teach high school chemistry and I was forgetting my own lesson plans mid-class. I'd look at my students and blank on what came next. I was terrified. My mom suggested it might be a gut issue — her mother used fermented foods back in the Philippines for everything. Started Origin and within a month the mental clarity was back. I'm myself again.",
+            "name": "Maria C. — Chicago, IL"
           }
         },
-        "review-4": {
-          "type": "testimonial",
+        "review_4": {
+          "type": "review",
           "settings": {
             "quote": "I spent $200/month on nootropics — lion's mane, alpha-GPC, the whole biohacker protocol. They'd work for a day then nothing. Origin is $34 and it actually resolved the fog instead of masking it. Four weeks in and I haven't touched my nootropic stack. Wish I'd found this a year ago.",
-            "author": "Khalid J.",
-            "role": "Toronto, ON",
-            "rating": 5
+            "name": "Khalid J. — Toronto, ON"
           }
         }
       },
-      "block_order": ["review-1", "review-2", "review-3", "review-4"]
-    },
-    "faq-accordion": {
-      "type": "faq-accordion",
-      "settings": {
-        "heading": "Frequently Asked Questions",
-        "subheading": "Brain Fog & Origin",
-        "bg_color": "#F5F2EC",
-        "text_color": "#1C2E23",
-        "accent_color": "#C4783A",
-        "accordion_style": "bordered",
-        "icon_style": "plus",
-        "open_first": true,
-        "content_width": "narrow",
-        "heading_align": "center",
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "enable_animation": true
-      },
-      "blocks": {
-        "faq-1": {
-          "type": "question",
-          "settings": {
-            "question": "How does a probiotic help with brain fog?",
-            "answer": "<p>Brain fog driven by neuroinflammation typically starts in the gut. When your intestinal barrier is compromised, bacterial endotoxins enter your bloodstream, degrade the blood-brain barrier, and activate microglia — your brain's immune cells. This microglial activation suppresses neurotransmitter production and impairs cognitive processing. Origin's strains restore gut barrier integrity, stopping endotoxin leakage at the source and allowing the neuroinflammation to resolve.</p>"
-          }
-        },
-        "faq-2": {
-          "type": "question",
-          "settings": {
-            "question": "How quickly will I notice cognitive improvement?",
-            "answer": "<p>Many customers report a noticeable lift in mental clarity within 2-3 weeks. Full cognitive recovery — improved working memory, sustained focus, and faster processing — typically develops over 6-8 weeks as the gut barrier strengthens and systemic inflammation decreases. The gut-brain axis takes time to restore, but the trajectory is consistent once it begins.</p>"
-          }
-        },
-        "faq-3": {
-          "type": "question",
-          "settings": {
-            "question": "Can I take Origin with my nootropic stack?",
-            "answer": "<p>Yes. Origin and nootropics work through different mechanisms. Nootropics stimulate cognitive performance acutely; Origin addresses the underlying inflammation that's suppressing your brain's baseline function. Most customers find they need their nootropic stack less — or not at all — once the gut-brain axis recovers. We recommend starting Origin alongside your current stack and reassessing after 4-6 weeks.</p>"
-          }
-        },
-        "faq-4": {
-          "type": "question",
-          "settings": {
-            "question": "Why did my brain fog get worse after moving to a new country?",
-            "answer": "<p>Immigration and dietary westernization deplete the specific bacterial populations that regulate gut barrier integrity and neurotransmitter production. The HELIUS study documented this pattern across 2,084 subjects from six ethnic groups: ethnicity — not diet or lifestyle — determines microbiome composition. When these populations collapse, the inflammatory cascade they were suppressing reaches the brain. Brain fog that worsens after immigration is a documented pattern with a documented biological cause.</p>"
-          }
-        },
-        "faq-5": {
-          "type": "question",
-          "settings": {
-            "question": "Is this the same as any other probiotic for cognitive health?",
-            "answer": "<p>No. Most probiotics marketed for brain health contain generic strains with minimal clinical documentation. Origin's L. paracasei specifically supports vagus nerve signaling — the direct gut-brain communication pathway. L. plantarum reduces IL-6 and TNF-alpha, the inflammatory cytokines that cross the blood-brain barrier and activate microglia. MAKTREK Bi-Pass delivery ensures all strains survive stomach acid. FOS prebiotic feeds them on arrival. The mechanism is specific. The delivery is verified.</p>"
-          }
-        }
-      },
-      "block_order": ["faq-1", "faq-2", "faq-3", "faq-4", "faq-5"]
-    },
-    "newsletter": {
-      "type": "newsletter",
-      "settings": {
-        "heading": "The gut-brain research that explains why you can't think straight anymore.",
-        "text": "Get the free Biology Gap report — plus research updates, product news, and biology-first insights. No spam.",
-        "button_text": "Send Me the Report",
-        "button_style": "white",
-        "form_layout": "stacked",
-        "show_name_field": false,
-        "success_heading": "You're in.",
-        "success_text": "Check your inbox — the report is on its way.",
-        "bg_color": "#1C2E23",
-        "text_color": "#F5F2EC",
-        "content_width": "narrow",
-        "text_align": "center",
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "enable_animation": true
-      }
+      "block_order": [
+        "pathway_1",
+        "pathway_2",
+        "pathway_3",
+        "outcome_1",
+        "outcome_2",
+        "outcome_3",
+        "outcome_4",
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4"
+      ]
     }
   },
   "order": [
-    "hero",
-    "features-banner",
-    "rich-text",
-    "image-with-text",
-    "research-highlight",
-    "benefits-product",
-    "image-banner",
-    "testimonials",
-    "faq-accordion",
-    "newsletter"
+    "landing"
   ]
 }

@@ -9,213 +9,45 @@
  */
 {
   "sections": {
-    "hero": {
-      "type": "hero",
-      "settings": {
-        "show_social_proof": true,
-        "social_proof_text": "Backed by biological diversity research",
-        "subtitle": "The Future of Supplements",
-        "heading": "Your biology is unique.",
-        "text": "<p>Origin is the first probiotic informed by biological diversity research. 40 billion CFU. 4 targeted strains. MAKTREK acid-protection delivery.</p>",
-        "button_text": "Discover Origin",
-        "button_link": "/products/origin",
-        "guarantee_text": "30-Day Money-Back Guarantee",
-        "text_align": "left",
-        "height": 90,
-        "mobile_height": 85,
-        "overlay_opacity": 55,
-        "text_color": "#FFFFFF"
-      }
-    },
-    "features": {
-      "type": "features-banner",
-      "settings": {
-        "bg_color": "#F5F2EC",
-        "padding_top": 20,
-        "padding_bottom": 20,
-        "layout": "inline"
-      },
-      "blocks": {
-        "f1": { "type": "feature", "settings": { "icon": "truck", "text": "Free Shipping on Subscriptions" } },
-        "f2": { "type": "feature", "settings": { "icon": "shield", "text": "30-Day Guarantee" } },
-        "f3": { "type": "feature", "settings": { "icon": "leaf", "text": "Vegan & Clean Formula" } },
-        "f4": { "type": "feature", "settings": { "icon": "lock", "text": "Secure Checkout" } }
-      },
-      "block_order": ["f1", "f2", "f3", "f4"]
-    },
-    "image-banner": {
-      "type": "image-banner",
-      "settings": {
-        "heading": "Your gut controls more than digestion.",
-        "text": "The HELIUS study proved that your biology — not diet or age — is the strongest predictor of your microbiome composition.",
-        "button_text": "Read the Science",
-        "button_link": "/pages/science",
-        "button_style": "white",
-        "height": 450,
-        "mobile_height": 350,
-        "overlay_color": "#1C2E23",
-        "overlay_opacity": 60,
-        "text_color": "#FFFFFF",
-        "enable_animation": true
-      }
-    },
-    "research": {
-      "type": "research-highlight",
-      "settings": {
-        "subtitle": "The Research",
-        "heading": "The science is clear.",
-        "button_text": "Read the Science",
-        "button_link": "/pages/science",
-        "bg_color": "#FFFFFF",
-        "padding_top": 80,
-        "padding_bottom": 80
-      },
-      "blocks": {
-        "s1": {
-          "type": "stat",
-          "settings": {
-            "stat": "01",
-            "title": "HELIUS Study: 2,084 subjects, 6 ethnic groups",
-            "text": "Biology — not diet, age, or lifestyle — is the strongest predictor of gut microbiome composition.",
-            "source": "Deschasaux et al., 2018 — Nature Medicine"
-          }
-        },
-        "s2": {
-          "type": "stat",
-          "settings": {
-            "stat": "02",
-            "title": "Microbiome shifts within one generation",
-            "text": "Immigration and environmental changes cause ancestral microbiome depletion — replacing diverse bacteria with Western strains.",
-            "source": "Vangay et al., 2018 — Cell"
-          }
-        },
-        "s3": {
-          "type": "stat",
-          "settings": {
-            "stat": "03",
-            "title": "Most probiotics don't survive stomach acid",
-            "text": "Without acid-protection delivery, up to 96% of probiotic bacteria die before reaching the gut. MAKTREK Bi-Pass solves this.",
-            "source": "Govender et al., 2014 — AAPS PharmSciTech"
-          }
-        }
-      },
-      "block_order": ["s1", "s2", "s3"]
-    },
-    "benefits": {
-      "type": "benefits-product",
-      "settings": {
-        "heading": "The Origin Difference",
-        "subheading": "Biology-First Formula",
-        "button_text": "Shop Origin — $34/mo",
-        "button_link": "/products/origin",
-        "bg_color": "#1C2E23",
-        "text_color": "#F5F2EC",
-        "accent_color": "#C4783A",
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "enable_animation": true
-      },
-      "blocks": {
-        "b1": { "type": "benefit", "settings": { "icon": "star", "heading": "40 Billion CFU", "text": "Clinical-strength dose across 4 targeted strains" } },
-        "b2": { "type": "benefit", "settings": { "icon": "shield", "heading": "MAKTREK Delivery", "text": "Acid-protected so bacteria arrive alive" } },
-        "b3": { "type": "benefit", "settings": { "icon": "leaf", "heading": "FOS Prebiotic", "text": "Feeds bacteria on arrival, not just on the label" } },
-        "b4": { "type": "benefit", "settings": { "icon": "check", "heading": "Diversity Research", "text": "Informed by the HELIUS study (2,084 subjects)" } },
-        "b5": { "type": "benefit", "settings": { "icon": "heart", "heading": "Vegan & Clean", "text": "HPMC capsules, no gelatin, no fillers" } },
-        "b6": { "type": "benefit", "settings": { "icon": "refresh", "heading": "30-Day Guarantee", "text": "Full refund if it doesn't work for you" } }
-      },
-      "block_order": ["b1", "b2", "b3", "b4", "b5", "b6"]
-    },
-    "mission": {
-      "type": "mission",
-      "settings": {
-        "subtitle": "Our Mission",
-        "heading": "Supplements informed by biological diversity research.",
-        "button_text": "Learn More",
-        "button_link": "/pages/about",
-        "bg_color": "#F5F2EC",
-        "padding_top": 80,
-        "padding_bottom": 80
-      },
-      "blocks": {
-        "c1": { "type": "item", "settings": { "text": "Informed by the HELIUS study (2,084 subjects, 6 ethnic groups)" } },
-        "c2": { "type": "item", "settings": { "text": "Strains selected for biological diversity, not generic formulas" } },
-        "c3": { "type": "item", "settings": { "text": "MAKTREK acid-protection ensures bacteria arrive alive" } },
-        "c4": { "type": "item", "settings": { "text": "FOS prebiotic feeds bacteria on arrival" } }
-      },
-      "block_order": ["c1", "c2", "c3", "c4"]
-    },
-    "brand-story": {
-      "type": "brand-story",
-      "settings": {
-        "heading": "Your biology isn't one-size-fits-all. Your supplements shouldn't be either.",
-        "text": "<p>At BaseCode Health, we build supplements informed by biological diversity research. The supplement industry ignores the fact that biology differs from person to person. We do not. Origin is our first product — and it will not be the last.</p>",
-        "button_text": "About Us",
-        "button_link": "/pages/about",
-        "bg_color": "#FFFFFF",
-        "padding_top": 80,
-        "padding_bottom": 80
-      }
-    },
-    "testimonials": {
-      "type": "testimonials",
-      "settings": {
-        "heading": "Real People. Real Results.",
-        "subheading": "What Our Customers Say",
-        "layout": "carousel",
-        "show_stars": true,
-        "bg_color": "#F5F2EC",
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "enable_animation": true
-      },
-      "blocks": {
-        "r1": { "type": "testimonial", "settings": { "quote": "Finally, a supplement that considers my biology. I noticed a difference within the first week.", "author": "Priya S.", "role": "Toronto, ON", "rating": 5 } },
-        "r2": { "type": "testimonial", "settings": { "quote": "I've tried every probiotic out there. Origin is the first one that actually works for my body.", "author": "Marcus T.", "role": "Dallas, TX", "rating": 5 } },
-        "r3": { "type": "testimonial", "settings": { "quote": "As someone from a South Asian background, this is the first time I feel like a supplement was made with me in mind.", "author": "Anjali R.", "role": "Vancouver, BC", "rating": 5 } }
-      },
-      "block_order": ["r1", "r2", "r3"]
-    },
-    "faq": {
-      "type": "faq-accordion",
-      "settings": {
-        "heading": "Frequently Asked Questions",
-        "bg_color": "#FFFFFF",
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "open_first": true
-      },
-      "blocks": {
-        "q1": { "type": "question", "settings": { "question": "What is Origin?", "answer": "<p>Origin is the first ethnobiotic — a probiotic informed by biological diversity research. 40 billion CFU, 4 targeted strains, MAKTREK Bi-Pass delivery, FOS prebiotic. 60 veggie capsules per bottle (30-day supply).</p>" } },
-        "q2": { "type": "question", "settings": { "question": "How is Origin different from other probiotics?", "answer": "<p>Most probiotics use generic strains for an average person. Origin's strains are selected based on the HELIUS study (2,084 subjects, 6 ethnic groups). MAKTREK acid-protection ensures bacteria arrive alive. FOS prebiotic feeds them on arrival.</p>" } },
-        "q3": { "type": "question", "settings": { "question": "How do I take Origin?", "answer": "<p>Take 2 capsules daily with water. Morning or evening, with or without food. Each bottle is a 30-day supply.</p>" } },
-        "q4": { "type": "question", "settings": { "question": "How much does Origin cost?", "answer": "<p>$34/month with a subscription (15% off). $40 for a one-time purchase. Free shipping on all subscriptions. Cancel anytime.</p>" } },
-        "q5": { "type": "question", "settings": { "question": "What's your return policy?", "answer": "<p>30-day money-back guarantee. If Origin doesn't work for you, email hello@basecodehealth.com for a full refund. No questions asked.</p>" } }
-      },
-      "block_order": ["q1", "q2", "q3", "q4", "q5"]
-    },
-    "newsletter": {
-      "type": "newsletter",
-      "settings": {
-        "heading": "Join the biology-first movement",
-        "text": "Get research updates, product launches, and biology tips. No spam.",
-        "button_text": "Subscribe",
-        "bg_color": "#1C2E23",
-        "text_color": "#F5F2EC",
-        "padding_top": 80,
-        "padding_bottom": 80
-      }
-    }
+    "hero": { "type": "hero-section", "settings": {} },
+    "trust-strip": { "type": "trust-strip", "settings": {} },
+    "journal-strip": { "type": "journal-strip", "settings": {} },
+    "problem": { "type": "problem-section", "settings": {} },
+    "lead-capture-1": { "type": "inline-lead-capture", "settings": { "variant": "dark", "headline": "Get the free research report.", "subtext": "The Biology Gap — 6 pages of published data on why your microbiome changed, and what you can do about it.", "source": "homepage-mid" } },
+    "reviews": { "type": "reviews-section", "settings": {} },
+    "biological-age": { "type": "biological-age-section", "settings": {} },
+    "solution": { "type": "solution-section", "settings": {} },
+    "lead-capture-2": { "type": "inline-lead-capture", "settings": { "variant": "light", "headline": "This research changed everything.", "subtext": "Get the full data behind Origin — free, no commitment, delivered instantly.", "source": "homepage-solution" } },
+    "pillars": { "type": "pillars-section", "settings": {} },
+    "protocol-suite": { "type": "protocol-suite-section", "settings": {} },
+    "lead-capture-3": { "type": "inline-lead-capture", "settings": { "variant": "dark", "headline": "Get the free research report.", "subtext": "The Biology Gap — 6 pages of data behind every formulation decision.", "source": "homepage-protocol" } },
+    "certifications": { "type": "certifications-section", "settings": {} },
+    "formula": { "type": "formula-section", "settings": {} },
+    "risk-reversal": { "type": "risk-reversal-section", "settings": {} },
+    "founder": { "type": "founder-section", "settings": {} },
+    "social-proof": { "type": "social-proof-section", "settings": {} },
+    "faq": { "type": "faq-section", "settings": {} },
+    "waitlist": { "type": "waitlist-section", "settings": {} }
   },
   "order": [
     "hero",
-    "features",
-    "research",
-    "benefits",
-    "mission",
-    "brand-story",
-    "image-banner",
-    "testimonials",
+    "trust-strip",
+    "journal-strip",
+    "problem",
+    "lead-capture-1",
+    "reviews",
+    "biological-age",
+    "solution",
+    "lead-capture-2",
+    "pillars",
+    "protocol-suite",
+    "lead-capture-3",
+    "certifications",
+    "formula",
+    "risk-reversal",
+    "founder",
+    "social-proof",
     "faq",
-    "newsletter"
+    "waitlist"
   ]
 }

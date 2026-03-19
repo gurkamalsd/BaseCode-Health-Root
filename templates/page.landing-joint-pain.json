@@ -1,443 +1,133 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "hero": {
-      "type": "hero",
+    "landing": {
+      "type": "landing-page",
       "settings": {
-        "show_social_proof": true,
-        "social_proof_text": "Backed by biological diversity research",
-        "subtitle": "Joint Pain & Your Microbiome",
-        "heading": "Your joints aren't aging. They're inflamed from the inside.",
-        "text": "Glucosamine treats cartilage. Turmeric masks signals. Fish oil dampens response. None of them ask why your joints are inflamed in the first place. The answer is in your gut: when ancestral bacteria deplete, endotoxins leak through your intestinal wall, enter circulation, and settle in your joints. Origin seals the barrier. The inflammation stops where it starts.",
-        "button_text": "End the Inflammation — $34/mo",
-        "button_link": "/products/origin",
-        "guarantee_text": "30-Day Money-Back Guarantee",
-        "text_align": "left",
-        "overlay_opacity": 55,
-        "height": 100,
-        "mobile_height": 85,
-        "text_color": "#FFFFFF"
-      }
-    },
-    "features-banner": {
-      "type": "features-banner",
-      "settings": {
-        "bg_color": "#F5F2EC",
-        "text_color": "#1C2E23",
-        "icon_color": "#C4783A",
-        "layout": "inline",
-        "desktop_columns": "4",
-        "mobile_layout": "slider",
-        "show_dividers": true,
-        "padding_top": 24,
-        "padding_bottom": 24,
-        "enable_animation": true
+        "symptom_slug": "joint-pain",
+        "eyebrow": "Joint Pain & Your Microbiome",
+        "headline": "Your joints aren't aging. They're inflamed from the inside.",
+        "subheadline": "Glucosamine treats cartilage. Turmeric masks signals. Fish oil dampens response. None of them ask why your joints are inflamed in the first place. The answer is in your gut: when ancestral bacteria deplete, endotoxins leak through your intestinal wall, enter circulation, and settle in your joints. Origin seals the barrier. The inflammation stops where it starts.",
+        "cta_text": "End the Inflammation — $34/mo",
+        "agitate_eyebrow": "Why Glucosamine, Turmeric, and Fish Oil Don't Work",
+        "agitate_headline": "You're fighting downstream. The inflammation starts upstream — in your gut.",
+        "agitate_body": "You wake up stiff. Knees, shoulders, hands — it takes thirty minutes before your body feels like it belongs to you. You've accepted this as normal. It isn't.||Your supplement stack keeps growing. Glucosamine. Turmeric. Fish oil. Collagen. MSM. You're spending $80-150 a month on compounds that address cartilage, pain signals, and inflammatory markers — but never ask why those markers are elevated in the first place. The relief is temporary because the cause is untouched.||And it's getting worse every year. The stiffness lasts longer. The recovery takes more days. New joints start hurting. You're told it's aging, but your parents at your age were squatting in fields, kneading dough for hours, walking miles daily — without a single joint complaint. Something else changed.",
+        "cost_headline": "Joint supplements: $80-150/month fighting symptoms. Origin: $34/month fixing the source.",
+        "cost_body": "The average person with chronic joint inflammation spends $960-1,800 per year stacking glucosamine, turmeric, fish oil, collagen, and OTC anti-inflammatories — none of which address why inflammatory markers are elevated. When the root cause is bacterial endotoxin leakage from a compromised gut barrier, no downstream supplement resolves it. Origin costs $1.13/day and targets the single upstream mechanism. One capsule replaces the stack.",
+        "bridge_headline": "The gut-joint connection: endotoxins leak, joints pay.",
+        "bridge_body": "Your intestinal barrier is maintained by specific bacterial populations — L. acidophilus, L. plantarum, and others that produce tight-junction proteins. When these populations deplete after dietary westernisation, the barrier weakens. Lipopolysaccharides (LPS) — endotoxins from gram-negative bacteria — cross into your bloodstream. Your immune system recognises them as invaders and launches a chronic inflammatory response. CRP rises. IL-6 rises. TNF-alpha rises. Your joints, rich in blood supply and synovial tissue, absorb the damage. Scher et al. demonstrated that patients with inflammatory arthritis show distinct gut microbiome disruption — the joint disease starts in the gut.",
+        "citation": "Thevaranjan et al., Cell Host & Microbe, 2017 · Clairembault et al., Nature Reviews Gastroenterology, 2015 · Scher et al., eLife, 2013",
+        "solution_headline": "Origin seals the gut barrier. LPS drops. Inflammation resolves. Joints recover.",
+        "solution_body": "L. acidophilus restores the tight-junction proteins that seal your intestinal lining — stopping endotoxin leakage at the source. L. plantarum directly reduces inflammatory cytokine production (IL-6, TNF-alpha) that drives joint destruction. B. lactis modulates systemic immune response so your body stops attacking its own tissue. L. paracasei supports regulatory immune pathways that prevent inflammatory cascade escalation. FOS prebiotic feeds all four strains on arrival. MAKTREK ensures they survive stomach acid to reach your gut alive. The inflammation doesn't get masked — it gets resolved.",
+        "lead_headline": "The endotoxin research connecting your gut to your joint pain.",
+        "closing_quote": "Your grandfather worked with his hands until he was eighty. Your grandmother ground spices on a stone slab every morning. They didn't have joint pain at your age — and they never took glucosamine. The difference isn't your joints. It's the microbiome they never lost."
       },
       "blocks": {
-        "badge-1": {
-          "type": "feature",
+        "pathway_1": {
+          "type": "pathway",
           "settings": {
-            "icon": "flask",
-            "text": "Biology-Informed Formula",
-            "subtext": "HELIUS study — 2,084 subjects"
-          }
-        },
-        "badge-2": {
-          "type": "feature",
-          "settings": {
-            "icon": "shield",
-            "text": "MAKTREK Bi-Pass Delivery",
-            "subtext": "Bacteria arrive alive"
-          }
-        },
-        "badge-3": {
-          "type": "feature",
-          "settings": {
-            "icon": "leaf",
-            "text": "Vegan & Clean",
-            "subtext": "HPMC veggie capsule, no gelatin"
-          }
-        },
-        "badge-4": {
-          "type": "feature",
-          "settings": {
-            "icon": "refresh",
-            "text": "30-Day Guarantee",
-            "subtext": "Full refund, no questions asked"
-          }
-        }
-      },
-      "block_order": ["badge-1", "badge-2", "badge-3", "badge-4"]
-    },
-    "rich-text": {
-      "type": "rich-text",
-      "settings": {
-        "bg_color": "#FFFFFF",
-        "text_color": "#1C2E23",
-        "content_width": "medium",
-        "text_align": "left",
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "enable_animation": true
-      },
-      "blocks": {
-        "eyebrow": {
-          "type": "subheading",
-          "settings": {
-            "subheading": "Why Glucosamine, Turmeric, and Fish Oil Don't Work",
-            "subheading_color": "#C4783A"
-          }
-        },
-        "headline": {
-          "type": "heading",
-          "settings": {
-            "heading": "You're fighting downstream. The inflammation starts upstream — in your gut.",
-            "heading_level": "h2",
-            "heading_size": "h2"
-          }
-        },
-        "body": {
-          "type": "text",
-          "settings": {
-            "text": "<p>You wake up stiff. Knees, shoulders, hands — it takes thirty minutes before your body feels like it belongs to you. You've accepted this as normal. It isn't.</p><p>Your supplement stack keeps growing. Glucosamine. Turmeric. Fish oil. Collagen. MSM. You're spending $80-150 a month on compounds that address cartilage, pain signals, and inflammatory markers — but never ask why those markers are elevated in the first place. The relief is temporary because the cause is untouched.</p><p>And it's getting worse every year. The stiffness lasts longer. The recovery takes more days. New joints start hurting. You're told it's aging, but your parents at your age were squatting in fields, kneading dough for hours, walking miles daily — without a single joint complaint. Something else changed.</p>"
-          }
-        },
-        "cost-cta": {
-          "type": "button",
-          "settings": {
-            "button_text": "End the Inflammation — $34/mo",
-            "button_link": "/products/origin",
-            "button_style": "primary"
-          }
-        }
-      },
-      "block_order": ["eyebrow", "headline", "body", "cost-cta"]
-    },
-    "image-with-text": {
-      "type": "image-with-text",
-      "settings": {
-        "bg_color": "#F5F2EC",
-        "text_color": "#1C2E23",
-        "layout": "image_first",
-        "image_width_pct": 50,
-        "text_align": "left",
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "enable_animation": true
-      },
-      "blocks": {
-        "sub": {
-          "type": "subheading",
-          "settings": {
-            "text": "The Science",
-            "color": "#C4783A"
-          }
-        },
-        "head": {
-          "type": "heading",
-          "settings": {
-            "text": "The gut-joint connection: endotoxins leak, joints pay.",
-            "heading_level": "h2",
-            "heading_size": "h2"
-          }
-        },
-        "body": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Your intestinal barrier is maintained by specific bacterial populations — L. acidophilus, L. plantarum, and others that produce tight-junction proteins. When these populations deplete after dietary westernisation, the barrier weakens. Lipopolysaccharides (LPS) — endotoxins from gram-negative bacteria — cross into your bloodstream. Your immune system recognises them as invaders and launches a chronic inflammatory response. CRP rises. IL-6 rises. TNF-alpha rises. Your joints, rich in blood supply and synovial tissue, absorb the damage. Scher et al. demonstrated that patients with inflammatory arthritis show distinct gut microbiome disruption — the joint disease starts in the gut.</p><p><em>Thevaranjan et al., Cell Host &amp; Microbe, 2017 · Scher et al., eLife, 2013</em></p>"
-          }
-        },
-        "btn": {
-          "type": "button",
-          "settings": {
-            "text": "Get Origin — $34/mo",
-            "link": "/products/origin",
-            "style": "primary"
-          }
-        }
-      },
-      "block_order": ["sub", "head", "body", "btn"]
-    },
-    "research-highlight": {
-      "type": "research-highlight",
-      "settings": {
-        "subtitle": "How It Works",
-        "heading": "Three steps from leaky gut to joint recovery.",
-        "bg_color": "#1C2E23",
-        "text_color": "#F5F2EC",
-        "accent_color": "#C4783A",
-        "card_bg_color": "#243D2B",
-        "icon_bg_color": "#C4783A",
-        "columns": "3",
-        "card_style": "vertical",
-        "button_text": "Get Origin — $34/mo",
-        "button_link": "/products/origin",
-        "button_style": "primary",
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "enable_animation": true
-      },
-      "blocks": {
-        "step-1": {
-          "type": "stat",
-          "settings": {
-            "icon_style": "number",
-            "stat": "01",
+            "step": "01 — Barrier Breach",
             "title": "Your gut wall develops gaps",
-            "text": "Ancestral bacteria that produce tight-junction proteins — the biological cement between intestinal cells — deplete after dietary westernisation. Microscopic gaps form in the intestinal lining. Your gut becomes permeable to compounds that should never enter your bloodstream.",
-            "source": "Step 01 — Barrier Breach"
+            "body": "Ancestral bacteria that produce tight-junction proteins — the biological cement between intestinal cells — deplete after dietary westernisation. Microscopic gaps form in the intestinal lining. Your gut becomes permeable to compounds that should never enter your bloodstream."
           }
         },
-        "step-2": {
-          "type": "stat",
+        "pathway_2": {
+          "type": "pathway",
           "settings": {
-            "icon_style": "number",
-            "stat": "02",
+            "step": "02 — Endotoxin Flood",
             "title": "LPS enters circulation and targets joints",
-            "text": "Bacterial lipopolysaccharides cross the weakened barrier into your blood. Your immune system identifies them as threats and launches inflammatory cascades — CRP, IL-6, TNF-alpha. These inflammatory signals concentrate in synovial tissue. Your joints swell, stiffen, and degrade.",
-            "source": "Step 02 — Endotoxin Flood"
+            "body": "Bacterial lipopolysaccharides cross the weakened barrier into your blood. Your immune system identifies them as threats and launches inflammatory cascades — CRP, IL-6, TNF-alpha. These inflammatory signals concentrate in synovial tissue. Your joints swell, stiffen, and degrade."
           }
         },
-        "step-3": {
-          "type": "stat",
+        "pathway_3": {
+          "type": "pathway",
           "settings": {
-            "icon_style": "number",
-            "stat": "03",
+            "step": "03 — Origin Seals the Source",
             "title": "Restore the barrier, resolve the inflammation",
-            "text": "L. acidophilus rebuilds tight junctions. L. plantarum reduces cytokine production at the gut level. LPS leakage decreases. Inflammatory markers drop systemically. Joint pain resolves because the upstream cause — not the downstream symptom — has been addressed.",
-            "source": "Step 03 — Origin Seals the Source"
-          }
-        }
-      },
-      "block_order": ["step-1", "step-2", "step-3"]
-    },
-    "benefits-product": {
-      "type": "benefits-product",
-      "settings": {
-        "heading": "What recovery actually feels like.",
-        "subheading": "Origin Results",
-        "bg_color": "#C4783A",
-        "text_color": "#FFFFFF",
-        "accent_color": "#1C2E23",
-        "button_text": "Get Origin — $34/mo",
-        "button_link": "/products/origin",
-        "button_style": "primary",
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "enable_animation": true
-      },
-      "blocks": {
-        "benefit-1": {
-          "type": "benefit",
-          "settings": {
-            "icon": "check",
-            "heading": "Mornings without stiffness",
-            "text": "That thirty-minute warm-up before your body cooperates? That's inflammatory fluid pooling in your joints overnight. When endotoxin-driven inflammation drops, you wake up and move — the way you used to."
+            "body": "L. acidophilus rebuilds tight junctions. L. plantarum reduces cytokine production at the gut level. LPS leakage decreases. Inflammatory markers drop systemically. Joint pain resolves because the upstream cause — not the downstream symptom — has been addressed."
           }
         },
-        "benefit-2": {
-          "type": "benefit",
+        "outcome_1": {
+          "type": "dream_outcome",
           "settings": {
-            "icon": "heart",
-            "heading": "Exercise without paying for it the next day",
-            "text": "A workout shouldn't cost you two days of recovery. When systemic inflammation normalizes, your joints handle load the way they're designed to. You train, you recover, you go again."
+            "title": "Mornings without stiffness",
+            "body": "That thirty-minute warm-up before your body cooperates? That's inflammatory fluid pooling in your joints overnight. When endotoxin-driven inflammation drops, you wake up and move — the way you used to."
           }
         },
-        "benefit-3": {
-          "type": "benefit",
+        "outcome_2": {
+          "type": "dream_outcome",
           "settings": {
-            "icon": "refresh",
-            "heading": "Stop the supplement spiral",
-            "text": "Glucosamine, turmeric, fish oil, collagen, MSM, boswellia — your cabinet looks like a pharmacy and nothing works long-term. Origin targets the single upstream cause. One product replaces the stack."
+            "title": "Exercise without paying for it the next day",
+            "body": "A workout shouldn't cost you two days of recovery. When systemic inflammation normalizes, your joints handle load the way they're designed to. You train, you recover, you go again."
           }
         },
-        "benefit-4": {
-          "type": "benefit",
+        "outcome_3": {
+          "type": "dream_outcome",
           "settings": {
-            "icon": "star",
-            "heading": "Feel your actual age",
-            "text": "You're not eighty. You shouldn't move like it. When gut-driven inflammation resolves, the gap between your calendar age and how your body feels closes fast. Your joints stop lying about how old you are."
+            "title": "Stop the supplement spiral",
+            "body": "Glucosamine, turmeric, fish oil, collagen, MSM, boswellia — your cabinet looks like a pharmacy and nothing works long-term. Origin targets the single upstream cause. One product replaces the stack."
           }
         },
-        "benefit-5": {
-          "type": "benefit",
+        "outcome_4": {
+          "type": "dream_outcome",
           "settings": {
-            "icon": "flask",
-            "heading": "40 Billion CFU, 4 targeted strains",
-            "text": "MAKTREK Bi-Pass delivery ensures the bacteria that seal your gut barrier actually survive stomach acid and arrive alive."
+            "title": "Feel your actual age",
+            "body": "You're not eighty. You shouldn't move like it. When gut-driven inflammation resolves, the gap between your calendar age and how your body feels closes fast. Your joints stop lying about how old you are."
           }
         },
-        "benefit-6": {
-          "type": "benefit",
-          "settings": {
-            "icon": "shield",
-            "heading": "30-Day Money-Back Guarantee",
-            "text": "Try Origin for 30 days. If the inflammation doesn't drop, we'll refund you in full. No questions asked."
-          }
-        }
-      },
-      "block_order": ["benefit-1", "benefit-2", "benefit-3", "benefit-4", "benefit-5", "benefit-6"]
-    },
-    "image-banner": {
-      "type": "image-banner",
-      "settings": {
-        "heading": "Your grandfather worked with his hands until he was eighty. The difference isn't your joints. It's the microbiome he never lost.",
-        "heading_size": "text-3xl",
-        "button_text": "Get Origin — $34/mo",
-        "button_link": "/products/origin",
-        "button_style": "white",
-        "overlay_color": "#1C2E23",
-        "overlay_opacity": 65,
-        "text_color": "#FFFFFF",
-        "text_align": "center",
-        "height": 400,
-        "mobile_height": 300,
-        "full_width": true,
-        "enable_animation": true
-      }
-    },
-    "testimonials": {
-      "type": "testimonials",
-      "settings": {
-        "heading": "Real results from real people.",
-        "subheading": "Customer Stories",
-        "bg_color": "#FFFFFF",
-        "layout": "carousel",
-        "card_style": "card",
-        "show_stars": true,
-        "accent_color": "#f59e0b",
-        "auto_play": true,
-        "auto_play_speed": 6,
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "enable_animation": true
-      },
-      "blocks": {
-        "review-1": {
-          "type": "testimonial",
+        "review_1": {
+          "type": "review",
           "settings": {
             "quote": "My knees were so bad I stopped playing basketball at 34. My dad played cricket until he was 60 back in Lahore. Three weeks on Origin and the morning stiffness is gone. I played a full game last weekend — no swelling the next day.",
-            "author": "Tariq A.",
-            "role": "Chicago, IL",
-            "rating": 5
+            "name": "Tariq A. — Chicago, IL"
           }
         },
-        "review-2": {
-          "type": "testimonial",
+        "review_2": {
+          "type": "review",
           "settings": {
             "quote": "I was spending $130 a month on glucosamine, turmeric, and fish oil. My physiotherapist suggested it might be gut-related inflammation. Started Origin, dropped everything else. Four weeks in and my hands don't ache when I wake up anymore.",
-            "author": "Nalini V.",
-            "role": "Scarborough, ON",
-            "rating": 5
+            "name": "Nalini V. — Scarborough, ON"
           }
         },
-        "review-3": {
-          "type": "testimonial",
+        "review_3": {
+          "type": "review",
           "settings": {
             "quote": "Doctors told me it was early arthritis. I'm 29. My grandmother in Lagos still pounds yam every morning. I knew something else was wrong. The research report explained it — endotoxins. Two weeks on Origin and the swelling in my wrists dropped noticeably.",
-            "author": "Chiamaka O.",
-            "role": "Atlanta, GA",
-            "rating": 5
+            "name": "Chiamaka O. — Atlanta, GA"
           }
         },
-        "review-4": {
-          "type": "testimonial",
+        "review_4": {
+          "type": "review",
           "settings": {
             "quote": "I emigrated from Mexico City twelve years ago. Joint pain started around year three. Tried everything — cortisone shots, supplements, even acupuncture. Origin is the first thing that actually made the pain stop coming back. My wife started taking it too.",
-            "author": "Marco E.",
-            "role": "Phoenix, AZ",
-            "rating": 5
+            "name": "Marco E. — Phoenix, AZ"
           }
         }
       },
-      "block_order": ["review-1", "review-2", "review-3", "review-4"]
-    },
-    "faq-accordion": {
-      "type": "faq-accordion",
-      "settings": {
-        "heading": "Frequently Asked Questions",
-        "subheading": "Joint Pain & Origin",
-        "bg_color": "#F5F2EC",
-        "text_color": "#1C2E23",
-        "accent_color": "#C4783A",
-        "accordion_style": "bordered",
-        "icon_style": "plus",
-        "open_first": true,
-        "content_width": "narrow",
-        "heading_align": "center",
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "enable_animation": true
-      },
-      "blocks": {
-        "faq-1": {
-          "type": "question",
-          "settings": {
-            "question": "How does a probiotic help with joint pain?",
-            "answer": "<p>Chronic joint inflammation is often driven by bacterial endotoxins (LPS) leaking through a compromised gut barrier into your bloodstream. Your immune system treats these as threats, triggering systemic inflammatory cascades — CRP, IL-6, TNF-alpha — that concentrate in synovial tissue. Origin's strains restore the gut barrier integrity that stops this leakage at the source. When LPS stops entering circulation, the downstream inflammatory load on your joints drops.</p>"
-          }
-        },
-        "faq-2": {
-          "type": "question",
-          "settings": {
-            "question": "How long before I notice a difference in joint stiffness?",
-            "answer": "<p>Most people notice a reduction in morning stiffness within 2-4 weeks. Full results — including reduced exercise recovery time and lower overall inflammation — typically appear within 6-8 weeks as the gut barrier strengthens and bacterial populations stabilize. Microbiome restoration is a progressive process, not an overnight fix.</p>"
-          }
-        },
-        "faq-3": {
-          "type": "question",
-          "settings": {
-            "question": "Can I take Origin alongside glucosamine or turmeric?",
-            "answer": "<p>Yes. Origin addresses the upstream cause — gut barrier permeability and systemic endotoxemia — while supplements like glucosamine address cartilage and turmeric dampens inflammatory signals. They work through different mechanisms. Many customers start with both, then reduce or eliminate the downstream supplements as the gut barrier recovers and their inflammation baseline drops.</p>"
-          }
-        },
-        "faq-4": {
-          "type": "question",
-          "settings": {
-            "question": "Why does joint pain get worse after immigration or dietary change?",
-            "answer": "<p>The HELIUS study (2,084 subjects, 6 ethnic groups) demonstrated that ethnicity determines microbiome composition more than diet, age, or medical history. When you adopt a Western diet, the specific bacterial populations that produce tight-junction proteins — the compounds that seal your gut barrier — deplete within one generation. That barrier breach is the mechanism behind the inflammatory conditions that emerge years after migration, including joint inflammation that didn't exist in your parents at your age.</p>"
-          }
-        },
-        "faq-5": {
-          "type": "question",
-          "settings": {
-            "question": "What makes Origin different from other probiotics for inflammation?",
-            "answer": "<p>Most probiotics use generic strains selected for a hypothetical average person. Origin's four strains — L. acidophilus, B. lactis, L. plantarum, and L. paracasei — are specifically chosen for their documented roles in gut barrier maintenance and anti-inflammatory cytokine reduction. MAKTREK Bi-Pass delivery ensures they survive stomach acid and arrive in your gut alive. Dead bacteria can't seal anything. FOS prebiotic feeds them on arrival so they colonize rather than pass through.</p>"
-          }
-        }
-      },
-      "block_order": ["faq-1", "faq-2", "faq-3", "faq-4", "faq-5"]
-    },
-    "newsletter": {
-      "type": "newsletter",
-      "settings": {
-        "heading": "The endotoxin research connecting your gut to your joint pain.",
-        "text": "Get the free Biology Gap report — plus research updates, product news, and biology-first insights. No spam.",
-        "button_text": "Send Me the Report",
-        "button_style": "white",
-        "form_layout": "stacked",
-        "show_name_field": false,
-        "success_heading": "You're in.",
-        "success_text": "Check your inbox — the report is on its way.",
-        "bg_color": "#1C2E23",
-        "text_color": "#F5F2EC",
-        "content_width": "narrow",
-        "text_align": "center",
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "enable_animation": true
-      }
+      "block_order": [
+        "pathway_1",
+        "pathway_2",
+        "pathway_3",
+        "outcome_1",
+        "outcome_2",
+        "outcome_3",
+        "outcome_4",
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4"
+      ]
     }
   },
   "order": [
-    "hero",
-    "features-banner",
-    "rich-text",
-    "image-with-text",
-    "research-highlight",
-    "benefits-product",
-    "image-banner",
-    "testimonials",
-    "faq-accordion",
-    "newsletter"
+    "landing"
   ]
 }

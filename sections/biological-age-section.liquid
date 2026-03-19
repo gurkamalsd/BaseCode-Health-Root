@@ -1,0 +1,89 @@
+<section id="aging" class="py-14 md:py-20 px-6 md:px-20" style="background: #1C2E23;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div class="text-center mb-16 reveal-hidden">
+      <p class="font-mono-spec text-11 uppercase mb-5" style="color: #C4783A; letter-spacing: 0.2em;">
+        Why You Feel Older Than You Are
+      </p>
+      <h2 class="font-heading text-32 md:text-48 font-medium mb-5" style="color: #F5F2EC; line-height: 1.1;">
+        Your body is aging faster than it should.<br>Your microbiome holds <em class="italic" style="color: #D4A97A;">the answer.</em>
+      </h2>
+      <p class="font-heading text-18 font-light mx-auto" style="color: rgba(245,242,236,0.60); max-width: 640px; line-height: 1.7;">
+        The bloating at 30. The fatigue at 35. The inflammation that won't resolve.
+        Your mother didn't have these symptoms at your age — because her microbiome
+        was intact. Three biological pathways drive it all. All three start in the gut.
+        All three are addressable.
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-6 mb-16 stagger-children">
+      {%- assign bio_titles = "End Chronic Inflammation|Restore All-Day Energy|Reset Your Metabolism" | split: "|" -%}
+      {%- assign bio_bodies = "Joint pain, brain fog, fatigue that won't lift — no matter how much you rest. When key bacteria are disrupted, your intestinal barrier weakens and endotoxins enter circulation, triggering whole-body inflammation. Origin's L. acidophilus and L. plantarum restore barrier integrity and reduce inflammation at the source — so you wake up feeling clear and light again.|Sleep 8 hours and still drag through the morning? Without the right bacteria, mitochondrial recycling stalls and cellular energy production drops. Origin's L. plantarum TWK10 showed measurable improvement in grip strength and endurance in 6-week clinical trials. B. lactis enhances immune cell activity that supports recovery. Feel the difference from day one.|Weight that won't budge despite eating right. Metabolic markers that look like someone a decade older. Diaspora communities develop type 2 diabetes at younger ages and lower BMIs — this isn't just lifestyle, it's the microbiome-muscle axis. Origin's L. paracasei modulates immune response while the full synbiotic formula supports metabolic balance and healthy weight management." | split: "|" -%}
+      {%- assign bio_stats = "Key protective bacteria decline 40–60% after dietary westernisation|L. plantarum improved endurance in 6-week clinical trials|T2D onset 5–10 years earlier in first-generation populations at equivalent BMI" | split: "|" -%}
+      {%- assign bio_cites = "Thevaranjan et al., Cell Host & Microbe, 2017|Huang et al., Nutrients, 2019|Ntuk et al., Diabetes Care, 2014" | split: "|" -%}
+      {%- assign bio_dois = "https://doi.org/10.1016/j.chom.2017.03.002|https://doi.org/10.3390/nu11020353|https://doi.org/10.2337/dc13-2966" | split: "|" -%}
+
+      {%- for title in bio_titles -%}
+        <div
+          class="rounded-2xl p-8 transition reveal-hidden card-hover"
+          style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.10); border-left: 4px solid #C4783A;"
+        >
+          <div class="mb-5" style="color: #C4783A;">
+            {%- case forloop.index0 -%}
+              {%- when 0 -%}
+                <!-- Flame icon -->
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+              {%- when 1 -%}
+                <!-- Battery icon -->
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="18" height="12" rx="2" ry="2"/><line x1="23" y1="13" x2="23" y2="11"/></svg>
+              {%- when 2 -%}
+                <!-- Activity icon -->
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            {%- endcase -%}
+          </div>
+          <h3 class="font-heading text-20 font-medium mb-4" style="color: #F5F2EC;">{{ title }}</h3>
+          <p class="font-heading text-15 font-light mb-6" style="color: rgba(245,242,236,0.60); line-height: 1.75;">
+            {{ bio_bodies[forloop.index0] }}
+          </p>
+          <div class="pt-5" style="border-top: 1px solid rgba(255,255,255,0.08);">
+            <p class="font-heading text-14 font-medium mb-1" style="color: #C4783A;">{{ bio_stats[forloop.index0] }}</p>
+            <p class="font-mono-spec text-11 mb-1" style="color: rgba(245,242,236,0.35);">{{ bio_cites[forloop.index0] }}</p>
+            <a href="{{ bio_dois[forloop.index0] }}" target="_blank" rel="noopener noreferrer" class="font-mono-spec text-11 inline-block py-1.5 transition hover:underline" style="color: #C4783A;">
+              View Study →
+            </a>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div style="max-width: 760px; margin: 0 auto;" class="text-center reveal-hidden">
+      <blockquote>
+        <p class="font-display text-22 md:text-28 font-normal italic mb-4" style="color: rgba(245,242,236,0.85); line-height: 1.5;">
+          "The bloating at 30. The fatigue at 35. The metabolic markers that look
+          like someone a decade older. This isn't bad luck — it's a biological
+          shift driven by microbiome disruption. And if your biology doesn't match
+          what generic supplements were designed for, the gap opens earlier and wider."
+        </p>
+      </blockquote>
+      <p class="font-mono-spec text-11" style="color: rgba(245,242,236,0.35);">
+        Three pathways. One ethnobiotic. Origin.
+      </p>
+    </div>
+
+    <div class="text-center mt-14 reveal-hidden">
+      <a href="/pages/quiz" class="btn btn--primary inline-block">
+        Discover Your Score — Free 2-Minute Quiz
+      </a>
+      <p class="font-heading text-13 font-light mt-3" style="color: rgba(245,242,236,0.40);">
+        Seven questions. Instant personalized results. Backed by published research.
+      </p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Biological Age",
+  "class": "biological-age-section",
+  "settings": []
+}
+{% endschema %}

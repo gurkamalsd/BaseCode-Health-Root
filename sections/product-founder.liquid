@@ -1,0 +1,44 @@
+<section class="py-16 px-6 md:px-20" style="background: #F5F2EC;">
+  <div style="max-width: 900px; margin: 0 auto;" class="reveal-hidden">
+    <div class="flex flex-col md:flex-row gap-8 items-center">
+      <!-- Photo -->
+      <div class="shrink-0" style="width: 200px; height: 200px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(196,120,58,0.25);">
+        {%- if section.settings.founder_image != blank -%}
+          <img src="{{ section.settings.founder_image | image_url: width: 400 }}" alt="Gurkamal, Founder" style="width: 100%; height: 100%; object-fit: cover;">
+        {%- else -%}
+          <div style="width: 100%; height: 100%; background: #1C2E23; display: flex; align-items: center; justify-content: center;">
+            <span class="font-heading text-36" style="color: #C4783A;">G</span>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Text -->
+      <div>
+        <p class="font-mono-spec text-11 uppercase mb-3" style="color: #C4783A; letter-spacing: 0.15em;">From the Founder</p>
+        <p class="font-display text-22 italic mb-4" style="color: #1C2E23; line-height: 1.4;">
+          &ldquo;I built Origin because the supplement industry ignored us. Generic probiotics were never tested on people who look like us, eat like us, or carry the microbiome we carry.&rdquo;
+        </p>
+        <p class="font-heading text-14 font-light mb-4" style="color: #4A5550; line-height: 1.7;">
+          When I discovered that ethnicity determines your gut bacteria more than diet, age, sex, or medical history — I knew something was broken. Every probiotic on the shelf was formulated for a population that doesn't include most of us. That's why I started BaseCode Health and built Origin from the ground up.
+        </p>
+        <p class="font-heading text-14 font-medium" style="color: #1C2E23;">
+          — Gurkamal, Founder · BaseCode Health
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product Founder",
+  "class": "product-founder-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "founder_image",
+      "label": "Founder Photo"
+    }
+  ]
+}
+{% endschema %}

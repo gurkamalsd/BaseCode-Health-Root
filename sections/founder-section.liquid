@@ -1,0 +1,100 @@
+<section id="story" class="flex flex-col md:flex-row w-full">
+  <!-- Left – founder portrait -->
+  <div class="w-full md:w-55 relative overflow-hidden flex items-center" style="min-height: 360px; aspect-ratio: 3/4;">
+    {%- if section.settings.founder_image != blank -%}
+      <img
+        src="{{ section.settings.founder_image | image_url: width: 1200 }}"
+        alt="Gurkamal, Founder of BaseCode"
+        width="848" height="1264" loading="lazy"
+        class="absolute inset-0 w-full h-full"
+        style="object-fit: cover; object-position: top;">
+    {%- else -%}
+      <div class="absolute inset-0 w-full h-full" style="background: linear-gradient(180deg, #162a1e, #1C2E23);"></div>
+    {%- endif -%}
+    <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(28,46,35,0.80), transparent);"></div>
+    <div class="relative px-10 md:px-20 py-20 mt-auto" style="z-index: 2;">
+      <p class="font-mono-spec text-11 uppercase mb-6" style="color: rgba(196,120,58,0.60); letter-spacing: 0.2em;">
+        03 — Founder
+      </p>
+      <p class="font-heading text-14 font-medium mb-2" style="color: rgba(245,242,236,0.50);">
+        Gurkamal
+      </p>
+      <p class="font-heading text-13 font-light" style="color: rgba(245,242,236,0.35); line-height: 1.7;">
+        Founder & Formulation Researcher · BaseCode Health
+      </p>
+    </div>
+  </div>
+
+  <!-- Right – manifesto -->
+  <div class="w-full md:w-45 px-8 md:px-20 py-16 md:py-20 reveal-hidden" style="background: #F5F2EC;">
+    <p class="font-display italic mb-10" style="color: #1C2E23; font-size: 30px; line-height: 1.3;">
+      "I built the supplement I couldn't find anywhere."
+    </p>
+
+    <div class="font-heading text-16 md:text-17 font-light space-y-6" style="color: #4A5550; line-height: 1.9;">
+      <p>
+        My mom cooked every night. Not quickly, not conveniently. The kind of cooking that took hours
+        — the fermented sour of fresh dahi sitting on the counter, lentils releasing that sweet nutty
+        smell that meant dinner was almost ready, vegetables chopped from scratch for even the most
+        ordinary Tuesday. Food was not fuel in our house. It was family. It was health. It was the
+        whole thing.
+      </p>
+      <p>
+        I didn't understand what I had until I left for university and slowly, without noticing,
+        stopped having it.
+      </p>
+      <p>
+        The supplements I tried didn't work. And when I started reading the research, I understood
+        why. Most probiotic bacteria aren't engineered to survive stomach acid. The
+        number on the bottle — 10 billion, 30 billion, 50 billion — is measured at manufacture,
+        not at delivery. Without acid protection, you're paying for a number, not for results.
+      </p>
+      <p>
+        When I found MAKTREK — a marine polysaccharide shield that actually protects bacteria
+        through gastric transit — everything changed. Pair that with a prebiotic that feeds
+        them on arrival, and you have something that actually works. Not a marketing claim.
+        A delivery system.
+      </p>
+      <p>
+        Then I read the HELIUS study — 2,084 people, 6 ethnic groups — and something clicked.
+        Your heritage shapes your microbiome more than diet, age, or lifestyle combined. The problem
+        isn't generic. It's ancestry-specific. The biological shift that hits diaspora communities isn't
+        the same disruption everyone else faces. But every probiotic on the market is built as if
+        it is. Seed built for Silicon Valley. I built for the world — one formula for every multicultural community, because the ancestral disruption pattern is universal.
+      </p>
+      <p>
+        I am a wrestler and an avid lifter. I think about my body for a living. When my system is
+        underperforming, I find out why. The science on this is published. The need exists. The
+        population exists. Nobody built the ethnobiotic that solved both the ancestral disruption
+        problem and the delivery problem. Until now.
+      </p>
+    </div>
+
+    <p class="font-display italic mt-8 mb-8 pl-6" style="color: #C4783A; border-left: 3px solid #C4783A; font-size: 22px; line-height: 1.4;">
+      "I have a seven-month-old daughter. There are things I want to understand about my own biology before they become questions about hers."
+    </p>
+
+    <p class="font-display italic mt-10 mb-6" style="color: #C4783A; font-size: 18px;">
+      "Your biology remembers.<br>
+      That's why we built Origin."
+    </p>
+
+    <p class="font-mono-spec text-13 mb-8" style="color: #8A9490;">
+      — Gurkamal, Founder · BaseCode
+    </p>
+
+    <a href="/pages/free-report" class="inline-block font-heading text-15 font-medium py-3 transition hover:underline" style="color: #C4783A;">
+      Read the research that started it all →
+    </a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Founder",
+  "class": "founder-section",
+  "settings": [
+    { "type": "image_picker", "id": "founder_image", "label": "Founder Photo" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,91 @@
+<section id="science" class="py-14 md:py-20 px-6 md:px-20" style="background: #F5F2EC;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <p class="font-mono-spec text-11 uppercase text-center mb-4" style="color: #C4783A; letter-spacing: 0.2em;">Why You Feel This Way</p>
+
+    <!-- Row 1: Depletion -->
+    <div class="flex flex-col md:flex-row gap-10 md:gap-16 items-center mb-16 reveal-hidden">
+      <div class="flex-1">
+        <p class="font-mono-spec text-10 uppercase mb-3" style="color: #C4783A; letter-spacing: 0.15em;">01 — The Biological Shift</p>
+        <h2 class="font-heading text-28 md:text-36 font-medium mb-4" style="color: #1C2E23; line-height: 1.2;">
+          Your gut remembers a biology that modern life erased.
+        </h2>
+        <p class="font-heading text-15 font-light mb-4" style="color: #4A5550; line-height: 1.7;">
+          The HELIUS study — 2,084 subjects, six ethnic groups — found that your biology determines your microbiome more than diet, age, sex, or medical history combined. Not lifestyle. Not choices. Your biological baseline. The supplement industry has ignored this for decades.
+        </p>
+        <p class="font-heading text-15 font-light mb-4" style="color: #4A5550; line-height: 1.7;">
+          When your environment changed — immigration, processed food, antibiotics, stress — the bacteria your ancestors cultivated over thousands of years through fermented foods, soil exposure, and traditional diets collapsed within a single generation. That's why you're bloated after meals your mother never struggled with. That's why you're exhausted at 30 when your grandmother had boundless energy at 50.
+        </p>
+        <p class="font-mono-spec text-10 mt-4" style="color: #8A9490;">
+          Deschasaux et al., Nature Medicine, 2018. HELIUS Cohort. n = 2,084.
+        </p>
+      </div>
+      <div class="flex-1 rounded-2xl overflow-hidden img-hover-scale">
+        {%- if section.settings.depletion_image != blank -%}
+          <img src="{{ section.settings.depletion_image | image_url: width: 600 }}" alt="Microbiome depletion research" loading="lazy" class="w-full">
+        {%- else -%}
+          <div class="w-full flex items-center justify-center" style="aspect-ratio: 4/3; background: linear-gradient(135deg, #1C2E23, #2a4435); border-radius: 16px;">
+            <div class="text-center px-8">
+              <p class="font-display text-48" style="color: rgba(196,120,58,0.3);">2,084</p>
+              <p class="font-mono-spec text-11 uppercase mt-2" style="color: rgba(245,242,236,0.4); letter-spacing: 0.15em;">Subjects · 6 Ethnic Groups</p>
+              <p class="font-heading text-14 mt-3" style="color: rgba(245,242,236,0.25);">HELIUS Study, 2018</p>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <!-- Row 2: Delivery -->
+    <div class="flex flex-col md:flex-row-reverse gap-10 md:gap-16 items-center reveal-hidden">
+      <div class="flex-1">
+        <p class="font-mono-spec text-10 uppercase mb-3" style="color: #C4783A; letter-spacing: 0.15em;">02 — The Delivery Problem</p>
+        <h2 class="font-heading text-28 md:text-36 font-medium mb-4" style="color: #1C2E23; line-height: 1.2;">
+          Most probiotics weren't built to survive the trip.
+        </h2>
+        <p class="font-heading text-15 font-light mb-4" style="color: #4A5550; line-height: 1.7;">
+          Your stomach acid (pH 1.5-3.5) destroys unprotected bacteria on contact. The "50 billion CFU" on most labels? Measured at manufacture, not at delivery. By the time those bacteria reach your intestine — where they actually work — most are already gone. That's why Origin uses MAKTREK Bi-Pass Technology: a marine polysaccharide shield that protects every strain through gastric transit and releases them alive in your intestine. Alive on arrival. Fed on impact.
+        </p>
+        <p class="font-mono-spec text-10 mt-4" style="color: #8A9490;">
+          Govender et al., AAPS PharmSciTech, 2014. Probiotic survivability review.
+        </p>
+      </div>
+      <div class="flex-1 rounded-2xl overflow-hidden img-hover-scale">
+        {%- if section.settings.delivery_image != blank -%}
+          <img src="{{ section.settings.delivery_image | image_url: width: 600 }}" alt="Probiotic delivery problem" loading="lazy" class="w-full">
+        {%- else -%}
+          <div class="w-full flex items-center justify-center" style="aspect-ratio: 4/3; background: linear-gradient(135deg, #1C2E23, #2a4435); border-radius: 16px;">
+            <div class="text-center px-8">
+              <p class="font-display text-36" style="color: rgba(196,120,58,0.3);">MAKTREK</p>
+              <p class="font-mono-spec text-11 uppercase mt-2" style="color: rgba(245,242,236,0.4); letter-spacing: 0.15em;">Acid-Protected Delivery</p>
+              <p class="font-heading text-14 mt-3" style="color: rgba(245,242,236,0.25);">Alive on Arrival</p>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="text-center mt-12">
+      <a href="/pages/free-report" class="font-heading text-15 font-medium transition" style="color: #C4783A;">
+        See what the research says about your biology — free report →
+      </a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Problem Section",
+  "class": "problem-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "depletion_image",
+      "label": "Depletion Problem Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "delivery_image",
+      "label": "Delivery Problem Image"
+    }
+  ]
+}
+{% endschema %}
