@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -7,13 +16,13 @@
         "social_proof_text": "Backed by biological diversity research",
         "subtitle": "The Future of Supplements",
         "heading": "Your biology is unique.",
-        "text": "Origin is the first probiotic informed by biological diversity research. 40 billion CFU. 4 targeted strains. MAKTREK acid-protection delivery.",
+        "text": "<p>Origin is the first probiotic informed by biological diversity research. 40 billion CFU. 4 targeted strains. MAKTREK acid-protection delivery.</p>",
         "button_text": "Discover Origin",
         "button_link": "/products/origin",
         "guarantee_text": "30-Day Money-Back Guarantee",
         "text_align": "left",
-        "height": "90vh",
-        "mobile_height": "85vh",
+        "height": 90,
+        "mobile_height": 85,
         "overlay_opacity": 55,
         "text_color": "#FFFFFF"
       }
@@ -139,7 +148,7 @@
       "type": "brand-story",
       "settings": {
         "heading": "Your biology isn't one-size-fits-all. Your supplements shouldn't be either.",
-        "text": "At BaseCode Health, we build supplements informed by biological diversity research. The supplement industry ignores the fact that biology differs from person to person. We do not. Origin is our first product — and it will not be the last.",
+        "text": "<p>At BaseCode Health, we build supplements informed by biological diversity research. The supplement industry ignores the fact that biology differs from person to person. We do not. Origin is our first product — and it will not be the last.</p>",
         "button_text": "About Us",
         "button_link": "/pages/about",
         "bg_color": "#FFFFFF",
