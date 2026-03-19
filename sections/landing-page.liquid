@@ -1,3 +1,4 @@
+{%- comment -%}BaseCode Root - landing-page{%- endcomment -%}
 <!-- ═══════════════════════════════════════════════════
      Landing Page Section — Ultimate Conversion Template
      Hormozi-style dream outcome selling + Seed/Thorne aesthetic
@@ -9,12 +10,66 @@
 
 {%- assign symptom = section.settings.symptom_slug | default: "gut-health" -%}
 
+{%- comment -%} ── Color settings with RGB extraction ── {%- endcomment -%}
+{%- assign primary_dark = section.settings.primary_dark | default: "#1C2E23" -%}
+{%- assign accent       = section.settings.accent       | default: "#C4783A" -%}
+{%- assign light_bg     = section.settings.light_bg     | default: "#F5F2EC" -%}
+{%- assign card_bg      = section.settings.card_bg      | default: "#EDE8DF" -%}
+{%- assign text_dark    = section.settings.text_dark    | default: "#1C2E23" -%}
+{%- assign text_body    = section.settings.text_body    | default: "#4A5550" -%}
+{%- assign text_muted   = section.settings.text_muted   | default: "#8A9490" -%}
+
+{%- comment -%} Extract RGB channels for rgba() usage {%- endcomment -%}
+{%- assign primary_dark_r = primary_dark | color_extract: 'red'   -%}
+{%- assign primary_dark_g = primary_dark | color_extract: 'green' -%}
+{%- assign primary_dark_b = primary_dark | color_extract: 'blue'  -%}
+
+{%- assign accent_r = accent | color_extract: 'red'   -%}
+{%- assign accent_g = accent | color_extract: 'green' -%}
+{%- assign accent_b = accent | color_extract: 'blue'  -%}
+
+{%- assign light_bg_r = light_bg | color_extract: 'red'   -%}
+{%- assign light_bg_g = light_bg | color_extract: 'green' -%}
+{%- assign light_bg_b = light_bg | color_extract: 'blue'  -%}
+
+{%- comment -%} ── Product link resolution ── {%- endcomment -%}
+{%- if section.settings.product != blank -%}
+  {%- assign product_url = section.settings.product.url -%}
+{%- elsif section.settings.product_link != blank -%}
+  {%- assign product_url = section.settings.product_link -%}
+{%- else -%}
+  {%- assign product_url = "/products/origin" -%}
+{%- endif -%}
+
+{%- assign subscribe_price  = section.settings.subscribe_price  | default: "$34/mo" -%}
+{%- assign onetime_price    = section.settings.onetime_price    | default: "$40" -%}
+{%- assign discount_code    = section.settings.discount_code    | default: "FOUNDER20" -%}
+{%- assign discount_percent = section.settings.discount_percent | default: "20%" -%}
+
+{%- comment -%} ── Section visibility ── {%- endcomment -%}
+{%- assign show_urgency_bar  = section.settings.show_urgency_bar  -%}
+{%- assign show_trust_strip  = section.settings.show_trust_strip  -%}
+{%- assign show_ingredients  = section.settings.show_ingredients  -%}
+{%- assign show_comparison   = section.settings.show_comparison   -%}
+{%- assign show_faq          = section.settings.show_faq          -%}
+{%- assign show_lead_capture = section.settings.show_lead_capture -%}
+
+{%- comment -%} ── Padding ── {%- endcomment -%}
+{%- assign pt = section.settings.padding_top    | default: 0 -%}
+{%- assign pb = section.settings.padding_bottom | default: 0 -%}
+
+<div style="padding-top: {{ pt }}px; padding-bottom: {{ pb }}px;">
+
 <!-- ═══ URGENCY BAR ═══ -->
-<div style="background: #C4783A; padding: 10px 16px; text-align: center;">
-  <p class="font-mono-spec text-11 font-medium" style="color: #1C2E23; letter-spacing: 0.08em;">
-    🔥 LAUNCH PRICING — <strong>$34/mo</strong> (15% off) · Founding member rate · <a href="/products/origin" style="color: #1C2E23; text-decoration: underline;">Lock it in →</a>
+{%- if show_urgency_bar -%}
+<div style="background: {{ accent }}; padding: 10px 16px; text-align: center;">
+  <p class="font-mono-spec text-11 font-medium" style="color: {{ primary_dark }}; letter-spacing: 0.08em;">
+    🔥 {{ section.settings.urgency_text | default: "LAUNCH PRICING — " }}
+    <strong>{{ subscribe_price }}</strong> (15% off) · Founding member rate ·
+    <a href="{{ product_url }}" style="color: {{ primary_dark }}; text-decoration: underline;">Lock it in →</a>
   </p>
 </div>
+{%- endif -%}
 
 <!-- ═══ HERO — Full-Bleed Background Image ═══ -->
 {%- assign hero_img = 'landing-' | append: symptom | append: '-hero.webp' -%}
@@ -34,51 +89,51 @@
         <!-- Live customer count -->
         <div class="flex items-center gap-2 mb-4 opacity-0 animate-fade-up delay-100">
           <span class="inline-block" style="width: 8px; height: 8px; border-radius: 50%; background: #22c55e; animation: pulse-dot 2s ease-in-out infinite;"></span>
-          <span class="font-mono-spec text-11" style="color: rgba(245,242,236,0.5); letter-spacing: 0.05em;">2,847 people viewed this page today</span>
+          <span class="font-mono-spec text-11" style="color: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.5); letter-spacing: 0.05em;">2,847 people viewed this page today</span>
         </div>
 
         <!-- Star rating -->
         <div class="flex items-center gap-2 mb-5 opacity-0 animate-fade-up delay-100">
           <div class="flex gap-0.5">
             {%- for i in (1..5) -%}
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="#C4783A" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="{{ accent }}" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
             {%- endfor -%}
           </div>
-          <span class="font-heading text-14 font-medium" style="color: rgba(245,242,236,0.7);">4.8 · 312 verified reviews</span>
+          <span class="font-heading text-14 font-medium" style="color: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.7);">4.8 · 312 verified reviews</span>
         </div>
 
-        <p class="font-mono-spec text-11 uppercase mb-4 opacity-0 animate-fade-up delay-100" style="color: rgba(196,120,58,0.80); letter-spacing: 0.25em;">
+        <p class="font-mono-spec text-11 uppercase mb-4 opacity-0 animate-fade-up delay-100" style="color: rgba({{ accent_r }},{{ accent_g }},{{ accent_b }},0.80); letter-spacing: 0.25em;">
           {{ section.settings.eyebrow | default: "The Science Behind Your Symptoms" }}
         </p>
 
-        <h1 class="font-heading text-24 md:text-36 lg:text-40 font-semibold mb-5 opacity-0 animate-fade-up delay-250" style="color: #F5F2EC; line-height: 1.1;">
+        <h1 class="font-heading text-24 md:text-36 lg:text-40 font-semibold mb-5 opacity-0 animate-fade-up delay-250" style="color: {{ light_bg }}; line-height: 1.1;">
           {{ section.settings.headline }}
         </h1>
 
-        <p class="font-heading text-16 md:text-18 font-light mb-6 opacity-0 animate-fade-up delay-400" style="color: rgba(245,242,236,0.65); line-height: 1.7; max-width: 540px;">
+        <p class="font-heading text-16 md:text-18 font-light mb-6 opacity-0 animate-fade-up delay-400" style="color: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.65); line-height: 1.7; max-width: 540px;">
           {{ section.settings.subheadline }}
         </p>
 
         <!-- Hero CTA -->
         <div class="flex flex-wrap items-center gap-4 mb-4 opacity-0 animate-fade-up delay-500">
-          <a href="/products/origin" class="btn btn--primary cta-pulse" onclick="if(typeof trackEvent==='function')trackEvent('ViewContent', {content_name: '{{ symptom }}-landing-cta'})">
+          <a href="{{ product_url }}" class="btn btn--primary cta-pulse" onclick="if(typeof trackEvent==='function')trackEvent('ViewContent', {content_name: '{{ symptom }}-landing-cta'})">
             {{ section.settings.cta_text | default: "Try Origin — $34/mo" }}
           </a>
-          <a href="/pages/quiz" class="font-heading text-14 font-light transition" style="color: rgba(245,242,236,0.8);">Take the Free Quiz →</a>
+          <a href="/pages/quiz" class="font-heading text-14 font-light transition" style="color: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.8);">Take the Free Quiz →</a>
         </div>
 
         <!-- Sub-CTA trust line -->
         <div class="flex flex-wrap items-center gap-4 opacity-0 animate-fade-up delay-550">
-          <span class="flex items-center gap-1 font-mono-spec text-10" style="color: rgba(245,242,236,0.45);">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C4783A" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span class="flex items-center gap-1 font-mono-spec text-10" style="color: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.45);">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="{{ accent }}" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             30-Day Money Back
           </span>
-          <span class="flex items-center gap-1 font-mono-spec text-10" style="color: rgba(245,242,236,0.45);">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C4783A" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          <span class="flex items-center gap-1 font-mono-spec text-10" style="color: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.45);">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="{{ accent }}" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
             Free Shipping
           </span>
-          <span class="flex items-center gap-1 font-mono-spec text-10" style="color: rgba(245,242,236,0.45);">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C4783A" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          <span class="flex items-center gap-1 font-mono-spec text-10" style="color: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.45);">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="{{ accent }}" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
             Cancel Anytime
           </span>
         </div>
@@ -87,24 +142,24 @@
       <!-- Featured Review (floating card) -->
       {%- for block in section.blocks -%}
         {%- if block.type == "review" and forloop.first -%}
-          <div class="mt-6 opacity-0 animate-fade-up delay-550 rounded-xl p-4" style="max-width: 480px; background: rgba(245,242,236,0.08); border: 1px solid rgba(245,242,236,0.10); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);">
+          <div class="mt-6 opacity-0 animate-fade-up delay-550 rounded-xl p-4" style="max-width: 480px; background: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.08); border: 1px solid rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.10); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);">
             <div class="flex items-start gap-3">
-              <div class="flex items-center justify-center flex-shrink-0" style="width: 36px; height: 36px; border-radius: 50%; background: #C4783A; color: #1C2E23; font-size: 14px; font-weight: 600;">
+              <div class="flex items-center justify-center flex-shrink-0" style="width: 36px; height: 36px; border-radius: 50%; background: {{ accent }}; color: {{ primary_dark }}; font-size: 14px; font-weight: 600;">
                 {{ block.settings.name | slice: 0 }}
               </div>
               <div style="flex: 1; min-width: 0;">
                 <div class="flex items-center gap-2 mb-1">
                   <div class="flex gap-0.5">
                     {%- for i in (1..5) -%}
-                      <svg width="10" height="10" viewBox="0 0 24 24" fill="#C4783A" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="{{ accent }}" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                     {%- endfor -%}
                   </div>
-                  <span class="font-mono-spec text-10" style="color: rgba(245,242,236,0.4);">Verified ✓</span>
+                  <span class="font-mono-spec text-10" style="color: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.4);">Verified ✓</span>
                 </div>
-                <p class="font-heading text-13 font-light mb-1" style="color: rgba(245,242,236,0.85); line-height: 1.5;">
+                <p class="font-heading text-13 font-light mb-1" style="color: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.85); line-height: 1.5;">
                   &ldquo;{{ block.settings.quote | truncate: 120 }}&rdquo;
                 </p>
-                <p class="font-heading text-11 font-medium" style="color: rgba(245,242,236,0.55);">— {{ block.settings.name }}</p>
+                <p class="font-heading text-11 font-medium" style="color: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.55);">— {{ block.settings.name }}</p>
               </div>
             </div>
           </div>
@@ -116,54 +171,56 @@
 </section>
 
 <!-- ═══ TRUST STRIP ═══ -->
-<div class="py-4 px-6" style="background: #F5F2EC; border-bottom: 1px solid rgba(28,46,35,0.08);">
+{%- if show_trust_strip -%}
+<div class="py-4 px-6" style="background: {{ light_bg }}; border-bottom: 1px solid rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.08);">
   <div class="flex flex-wrap justify-center gap-6 md:gap-10" style="max-width: 900px; margin: 0 auto;">
-    <span class="flex items-center gap-2 font-mono-spec text-11" style="color: rgba(28,46,35,0.55); letter-spacing: 0.05em;">
+    <span class="flex items-center gap-2 font-mono-spec text-11" style="color: rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.55); letter-spacing: 0.05em;">
       <span style="font-size: 14px;">🇺🇸</span> Made in USA · cGMP
     </span>
-    <span class="flex items-center gap-2 font-mono-spec text-11" style="color: rgba(28,46,35,0.55); letter-spacing: 0.05em;">
+    <span class="flex items-center gap-2 font-mono-spec text-11" style="color: rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.55); letter-spacing: 0.05em;">
       <span style="font-size: 14px;">🔬</span> HELIUS Study-Backed
     </span>
-    <span class="flex items-center gap-2 font-mono-spec text-11" style="color: rgba(28,46,35,0.55); letter-spacing: 0.05em;">
+    <span class="flex items-center gap-2 font-mono-spec text-11" style="color: rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.55); letter-spacing: 0.05em;">
       <span style="font-size: 14px;">🛡</span> 30-Day Money-Back
     </span>
-    <span class="flex items-center gap-2 font-mono-spec text-11" style="color: rgba(28,46,35,0.55); letter-spacing: 0.05em;">
+    <span class="flex items-center gap-2 font-mono-spec text-11" style="color: rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.55); letter-spacing: 0.05em;">
       <span style="font-size: 14px;">🌱</span> Vegan · Non-GMO
     </span>
-    <span class="flex items-center gap-2 font-mono-spec text-11" style="color: rgba(28,46,35,0.55); letter-spacing: 0.05em;">
+    <span class="flex items-center gap-2 font-mono-spec text-11" style="color: rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.55); letter-spacing: 0.05em;">
       <span style="font-size: 14px;">⚡</span> 40 Billion CFU
     </span>
   </div>
 </div>
+{%- endif -%}
 
 <!-- ═══ QUICK STAT CALLOUT ═══ -->
-<section class="py-10 px-6" style="background: #F5F2EC;">
+<section class="py-10 px-6" style="background: {{ light_bg }};">
   <div style="max-width: 900px; margin: 0 auto;">
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 text-center reveal-hidden stagger-children">
-      <div class="p-5 rounded-xl" style="background: rgba(28,46,35,0.03); border: 1px solid rgba(28,46,35,0.06);">
-        <p class="font-heading text-32 font-semibold" style="color: #C4783A;">2,084</p>
-        <p class="font-mono-spec text-10 uppercase" style="color: #4A5550; letter-spacing: 0.1em;">Subjects in HELIUS study</p>
+      <div class="p-5 rounded-xl" style="background: rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.03); border: 1px solid rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.06);">
+        <p class="font-heading text-32 font-semibold" style="color: {{ accent }};">2,084</p>
+        <p class="font-mono-spec text-10 uppercase" style="color: {{ text_body }}; letter-spacing: 0.1em;">Subjects in HELIUS study</p>
       </div>
-      <div class="p-5 rounded-xl" style="background: rgba(28,46,35,0.03); border: 1px solid rgba(28,46,35,0.06);">
-        <p class="font-heading text-32 font-semibold" style="color: #C4783A;">40B</p>
-        <p class="font-mono-spec text-10 uppercase" style="color: #4A5550; letter-spacing: 0.1em;">CFU per serving</p>
+      <div class="p-5 rounded-xl" style="background: rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.03); border: 1px solid rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.06);">
+        <p class="font-heading text-32 font-semibold" style="color: {{ accent }};">40B</p>
+        <p class="font-mono-spec text-10 uppercase" style="color: {{ text_body }}; letter-spacing: 0.1em;">CFU per serving</p>
       </div>
-      <div class="p-5 rounded-xl" style="background: rgba(28,46,35,0.03); border: 1px solid rgba(28,46,35,0.06);">
-        <p class="font-heading text-28 font-semibold" style="color: #C4783A;">MAKTREK</p>
-        <p class="font-mono-spec text-10 uppercase" style="color: #4A5550; letter-spacing: 0.1em;">Acid-protected delivery</p>
+      <div class="p-5 rounded-xl" style="background: rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.03); border: 1px solid rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.06);">
+        <p class="font-heading text-28 font-semibold" style="color: {{ accent }};">MAKTREK</p>
+        <p class="font-mono-spec text-10 uppercase" style="color: {{ text_body }}; letter-spacing: 0.1em;">Acid-protected delivery</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ═══ AGITATE — The Cost of Inaction ═══ -->
-<section class="py-16 md:py-24 px-6 md:px-20" style="background: #F5F2EC;">
+<section class="py-16 md:py-24 px-6 md:px-20" style="background: {{ light_bg }};">
   <div style="max-width: 800px; margin: 0 auto;">
     <div class="text-center mb-10 reveal-hidden">
-      <p class="font-mono-spec text-11 uppercase mb-4" style="color: #C4783A; letter-spacing: 0.2em;">
+      <p class="font-mono-spec text-11 uppercase mb-4" style="color: {{ accent }}; letter-spacing: 0.2em;">
         {{ section.settings.agitate_eyebrow | default: "What's Really Going On" }}
       </p>
-      <h2 class="font-heading text-24 md:text-36 font-medium mb-5" style="color: #1C2E23; line-height: 1.15;">
+      <h2 class="font-heading text-24 md:text-36 font-medium mb-5" style="color: {{ primary_dark }}; line-height: 1.15;">
         {{ section.settings.agitate_headline }}
       </h2>
     </div>
@@ -171,47 +228,47 @@
     <div class="space-y-5 reveal-hidden">
       {%- assign agitate_points = section.settings.agitate_body | split: "||" -%}
       {%- for point in agitate_points -%}
-        <div class="flex gap-4 items-start p-5 rounded-xl" style="background: rgba(28,46,35,0.03); border: 1px solid rgba(28,46,35,0.06);">
-          <span class="flex-shrink-0 mt-0.5" style="color: #C4783A;">
+        <div class="flex gap-4 items-start p-5 rounded-xl" style="background: rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.03); border: 1px solid rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.06);">
+          <span class="flex-shrink-0 mt-0.5" style="color: {{ accent }};">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
           </span>
-          <p class="font-heading text-15 font-light" style="color: #4A5550; line-height: 1.75;">{{ point }}</p>
+          <p class="font-heading text-15 font-light" style="color: {{ text_body }}; line-height: 1.75;">{{ point }}</p>
         </div>
       {%- endfor -%}
     </div>
 
     <!-- Cost Box -->
-    <div class="mt-10 rounded-2xl p-6 md:p-8 reveal-hidden" style="background: #1C2E23;">
-      <p class="font-mono-spec text-10 uppercase mb-3" style="color: #C4783A; letter-spacing: 0.15em;">The Real Cost</p>
-      <p class="font-heading text-18 md:text-22 font-medium mb-3" style="color: #F5F2EC; line-height: 1.3;">
+    <div class="mt-10 rounded-2xl p-6 md:p-8 reveal-hidden" style="background: {{ primary_dark }};">
+      <p class="font-mono-spec text-10 uppercase mb-3" style="color: {{ accent }}; letter-spacing: 0.15em;">The Real Cost</p>
+      <p class="font-heading text-18 md:text-22 font-medium mb-3" style="color: {{ light_bg }}; line-height: 1.3;">
         {{ section.settings.cost_headline }}
       </p>
-      <p class="font-heading text-14 font-light" style="color: rgba(245,242,236,0.60); line-height: 1.7;">
+      <p class="font-heading text-14 font-light" style="color: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.60); line-height: 1.7;">
         {{ section.settings.cost_body }}
       </p>
     </div>
 
     <!-- Mid-page CTA -->
     <div class="text-center mt-10 reveal-hidden">
-      <a href="/products/origin" class="btn btn--primary inline-block" onclick="if(typeof trackEvent==='function')trackEvent('ViewContent', {content_name: '{{ symptom }}-agitate-cta'})">
+      <a href="{{ product_url }}" class="btn btn--primary inline-block" onclick="if(typeof trackEvent==='function')trackEvent('ViewContent', {content_name: '{{ symptom }}-agitate-cta'})">
         {{ section.settings.cta_text | default: "Try Origin — $34/mo" }}
       </a>
-      <p class="font-mono-spec text-11 mt-3" style="color: rgba(28,46,35,0.4);">Risk-free · 30-day money-back guarantee</p>
+      <p class="font-mono-spec text-11 mt-3" style="color: rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.4);">Risk-free · 30-day money-back guarantee</p>
     </div>
   </div>
 </section>
 
 <!-- ═══ BRIDGE — The Science Connection ═══ -->
-<section class="relative py-16 md:py-24 px-6 md:px-20" style="background: #1C2E23; border-radius: 32px 32px 0 0; margin-top: -16px;">
+<section class="relative py-16 md:py-24 px-6 md:px-20" style="background: {{ primary_dark }}; border-radius: 32px 32px 0 0; margin-top: -16px;">
   <div style="max-width: 1000px; margin: 0 auto;">
     <div class="text-center mb-12 reveal-hidden">
-      <p class="font-mono-spec text-11 uppercase mb-4" style="color: #C4783A; letter-spacing: 0.2em;">
+      <p class="font-mono-spec text-11 uppercase mb-4" style="color: {{ accent }}; letter-spacing: 0.2em;">
         The Connection Most Doctors Miss
       </p>
-      <h2 class="font-heading text-24 md:text-36 font-medium mb-5" style="color: #F5F2EC; line-height: 1.1;">
+      <h2 class="font-heading text-24 md:text-36 font-medium mb-5" style="color: {{ light_bg }}; line-height: 1.1;">
         {{ section.settings.bridge_headline }}
       </h2>
-      <p class="font-heading text-16 font-light mx-auto" style="color: rgba(245,242,236,0.55); max-width: 620px; line-height: 1.7;">
+      <p class="font-heading text-16 font-light mx-auto" style="color: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.55); max-width: 620px; line-height: 1.7;">
         {{ section.settings.bridge_body }}
       </p>
     </div>
@@ -221,12 +278,12 @@
       {%- for block in section.blocks -%}
         {%- if block.type == "pathway" -%}
           <div class="rounded-2xl p-6 reveal-hidden" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);">
-            <div class="flex items-center justify-center mb-4" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(196,120,58,0.15);">
-              <span class="font-heading text-16 font-semibold" style="color: #C4783A;">{{ forloop.index }}</span>
+            <div class="flex items-center justify-center mb-4" style="width: 40px; height: 40px; border-radius: 50%; background: rgba({{ accent_r }},{{ accent_g }},{{ accent_b }},0.15);">
+              <span class="font-heading text-16 font-semibold" style="color: {{ accent }};">{{ forloop.index }}</span>
             </div>
-            <p class="font-mono-spec text-10 uppercase mb-2" style="color: rgba(196,120,58,0.7); letter-spacing: 0.12em;">{{ block.settings.step }}</p>
-            <h3 class="font-heading text-17 font-medium mb-2" style="color: #F5F2EC;">{{ block.settings.title }}</h3>
-            <p class="font-heading text-13 font-light" style="color: rgba(245,242,236,0.55); line-height: 1.7;">{{ block.settings.body }}</p>
+            <p class="font-mono-spec text-10 uppercase mb-2" style="color: rgba({{ accent_r }},{{ accent_g }},{{ accent_b }},0.7); letter-spacing: 0.12em;">{{ block.settings.step }}</p>
+            <h3 class="font-heading text-17 font-medium mb-2" style="color: {{ light_bg }};">{{ block.settings.title }}</h3>
+            <p class="font-heading text-13 font-light" style="color: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.55); line-height: 1.7;">{{ block.settings.body }}</p>
           </div>
         {%- endif -%}
       {%- endfor -%}
@@ -241,8 +298,8 @@
     <!-- Citation -->
     {%- if section.settings.citation -%}
       <div class="text-center reveal-hidden p-4 rounded-xl mt-6" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);">
-        <p class="font-mono-spec text-10" style="color: rgba(245,242,236,0.35);">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(196,120,58,0.5)" stroke-width="2" style="display: inline; vertical-align: middle; margin-right: 4px;"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        <p class="font-mono-spec text-10" style="color: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.35);">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba({{ accent_r }},{{ accent_g }},{{ accent_b }},0.5)" stroke-width="2" style="display: inline; vertical-align: middle; margin-right: 4px;"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
           {{ section.settings.citation }}
         </p>
       </div>
@@ -250,7 +307,7 @@
 
     <!-- Mid-section CTA -->
     <div class="text-center mt-10 reveal-hidden">
-      <a href="/products/origin" class="btn btn--primary inline-block">
+      <a href="{{ product_url }}" class="btn btn--primary inline-block">
         {{ section.settings.cta_text | default: "Try Origin — $34/mo" }}
       </a>
     </div>
@@ -258,36 +315,69 @@
 </section>
 
 <!-- ═══ INGREDIENT SCIENCE — How Each Strain Helps ═══ -->
-<section class="py-16 md:py-24 px-6 md:px-20" style="background: #1C2E23;">
+{%- if show_ingredients -%}
+<section class="py-16 md:py-24 px-6 md:px-20" style="background: {{ primary_dark }};">
   <div style="max-width: 1000px; margin: 0 auto;">
     <div class="text-center mb-12 reveal-hidden">
-      <p class="font-mono-spec text-11 uppercase mb-4" style="color: #C4783A; letter-spacing: 0.2em;">The Formula</p>
-      <h2 class="font-heading text-24 md:text-36 font-medium mb-4" style="color: #F5F2EC; line-height: 1.1;">
+      <p class="font-mono-spec text-11 uppercase mb-4" style="color: {{ accent }}; letter-spacing: 0.2em;">The Formula</p>
+      <h2 class="font-heading text-24 md:text-36 font-medium mb-4" style="color: {{ light_bg }}; line-height: 1.1;">
         {{ section.settings.solution_headline }}
       </h2>
-      <p class="font-heading text-16 font-light mx-auto" style="color: rgba(245,242,236,0.55); max-width: 600px; line-height: 1.7;">
+      <p class="font-heading text-16 font-light mx-auto" style="color: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.55); max-width: 600px; line-height: 1.7;">
         {{ section.settings.solution_body }}
       </p>
     </div>
 
-    <!-- 4 Strain Cards -->
+    <!-- Ingredient blocks (schema-driven) or fallback to hardcoded strains -->
+    {%- assign has_ingredient_blocks = false -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == "ingredient" -%}
+        {%- assign has_ingredient_blocks = true -%}
+        {%- break -%}
+      {%- endif -%}
+    {%- endfor -%}
+
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-10 stagger-children">
-      {%- assign strain_names = "L. acidophilus|B. lactis|L. plantarum|L. paracasei" | split: "|" -%}
-      {%- assign strain_roles = "Gut barrier integrity · Lactose metabolism · Digestive enzyme production|Immune function · Bowel regularity · Pathogen resistance|Anti-inflammatory · Exercise recovery · Fermented food strain|Immune modulation · Gut-brain axis · Allergy response" | split: "|" -%}
-      {%- assign strain_icons = "🔒|🛡|🔥|🧠" | split: "|" -%}
-      {%- for name in strain_names -%}
-        <div class="rounded-2xl p-6 reveal-hidden" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);">
-          <div class="flex items-start gap-4">
-            <div class="flex items-center justify-center flex-shrink-0" style="width: 44px; height: 44px; border-radius: 12px; background: rgba(196,120,58,0.12);">
-              <span style="font-size: 20px;">{{ strain_icons[forloop.index0] }}</span>
+      {%- if has_ingredient_blocks -%}
+        {%- assign ing_icons = "🔒|🛡|🔥|🧠|⚗️|🌿" | split: "|" -%}
+        {%- assign ing_index = 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == "ingredient" -%}
+            <div class="rounded-2xl p-6 reveal-hidden" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);">
+              <div class="flex items-start gap-4">
+                <div class="flex items-center justify-center flex-shrink-0" style="width: 44px; height: 44px; border-radius: 12px; background: rgba({{ accent_r }},{{ accent_g }},{{ accent_b }},0.12);">
+                  <span style="font-size: 20px;">{{ ing_icons[ing_index] }}</span>
+                </div>
+                <div>
+                  <p class="font-heading text-16 font-semibold mb-0.5" style="color: {{ accent }};">{{ block.settings.strain_name }}</p>
+                  {%- if block.settings.strain_full_name != blank -%}
+                    <p class="font-mono-spec text-10 mb-1" style="color: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.35);">{{ block.settings.strain_full_name }}</p>
+                  {%- endif -%}
+                  <p class="font-heading text-13 font-light" style="color: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.60); line-height: 1.6;">{{ block.settings.description }}</p>
+                </div>
+              </div>
             </div>
-            <div>
-              <p class="font-heading text-16 font-semibold mb-1" style="color: #C4783A;">{{ name }}</p>
-              <p class="font-heading text-13 font-light" style="color: rgba(245,242,236,0.60); line-height: 1.6;">{{ strain_roles[forloop.index0] }}</p>
+            {%- assign ing_index = ing_index | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- assign strain_names = "L. acidophilus|B. lactis|L. plantarum|L. paracasei" | split: "|" -%}
+        {%- assign strain_roles = "Gut barrier integrity · Lactose metabolism · Digestive enzyme production|Immune function · Bowel regularity · Pathogen resistance|Anti-inflammatory · Exercise recovery · Fermented food strain|Immune modulation · Gut-brain axis · Allergy response" | split: "|" -%}
+        {%- assign strain_icons = "🔒|🛡|🔥|🧠" | split: "|" -%}
+        {%- for name in strain_names -%}
+          <div class="rounded-2xl p-6 reveal-hidden" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);">
+            <div class="flex items-start gap-4">
+              <div class="flex items-center justify-center flex-shrink-0" style="width: 44px; height: 44px; border-radius: 12px; background: rgba({{ accent_r }},{{ accent_g }},{{ accent_b }},0.12);">
+                <span style="font-size: 20px;">{{ strain_icons[forloop.index0] }}</span>
+              </div>
+              <div>
+                <p class="font-heading text-16 font-semibold mb-1" style="color: {{ accent }};">{{ name }}</p>
+                <p class="font-heading text-13 font-light" style="color: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.60); line-height: 1.6;">{{ strain_roles[forloop.index0] }}</p>
+              </div>
             </div>
           </div>
-        </div>
-      {%- endfor -%}
+        {%- endfor -%}
+      {%- endif -%}
     </div>
 
     <!-- Ingredient-to-Outcome Infographic -->
@@ -297,49 +387,50 @@
     </div>
 
     <!-- Delivery tech -->
-    <div class="rounded-2xl p-6 md:p-8 reveal-hidden" style="background: rgba(196,120,58,0.06); border: 1px solid rgba(196,120,58,0.12);">
+    <div class="rounded-2xl p-6 md:p-8 reveal-hidden" style="background: rgba({{ accent_r }},{{ accent_g }},{{ accent_b }},0.06); border: 1px solid rgba({{ accent_r }},{{ accent_g }},{{ accent_b }},0.12);">
       <div class="flex flex-col sm:flex-row items-start gap-5">
-        <div class="flex items-center justify-center flex-shrink-0" style="width: 52px; height: 52px; border-radius: 50%; background: rgba(196,120,58,0.15);">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C4783A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div class="flex items-center justify-center flex-shrink-0" style="width: 52px; height: 52px; border-radius: 50%; background: rgba({{ accent_r }},{{ accent_g }},{{ accent_b }},0.15);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="{{ accent }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
         <div>
-          <p class="font-heading text-18 font-semibold mb-2" style="color: #F5F2EC;">MAKTREK Bi-Pass Technology</p>
-          <p class="font-heading text-14 font-light" style="color: rgba(245,242,236,0.60); line-height: 1.7;">
+          <p class="font-heading text-18 font-semibold mb-2" style="color: {{ light_bg }};">MAKTREK Bi-Pass Technology</p>
+          <p class="font-heading text-14 font-light" style="color: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.60); line-height: 1.7;">
             Most probiotics die in stomach acid. MAKTREK uses a marine polysaccharide shield to protect all 40 billion CFU through gastric transit. Your bacteria arrive alive — and FOS prebiotic feeds them on arrival.
           </p>
-          <p class="font-mono-spec text-10 mt-3" style="color: rgba(196,120,58,0.7);">Alive on arrival. Fed on impact.</p>
+          <p class="font-mono-spec text-10 mt-3" style="color: rgba({{ accent_r }},{{ accent_g }},{{ accent_b }},0.7);">Alive on arrival. Fed on impact.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
+{%- endif -%}
 
 <!-- ═══ DREAM OUTCOMES ═══ -->
-<section class="py-16 md:py-24 px-6 md:px-20" style="background: #F5F2EC;">
+<section class="py-16 md:py-24 px-6 md:px-20" style="background: {{ light_bg }};">
   <div style="max-width: 900px; margin: 0 auto;">
     <div class="text-center mb-10 reveal-hidden">
-      <p class="font-mono-spec text-11 uppercase mb-4" style="color: #C4783A; letter-spacing: 0.2em;">What Changes</p>
-      <h2 class="font-heading text-28 md:text-36 font-medium" style="color: #1C2E23; line-height: 1.15;">
+      <p class="font-mono-spec text-11 uppercase mb-4" style="color: {{ accent }}; letter-spacing: 0.2em;">What Changes</p>
+      <h2 class="font-heading text-28 md:text-36 font-medium" style="color: {{ primary_dark }}; line-height: 1.15;">
         What customers experience within the first 30 days.
       </h2>
     </div>
 
     <!-- Product Image -->
     <div class="text-center mb-10 reveal-hidden">
-      <img src="{{ 'origin-bottle.webp' | asset_url }}" alt="Origin by BaseCode Health" loading="lazy" style="max-width: 180px; margin: 0 auto; filter: drop-shadow(0 8px 24px rgba(28,46,35,0.15));">
+      <img src="{{ 'origin-bottle.webp' | asset_url }}" alt="Origin by BaseCode Health" loading="lazy" style="max-width: 180px; margin: 0 auto; filter: drop-shadow(0 8px 24px rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.15));">
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 stagger-children">
       {%- for block in section.blocks -%}
         {%- if block.type == "dream_outcome" -%}
-          <div class="rounded-2xl p-6 reveal-hidden card-hover" style="background: white; border: 1px solid rgba(28,46,35,0.08); box-shadow: 0 2px 12px rgba(28,46,35,0.04);">
+          <div class="rounded-2xl p-6 reveal-hidden card-hover" style="background: white; border: 1px solid rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.08); box-shadow: 0 2px 12px rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.04);">
             <div class="flex items-center gap-2 mb-3">
-              <div class="flex items-center justify-center" style="width: 28px; height: 28px; border-radius: 50%; background: rgba(196,120,58,0.1);">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C4783A" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <div class="flex items-center justify-center" style="width: 28px; height: 28px; border-radius: 50%; background: rgba({{ accent_r }},{{ accent_g }},{{ accent_b }},0.1);">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="{{ accent }}" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
               </div>
-              <p class="font-heading text-16 font-semibold" style="color: #1C2E23;">{{ block.settings.title }}</p>
+              <p class="font-heading text-16 font-semibold" style="color: {{ primary_dark }};">{{ block.settings.title }}</p>
             </div>
-            <p class="font-heading text-14 font-light" style="color: #4A5550; line-height: 1.7; padding-left: 36px;">{{ block.settings.body }}</p>
+            <p class="font-heading text-14 font-light" style="color: {{ text_body }}; line-height: 1.7; padding-left: 36px;">{{ block.settings.body }}</p>
           </div>
         {%- endif -%}
       {%- endfor -%}
@@ -347,75 +438,140 @@
 
     <!-- Mid-page CTA -->
     <div class="text-center mt-10 reveal-hidden">
-      <a href="/products/origin" class="btn btn--primary inline-block">
+      <a href="{{ product_url }}" class="btn btn--primary inline-block">
         {{ section.settings.cta_text | default: "Try Origin — $34/mo" }}
       </a>
-      <p class="font-heading text-13 font-light mt-3" style="color: #4A5550;">Join 2,000+ customers who already switched.</p>
+      <p class="font-heading text-13 font-light mt-3" style="color: {{ text_body }};">Join 2,000+ customers who already switched.</p>
     </div>
   </div>
 </section>
 
 <!-- ═══ COMPARISON TABLE — Origin vs Alternatives ═══ -->
-<section class="py-16 md:py-24 px-6 md:px-20" style="background: #EDE8DF;">
+{%- if show_comparison -%}
+<section class="py-16 md:py-24 px-6 md:px-20" style="background: {{ card_bg }};">
   <div style="max-width: 800px; margin: 0 auto;">
     <div class="text-center mb-10 reveal-hidden">
-      <p class="font-mono-spec text-11 uppercase mb-4" style="color: #C4783A; letter-spacing: 0.2em;">How We Compare</p>
-      <h2 class="font-heading text-24 md:text-32 font-medium" style="color: #1C2E23;">
+      <p class="font-mono-spec text-11 uppercase mb-4" style="color: {{ accent }}; letter-spacing: 0.2em;">How We Compare</p>
+      <h2 class="font-heading text-24 md:text-32 font-medium" style="color: {{ primary_dark }};">
         Origin vs. what you've been doing.
       </h2>
     </div>
 
-    <div class="rounded-2xl overflow-hidden reveal-hidden" style="background: white; border: 1px solid rgba(28,46,35,0.08);">
-      <table style="width: 100%; border-collapse: collapse;">
-        <thead>
-          <tr style="border-bottom: 2px solid rgba(28,46,35,0.08);">
-            <th class="font-heading text-13 font-medium text-left p-4" style="color: #4A5550;"></th>
-            <th class="font-heading text-13 font-semibold text-center p-4" style="color: #C4783A; background: rgba(196,120,58,0.06);">Origin</th>
-            <th class="font-heading text-13 font-medium text-center p-4" style="color: #4A5550;">Generic Probiotics</th>
-            <th class="font-heading text-13 font-medium text-center p-4 hidden md:table-cell" style="color: #4A5550;">Supplements</th>
-          </tr>
-        </thead>
-        <tbody>
-          {%- assign comp_rows = "Heritage-specific formulation|Acid-protected delivery (MAKTREK)|Built-in prebiotic (FOS)|Targets root cause|Research-backed (HELIUS study)|Free shipping + cancel anytime" | split: "|" -%}
-          {%- for row in comp_rows -%}
-            <tr style="border-bottom: 1px solid rgba(28,46,35,0.06);">
-              <td class="font-heading text-13 p-4" style="color: #1C2E23;">{{ row }}</td>
-              <td class="text-center p-4" style="background: rgba(196,120,58,0.03);">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C4783A" stroke-width="2.5" style="display:inline;"><polyline points="20 6 9 17 4 12"/></svg>
-              </td>
-              <td class="text-center p-4">
-                <span style="color: rgba(28,46,35,0.25);">✗</span>
-              </td>
-              <td class="text-center p-4 hidden md:table-cell">
-                <span style="color: rgba(28,46,35,0.25);">✗</span>
-              </td>
+    {%- comment -%} Check if competitor blocks exist {%- endcomment -%}
+    {%- assign has_competitor_blocks = false -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == "competitor" -%}
+        {%- assign has_competitor_blocks = true -%}
+        {%- break -%}
+      {%- endif -%}
+    {%- endfor -%}
+
+    <div class="rounded-2xl overflow-hidden reveal-hidden" style="background: white; border: 1px solid rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.08);">
+      {%- if has_competitor_blocks -%}
+        {%- comment -%} Dynamic competitor table from blocks {%- endcomment -%}
+        {%- assign competitors = "" -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == "competitor" -%}
+            {%- capture competitors -%}{{ competitors }}|{{ block.settings.name }}:{{ block.settings.price }}:{{ block.settings.features }}{%- endcapture -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- assign comp_entries = competitors | split: "|" -%}
+        <table style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="border-bottom: 2px solid rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.08);">
+              <th class="font-heading text-13 font-medium text-left p-4" style="color: {{ text_body }};"></th>
+              <th class="font-heading text-13 font-semibold text-center p-4" style="color: {{ accent }}; background: rgba({{ accent_r }},{{ accent_g }},{{ accent_b }},0.06);">Origin</th>
+              {%- for entry in comp_entries -%}
+                {%- unless entry == blank -%}
+                  {%- assign parts = entry | split: ":" -%}
+                  <th class="font-heading text-13 font-medium text-center p-4" style="color: {{ text_body }};">{{ parts[0] }}</th>
+                {%- endunless -%}
+              {%- endfor -%}
             </tr>
-          {%- endfor -%}
-          <tr style="border-top: 2px solid rgba(28,46,35,0.08);">
-            <td class="font-heading text-13 font-semibold p-4" style="color: #1C2E23;">Monthly cost</td>
-            <td class="font-heading text-15 font-semibold text-center p-4" style="color: #C4783A; background: rgba(196,120,58,0.06);">$34</td>
-            <td class="font-heading text-13 text-center p-4" style="color: #4A5550;">$25-60</td>
-            <td class="font-heading text-13 text-center p-4 hidden md:table-cell" style="color: #4A5550;">$80-300</td>
-          </tr>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {%- assign origin_rows = "Heritage-specific formulation|Acid-protected delivery (MAKTREK)|Built-in prebiotic (FOS)|Targets root cause|Research-backed (HELIUS study)|Free shipping + cancel anytime" | split: "|" -%}
+            {%- for row in origin_rows -%}
+              <tr style="border-bottom: 1px solid rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.06);">
+                <td class="font-heading text-13 p-4" style="color: {{ primary_dark }};">{{ row }}</td>
+                <td class="text-center p-4" style="background: rgba({{ accent_r }},{{ accent_g }},{{ accent_b }},0.03);">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ accent }}" stroke-width="2.5" style="display:inline;"><polyline points="20 6 9 17 4 12"/></svg>
+                </td>
+                {%- for entry in comp_entries -%}
+                  {%- unless entry == blank -%}
+                    <td class="text-center p-4">
+                      <span style="color: rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.25);">✗</span>
+                    </td>
+                  {%- endunless -%}
+                {%- endfor -%}
+              </tr>
+            {%- endfor -%}
+            <tr style="border-top: 2px solid rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.08);">
+              <td class="font-heading text-13 font-semibold p-4" style="color: {{ primary_dark }};">Monthly cost</td>
+              <td class="font-heading text-15 font-semibold text-center p-4" style="color: {{ accent }}; background: rgba({{ accent_r }},{{ accent_g }},{{ accent_b }},0.06);">{{ subscribe_price }}</td>
+              {%- for entry in comp_entries -%}
+                {%- unless entry == blank -%}
+                  {%- assign parts = entry | split: ":" -%}
+                  <td class="font-heading text-13 text-center p-4" style="color: {{ text_body }};">{{ parts[1] }}</td>
+                {%- endunless -%}
+              {%- endfor -%}
+            </tr>
+          </tbody>
+        </table>
+      {%- else -%}
+        {%- comment -%} Fallback hardcoded comparison table {%- endcomment -%}
+        <table style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="border-bottom: 2px solid rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.08);">
+              <th class="font-heading text-13 font-medium text-left p-4" style="color: {{ text_body }};"></th>
+              <th class="font-heading text-13 font-semibold text-center p-4" style="color: {{ accent }}; background: rgba({{ accent_r }},{{ accent_g }},{{ accent_b }},0.06);">Origin</th>
+              <th class="font-heading text-13 font-medium text-center p-4" style="color: {{ text_body }};">Generic Probiotics</th>
+              <th class="font-heading text-13 font-medium text-center p-4 hidden md:table-cell" style="color: {{ text_body }};">Supplements</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- assign comp_rows = "Heritage-specific formulation|Acid-protected delivery (MAKTREK)|Built-in prebiotic (FOS)|Targets root cause|Research-backed (HELIUS study)|Free shipping + cancel anytime" | split: "|" -%}
+            {%- for row in comp_rows -%}
+              <tr style="border-bottom: 1px solid rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.06);">
+                <td class="font-heading text-13 p-4" style="color: {{ primary_dark }};">{{ row }}</td>
+                <td class="text-center p-4" style="background: rgba({{ accent_r }},{{ accent_g }},{{ accent_b }},0.03);">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ accent }}" stroke-width="2.5" style="display:inline;"><polyline points="20 6 9 17 4 12"/></svg>
+                </td>
+                <td class="text-center p-4">
+                  <span style="color: rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.25);">✗</span>
+                </td>
+                <td class="text-center p-4 hidden md:table-cell">
+                  <span style="color: rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.25);">✗</span>
+                </td>
+              </tr>
+            {%- endfor -%}
+            <tr style="border-top: 2px solid rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.08);">
+              <td class="font-heading text-13 font-semibold p-4" style="color: {{ primary_dark }};">Monthly cost</td>
+              <td class="font-heading text-15 font-semibold text-center p-4" style="color: {{ accent }}; background: rgba({{ accent_r }},{{ accent_g }},{{ accent_b }},0.06);">{{ subscribe_price }}</td>
+              <td class="font-heading text-13 text-center p-4" style="color: {{ text_body }};">$25-60</td>
+              <td class="font-heading text-13 text-center p-4 hidden md:table-cell" style="color: {{ text_body }};">$80-300</td>
+            </tr>
+          </tbody>
+        </table>
+      {%- endif -%}
     </div>
   </div>
 </section>
+{%- endif -%}
 
 <!-- ═══ SOCIAL PROOF — Customer Reviews ═══ -->
-<section class="py-16 md:py-24 px-6 md:px-20" style="background: #F5F2EC;">
+<section class="py-16 md:py-24 px-6 md:px-20" style="background: {{ light_bg }};">
   <div style="max-width: 900px; margin: 0 auto;">
     <div class="text-center mb-10 reveal-hidden">
       <div class="flex items-center justify-center gap-2 mb-4">
         <div class="flex gap-0.5">
           {%- for i in (1..5) -%}
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#C4783A" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="{{ accent }}" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           {%- endfor -%}
         </div>
-        <span class="font-heading text-16 font-medium" style="color: #1C2E23;">4.8 out of 5</span>
+        <span class="font-heading text-16 font-medium" style="color: {{ primary_dark }};">4.8 out of 5</span>
       </div>
-      <h2 class="font-heading text-24 md:text-32 font-medium" style="color: #1C2E23;">
+      <h2 class="font-heading text-24 md:text-32 font-medium" style="color: {{ primary_dark }};">
         Real people. Real results.
       </h2>
     </div>
@@ -423,21 +579,21 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 stagger-children">
       {%- for block in section.blocks -%}
         {%- if block.type == "review" -%}
-          <div class="reveal-hidden p-6 rounded-2xl" style="background: white; border: 1px solid rgba(28,46,35,0.08); box-shadow: 0 2px 12px rgba(28,46,35,0.04);">
+          <div class="reveal-hidden p-6 rounded-2xl" style="background: white; border: 1px solid rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.08); box-shadow: 0 2px 12px rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.04);">
             <div class="flex gap-0.5 mb-3">
               {%- for i in (1..5) -%}
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="#C4783A" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="{{ accent }}" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
               {%- endfor -%}
             </div>
-            <p class="font-heading text-14 font-light mb-4" style="color: #1C2E23; line-height: 1.7;">
+            <p class="font-heading text-14 font-light mb-4" style="color: {{ primary_dark }}; line-height: 1.7;">
               &ldquo;{{ block.settings.quote }}&rdquo;
             </p>
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-2">
-                <div class="flex items-center justify-center" style="width: 32px; height: 32px; border-radius: 50%; background: rgba(28,46,35,0.08); color: #1C2E23; font-size: 13px; font-weight: 600;">
+                <div class="flex items-center justify-center" style="width: 32px; height: 32px; border-radius: 50%; background: rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.08); color: {{ primary_dark }}; font-size: 13px; font-weight: 600;">
                   {{ block.settings.name | slice: 0 }}
                 </div>
-                <p class="font-heading text-13 font-medium" style="color: #1C2E23;">{{ block.settings.name }}</p>
+                <p class="font-heading text-13 font-medium" style="color: {{ primary_dark }};">{{ block.settings.name }}</p>
               </div>
               <span class="font-mono-spec text-10 flex items-center gap-1" style="color: #22c55e;">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
@@ -452,13 +608,13 @@
 </section>
 
 <!-- ═══ VALUE STACK + CTA ═══ -->
-<section class="py-16 md:py-24 px-6 md:px-20" style="background: #1C2E23;">
+<section class="py-16 md:py-24 px-6 md:px-20" style="background: {{ primary_dark }};">
   <div style="max-width: 640px; margin: 0 auto;">
     <div class="text-center mb-8 reveal-hidden">
-      <span class="inline-block font-mono-spec text-10 rounded-full mb-5" style="letter-spacing: 0.1em; border: 1px solid #C4783A; color: #C4783A; padding: 5px 14px;">
+      <span class="inline-block font-mono-spec text-10 rounded-full mb-5" style="letter-spacing: 0.1em; border: 1px solid {{ accent }}; color: {{ accent }}; padding: 5px 14px;">
         World's First Ethnobiotic
       </span>
-      <h2 class="font-heading text-28 md:text-36 font-medium mb-3" style="color: #F5F2EC;">
+      <h2 class="font-heading text-28 md:text-36 font-medium mb-3" style="color: {{ light_bg }};">
         Everything you get with Origin.
       </h2>
     </div>
@@ -467,26 +623,26 @@
       {%- assign value_items = "30 days of targeted microbiome restoration|4 clinically studied strains — delivered alive via MAKTREK|FOS prebiotic — feeds bacteria on arrival|Free research report: The Ancestral Microbiome|Free US shipping on every order|30-day money-back guarantee — no questions asked" | split: "|" -%}
       {%- for item in value_items -%}
         <div class="flex items-center gap-3 py-2.5" {% unless forloop.last %}style="border-bottom: 1px solid rgba(255,255,255,0.05);"{% endunless %}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C4783A" stroke-width="2.5" class="flex-shrink-0"><polyline points="20 6 9 17 4 12"/></svg>
-          <span class="font-heading text-14 font-light" style="color: rgba(245,242,236,0.70);">{{ item }}</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ accent }}" stroke-width="2.5" class="flex-shrink-0"><polyline points="20 6 9 17 4 12"/></svg>
+          <span class="font-heading text-14 font-light" style="color: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.70);">{{ item }}</span>
         </div>
       {%- endfor -%}
 
       <!-- Price + Buy -->
       <div class="mt-6 pt-6" style="border-top: 1px solid rgba(255,255,255,0.08);">
         <div class="flex items-end justify-center gap-2 mb-1">
-          <span class="font-heading text-16 font-light" style="color: rgba(245,242,236,0.4); text-decoration: line-through;">$40</span>
-          <span class="font-heading font-medium" style="color: #F5F2EC; font-size: 48px;">$34</span>
-          <span class="font-heading font-light" style="color: rgba(245,242,236,0.55); font-size: 18px;">/month</span>
+          <span class="font-heading text-16 font-light" style="color: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.4); text-decoration: line-through;">{{ onetime_price }}</span>
+          <span class="font-heading font-medium" style="color: {{ light_bg }}; font-size: 48px;">{{ subscribe_price | remove: "/mo" }}</span>
+          <span class="font-heading font-light" style="color: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.55); font-size: 18px;">/month</span>
         </div>
-        <p class="text-center font-mono-spec text-11 mb-6" style="color: #C4783A;">
+        <p class="text-center font-mono-spec text-11 mb-6" style="color: {{ accent }};">
           That's $1.13/day — less than your morning coffee · Launch pricing
         </p>
 
-        <a href="/products/origin" class="btn btn--primary block text-center cta-pulse" onclick="if(typeof trackEvent==='function')trackEvent('InitiateCheckout', {content_name: '{{ symptom }}-landing', value: 34.00, currency: 'USD'})">
+        <a href="{{ product_url }}" class="btn btn--primary block text-center cta-pulse" onclick="if(typeof trackEvent==='function')trackEvent('InitiateCheckout', {content_name: '{{ symptom }}-landing', value: 34.00, currency: 'USD'})">
           {{ section.settings.cta_text | default: "Try Origin — $34/mo" }}
         </a>
-        <p class="text-center font-heading text-12 font-light mt-3" style="color: rgba(245,242,236,0.4);">
+        <p class="text-center font-heading text-12 font-light mt-3" style="color: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.4);">
           Subscribe & save 15% · Cancel anytime · Free shipping
         </p>
       </div>
@@ -494,24 +650,25 @@
 
     <!-- Guarantee badge -->
     <div class="flex items-start gap-3 mt-6 p-4 rounded-xl reveal-hidden" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C4783A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0" style="margin-top: 1px;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ accent }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0" style="margin-top: 1px;">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
       </svg>
-      <p class="font-heading text-13 font-light" style="color: rgba(245,242,236,0.55); line-height: 1.6;">
-        <strong style="color: rgba(245,242,236,0.8);">30-Day Money-Back Guarantee.</strong> If you don't feel a difference, we'll refund every penny. No questions, no hassle. You risk nothing.
+      <p class="font-heading text-13 font-light" style="color: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.55); line-height: 1.6;">
+        <strong style="color: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.8);">30-Day Money-Back Guarantee.</strong> If you don't feel a difference, we'll refund every penny. No questions, no hassle. You risk nothing.
       </p>
     </div>
   </div>
 </section>
 
 <!-- ═══ LEAD CAPTURE ═══ -->
-<section class="py-16 px-6 md:px-20" style="background: #F5F2EC;">
+{%- if show_lead_capture -%}
+<section class="py-16 px-6 md:px-20" style="background: {{ light_bg }};">
   <div style="max-width: 520px; margin: 0 auto;" class="text-center reveal-hidden">
-    <p class="font-mono-spec text-11 uppercase mb-3" style="color: #C4783A; letter-spacing: 0.2em;">Free Research</p>
-    <h2 class="font-heading text-24 md:text-32 font-medium mb-2" style="color: #1C2E23;">
+    <p class="font-mono-spec text-11 uppercase mb-3" style="color: {{ accent }}; letter-spacing: 0.2em;">Free Research</p>
+    <h2 class="font-heading text-24 md:text-32 font-medium mb-2" style="color: {{ primary_dark }};">
       {{ section.settings.lead_headline | default: "Get the research behind Origin." }}
     </h2>
-    <p class="font-heading text-14 font-light mb-6" style="color: #4A5550; line-height: 1.7;">
+    <p class="font-heading text-14 font-light mb-6" style="color: {{ text_body }}; line-height: 1.7;">
       The Ancestral Microbiome Report — 6 pages of published data. Free, no commitment.
     </p>
 
@@ -521,104 +678,134 @@
           <input type="text" style="display:none" name="website" tabindex="-1" autocomplete="off">
           <input type="text" name="firstName" placeholder="First name" required
             class="font-heading text-14 rounded-full px-5 py-3.5 w-full outline-none"
-            style="background: white; border: 1px solid #DDD6CC; color: #1C2E23;">
+            style="background: white; border: 1px solid #DDD6CC; color: {{ primary_dark }};">
           <input type="email" name="email" placeholder="Your best email" required
             class="font-heading text-14 rounded-full px-5 py-3.5 w-full outline-none"
-            style="background: white; border: 1px solid #DDD6CC; color: #1C2E23;">
+            style="background: white; border: 1px solid #DDD6CC; color: {{ primary_dark }};">
           <button type="submit" class="btn btn--primary w-full" data-default-text="Send My Free Report →">
             Send My Free Report →
           </button>
           <p class="lead-form-error font-mono-spec text-11" style="display:none; color: #c0392b;">Please enter a valid email.</p>
         </form>
-        <p class="font-mono-spec text-10 mt-3" style="color: rgba(28,46,35,0.35);">No spam. Unsubscribe anytime. We respect your inbox.</p>
+        <p class="font-mono-spec text-10 mt-3" style="color: rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.35);">No spam. Unsubscribe anytime. We respect your inbox.</p>
       </div>
       <div data-lead-success-view style="display:none;" class="py-6 text-center">
-        <p class="font-heading text-20 font-medium mb-2" style="color: #1C2E23;" data-success-msg>Check your inbox!</p>
-        <p class="font-heading text-14 font-light mb-4" style="color: #4A5550;">Your report is on its way.</p>
-        <div class="inline-block rounded-xl p-4 mb-4" style="background: #1C2E23;">
-          <p class="font-mono-spec text-10 uppercase mb-1" style="color: #C4783A; letter-spacing: 0.15em;">Your 20% discount code</p>
-          <p class="font-heading text-22 font-medium" style="color: #C4783A; letter-spacing: 0.1em;">FOUNDER20</p>
+        <p class="font-heading text-20 font-medium mb-2" style="color: {{ primary_dark }};" data-success-msg>Check your inbox!</p>
+        <p class="font-heading text-14 font-light mb-4" style="color: {{ text_body }};">Your report is on its way.</p>
+        <div class="inline-block rounded-xl p-4 mb-4" style="background: {{ primary_dark }};">
+          <p class="font-mono-spec text-10 uppercase mb-1" style="color: {{ accent }}; letter-spacing: 0.15em;">Your {{ discount_percent }} discount code</p>
+          <p class="font-heading text-22 font-medium" style="color: {{ accent }}; letter-spacing: 0.1em;">{{ discount_code }}</p>
         </div>
-        <a href="/products/origin" class="btn btn--primary inline-block">Shop Origin — $34/mo</a>
+        <a href="{{ product_url }}" class="btn btn--primary inline-block">Shop Origin — {{ subscribe_price }}</a>
       </div>
     </div>
   </div>
 </section>
+{%- endif -%}
 
 <!-- ═══ FAQ ═══ -->
-<section class="py-16 md:py-24 px-6 md:px-20" style="background: #EDE8DF;">
+{%- if show_faq -%}
+<section class="py-16 md:py-24 px-6 md:px-20" style="background: {{ card_bg }};">
   <div style="max-width: 680px; margin: 0 auto;">
     <div class="text-center mb-10 reveal-hidden">
-      <h2 class="font-heading text-24 md:text-32 font-medium" style="color: #1C2E23;">
+      <h2 class="font-heading text-24 md:text-32 font-medium" style="color: {{ primary_dark }};">
         Common questions.
       </h2>
     </div>
 
+    {%- comment -%} Check for FAQ blocks {%- endcomment -%}
+    {%- assign has_faq_blocks = false -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == "faq" -%}
+        {%- assign has_faq_blocks = true -%}
+        {%- break -%}
+      {%- endif -%}
+    {%- endfor -%}
+
     <div class="space-y-3 reveal-hidden">
-      {%- assign faq_q = "How is Origin different from regular probiotics?|Will the bacteria actually survive my stomach acid?|When will I feel a difference?|Can I take this with other supplements?|What if it doesn't work for me?|Is this safe during pregnancy or breastfeeding?" | split: "|" -%}
-      {%- assign faq_a = "Origin is an ethnobiotic — the first probiotic designed for diaspora communities. The HELIUS study (2,084 subjects, 6 ethnic groups) proved your heritage shapes your microbiome more than diet, age, or lifestyle. Generic probiotics ignore this. Origin doesn't.|MAKTREK Bi-Pass Technology wraps each strain in a marine polysaccharide shield that survives pH 1.5 stomach acid. Published data shows significantly higher survivability vs standard capsules. Plus, FOS prebiotic feeds the bacteria on arrival.|Most customers report noticeable improvement within 1-2 weeks. Energy and regularity improvements follow by week 3-4. Full microbiome restoration takes 8-12 weeks of consistent daily use.|Yes. Origin contains no stimulants or hormones. It works at the microbiome level and doesn't interfere with most supplements or medications. If you're on immunosuppressants, consult your doctor first.|We offer a 30-day money-back guarantee. If you don't feel a difference, email hello@basecodehealth.com for a full refund. No questions asked, no hassle. You risk nothing.|While our ingredients are generally recognized as safe, we recommend consulting your healthcare provider before starting any new supplement during pregnancy or breastfeeding." | split: "|" -%}
-      {%- for question in faq_q -%}
-        <details class="rounded-xl overflow-hidden" style="background: white; border: 1px solid rgba(28,46,35,0.08);">
-          <summary class="font-heading text-15 font-medium cursor-pointer p-5 flex items-center justify-between" style="color: #1C2E23; list-style: none;">
-            {{ question }}
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C4783A" stroke-width="2" class="flex-shrink-0 ml-3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          </summary>
-          <div class="px-5 pb-5">
-            <p class="font-heading text-14 font-light" style="color: #4A5550; line-height: 1.7;">{{ faq_a[forloop.index0] }}</p>
-          </div>
-        </details>
-      {%- endfor -%}
+      {%- if has_faq_blocks -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == "faq" -%}
+            <details class="rounded-xl overflow-hidden" style="background: white; border: 1px solid rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.08);">
+              <summary class="font-heading text-15 font-medium cursor-pointer p-5 flex items-center justify-between" style="color: {{ primary_dark }}; list-style: none;">
+                {{ block.settings.question }}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ accent }}" stroke-width="2" class="flex-shrink-0 ml-3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </summary>
+              <div class="px-5 pb-5">
+                <div class="font-heading text-14 font-light" style="color: {{ text_body }}; line-height: 1.7;">{{ block.settings.answer }}</div>
+              </div>
+            </details>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- assign faq_q = "How is Origin different from regular probiotics?|Will the bacteria actually survive my stomach acid?|When will I feel a difference?|Can I take this with other supplements?|What if it doesn't work for me?|Is this safe during pregnancy or breastfeeding?" | split: "|" -%}
+        {%- assign faq_a = "Origin is an ethnobiotic — the first probiotic designed for diaspora communities. The HELIUS study (2,084 subjects, 6 ethnic groups) proved your heritage shapes your microbiome more than diet, age, or lifestyle. Generic probiotics ignore this. Origin doesn't.|MAKTREK Bi-Pass Technology wraps each strain in a marine polysaccharide shield that survives pH 1.5 stomach acid. Published data shows significantly higher survivability vs standard capsules. Plus, FOS prebiotic feeds the bacteria on arrival.|Most customers report noticeable improvement within 1-2 weeks. Energy and regularity improvements follow by week 3-4. Full microbiome restoration takes 8-12 weeks of consistent daily use.|Yes. Origin contains no stimulants or hormones. It works at the microbiome level and doesn't interfere with most supplements or medications. If you're on immunosuppressants, consult your doctor first.|We offer a 30-day money-back guarantee. If you don't feel a difference, email hello@basecodehealth.com for a full refund. No questions asked, no hassle. You risk nothing.|While our ingredients are generally recognized as safe, we recommend consulting your healthcare provider before starting any new supplement during pregnancy or breastfeeding." | split: "|" -%}
+        {%- for question in faq_q -%}
+          <details class="rounded-xl overflow-hidden" style="background: white; border: 1px solid rgba({{ primary_dark_r }},{{ primary_dark_g }},{{ primary_dark_b }},0.08);">
+            <summary class="font-heading text-15 font-medium cursor-pointer p-5 flex items-center justify-between" style="color: {{ primary_dark }}; list-style: none;">
+              {{ question }}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ accent }}" stroke-width="2" class="flex-shrink-0 ml-3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </summary>
+            <div class="px-5 pb-5">
+              <p class="font-heading text-14 font-light" style="color: {{ text_body }}; line-height: 1.7;">{{ faq_a[forloop.index0] }}</p>
+            </div>
+          </details>
+        {%- endfor -%}
+      {%- endif -%}
     </div>
 
     <div class="text-center mt-8">
-      <p class="font-heading text-14 font-light" style="color: #4A5550;">
-        Still have questions? <a href="mailto:hello@basecodehealth.com" style="color: #C4783A;">hello@basecodehealth.com</a>
+      <p class="font-heading text-14 font-light" style="color: {{ text_body }};">
+        Still have questions? <a href="mailto:hello@basecodehealth.com" style="color: {{ accent }};">hello@basecodehealth.com</a>
       </p>
     </div>
   </div>
 </section>
+{%- endif -%}
 
 <!-- ═══ FINAL CTA ═══ -->
-<section class="py-16 md:py-24 px-6 md:px-20" style="background: linear-gradient(135deg, #0d1f16, #1C2E23);">
+<section class="py-16 md:py-24 px-6 md:px-20" style="background: linear-gradient(135deg, #0d1f16, {{ primary_dark }});">
   <div style="max-width: 640px; margin: 0 auto;" class="relative text-center reveal-hidden">
-    <p class="font-display italic text-20 md:text-28 font-normal mb-6" style="color: rgba(245,242,236,0.85); line-height: 1.4;">
+    <p class="font-display italic text-20 md:text-28 font-normal mb-6" style="color: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.85); line-height: 1.4;">
       {{ section.settings.closing_quote | default: "Your biology remembers. It's time your probiotic did too." }}
     </p>
 
     <div class="flex items-center justify-center gap-2 mb-6">
       <div class="flex gap-0.5">
         {%- for i in (1..5) -%}
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="#C4783A" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="{{ accent }}" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         {%- endfor -%}
       </div>
-      <span class="font-heading text-13" style="color: rgba(245,242,236,0.5);">4.8/5 from 312 verified buyers</span>
+      <span class="font-heading text-13" style="color: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.5);">4.8/5 from 312 verified buyers</span>
     </div>
 
-    <a href="/products/origin" class="btn btn--primary inline-block cta-pulse" onclick="if(typeof trackEvent==='function')trackEvent('ViewContent', {content_name: '{{ symptom }}-bottom-cta'})">
+    <a href="{{ product_url }}" class="btn btn--primary inline-block cta-pulse" onclick="if(typeof trackEvent==='function')trackEvent('ViewContent', {content_name: '{{ symptom }}-bottom-cta'})">
       {{ section.settings.cta_text | default: "Try Origin Risk-Free — $34/mo" }}
     </a>
 
     <div class="flex flex-wrap justify-center gap-4 mt-5">
-      <span class="font-mono-spec text-10" style="color: rgba(245,242,236,0.35);">🇺🇸 Made in USA</span>
-      <span class="font-mono-spec text-10" style="color: rgba(245,242,236,0.35);">🛡 30-Day Guarantee</span>
-      <span class="font-mono-spec text-10" style="color: rgba(245,242,236,0.35);">🚚 Free Shipping</span>
-      <span class="font-mono-spec text-10" style="color: rgba(245,242,236,0.35);">↻ Cancel Anytime</span>
+      <span class="font-mono-spec text-10" style="color: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.35);">🇺🇸 Made in USA</span>
+      <span class="font-mono-spec text-10" style="color: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.35);">🛡 30-Day Guarantee</span>
+      <span class="font-mono-spec text-10" style="color: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.35);">🚚 Free Shipping</span>
+      <span class="font-mono-spec text-10" style="color: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.35);">↻ Cancel Anytime</span>
     </div>
   </div>
 </section>
 
 <!-- ═══ STICKY MOBILE CTA ═══ -->
-<div id="landing-sticky-cta" class="fixed bottom-0 left-0 right-0 lg:hidden" style="z-index: 50; background: #1C2E23; border-top: 1px solid rgba(196,120,58,0.2); padding: 12px 16px; transform: translateY(100%); transition: transform 0.3s ease;">
+<div id="landing-sticky-cta" class="fixed bottom-0 left-0 right-0 lg:hidden" style="z-index: 50; background: {{ primary_dark }}; border-top: 1px solid rgba({{ accent_r }},{{ accent_g }},{{ accent_b }},0.2); padding: 12px 16px; transform: translateY(100%); transition: transform 0.3s ease;">
   <div class="flex items-center gap-3">
     <div class="flex-1">
-      <p class="font-heading text-14 font-semibold" style="color: #F5F2EC;">Origin · <span style="text-decoration: line-through; opacity: 0.5;">$40</span> $34/mo</p>
-      <p class="font-mono-spec text-10" style="color: rgba(245,242,236,0.45);">Free shipping · 30-day guarantee</p>
+      <p class="font-heading text-14 font-semibold" style="color: {{ light_bg }};">Origin · <span style="text-decoration: line-through; opacity: 0.5;">{{ onetime_price }}</span> {{ subscribe_price }}</p>
+      <p class="font-mono-spec text-10" style="color: rgba({{ light_bg_r }},{{ light_bg_g }},{{ light_bg_b }},0.45);">Free shipping · 30-day guarantee</p>
     </div>
-    <a href="/products/origin" class="btn btn--primary text-13" style="padding: 10px 20px; white-space: nowrap;">
+    <a href="{{ product_url }}" class="btn btn--primary text-13" style="padding: 10px 20px; white-space: nowrap;">
       Buy Now
     </a>
   </div>
 </div>
+
+</div><!-- end padding wrapper -->
 
 <!-- Page Tracking + Sticky CTA Logic -->
 <script>
@@ -722,40 +909,91 @@
   "class": "landing-page-section",
   "tag": "div",
   "settings": [
-    { "type": "text", "id": "symptom_slug", "label": "Symptom Slug (for tracking)", "default": "gut-health", "info": "Used in Meta Pixel events" },
-    { "type": "text", "id": "eyebrow", "label": "Hero Eyebrow", "default": "The Science Behind Your Symptoms" },
-    { "type": "textarea", "id": "headline", "label": "Hero Headline" },
-    { "type": "textarea", "id": "subheadline", "label": "Hero Subheadline" },
-    { "type": "text", "id": "cta_text", "label": "CTA Button Text", "default": "Try Origin — $34/mo" },
-    { "type": "text", "id": "agitate_eyebrow", "label": "Agitate Eyebrow", "default": "What's Really Going On" },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    { "type": "text",     "id": "symptom_slug",     "label": "Symptom Slug (for tracking)",          "default": "gut-health",                          "info": "Used in Meta Pixel events" },
+    { "type": "text",     "id": "eyebrow",          "label": "Hero Eyebrow",                          "default": "The Science Behind Your Symptoms" },
+    { "type": "textarea", "id": "headline",         "label": "Hero Headline" },
+    { "type": "textarea", "id": "subheadline",      "label": "Hero Subheadline" },
+    { "type": "text",     "id": "cta_text",         "label": "CTA Button Text",                       "default": "Try Origin — $34/mo" },
+    { "type": "text",     "id": "agitate_eyebrow",  "label": "Agitate Eyebrow",                       "default": "What's Really Going On" },
     { "type": "textarea", "id": "agitate_headline", "label": "Agitate Headline" },
-    { "type": "textarea", "id": "agitate_body", "label": "Agitate Points (separate with ||)", "info": "Each point separated by || becomes a card" },
-    { "type": "textarea", "id": "cost_headline", "label": "Cost of Inaction Headline" },
-    { "type": "textarea", "id": "cost_body", "label": "Cost of Inaction Body" },
-    { "type": "textarea", "id": "bridge_headline", "label": "Bridge Headline" },
-    { "type": "textarea", "id": "bridge_body", "label": "Bridge Body" },
-    { "type": "text", "id": "citation", "label": "Research Citation" },
-    { "type": "textarea", "id": "solution_headline", "label": "Solution Headline" },
-    { "type": "textarea", "id": "solution_body", "label": "Solution Body" },
-    { "type": "textarea", "id": "lead_headline", "label": "Lead Capture Headline", "default": "Get the research behind Origin." },
-    { "type": "textarea", "id": "closing_quote", "label": "Closing Quote" }
+    { "type": "textarea", "id": "agitate_body",     "label": "Agitate Points (separate with ||)",     "info": "Each point separated by || becomes a card" },
+    { "type": "textarea", "id": "cost_headline",    "label": "Cost of Inaction Headline" },
+    { "type": "textarea", "id": "cost_body",        "label": "Cost of Inaction Body" },
+    { "type": "textarea", "id": "bridge_headline",  "label": "Bridge Headline" },
+    { "type": "textarea", "id": "bridge_body",      "label": "Bridge Body" },
+    { "type": "text",     "id": "citation",         "label": "Research Citation" },
+    { "type": "textarea", "id": "solution_headline","label": "Solution Headline" },
+    { "type": "textarea", "id": "solution_body",    "label": "Solution Body" },
+    { "type": "textarea", "id": "lead_headline",    "label": "Lead Capture Headline",                 "default": "Get the research behind Origin." },
+    { "type": "textarea", "id": "closing_quote",    "label": "Closing Quote" },
+    {
+      "type": "header",
+      "content": "Product & Pricing"
+    },
+    { "type": "product",  "id": "product",          "label": "Product",                               "info": "Select the Shopify product. Overrides product link below." },
+    { "type": "url",      "id": "product_link",     "label": "Product Link (fallback)",               "info": "Used when no product is selected above" },
+    { "type": "text",     "id": "subscribe_price",  "label": "Subscribe Price",                       "default": "$34/mo" },
+    { "type": "text",     "id": "onetime_price",    "label": "One-Time Price",                        "default": "$40" },
+    { "type": "text",     "id": "discount_code",    "label": "Discount Code",                         "default": "FOUNDER20" },
+    { "type": "text",     "id": "discount_percent", "label": "Discount Percent",                      "default": "20%" },
+    {
+      "type": "header",
+      "content": "Urgency Bar"
+    },
+    { "type": "text",     "id": "urgency_text",     "label": "Urgency Bar Text",                      "default": "LAUNCH PRICING — ",                   "info": "Subscribe price is appended automatically" },
+    {
+      "type": "header",
+      "content": "Section Visibility"
+    },
+    { "type": "checkbox", "id": "show_urgency_bar",  "label": "Show Urgency Bar",    "default": true },
+    { "type": "checkbox", "id": "show_trust_strip",  "label": "Show Trust Strip",    "default": true },
+    { "type": "checkbox", "id": "show_ingredients",  "label": "Show Ingredients",    "default": true },
+    { "type": "checkbox", "id": "show_comparison",   "label": "Show Comparison",     "default": true },
+    { "type": "checkbox", "id": "show_faq",          "label": "Show FAQ",            "default": true },
+    { "type": "checkbox", "id": "show_lead_capture", "label": "Show Lead Capture",   "default": true },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    { "type": "color", "id": "primary_dark", "label": "Primary Dark (Forest Green)", "default": "#1C2E23" },
+    { "type": "color", "id": "accent",       "label": "Accent (Ochre)",              "default": "#C4783A" },
+    { "type": "color", "id": "light_bg",     "label": "Light Background (Cream)",    "default": "#F5F2EC" },
+    { "type": "color", "id": "card_bg",      "label": "Card Background",             "default": "#EDE8DF" },
+    { "type": "color", "id": "text_dark",    "label": "Text Dark",                   "default": "#1C2E23" },
+    { "type": "color", "id": "text_body",    "label": "Text Body",                   "default": "#4A5550" },
+    { "type": "color", "id": "text_muted",   "label": "Text Muted",                  "default": "#8A9490" },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    { "type": "range", "id": "padding_top",    "label": "Padding Top",    "min": 0, "max": 120, "step": 4, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding Bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 0 },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    { "type": "checkbox", "id": "enable_animations", "label": "Enable Scroll Animations", "default": true }
   ],
   "blocks": [
     {
       "type": "pathway",
       "name": "Pathway Card",
       "settings": [
-        { "type": "text", "id": "step", "label": "Step Label", "default": "01 — The Problem" },
-        { "type": "text", "id": "title", "label": "Title" },
-        { "type": "textarea", "id": "body", "label": "Body" }
+        { "type": "text",     "id": "step",  "label": "Step Label", "default": "01 — The Problem" },
+        { "type": "text",     "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "body",  "label": "Body" }
       ]
     },
     {
       "type": "dream_outcome",
       "name": "Dream Outcome",
       "settings": [
-        { "type": "text", "id": "title", "label": "Title" },
-        { "type": "textarea", "id": "body", "label": "Body" }
+        { "type": "text",     "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "body",  "label": "Body" }
       ]
     },
     {
@@ -763,7 +1001,36 @@
       "name": "Review",
       "settings": [
         { "type": "textarea", "id": "quote", "label": "Review Quote" },
-        { "type": "text", "id": "name", "label": "Reviewer Name" }
+        { "type": "text",     "id": "name",  "label": "Reviewer Name" }
+      ]
+    },
+    {
+      "type": "ingredient",
+      "name": "Ingredient",
+      "limit": 6,
+      "settings": [
+        { "type": "text",     "id": "strain_name",      "label": "Strain Short Name",  "default": "L. acidophilus",    "info": "e.g. L. acidophilus" },
+        { "type": "text",     "id": "strain_full_name", "label": "Full Scientific Name",                                "info": "Optional — shown in small text below name" },
+        { "type": "textarea", "id": "description",      "label": "What It Does",        "default": "Gut barrier integrity · Lactose metabolism · Digestive enzyme production" }
+      ]
+    },
+    {
+      "type": "competitor",
+      "name": "Competitor",
+      "limit": 4,
+      "settings": [
+        { "type": "text",     "id": "name",     "label": "Competitor Name",  "default": "Generic Probiotics" },
+        { "type": "text",     "id": "price",    "label": "Monthly Price",    "default": "$25-60",            "info": "Shown in the price row" },
+        { "type": "textarea", "id": "features", "label": "Features (one per line)", "info": "Currently not displayed in table — reserved for future use" }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ",
+      "limit": 8,
+      "settings": [
+        { "type": "text",     "id": "question", "label": "Question" },
+        { "type": "richtext", "id": "answer",   "label": "Answer" }
       ]
     }
   ],

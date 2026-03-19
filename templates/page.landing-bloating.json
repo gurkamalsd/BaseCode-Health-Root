@@ -9,125 +9,444 @@
  */
 {
   "sections": {
-    "landing": {
-      "type": "landing-page",
+    "hero": {
+      "type": "hero",
       "settings": {
-        "symptom_slug": "bloating",
-        "eyebrow": "The Immigrant Gut",
-        "headline": "Your bloating isn't a food problem. It's a bacterial extinction event inside your gut.",
-        "subheadline": "You've cut dairy. Gluten. FODMAPs. Your diet gets smaller every year but the bloating never stops. That's because bloating isn't caused by what you eat — it's caused by the ancestral bacteria you lost. When those populations disappear, food that your grandmother digested effortlessly now ferments inside you like a bomb.",
-        "cta_text": "End the Bloating — $34/mo",
-        "agitate_eyebrow": "You've Tried Everything. Nothing Holds.",
-        "agitate_headline": "Every diet you try works for two weeks. Then the bloating comes back worse. Here's why.",
-        "agitate_body": "You wake up flat. By noon you look four months pregnant. You unbutton your jeans at your desk. You skip dinner plans because you know what's coming. You've googled 'why am I always bloated' so many times your phone autocompletes it. You carry Gas-X like it's chapstick. You eat a salad and bloat. You eat rice and bloat. You eat nothing and somehow still bloat.||You've done the elimination diets. The food sensitivity tests. The $300 functional medicine panels. You've cut dairy, gluten, onions, garlic, beans, cruciferous vegetables — half the foods your mother raised you on. Your gastroenterologist shrugged and said 'IBS.' Your dietitian handed you a FODMAP chart. Nobody asked the obvious question: why can your grandmother eat everything you can't?||The answer is bacterial. Research on 2,084 people across six ethnic groups proved that ethnicity shapes your microbiome more than diet, age, or medical history. When you immigrate — or grow up eating a Western diet your ancestors never touched — the bacterial populations that digest your ancestral foods collapse. You're not intolerant. You're depleted.",
-        "cost_headline": "You're spending $150+/month managing a problem that costs $34/month to fix.",
-        "cost_body": "Digestive enzymes: $30/month. Specialty groceries to avoid triggers: $80+/month. Gas relief products: $15/month. The gastro copay: $50 per visit. The food sensitivity test that found 27 new 'intolerances': $250. The low-FODMAP cookbook: $34. The anxiety of eating at a restaurant: priceless. Americans spend $4.6 billion annually on digestive products — enzymes, antacids, gas relief, elimination diet foods — treating symptoms of a bacterial problem. Origin costs $1.13 per day. Less than the Gas-X you bought last week.",
-        "bridge_headline": "Your gut bacteria are a digestive workforce. Immigration wiped out the crew.",
-        "bridge_body": "Published research in Gut confirms that microbiome composition directly determines digestive capacity. L. acidophilus produces lactase — the enzyme that breaks down dairy. L. plantarum ferments complex plant fibers before they can produce gas. These are strains found abundantly in traditional fermented foods across South Asian, East Asian, African, and Latin American diets — foods that disappear within one generation of Westernization. When these bacterial populations collapse, carbohydrates that should break down in the small intestine reach your colon intact and ferment explosively. That fermentation is your bloating. That gas is the sound of bacteria that should be there — but aren't.",
-        "citation": "Aziz et al., Gut, 2019 · Tap et al., Cell Host & Microbe, 2017 · Canani et al., World Journal of Gastroenterology, 2016",
-        "solution_headline": "Origin doesn't mask your bloating. It rebuilds the bacterial workforce that eliminates it.",
-        "solution_body": "L. acidophilus restores lactase production so dairy stops destroying you. L. plantarum breaks down plant fibers before they ferment into gas. B. lactis normalizes intestinal transit so food moves through at the right speed — not too fast, not too slow. L. paracasei calms the immune overreaction that drives IBS-pattern symptoms. MAKTREK Bi-Pass ensures all four strains survive stomach acid alive — because dead bacteria fix nothing. FOS prebiotic feeds them on arrival so they colonize, not just pass through. This isn't symptom management. This is restoration.",
-        "lead_headline": "The research paper that explains why your bloating started after immigration.",
-        "closing_quote": "Your grandmother ate dal, roti, kimchi, injera, mole — whatever her mother made — and never once googled 'why am I so bloated.' She didn't have better willpower. She had better bacteria. You can get them back."
+        "show_social_proof": true,
+        "social_proof_text": "Backed by biological diversity research",
+        "subtitle": "Digestive Health & Your Microbiome",
+        "heading": "Your bloating isn't a food problem. It's a bacterial extinction event inside your gut.",
+        "text": "You've cut dairy. Gluten. FODMAPs. Your diet gets smaller every year but the bloating never stops. That's because bloating isn't caused by what you eat — it's caused by the ancestral bacteria you lost. When those populations disappear, food that your grandmother digested effortlessly now ferments inside you like a bomb.",
+        "button_text": "End the Bloating — $34/mo",
+        "button_link": "/products/origin",
+        "guarantee_text": "30-Day Money-Back Guarantee",
+        "text_align": "left",
+        "overlay_opacity": 55,
+        "height": 100,
+        "mobile_height": 85,
+        "text_color": "#FFFFFF"
+      }
+    },
+    "features-banner": {
+      "type": "features-banner",
+      "settings": {
+        "bg_color": "#F5F2EC",
+        "text_color": "#1C2E23",
+        "icon_color": "#C4783A",
+        "layout": "inline",
+        "desktop_columns": "4",
+        "mobile_layout": "slider",
+        "show_dividers": true,
+        "padding_top": 24,
+        "padding_bottom": 24,
+        "enable_animation": true
       },
       "blocks": {
-        "pathway_1": {
-          "type": "pathway",
+        "badge-1": {
+          "type": "feature",
           "settings": {
-            "step": "01 — Bacterial Extinction",
-            "title": "Your ancestral digestive crew disappears",
-            "body": "Within one generation of Western diet exposure, the bacterial strains that produce digestive enzymes — lactase, bile salt hydrolase, fiber-fermenting enzymes — collapse. Your gut loses the machinery to break down the foods your family has eaten for thousands of years. The HELIUS study proved this across 2,084 people from six ethnic groups."
+            "icon": "flask",
+            "text": "Biology-Informed Formula",
+            "subtext": "HELIUS study — 2,084 subjects"
           }
         },
-        "pathway_2": {
-          "type": "pathway",
+        "badge-2": {
+          "type": "feature",
           "settings": {
-            "step": "02 — Explosive Malfermentation",
-            "title": "Your food rots instead of digesting",
-            "body": "Without the right bacteria, carbohydrates bypass the small intestine undigested and hit your colon intact. Opportunistic bacteria ferment them violently — producing hydrogen, methane, and CO2. Your intestines distend with gas. Pain radiates. You look pregnant by dinner. You blame the food. But the food isn't the problem. The missing bacteria are."
+            "icon": "shield",
+            "text": "MAKTREK Bi-Pass Delivery",
+            "subtext": "Bacteria arrive alive"
           }
         },
-        "pathway_3": {
-          "type": "pathway",
+        "badge-3": {
+          "type": "feature",
           "settings": {
-            "step": "03 — Origin Rebuilds the Crew",
-            "title": "Stop eliminating foods. Start restoring bacteria.",
-            "body": "Origin delivers four clinically documented strains — alive, through stomach acid, fed on arrival. L. acidophilus and L. plantarum restore the enzymatic breakdown your gut lost. Food digests where it should. Colonic fermentation normalizes. The bloating resolves because the cause resolves — not because you stopped eating."
+            "icon": "leaf",
+            "text": "Vegan & Clean",
+            "subtext": "HPMC veggie capsule, no gelatin"
           }
         },
-        "outcome_1": {
-          "type": "dream_outcome",
+        "badge-4": {
+          "type": "feature",
           "settings": {
-            "title": "Eat your mother's cooking again",
-            "body": "Dal. Curry. Kimchi. Injera. The foods you grew up on — the ones you've been avoiding because they 'trigger' you. When your bacterial workforce comes back, these foods stop being threats. They become comfort again. Sunday dinner at your parents' house without a Ziploc bag of safe snacks."
-          }
-        },
-        "outcome_2": {
-          "type": "dream_outcome",
-          "settings": {
-            "title": "Same waistband at 9pm as 9am",
-            "body": "You know the drill. Wake up flat. By lunch, your jeans dig in. By dinner, you're in sweats. That 'six months pregnant' look by evening is gas from malfermentation — nothing more. When your bacteria recover, your stomach stays the same size all day. You stop carrying a backup outfit."
-          }
-        },
-        "outcome_3": {
-          "type": "dream_outcome",
-          "settings": {
-            "title": "Say yes to dinner plans",
-            "body": "Restaurants. Weddings. First dates. Work dinners. Every social situation you've been declining or dreading because you can't control every ingredient. Imagine ordering off a menu without scanning for 'safe' options. Imagine eating without doing math. That's what a functioning microbiome feels like."
-          }
-        },
-        "outcome_4": {
-          "type": "dream_outcome",
-          "settings": {
-            "title": "Throw away the elimination diet",
-            "body": "Dairy. Gluten. Onions. Garlic. Beans. Lentils. Bread. You've been shrinking your diet for years, cutting one more food every few months, and the bloating still finds you. With Origin, the list of foods you can eat gets longer every week — not shorter. Your world expands instead of contracting."
-          }
-        },
-        "review_1": {
-          "type": "review",
-          "settings": {
-            "quote": "I moved from Mumbai to Chicago nine years ago and slowly lost the ability to eat everything I grew up on. Dairy gone. Lentils gone. Even rice would bloat me. I thought my body was just broken. Four weeks on Origin and I ate my mom's rajma chawal for the first time in years. No bloating. No pain. I called her crying. She said 'I told you — you just needed to fix your stomach.' She was more right than she knew.",
-            "name": "Priya K. — Chicago, IL"
-          }
-        },
-        "review_2": {
-          "type": "review",
-          "settings": {
-            "quote": "My gastro said IBS, handed me a FODMAP list, and sent me home. I cut 23 foods in six months and still bloated every single day. Two weeks on Origin I ate a bowl of pasta and waited for the bomb. Nothing happened. Three months later I eat everything. EVERYTHING. I want those six years of restriction back.",
-            "name": "Ji-Yeon S. — Vancouver, BC"
-          }
-        },
-        "review_3": {
-          "type": "review",
-          "settings": {
-            "quote": "First-generation Nigerian-American. By 25 I couldn't eat jollof rice without looking six months pregnant by evening. My doctor said 'some people are just sensitive.' Origin proved him wrong. I eat my auntie's cooking every Sunday now — no Gas-X, no Tums, no unbuttoning my jeans under the table.",
-            "name": "Amara O. — Houston, TX"
-          }
-        },
-        "review_4": {
-          "type": "review",
-          "settings": {
-            "quote": "My abuela makes the best tamales in East LA and I spent three Christmases avoiding them. Started Origin in October, and by December I ate four tamales and felt completely fine. My abuela cried. She thought I just didn't like her cooking anymore. Best $34 I've ever spent.",
-            "name": "Sofia M. — Los Angeles, CA"
+            "icon": "refresh",
+            "text": "30-Day Guarantee",
+            "subtext": "Full refund, no questions asked"
           }
         }
       },
-      "block_order": [
-        "pathway_1",
-        "pathway_2",
-        "pathway_3",
-        "outcome_1",
-        "outcome_2",
-        "outcome_3",
-        "outcome_4",
-        "review_1",
-        "review_2",
-        "review_3",
-        "review_4"
-      ]
+      "block_order": ["badge-1", "badge-2", "badge-3", "badge-4"]
+    },
+    "rich-text": {
+      "type": "rich-text",
+      "settings": {
+        "bg_color": "#FFFFFF",
+        "text_color": "#1C2E23",
+        "content_width": "medium",
+        "text_align": "left",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "enable_animation": true
+      },
+      "blocks": {
+        "eyebrow": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "You've Tried Everything. Nothing Holds.",
+            "subheading_color": "#C4783A"
+          }
+        },
+        "headline": {
+          "type": "heading",
+          "settings": {
+            "heading": "Every diet you try works for two weeks. Then the bloating comes back worse. Here's why.",
+            "heading_level": "h2",
+            "heading_size": "h2"
+          }
+        },
+        "body": {
+          "type": "text",
+          "settings": {
+            "text": "<p>You wake up flat. By noon you look four months pregnant. You unbutton your jeans at your desk. You skip dinner plans because you know what's coming. You've googled 'why am I always bloated' so many times your phone autocompletes it. You carry Gas-X like it's chapstick. You eat a salad and bloat. You eat rice and bloat. You eat nothing and somehow still bloat.</p><p>You've done the elimination diets. The food sensitivity tests. The $300 functional medicine panels. You've cut dairy, gluten, onions, garlic, beans, cruciferous vegetables — half the foods your mother raised you on. Your gastroenterologist shrugged and said 'IBS.' Your dietitian handed you a FODMAP chart. Nobody asked the obvious question: why can your grandmother eat everything you can't?</p><p>The answer is bacterial. Research on 2,084 people across six ethnic groups proved that ethnicity shapes your microbiome more than diet, age, or medical history. When you immigrate — or grow up eating a Western diet your ancestors never touched — the bacterial populations that digest your ancestral foods collapse. You're not intolerant. You're depleted.</p>"
+          }
+        },
+        "cost-cta": {
+          "type": "button",
+          "settings": {
+            "button_text": "End the Bloating — $34/mo",
+            "button_link": "/products/origin",
+            "button_style": "primary"
+          }
+        }
+      },
+      "block_order": ["eyebrow", "headline", "body", "cost-cta"]
+    },
+    "image-with-text": {
+      "type": "image-with-text",
+      "settings": {
+        "bg_color": "#F5F2EC",
+        "text_color": "#1C2E23",
+        "layout": "image_first",
+        "image_width_pct": 50,
+        "text_align": "left",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "enable_animation": true
+      },
+      "blocks": {
+        "sub": {
+          "type": "subheading",
+          "settings": {
+            "text": "The Science",
+            "color": "#C4783A"
+          }
+        },
+        "head": {
+          "type": "heading",
+          "settings": {
+            "text": "Your gut bacteria are a digestive workforce. Immigration wiped out the crew.",
+            "heading_level": "h2",
+            "heading_size": "h2"
+          }
+        },
+        "body": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Published research in Gut confirms that microbiome composition directly determines digestive capacity. L. acidophilus produces lactase — the enzyme that breaks down dairy. L. plantarum ferments complex plant fibers before they can produce gas. These are strains found abundantly in traditional fermented foods across South Asian, East Asian, African, and Latin American diets — foods that disappear within one generation of Westernization. When these bacterial populations collapse, carbohydrates that should break down in the small intestine reach your colon intact and ferment explosively. That fermentation is your bloating. That gas is the sound of bacteria that should be there — but aren't.</p><p><em>Aziz et al., Gut, 2019 · Tap et al., Cell Host &amp; Microbe, 2017</em></p>"
+          }
+        },
+        "btn": {
+          "type": "button",
+          "settings": {
+            "text": "Get Origin — $34/mo",
+            "link": "/products/origin",
+            "style": "primary"
+          }
+        }
+      },
+      "block_order": ["sub", "head", "body", "btn"]
+    },
+    "research-highlight": {
+      "type": "research-highlight",
+      "settings": {
+        "subtitle": "How It Works",
+        "heading": "Three steps from bacterial extinction to digestive restoration.",
+        "bg_color": "#1C2E23",
+        "text_color": "#F5F2EC",
+        "accent_color": "#C4783A",
+        "card_bg_color": "#243D2B",
+        "icon_bg_color": "#C4783A",
+        "columns": "3",
+        "card_style": "vertical",
+        "button_text": "Get Origin — $34/mo",
+        "button_link": "/products/origin",
+        "button_style": "primary",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "enable_animation": true
+      },
+      "blocks": {
+        "step-1": {
+          "type": "stat",
+          "settings": {
+            "icon_style": "number",
+            "stat": "01",
+            "title": "Your ancestral digestive crew disappears",
+            "text": "Within one generation of Western diet exposure, the bacterial strains that produce digestive enzymes — lactase, bile salt hydrolase, fiber-fermenting enzymes — collapse. Your gut loses the machinery to break down the foods your family has eaten for thousands of years. The HELIUS study proved this across 2,084 people from six ethnic groups.",
+            "source": "Step 01 — Bacterial Extinction"
+          }
+        },
+        "step-2": {
+          "type": "stat",
+          "settings": {
+            "icon_style": "number",
+            "stat": "02",
+            "title": "Your food rots instead of digesting",
+            "text": "Without the right bacteria, carbohydrates bypass the small intestine undigested and hit your colon intact. Opportunistic bacteria ferment them violently — producing hydrogen, methane, and CO2. Your intestines distend with gas. Pain radiates. You look pregnant by dinner. You blame the food. But the food isn't the problem. The missing bacteria are.",
+            "source": "Step 02 — Explosive Malfermentation"
+          }
+        },
+        "step-3": {
+          "type": "stat",
+          "settings": {
+            "icon_style": "number",
+            "stat": "03",
+            "title": "Stop eliminating foods. Start restoring bacteria.",
+            "text": "Origin delivers four clinically documented strains — alive, through stomach acid, fed on arrival. L. acidophilus and L. plantarum restore the enzymatic breakdown your gut lost. Food digests where it should. Colonic fermentation normalizes. The bloating resolves because the cause resolves — not because you stopped eating.",
+            "source": "Step 03 — Origin Rebuilds the Crew"
+          }
+        }
+      },
+      "block_order": ["step-1", "step-2", "step-3"]
+    },
+    "benefits-product": {
+      "type": "benefits-product",
+      "settings": {
+        "heading": "What eating freely again feels like.",
+        "subheading": "Origin Results",
+        "bg_color": "#C4783A",
+        "text_color": "#FFFFFF",
+        "accent_color": "#1C2E23",
+        "button_text": "Get Origin — $34/mo",
+        "button_link": "/products/origin",
+        "button_style": "primary",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "enable_animation": true
+      },
+      "blocks": {
+        "benefit-1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "heart",
+            "heading": "Eat your mother's cooking again",
+            "text": "Dal. Curry. Kimchi. Injera. The foods you grew up on — the ones you've been avoiding because they trigger you. When your bacterial workforce comes back, these foods stop being threats. They become comfort again."
+          }
+        },
+        "benefit-2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "check",
+            "heading": "Same waistband at 9pm as 9am",
+            "text": "That 'six months pregnant' look by evening is gas from malfermentation — nothing more. When your bacteria recover, your stomach stays the same size all day. You stop carrying a backup outfit."
+          }
+        },
+        "benefit-3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "star",
+            "heading": "Say yes to dinner plans",
+            "text": "Restaurants. Weddings. First dates. Work dinners. Imagine ordering off a menu without scanning for safe options. Imagine eating without doing math. That's what a functioning microbiome feels like."
+          }
+        },
+        "benefit-4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "refresh",
+            "heading": "Throw away the elimination diet",
+            "text": "Dairy. Gluten. Onions. Garlic. Beans. Lentils. Bread. With Origin, the list of foods you can eat gets longer every week — not shorter. Your world expands instead of contracting."
+          }
+        },
+        "benefit-5": {
+          "type": "benefit",
+          "settings": {
+            "icon": "flask",
+            "heading": "40 Billion CFU, 4 targeted strains",
+            "text": "MAKTREK Bi-Pass delivery ensures the bacteria that restore your digestive capacity actually arrive in your gut alive."
+          }
+        },
+        "benefit-6": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shield",
+            "heading": "30-Day Money-Back Guarantee",
+            "text": "Try Origin for 30 days. If the bloating doesn't resolve, we'll refund you in full. No questions asked."
+          }
+        }
+      },
+      "block_order": ["benefit-1", "benefit-2", "benefit-3", "benefit-4", "benefit-5", "benefit-6"]
+    },
+    "image-banner": {
+      "type": "image-banner",
+      "settings": {
+        "heading": "Your grandmother ate dal, roti, kimchi, injera — whatever her mother made — and never once googled 'why am I so bloated.' She didn't have better willpower. She had better bacteria. You can get them back.",
+        "heading_size": "text-3xl",
+        "button_text": "Get Origin — $34/mo",
+        "button_link": "/products/origin",
+        "button_style": "white",
+        "overlay_color": "#1C2E23",
+        "overlay_opacity": 65,
+        "text_color": "#FFFFFF",
+        "text_align": "center",
+        "height": 400,
+        "mobile_height": 300,
+        "full_width": true,
+        "enable_animation": true
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {
+        "heading": "Real results from real people.",
+        "subheading": "Customer Stories",
+        "bg_color": "#FFFFFF",
+        "layout": "carousel",
+        "card_style": "card",
+        "show_stars": true,
+        "accent_color": "#f59e0b",
+        "auto_play": true,
+        "auto_play_speed": 6,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "enable_animation": true
+      },
+      "blocks": {
+        "review-1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I moved from Mumbai to Chicago nine years ago and slowly lost the ability to eat everything I grew up on. Dairy gone. Lentils gone. Even rice would bloat me. Four weeks on Origin and I ate my mom's rajma chawal for the first time in years. No bloating. No pain. I called her crying.",
+            "author": "Priya K.",
+            "role": "Chicago, IL",
+            "rating": 5
+          }
+        },
+        "review-2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "My gastro said IBS, handed me a FODMAP list, and sent me home. I cut 23 foods in six months and still bloated every single day. Two weeks on Origin I ate a bowl of pasta and waited for the bomb. Nothing happened. Three months later I eat everything. EVERYTHING.",
+            "author": "Ji-Yeon S.",
+            "role": "Vancouver, BC",
+            "rating": 5
+          }
+        },
+        "review-3": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "First-generation Nigerian-American. By 25 I couldn't eat jollof rice without looking six months pregnant by evening. My doctor said 'some people are just sensitive.' Origin proved him wrong. I eat my auntie's cooking every Sunday now — no Gas-X, no Tums, no unbuttoning my jeans under the table.",
+            "author": "Amara O.",
+            "role": "Houston, TX",
+            "rating": 5
+          }
+        },
+        "review-4": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "My abuela makes the best tamales in East LA and I spent three Christmases avoiding them. Started Origin in October, and by December I ate four tamales and felt completely fine. My abuela cried. She thought I just didn't like her cooking anymore. Best $34 I've ever spent.",
+            "author": "Sofia M.",
+            "role": "Los Angeles, CA",
+            "rating": 5
+          }
+        }
+      },
+      "block_order": ["review-1", "review-2", "review-3", "review-4"]
+    },
+    "faq-accordion": {
+      "type": "faq-accordion",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "subheading": "Bloating & Origin",
+        "bg_color": "#F5F2EC",
+        "text_color": "#1C2E23",
+        "accent_color": "#C4783A",
+        "accordion_style": "bordered",
+        "icon_style": "plus",
+        "open_first": true,
+        "content_width": "narrow",
+        "heading_align": "center",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "enable_animation": true
+      },
+      "blocks": {
+        "faq-1": {
+          "type": "question",
+          "settings": {
+            "question": "Why do I bloat even on an elimination diet?",
+            "answer": "<p>Elimination diets remove trigger foods but leave the underlying bacterial deficit untreated. When L. acidophilus and L. plantarum populations are depleted, your gut lacks the enzymatic machinery to process a wide range of foods — not just the specific ones you've identified. The bloating follows you from food to food because the root cause isn't the food. It's the missing bacteria that should be digesting it.</p>"
+          }
+        },
+        "faq-2": {
+          "type": "question",
+          "settings": {
+            "question": "How long before I can eat freely again?",
+            "answer": "<p>Most people notice meaningful improvement within 3-4 weeks. By week 6-8, as the bacterial populations stabilize and enzymatic capacity rebuilds, foods that previously triggered bloating become tolerable. Full restoration takes time — bacterial colonization is progressive. But you'll notice the direction of change quickly: foods that used to destroy you become manageable, then fine, then completely normal again.</p>"
+          }
+        },
+        "faq-3": {
+          "type": "question",
+          "settings": {
+            "question": "Is this different from digestive enzyme supplements?",
+            "answer": "<p>Yes. Enzyme supplements provide temporary external enzymes that digest food in the moment — like renting the equipment. Origin restores the bacterial populations that produce these enzymes naturally, continuously, from inside your gut. When your bacteria are back, you don't need to remember a pill before every meal. Your gut does the work it was always designed to do.</p>"
+          }
+        },
+        "faq-4": {
+          "type": "question",
+          "settings": {
+            "question": "Will Origin help with IBS?",
+            "answer": "<p>IBS is a symptomatic diagnosis — it describes what's happening without explaining why. For many people with IBS-pattern symptoms (bloating, gas, irregular bowel movements), the underlying driver is microbiome disruption. L. paracasei and B. lactis in particular have clinical documentation showing improvement in IBS symptom scores. Origin doesn't treat IBS as a disease — it addresses the bacterial imbalances that are frequently its cause.</p>"
+          }
+        },
+        "faq-5": {
+          "type": "question",
+          "settings": {
+            "question": "Why did my digestion get worse after I moved countries or changed my diet?",
+            "answer": "<p>The HELIUS study (2,084 subjects, 6 ethnic groups) documented that ethnicity determines microbiome composition more strongly than diet, age, or medical history. When you adopt a Western diet, the ancestral bacterial strains that processed your family's traditional foods deplete within one generation. Your grandmother's gut could handle fermented, spiced, high-fiber ancestral cuisine because she had the bacterial workforce to process it. That workforce depletes in a new dietary environment. Origin restores it.</p>"
+          }
+        }
+      },
+      "block_order": ["faq-1", "faq-2", "faq-3", "faq-4", "faq-5"]
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "The research that explains why your bloating started after immigration.",
+        "text": "Get the free Biology Gap report — plus research updates, product news, and biology-first insights. No spam.",
+        "button_text": "Send Me the Report",
+        "button_style": "white",
+        "form_layout": "stacked",
+        "show_name_field": false,
+        "success_heading": "You're in.",
+        "success_text": "Check your inbox — the report is on its way.",
+        "bg_color": "#1C2E23",
+        "text_color": "#F5F2EC",
+        "content_width": "narrow",
+        "text_align": "center",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "enable_animation": true
+      }
     }
   },
   "order": [
-    "landing"
+    "hero",
+    "features-banner",
+    "rich-text",
+    "image-with-text",
+    "research-highlight",
+    "benefits-product",
+    "image-banner",
+    "testimonials",
+    "faq-accordion",
+    "newsletter"
   ]
 }

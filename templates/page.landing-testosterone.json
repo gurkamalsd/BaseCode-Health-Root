@@ -9,125 +9,521 @@
  */
 {
   "sections": {
-    "landing": {
-      "type": "landing-page",
+    "hero": {
+      "type": "hero",
       "settings": {
-        "symptom_slug": "testosterone",
-        "eyebrow": "Energy, Strength & Your Microbiome",
-        "headline": "Your testosterone isn't low because you're aging. Your gut stopped making the compounds that fuel it.",
-        "subheadline": "Your gut bacteria produce short-chain fatty acids that regulate the hypothalamic-pituitary-gonadal axis — the master switch for testosterone. When ancestral bacterial populations crash after immigration and dietary westernization, SCFA production collapses, systemic inflammation spikes, and your hormonal signaling breaks down from the inside out.",
-        "cta_text": "Reclaim Your Edge — $34/mo",
-        "agitate_eyebrow": "Why TRT Clinics Are a $20B Industry",
-        "agitate_headline": "Men are injecting hormones because nobody told them the real problem starts in their gut.",
-        "agitate_body": "You're 32 and you feel 50. The alarm goes off and your body fights you for another hour. The gym gains that used to come easy? Gone. You're lifting the same weight you lifted two years ago — or less. Your drive for everything — work, relationships, life — flatlined. The doctor says your testosterone is \"low-normal\" and offers a prescription.||Your friends are whispering about TRT clinics. $200/month, weekly injections, blood work every 90 days. And the part nobody mentions: once you start, your body stops producing testosterone on its own. You're 32 and they want to put you on hormone replacement for life.||Here's what the TRT industry won't tell you: published research shows that gut microbiome composition directly modulates testosterone production through the gut-brain-gonad axis. When key bacterial populations deplete — a pattern documented in every immigrant diaspora community studied — the upstream system that drives testosterone breaks down. You don't have a hormone problem. You have a microbiome problem.",
-        "cost_headline": "TRT: $150-400/month plus blood work, plus lifetime dependency. Origin: $34/month. No needles. No shutdown.",
-        "cost_body": "The testosterone optimization industry is worth $20 billion because it profits from dependency. TRT costs $1,800-4,800 per year — plus clinic visits, blood panels every quarter, and the biological reality that exogenous testosterone suppresses your body's own production permanently. Ashwagandha and tongkat ali address downstream symptoms. None of them fix the upstream cause. Origin costs $1.13/day and restores the bacterial ecosystem your hormonal system was built to run on.",
-        "bridge_headline": "The gut-testosterone axis: the connection TRT clinics will never mention.",
-        "bridge_body": "Published research in Gut Microbes and Medical Hypotheses demonstrates that gut bacteria produce short-chain fatty acids — butyrate, propionate, acetate — that regulate systemic inflammation and modulate the hypothalamic-pituitary-gonadal (HPG) axis. When butyrate-producing species like L. plantarum deplete, gut barrier integrity fails, endotoxins leak into the bloodstream, inflammatory cytokines spike, cortisol rises, and testosterone production downregulates. It's not aging. It's a bacterial deficit with a hormonal consequence.",
-        "citation": "Shin et al., Gut Microbes, 2019 · Tremellen & Pearce, Medical Hypotheses, 2012 · Org et al., Genome Biology, 2016",
-        "solution_headline": "Origin rebuilds the gut-hormone axis. Your body handles the testosterone.",
-        "solution_body": "L. plantarum TWK10 demonstrated measurable improvements in muscle endurance and grip strength in 6-week clinical trials — without a single milligram of exogenous hormone. It restores butyrate production, the SCFA that keeps inflammation low and the HPG axis firing. L. acidophilus repairs gut barrier integrity so endotoxins stop leaking. B. lactis normalizes immune signaling. L. paracasei modulates the inflammatory cascade that suppresses hormonal output. Together with MAKTREK acid-protection delivery and FOS prebiotic fuel, Origin creates the conditions for your body to optimize its own testosterone production — the way it was designed to.",
-        "lead_headline": "The gut-testosterone research your TRT clinic doesn't want you to read.",
-        "closing_quote": "Your father worked 14-hour days, raised a family in a new country, and never once complained about energy. The difference isn't genetics or grit — it's the microbiome he brought with him that you lost growing up here."
+        "overlay_opacity": 60,
+        "show_social_proof": true,
+        "social_proof_text": "Backed by biological diversity research",
+        "subtitle": "Energy, Strength & Your Microbiome",
+        "heading": "Your testosterone isn't low because you're aging. Your gut stopped making the compounds that fuel it.",
+        "text": "Your gut bacteria produce short-chain fatty acids that regulate the hypothalamic-pituitary-gonadal axis — the master switch for testosterone. When ancestral bacterial populations crash after dietary westernization, SCFA production collapses and your hormonal signaling breaks down from the inside out.",
+        "button_text": "Reclaim Your Edge — $34/mo",
+        "button_link": "/products/origin",
+        "guarantee_text": "30-Day Money-Back Guarantee",
+        "text_align": "center",
+        "vertical_align": "center",
+        "height": 100,
+        "mobile_height": 85,
+        "content_width": 750,
+        "text_color": "#FFFFFF"
+      }
+    },
+    "features_banner": {
+      "type": "features-banner",
+      "blocks": {
+        "badge_cgmp": {
+          "type": "feature",
+          "settings": {
+            "icon": "flask",
+            "text": "cGMP Certified",
+            "subtext": "Made in USA"
+          }
+        },
+        "badge_vegan": {
+          "type": "feature",
+          "settings": {
+            "icon": "leaf",
+            "text": "Vegan Formula",
+            "subtext": "HPMC veggie capsules"
+          }
+        },
+        "badge_maktrek": {
+          "type": "feature",
+          "settings": {
+            "icon": "shield",
+            "text": "MAKTREK Bi-Pass",
+            "subtext": "Acid-protected delivery"
+          }
+        },
+        "badge_tested": {
+          "type": "feature",
+          "settings": {
+            "icon": "check",
+            "text": "Third-Party Tested",
+            "subtext": "Purity & potency verified"
+          }
+        }
       },
+      "block_order": [
+        "badge_cgmp",
+        "badge_vegan",
+        "badge_maktrek",
+        "badge_tested"
+      ],
+      "settings": {
+        "layout": "stacked",
+        "desktop_columns": "4",
+        "mobile_layout": "grid",
+        "show_dividers": true,
+        "padding_top": 28,
+        "padding_bottom": 28,
+        "bg_color": "#F5F2EC",
+        "text_color": "#1C2E23",
+        "icon_color": "#C4783A",
+        "text_size": "medium",
+        "icon_size": 28,
+        "enable_animation": true
+      }
+    },
+    "rich_text_agitate": {
+      "type": "rich-text",
+      "blocks": {
+        "agitate_eyebrow": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Why TRT Clinics Are a $20B Industry",
+            "subheading_color": "#C4783A"
+          }
+        },
+        "agitate_heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Men are injecting hormones because nobody told them the real problem starts in their gut.",
+            "heading_level": "h2",
+            "heading_size": "h2"
+          }
+        },
+        "agitate_text_1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>You're 32 and you feel 50. The alarm goes off and your body fights you for another hour. The gym gains that used to come easy? Gone. You're lifting the same weight you lifted two years ago — or less. Your drive for everything — work, relationships, life — flatlined. The doctor says your testosterone is \"low-normal\" and offers a prescription.</p>",
+            "text_color": "#1C2E23"
+          }
+        },
+        "agitate_text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Your friends are whispering about TRT clinics. $200/month, weekly injections, blood work every 90 days. And the part nobody mentions: once you start, your body stops producing testosterone on its own. You're 32 and they want to put you on hormone replacement for life.</p>",
+            "text_color": "#1C2E23"
+          }
+        },
+        "agitate_text_3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Here's what the TRT industry won't tell you: published research shows that gut microbiome composition directly modulates testosterone production through the gut-brain-gonad axis. When key bacterial populations deplete — a pattern documented in every immigrant diaspora community studied — the upstream system that drives testosterone breaks down. You don't have a hormone problem. You have a microbiome problem.</p><p><strong>TRT: $150–400/month plus blood work, plus lifetime dependency. Origin: $34/month. No needles. No shutdown.</strong></p>",
+            "text_color": "#1C2E23"
+          }
+        }
+      },
+      "block_order": [
+        "agitate_eyebrow",
+        "agitate_heading",
+        "agitate_text_1",
+        "agitate_text_2",
+        "agitate_text_3"
+      ],
+      "settings": {
+        "content_width": "medium",
+        "text_align": "center",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "bg_color": "#FFFFFF",
+        "bg_opacity": 100,
+        "text_color": "#1C2E23",
+        "enable_animation": true
+      }
+    },
+    "image_with_text_bridge": {
+      "type": "image-with-text",
+      "blocks": {
+        "bridge_subheading": {
+          "type": "subheading",
+          "settings": {
+            "text": "The Science",
+            "color": "#C4783A"
+          }
+        },
+        "bridge_heading": {
+          "type": "heading",
+          "settings": {
+            "text": "The gut-testosterone axis: the connection TRT clinics will never mention.",
+            "heading_level": "h2",
+            "heading_size": "h2"
+          }
+        },
+        "bridge_text_1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Published research in <em>Gut Microbes</em> and <em>Medical Hypotheses</em> demonstrates that gut bacteria produce short-chain fatty acids — butyrate, propionate, acetate — that regulate systemic inflammation and modulate the hypothalamic-pituitary-gonadal (HPG) axis.</p>",
+            "text_color": "#444444",
+            "text_size": "var(--text-base, 1rem)"
+          }
+        },
+        "bridge_text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>When butyrate-producing species like L. plantarum deplete, gut barrier integrity fails, endotoxins leak into the bloodstream, inflammatory cytokines spike, cortisol rises, and testosterone production downregulates. It's not aging. It's a bacterial deficit with a hormonal consequence.</p><p><em>Shin et al., Gut Microbes, 2019 · Tremellen &amp; Pearce, Medical Hypotheses, 2012 · Org et al., Genome Biology, 2016</em></p>",
+            "text_color": "#444444",
+            "text_size": "var(--text-base, 1rem)"
+          }
+        },
+        "bridge_cta": {
+          "type": "button",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "bridge_subheading",
+        "bridge_heading",
+        "bridge_text_1",
+        "bridge_text_2",
+        "bridge_cta"
+      ],
+      "settings": {
+        "layout": "text_first",
+        "image_width_pct": 50,
+        "height_mode": "adapt",
+        "image_ratio": "4/5",
+        "vertical_align": "center",
+        "text_align": "left",
+        "bg_color": "#F5F2EC",
+        "text_color": "#1C2E23",
+        "full_width": false,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "enable_animation": true
+      }
+    },
+    "research_highlight": {
+      "type": "research-highlight",
       "blocks": {
         "pathway_1": {
-          "type": "pathway",
+          "type": "stat",
           "settings": {
-            "step": "01 — SCFA Collapse",
-            "title": "Your gut stops producing butyrate",
-            "body": "Butyrate-producing bacteria — L. plantarum and related species — deplete after dietary westernization. Without these short-chain fatty acids, your gut barrier weakens, endotoxins leak into the bloodstream, and the HPG axis loses the microbial signaling it depends on to drive testosterone production."
+            "icon_style": "number",
+            "stat": "01",
+            "title": "SCFA Collapse",
+            "text": "Butyrate-producing bacteria — L. plantarum and related species — deplete after dietary westernization. Without short-chain fatty acids, your gut barrier weakens, endotoxins leak into the bloodstream, and the HPG axis loses the microbial signaling it depends on to drive testosterone production.",
+            "source": "Shin et al., Gut Microbes, 2019"
           }
         },
         "pathway_2": {
-          "type": "pathway",
+          "type": "stat",
           "settings": {
-            "step": "02 — Inflammatory Takeover",
-            "title": "Cortisol rises, testosterone crashes",
-            "body": "Endotoxin leakage triggers systemic inflammation. Inflammatory cytokines signal your adrenals to pump cortisol. Cortisol and testosterone are inversely linked — when one rises, the other falls. Your body shifts from anabolic to catabolic: muscle wastes, fat stores, energy disappears, drive dies."
+            "icon_style": "number",
+            "stat": "02",
+            "title": "Inflammatory Takeover",
+            "text": "Endotoxin leakage triggers systemic inflammation. Inflammatory cytokines signal your adrenals to pump cortisol. Cortisol and testosterone are inversely linked — when one rises, the other falls. Your body shifts from anabolic to catabolic: muscle wastes, fat stores, energy disappears, drive dies.",
+            "source": "Tremellen & Pearce, Medical Hypotheses, 2012"
           }
         },
         "pathway_3": {
-          "type": "pathway",
+          "type": "stat",
           "settings": {
-            "step": "03 — Origin Restores the Axis",
-            "title": "Rebuild hormonal signaling from the gut up",
-            "body": "L. plantarum restores butyrate production and seals the gut barrier. Endotoxin leakage stops. Inflammation drops. Cortisol normalizes. The HPG axis receives the microbial signals it needs to support healthy testosterone output — naturally, without injections, without dependency, without shutting down your own production."
-          }
-        },
-        "outcome_1": {
-          "type": "dream_outcome",
-          "settings": {
-            "title": "All-day energy without stimulants",
-            "body": "When systemic inflammation drops and mitochondrial function recovers, your energy stabilizes. No 2pm crash. No fourth coffee. Steady, clean output from the moment you wake up to the moment you choose to stop."
-          }
-        },
-        "outcome_2": {
-          "type": "dream_outcome",
-          "settings": {
-            "title": "Gym gains that actually stick",
-            "body": "L. plantarum TWK10 improved endurance and grip strength in 6-week clinical trials. When your gut stops driving inflammation and cortisol, your training compounds instead of stalling. Recovery shortens. Lifts go up. Muscle stays."
-          }
-        },
-        "outcome_3": {
-          "type": "dream_outcome",
-          "settings": {
-            "title": "Mental clarity that doesn't fade by noon",
-            "body": "Brain fog isn't low T — it's endotoxin-driven inflammation crossing the blood-brain barrier. When your gut barrier seals and inflammatory cytokines drop, the fog lifts. Focus sharpens. Decisions come faster. You feel like yourself again."
-          }
-        },
-        "outcome_4": {
-          "type": "dream_outcome",
-          "settings": {
-            "title": "Skip TRT dependency entirely",
-            "body": "Exogenous testosterone suppresses your hypothalamic-pituitary-gonadal axis — permanently. Once you start, your body stops producing its own. Origin supports your natural hormonal system so you never need to make that trade. Fix the foundation before you bypass it."
-          }
-        },
-        "review_1": {
-          "type": "review",
-          "settings": {
-            "quote": "I had one foot in a TRT clinic. Blood work came back at 340 ng/dL at age 33. My dad told me to fix my diet first — he wasn't wrong, but it wasn't just food. Six weeks on Origin and my energy came back before I even retested. I wake up at 6am without an alarm now. The gym feels like it did in college. I cancelled my TRT consultation.",
-            "name": "Nikhil V. — Jersey City, NJ"
-          }
-        },
-        "review_2": {
-          "type": "review",
-          "settings": {
-            "quote": "First-generation Somali-Canadian. By 30 I was exhausted all the time — dragging through workouts, falling asleep at my desk by 3pm, zero motivation. My doctor said it was stress. My testosterone was 380. I started Origin expecting nothing. By week four my wife noticed before I did. 'You're different,' she said. 'You're back.'",
-            "name": "Abdi M. — Edmonton, AB"
-          }
-        },
-        "review_3": {
-          "type": "review",
-          "settings": {
-            "quote": "Moved from Manila to Dallas at 19. By 29 I'd lost 15 pounds of muscle I couldn't explain, my recovery was garbage, and I was seriously considering gear. A friend sent me the HELIUS study and I started connecting dots. Three weeks on Origin and my deadlift went up 20 pounds. Month two, my morning energy is unrecognizable. I don't need TRT. I needed my gut back.",
-            "name": "Marcus T. — Dallas, TX"
-          }
-        },
-        "review_4": {
-          "type": "review",
-          "settings": {
-            "quote": "Egyptian-American, 36, two kids. I thought being tired was just fatherhood. Couldn't keep up with my boys at the park. Considered testosterone pellets — $400/month. My brother found BaseCode and we both started. Five weeks in: I'm outrunning my 4-year-old again, I'm hitting PRs I haven't seen in years, and I saved myself from a lifetime of hormone dependency. This should be the first thing every guy tries.",
-            "name": "Tarek H. — Dearborn, MI"
+            "icon_style": "number",
+            "stat": "03",
+            "title": "Origin Restores the Axis",
+            "text": "L. plantarum restores butyrate production and seals the gut barrier. Endotoxin leakage stops. Inflammation drops. Cortisol normalizes. The HPG axis receives the microbial signals it needs to support healthy testosterone output — naturally, without injections, without dependency.",
+            "source": "Org et al., Genome Biology, 2016"
           }
         }
       },
       "block_order": [
         "pathway_1",
         "pathway_2",
-        "pathway_3",
-        "outcome_1",
-        "outcome_2",
-        "outcome_3",
-        "outcome_4",
+        "pathway_3"
+      ],
+      "settings": {
+        "subtitle": "How Origin Supports Testosterone",
+        "heading": "How Origin Supports Testosterone",
+        "heading_size": "text-3xl",
+        "heading_level": "h2",
+        "columns": "3",
+        "card_style": "vertical",
+        "full_width": false,
+        "bg_color": "#1C2E23",
+        "text_color": "#F5F2EC",
+        "accent_color": "#C4783A",
+        "card_bg_color": "#243D2E",
+        "icon_bg_color": "#C4783A",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "enable_animation": true
+      }
+    },
+    "benefits_product": {
+      "type": "benefits-product",
+      "blocks": {
+        "benefit_1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "star",
+            "heading": "All-Day Energy",
+            "text": "When systemic inflammation drops and mitochondrial function recovers, energy stabilizes. No 2pm crash. Steady, clean output from morning to close.",
+            "heading_scale": "medium"
+          }
+        },
+        "benefit_2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "check",
+            "heading": "Gym Gains That Stick",
+            "text": "L. plantarum TWK10 improved endurance and grip strength in 6-week clinical trials. When your gut stops driving inflammation, training compounds instead of stalling.",
+            "heading_scale": "medium"
+          }
+        },
+        "benefit_3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "flask",
+            "heading": "Mental Clarity All Day",
+            "text": "Brain fog is endotoxin-driven inflammation crossing the blood-brain barrier. When your gut barrier seals and cytokines drop, the fog lifts and decisions come faster.",
+            "heading_scale": "medium"
+          }
+        },
+        "benefit_4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shield",
+            "heading": "Skip TRT Dependency",
+            "text": "Exogenous testosterone suppresses your HPG axis — permanently. Origin supports your natural hormonal system so you never need to make that trade.",
+            "heading_scale": "medium"
+          }
+        },
+        "benefit_5": {
+          "type": "benefit",
+          "settings": {
+            "icon": "truck",
+            "heading": "30-Day Supply",
+            "text": "60 white HPMC veggie capsules. 2 per day. No gelatin. No artificial fillers. Vegan and clean from capsule to formula.",
+            "heading_scale": "medium"
+          }
+        },
+        "benefit_6": {
+          "type": "benefit",
+          "settings": {
+            "icon": "refresh",
+            "heading": "30-Day Guarantee",
+            "text": "Try Origin for 30 days. If it doesn't work for your biology, email us for a full refund — no questions asked.",
+            "heading_scale": "medium"
+          }
+        }
+      },
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "benefit_4",
+        "benefit_5",
+        "benefit_6"
+      ],
+      "settings": {
+        "heading": "Everything You Get With Origin",
+        "subheading": "Origin — $34/mo Subscribe",
+        "desktop_image_width": 40,
+        "desktop_image_max_width": 400,
+        "button_text": "Get Origin — $34/mo",
+        "button_link": "/products/origin",
+        "button_style": "primary",
+        "quick_buy": false,
+        "full_width": false,
+        "bg_color": "#C4783A",
+        "text_color": "#FFFFFF",
+        "accent_color": "#1C2E23",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "enable_animation": true
+      }
+    },
+    "image_banner_cta": {
+      "type": "image-banner",
+      "settings": {
+        "heading": "Reclaim Your Edge",
+        "heading_size": "text-5xl",
+        "text": "40 Billion CFU. 4 strains. MAKTREK acid-protection. FOS prebiotic. $34/mo subscribe or $40 one-time.",
+        "button_text": "Get Origin — $34/mo",
+        "button_link": "/products/origin",
+        "button_style": "white",
+        "text_align": "center",
+        "vertical_align": "center",
+        "content_width": "narrow",
+        "full_width": true,
+        "overlay_color": "#1C2E23",
+        "overlay_opacity": 65,
+        "text_color": "#FFFFFF",
+        "height": 450,
+        "mobile_height": 350,
+        "enable_animation": true
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "review_1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I had one foot in a TRT clinic. Blood work came back at 340 ng/dL at age 33. My dad told me to fix my diet first — he wasn't wrong, but it wasn't just food. Six weeks on Origin and my energy came back before I even retested. I wake up at 6am without an alarm now. The gym feels like it did in college. I cancelled my TRT consultation.",
+            "author": "Nikhil V.",
+            "role": "Jersey City, NJ",
+            "rating": 5
+          }
+        },
+        "review_2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "First-generation Somali-Canadian. By 30 I was exhausted all the time — dragging through workouts, falling asleep at my desk by 3pm, zero motivation. My doctor said it was stress. My testosterone was 380. I started Origin expecting nothing. By week four my wife noticed before I did. 'You're different,' she said. 'You're back.'",
+            "author": "Abdi M.",
+            "role": "Edmonton, AB",
+            "rating": 5
+          }
+        },
+        "review_3": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Moved from Manila to Dallas at 19. By 29 I'd lost 15 pounds of muscle I couldn't explain, my recovery was garbage, and I was seriously considering gear. A friend sent me the HELIUS study and I started connecting dots. Three weeks on Origin and my deadlift went up 20 pounds. Month two, my morning energy is unrecognizable. I don't need TRT. I needed my gut back.",
+            "author": "Marcus T.",
+            "role": "Dallas, TX",
+            "rating": 5
+          }
+        },
+        "review_4": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Egyptian-American, 36, two kids. I thought being tired was just fatherhood. Couldn't keep up with my boys at the park. Considered testosterone pellets — $400/month. My brother found BaseCode and we both started. Five weeks in: I'm outrunning my 4-year-old again, I'm hitting PRs I haven't seen in years, and I saved myself from a lifetime of hormone dependency. This should be the first thing every guy tries.",
+            "author": "Tarek H.",
+            "role": "Dearborn, MI",
+            "rating": 5
+          }
+        }
+      },
+      "block_order": [
         "review_1",
         "review_2",
         "review_3",
         "review_4"
-      ]
+      ],
+      "settings": {
+        "subheading": "Real Results",
+        "heading": "What Our Customers Say",
+        "heading_size": "text-3xl",
+        "layout": "carousel",
+        "card_style": "minimal",
+        "show_stars": true,
+        "accent_color": "#f59e0b",
+        "auto_play": true,
+        "auto_play_speed": 6,
+        "bg_color": "#FFFFFF",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "enable_animation": true
+      }
+    },
+    "faq_accordion": {
+      "type": "faq-accordion",
+      "blocks": {
+        "faq_1": {
+          "type": "question",
+          "settings": {
+            "question": "Can a probiotic really affect testosterone levels?",
+            "answer": "<p>Directly? No — Origin doesn't contain testosterone or testosterone precursors. What it does is restore the gut bacterial ecosystem that regulates your body's own hormonal signaling pathway. Published research in <em>Gut Microbes</em> (Shin et al., 2019) demonstrates that gut bacteria modulate the hypothalamic-pituitary-gonadal (HPG) axis through short-chain fatty acid production. When that pathway functions correctly, your body is better positioned to produce testosterone naturally. Fix the gut. Let your biology do the rest.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "question",
+          "settings": {
+            "question": "How long before I notice results?",
+            "answer": "<p>Most men report the first noticeable change in energy within 2–4 weeks — this typically comes from reduced gut-driven systemic inflammation rather than any direct hormonal shift. Strength and recovery improvements tend to follow at 4–8 weeks as the bacterial ecosystem stabilizes. Lab-confirmed changes in testosterone markers, if measured, typically appear after 2–3 months of consistent use. Every biology is different, which is why we offer a 30-day money-back guarantee.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "question",
+          "settings": {
+            "question": "Can I take Origin alongside ashwagandha, tongkat ali, or other testosterone support supplements?",
+            "answer": "<p>Yes. Origin doesn't conflict with adaptogens or testosterone-supporting botanicals. In fact, restoring gut health through Origin may improve the bioavailability and effectiveness of those supplements — since gut barrier integrity affects how well nutrients are absorbed in the first place. If you're on any prescription medications or existing hormone protocols, consult your physician before adding any supplement.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "question",
+          "settings": {
+            "question": "Why does ethnicity matter for gut health and hormones?",
+            "answer": "<p>The HELIUS study — 2,084 subjects across 6 ethnic groups — proved that biological heritage is the strongest predictor of gut microbiome composition, stronger than diet, age, sex, or medical history. Ancestral bacterial populations that supported hormonal regulation for generations can deplete within a single generation of Western dietary exposure (Vangay et al., 2018). This isn't a lifestyle problem — it's a biological one with a biological solution.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "question",
+          "settings": {
+            "question": "What's in Origin and is it vegan?",
+            "answer": "<p>Origin contains 40 Billion CFU across 4 clinically documented strains: L. acidophilus, B. lactis, L. plantarum, and L. paracasei. It uses MAKTREK Bi-Pass marine polysaccharide acid-protection delivery and FOS fructooligosaccharide prebiotic. Capsule shell is HPMC (hypromellose) — 100% vegan. No gelatin, no artificial fillers, no animal-derived ingredients. cGMP certified, made in USA.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5"
+      ],
+      "settings": {
+        "heading": "Common Questions",
+        "heading_size": "text-3xl",
+        "heading_align": "center",
+        "accordion_style": "bordered",
+        "icon_style": "plus",
+        "open_first": true,
+        "content_width": "narrow",
+        "bg_color": "#F5F2EC",
+        "accent_color": "#C4783A",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "enable_animation": true
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "Get the gut-testosterone research report",
+        "heading_level": "h2",
+        "heading_size": "h2",
+        "text": "The published research on how your microbiome drives hormonal output — and what you can do about it. Free. No spam.",
+        "form_layout": "stacked",
+        "show_name_field": false,
+        "button_text": "Send Me the Report",
+        "button_style": "white",
+        "success_heading": "You're in.",
+        "success_text": "Check your inbox — the gut-testosterone research is on its way.",
+        "content_width": "narrow",
+        "text_align": "center",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "bg_color": "#1C2E23",
+        "bg_opacity": 100,
+        "text_color": "#F5F2EC",
+        "enable_animation": true
+      }
     }
   },
   "order": [
-    "landing"
+    "hero",
+    "features_banner",
+    "rich_text_agitate",
+    "image_with_text_bridge",
+    "research_highlight",
+    "benefits_product",
+    "image_banner_cta",
+    "testimonials",
+    "faq_accordion",
+    "newsletter"
   ]
 }

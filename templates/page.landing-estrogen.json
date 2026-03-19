@@ -9,125 +9,498 @@
  */
 {
   "sections": {
-    "landing": {
-      "type": "landing-page",
+    "hero": {
+      "type": "hero",
       "settings": {
-        "symptom_slug": "estrogen",
-        "eyebrow": "Hormonal Balance & Your Microbiome",
-        "headline": "Your hot flashes aren't \"just aging.\" Your gut stopped regulating your hormones.",
-        "subheadline": "Your gut contains a specialized bacterial community called the estrobolome — it controls how your body metabolizes and recycles estrogen through an enzyme called beta-glucuronidase. When these bacteria deplete, estrogen clearance accelerates and hormonal balance breaks down. The hot flashes, mood swings, and weight gain that follow aren't inevitable — they're a signal.",
-        "cta_text": "Support Your Hormone Balance — $34/mo",
-        "agitate_eyebrow": "Why Hormone Supplements Alone Aren't Enough",
-        "agitate_headline": "You're adding hormones to a system that can't hold onto them. It's a leaky bucket.",
-        "agitate_body": "You're 38 and waking up drenched at 3am. Hot flashes in meetings. A mood crash that comes out of nowhere and derails your entire afternoon. Your doctor says it's perimenopause. Take these supplements. Try this cream. Wait it out.||The supplement graveyard is growing — DIM, black cohosh, evening primrose oil, maca, vitex, magnesium. Each one helped for a week, then stopped. You're spending $150/month on a stack that keeps shifting because nothing holds. Nobody told you why.||Here's what's missing from the conversation: your gut bacteria regulate how much estrogen your body retains versus excretes. When those bacteria deplete, every hormone supplement you take clears your system too fast. You're pouring water into a bucket with a hole in the bottom. The hole is in your microbiome.",
-        "cost_headline": "HRT and hormone supplements cost $100-300/month — and don't fix the recycling system. Origin costs $34/month and supports it.",
-        "cost_body": "Women dealing with hormonal imbalance spend $1,200-3,600 per year on HRT, bioidentical creams, adaptogens, and specialist visits. These can address symptoms, but they don't restore the estrobolome — the bacterial community that determines how your body processes estrogen in the first place. For $1.13/day, Origin supports the gut ecosystem your hormonal system depends on.",
-        "bridge_headline": "The estrobolome: the hormone regulator hiding in your gut.",
-        "bridge_body": "Plottel and Blaser coined the term 'estrobolome' in 2011 to describe the collection of gut bacteria capable of metabolizing estrogen. These bacteria produce beta-glucuronidase — the enzyme that determines how much estrogen your body recirculates versus eliminates. Flores et al. demonstrated that gut bacterial diversity directly correlates with urinary estrogen levels. Baker et al. confirmed the clinical connection between microbiome composition and circulating estrogen in the Journal of Clinical Endocrinology & Metabolism. When key bacterial populations deplete, the estrobolome loses function and hormonal symptoms follow.",
-        "citation": "Plottel & Blaser, Cell Host & Microbe, 2011 · Flores et al., mBio, 2012 · Baker et al., Journal of Clinical Endocrinology & Metabolism, 2017",
-        "solution_headline": "Origin supports your estrobolome. Your body can handle the rest.",
-        "solution_body": "L. acidophilus and L. plantarum contribute to beta-glucuronidase activity, supporting your body's natural estrogen recycling process. L. paracasei helps modulate the inflammatory signaling that can disrupt hormonal pathways. B. lactis supports gut barrier integrity — keeping the system sealed so bacterial metabolites reach the right receptors. Origin doesn't replace medical treatment. It supports the gut foundation that helps your body regulate its own hormones more effectively.",
-        "lead_headline": "The estrobolome research that connects your gut health to your hormonal balance.",
-        "closing_quote": "The women in your family didn't have a supplement graveyard on the counter. They aged with steadiness, with grace. The difference isn't luck or genetics — it's the microbiome they kept intact through ancestral food."
+        "subtitle": "Hormonal Balance & Your Microbiome",
+        "heading": "Your hot flashes aren't \"just aging.\" Your gut stopped regulating your hormones.",
+        "text": "Your gut contains a specialized bacterial community called the estrobolome — it controls how your body metabolizes and recycles estrogen. When these bacteria deplete, hormonal balance breaks down. The hot flashes, mood swings, and weight gain that follow aren't inevitable — they're a signal.",
+        "button_text": "Support Your Hormone Balance — $34/mo",
+        "button_link": "/products/origin",
+        "guarantee_text": "30-Day Money-Back Guarantee",
+        "show_social_proof": true,
+        "social_proof_text": "Backed by biological diversity research",
+        "text_align": "left",
+        "height": 90,
+        "mobile_height": 85,
+        "overlay_opacity": 55,
+        "text_color": "#FFFFFF",
+        "content_width": 700
+      }
+    },
+    "features-banner": {
+      "type": "features-banner",
+      "settings": {
+        "bg_color": "#F5F2EC",
+        "text_color": "#1C2E23",
+        "icon_color": "#C4783A",
+        "layout": "inline",
+        "desktop_columns": "4",
+        "mobile_layout": "slider",
+        "show_dividers": true,
+        "padding_top": 24,
+        "padding_bottom": 24,
+        "enable_animation": true
       },
       "blocks": {
-        "pathway_1": {
-          "type": "pathway",
+        "badge-cgmp": {
+          "type": "feature",
           "settings": {
-            "step": "01 — Estrobolome Disruption",
-            "title": "Key bacteria deplete, enzyme production drops",
-            "body": "Dietary westernization depletes L. acidophilus and L. plantarum — bacteria involved in beta-glucuronidase production. Without adequate enzyme activity, your body clears estrogen faster than it should. The recycling system loses efficiency."
+            "icon": "shield",
+            "text": "cGMP Certified",
+            "subtext": "FDA-registered facility"
           }
         },
-        "pathway_2": {
-          "type": "pathway",
+        "badge-vegan": {
+          "type": "feature",
           "settings": {
-            "step": "02 — Hormonal Cascade",
-            "title": "Estrogen metabolism shifts, symptoms follow",
-            "body": "With reduced estrogen recirculation, your body struggles to maintain hormonal balance. Hot flashes, night sweats, mood instability, sleep disruption, and stubborn weight gain around the midsection follow — not because of aging, but because the regulatory system is compromised."
+            "icon": "leaf",
+            "text": "Vegan",
+            "subtext": "HPMC veggie capsule, no gelatin"
           }
         },
-        "pathway_3": {
-          "type": "pathway",
+        "badge-maktrek": {
+          "type": "feature",
           "settings": {
-            "step": "03 — Origin Supports Recovery",
-            "title": "Rebuild the bacterial foundation",
-            "body": "Origin's four strains support the bacterial community your estrobolome relies on. As gut diversity recovers, beta-glucuronidase activity can normalize. Your body gets a better chance to regulate its own hormonal balance — from the gut up."
+            "icon": "flask",
+            "text": "MAKTREK Delivery",
+            "subtext": "Alive through stomach acid"
           }
         },
-        "outcome_1": {
-          "type": "dream_outcome",
+        "badge-tested": {
+          "type": "feature",
           "settings": {
-            "title": "Sleep through the night again",
-            "body": "Night sweats and hot flashes are downstream of estrogen dysregulation. When the estrobolome has the bacteria it needs, thermoregulation can stabilize and uninterrupted sleep becomes possible again."
-          }
-        },
-        "outcome_2": {
-          "type": "dream_outcome",
-          "settings": {
-            "title": "Steady mood without the rollercoaster",
-            "body": "Estrogen helps regulate serotonin and other neurotransmitters. When your gut supports healthier estrogen metabolism, the mood swings, irritability, and emotional crashes can ease — and you start feeling like yourself again."
-          }
-        },
-        "outcome_3": {
-          "type": "dream_outcome",
-          "settings": {
-            "title": "Feel like yourself again",
-            "body": "The mental fog, the fatigue, the feeling of being disconnected from your own body — these aren't permanent. When the gut-hormone connection strengthens, women consistently describe it the same way: 'I feel like me again.'"
-          }
-        },
-        "outcome_4": {
-          "type": "dream_outcome",
-          "settings": {
-            "title": "Simplify the supplement stack",
-            "body": "DIM, black cohosh, maca, vitex, evening primrose, ashwagandha — the stack keeps growing because nothing addresses the upstream cause. Origin supports the gut foundation so your body can do more of the hormonal regulation on its own."
-          }
-        },
-        "review_1": {
-          "type": "review",
-          "settings": {
-            "quote": "I was getting hot flashes four or five times a day at 39. My naturopath had me on six different supplements. Three weeks into Origin, the hot flashes dropped to maybe one a day. I've never had anything work this noticeably.",
-            "name": "Nalini R. — Brampton, ON"
-          }
-        },
-        "review_2": {
-          "type": "review",
-          "settings": {
-            "quote": "The mood swings were destroying my marriage. I'd go from fine to furious in ten minutes and I couldn't explain it. After a month on Origin I'm steadier than I've been in two years. My husband noticed before I did.",
-            "name": "Aisha J. — Atlanta, GA"
-          }
-        },
-        "review_3": {
-          "type": "review",
-          "settings": {
-            "quote": "I spent $280/month on bioidentical hormones and still felt terrible. My functional medicine doctor suggested fixing my gut first. Origin was the only probiotic that made sense for my background. Sleeping through the night again after four months of waking up drenched.",
-            "name": "Rosa V. — Chicago, IL"
-          }
-        },
-        "review_4": {
-          "type": "review",
-          "settings": {
-            "quote": "I'm Filipino, 43, and was told this is just what happens in your forties. It's not. The estrobolome research in the free report opened my eyes. Two weeks on Origin and the brain fog lifted first. Then the night sweats started spacing out. I wish I'd found this sooner.",
-            "name": "Maricel D. — San Diego, CA"
+            "icon": "check",
+            "text": "Third-Party Tested",
+            "subtext": "Purity & potency verified"
           }
         }
       },
       "block_order": [
-        "pathway_1",
-        "pathway_2",
-        "pathway_3",
-        "outcome_1",
-        "outcome_2",
-        "outcome_3",
-        "outcome_4",
-        "review_1",
-        "review_2",
-        "review_3",
-        "review_4"
+        "badge-cgmp",
+        "badge-vegan",
+        "badge-maktrek",
+        "badge-tested"
       ]
+    },
+    "agitate": {
+      "type": "rich-text",
+      "settings": {
+        "bg_color": "#FFFFFF",
+        "text_color": "#1C2E23",
+        "bg_opacity": 100,
+        "content_width": "medium",
+        "text_align": "left",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "enable_animation": true
+      },
+      "blocks": {
+        "agitate-subheading": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Why Hormone Supplements Alone Aren't Enough",
+            "subheading_color": "#C4783A"
+          }
+        },
+        "agitate-heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "You're adding hormones to a system that can't hold onto them. It's a leaky bucket.",
+            "heading_level": "h2",
+            "heading_size": "h2"
+          }
+        },
+        "agitate-text-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>You're 38 and waking up drenched at 3am. Hot flashes in meetings. A mood crash that comes out of nowhere and derails your entire afternoon. Your doctor says it's perimenopause. Take these supplements. Try this cream. Wait it out.</p>"
+          }
+        },
+        "agitate-text-2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>The supplement graveyard is growing — DIM, black cohosh, evening primrose oil, maca, vitex, magnesium. Each one helped for a week, then stopped. You're spending $150/month on a stack that keeps shifting because nothing holds. Nobody told you why.</p>"
+          }
+        },
+        "agitate-text-3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Here's what's missing from the conversation: your gut bacteria regulate how much estrogen your body retains versus excretes. When those bacteria deplete, every hormone supplement you take clears your system too fast. You're pouring water into a bucket with a hole in the bottom. The hole is in your microbiome.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "agitate-subheading",
+        "agitate-heading",
+        "agitate-text-1",
+        "agitate-text-2",
+        "agitate-text-3"
+      ]
+    },
+    "bridge": {
+      "type": "image-with-text",
+      "settings": {
+        "layout": "text_first",
+        "bg_color": "#F5F2EC",
+        "text_color": "#1C2E23",
+        "text_align": "left",
+        "image_ratio": "4/5",
+        "image_width_pct": 50,
+        "height_mode": "adapt",
+        "vertical_align": "center",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "full_width": false,
+        "enable_animation": true
+      },
+      "blocks": {
+        "bridge-subheading": {
+          "type": "subheading",
+          "settings": {
+            "text": "The Science Behind Your Symptoms",
+            "color": "#C4783A"
+          }
+        },
+        "bridge-heading": {
+          "type": "heading",
+          "settings": {
+            "text": "The estrobolome: the hormone regulator hiding in your gut.",
+            "heading_level": "h2",
+            "heading_size": "h2"
+          }
+        },
+        "bridge-text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Plottel and Blaser coined the term 'estrobolome' in 2011 to describe the collection of gut bacteria capable of metabolizing estrogen. These bacteria produce beta-glucuronidase — the enzyme that determines how much estrogen your body recirculates versus eliminates. Flores et al. demonstrated that gut bacterial diversity directly correlates with urinary estrogen levels. Baker et al. confirmed the clinical connection between microbiome composition and circulating estrogen in the Journal of Clinical Endocrinology &amp; Metabolism. When key bacterial populations deplete, the estrobolome loses function and hormonal symptoms follow.</p><p><em>Plottel &amp; Blaser, Cell Host &amp; Microbe, 2011 · Flores et al., mBio, 2012 · Baker et al., Journal of Clinical Endocrinology &amp; Metabolism, 2017</em></p>",
+            "text_color": "#444444"
+          }
+        }
+      },
+      "block_order": [
+        "bridge-subheading",
+        "bridge-heading",
+        "bridge-text"
+      ]
+    },
+    "pathways": {
+      "type": "research-highlight",
+      "settings": {
+        "heading": "How Origin Supports Estrogen Balance",
+        "heading_size": "text-3xl",
+        "heading_level": "h2",
+        "bg_color": "#1C2E23",
+        "text_color": "#F5F2EC",
+        "accent_color": "#C4783A",
+        "card_bg_color": "#243D2D",
+        "icon_bg_color": "#C4783A",
+        "columns": "3",
+        "card_style": "vertical",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "enable_animation": true
+      },
+      "blocks": {
+        "pathway-1": {
+          "type": "stat",
+          "settings": {
+            "icon_style": "number",
+            "stat": "01",
+            "title": "Estrobolome Disruption",
+            "text": "Key bacteria deplete, enzyme production drops. Dietary westernization depletes L. acidophilus and L. plantarum — bacteria involved in beta-glucuronidase production. Without adequate enzyme activity, your body clears estrogen faster than it should. The recycling system loses efficiency.",
+            "source": "Plottel & Blaser, Cell Host & Microbe, 2011"
+          }
+        },
+        "pathway-2": {
+          "type": "stat",
+          "settings": {
+            "icon_style": "number",
+            "stat": "02",
+            "title": "Hormonal Cascade",
+            "text": "Estrogen metabolism shifts, symptoms follow. With reduced estrogen recirculation, your body struggles to maintain hormonal balance. Hot flashes, night sweats, mood instability, sleep disruption, and stubborn weight gain around the midsection follow — not because of aging, but because the regulatory system is compromised.",
+            "source": "Baker et al., Journal of Clinical Endocrinology & Metabolism, 2017"
+          }
+        },
+        "pathway-3": {
+          "type": "stat",
+          "settings": {
+            "icon_style": "number",
+            "stat": "03",
+            "title": "Origin Supports Recovery",
+            "text": "Rebuild the bacterial foundation. Origin's four strains support the bacterial community your estrobolome relies on. As gut diversity recovers, beta-glucuronidase activity can normalize. Your body gets a better chance to regulate its own hormonal balance — from the gut up.",
+            "source": "Flores et al., mBio, 2012"
+          }
+        }
+      },
+      "block_order": [
+        "pathway-1",
+        "pathway-2",
+        "pathway-3"
+      ]
+    },
+    "benefits": {
+      "type": "benefits-product",
+      "settings": {
+        "heading": "Everything You Get With Origin",
+        "subheading": "One Formula. Complete Support.",
+        "bg_color": "#C4783A",
+        "text_color": "#FFFFFF",
+        "accent_color": "#FFFFFF",
+        "button_text": "Get Origin — $34/mo",
+        "button_link": "/products/origin",
+        "button_style": "primary",
+        "quick_buy": false,
+        "desktop_image_width": 40,
+        "desktop_image_max_width": 400,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "full_width": false,
+        "enable_animation": true
+      },
+      "blocks": {
+        "benefit-1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "refresh",
+            "heading": "30 Days of Restoration",
+            "text": "60 capsules. 2 per day. A full month of gut support to begin rebuilding the estrobolome.",
+            "heading_scale": "medium"
+          }
+        },
+        "benefit-2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "flask",
+            "heading": "4 Clinically Studied Strains",
+            "text": "L. acidophilus, B. lactis, L. plantarum, L. paracasei — each selected for documented hormonal and gut support.",
+            "heading_scale": "medium"
+          }
+        },
+        "benefit-3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "leaf",
+            "heading": "FOS Prebiotic Included",
+            "text": "Feeds the bacteria the moment they arrive. Not just a delivery vehicle — a complete synbiotic system.",
+            "heading_scale": "medium"
+          }
+        },
+        "benefit-4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "star",
+            "heading": "Free Estrobolome Research Report",
+            "text": "Download the research on your gut's role in hormone regulation. Yours free with every order.",
+            "heading_scale": "medium"
+          }
+        },
+        "benefit-5": {
+          "type": "benefit",
+          "settings": {
+            "icon": "truck",
+            "heading": "Free Shipping",
+            "text": "Free shipping on subscriptions. Subscribe and save 15% — $34/mo versus $40 one-time.",
+            "heading_scale": "medium"
+          }
+        },
+        "benefit-6": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shield",
+            "heading": "30-Day Guarantee",
+            "text": "Try Origin for 30 days. If it's not right for your biology, we'll make it right. No questions.",
+            "heading_scale": "medium"
+          }
+        }
+      },
+      "block_order": [
+        "benefit-1",
+        "benefit-2",
+        "benefit-3",
+        "benefit-4",
+        "benefit-5",
+        "benefit-6"
+      ]
+    },
+    "cta-banner": {
+      "type": "image-banner",
+      "settings": {
+        "heading": "Support Your Hormone Balance",
+        "heading_size": "text-4xl",
+        "text": "Origin is the first ethnobiotic — a probiotic informed by biological diversity research. $34/mo, free shipping on subscriptions, 30-day guarantee.",
+        "button_text": "Get Origin — $34/mo",
+        "button_link": "/products/origin",
+        "button_style": "white",
+        "overlay_color": "#1C2E23",
+        "overlay_opacity": 65,
+        "text_color": "#FFFFFF",
+        "text_align": "center",
+        "vertical_align": "center",
+        "content_width": "narrow",
+        "full_width": true,
+        "height": 450,
+        "mobile_height": 350,
+        "enable_animation": true
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {
+        "heading": "Real People. Real Results.",
+        "heading_size": "text-3xl",
+        "bg_color": "#FFFFFF",
+        "layout": "carousel",
+        "card_style": "card",
+        "show_stars": true,
+        "accent_color": "#f59e0b",
+        "auto_play": true,
+        "auto_play_speed": 6,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "enable_animation": true
+      },
+      "blocks": {
+        "review-1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I was getting hot flashes four or five times a day at 39. My naturopath had me on six different supplements. Three weeks into Origin, the hot flashes dropped to maybe one a day. I've never had anything work this noticeably.",
+            "author": "Nalini R.",
+            "role": "Brampton, ON",
+            "rating": 5
+          }
+        },
+        "review-2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "The mood swings were destroying my marriage. I'd go from fine to furious in ten minutes and I couldn't explain it. After a month on Origin I'm steadier than I've been in two years. My husband noticed before I did.",
+            "author": "Aisha J.",
+            "role": "Atlanta, GA",
+            "rating": 5
+          }
+        },
+        "review-3": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I spent $280/month on bioidentical hormones and still felt terrible. My functional medicine doctor suggested fixing my gut first. Origin was the only probiotic that made sense for my background. Sleeping through the night again after four months of waking up drenched.",
+            "author": "Rosa V.",
+            "role": "Chicago, IL",
+            "rating": 5
+          }
+        },
+        "review-4": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I'm Filipino, 43, and was told this is just what happens in your forties. It's not. The estrobolome research in the free report opened my eyes. Two weeks on Origin and the brain fog lifted first. Then the night sweats started spacing out. I wish I'd found this sooner.",
+            "author": "Maricel D.",
+            "role": "San Diego, CA",
+            "rating": 5
+          }
+        }
+      },
+      "block_order": [
+        "review-1",
+        "review-2",
+        "review-3",
+        "review-4"
+      ]
+    },
+    "faq": {
+      "type": "faq-accordion",
+      "settings": {
+        "heading": "Questions About Origin & Hormonal Health",
+        "heading_size": "text-3xl",
+        "heading_align": "center",
+        "bg_color": "#F5F2EC",
+        "text_color": "#1C2E23",
+        "accent_color": "#C4783A",
+        "accordion_style": "bordered",
+        "icon_style": "plus",
+        "content_width": "narrow",
+        "open_first": true,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "enable_animation": true
+      },
+      "blocks": {
+        "faq-1": {
+          "type": "question",
+          "settings": {
+            "question": "Can a probiotic actually affect my hormone levels?",
+            "answer": "<p>Origin doesn't add hormones to your body — it supports the gut bacteria that regulate how your body metabolizes and recycles the estrogen you already produce. The estrobolome (a community of gut bacteria identified by Plottel & Blaser, 2011) produces beta-glucuronidase, an enzyme that influences how much estrogen your body retains versus excretes. When estrobolome bacteria deplete, that regulatory system weakens. Origin supports the bacterial foundation that allows it to function more effectively.</p>"
+          }
+        },
+        "faq-2": {
+          "type": "question",
+          "settings": {
+            "question": "How long before I notice a difference?",
+            "answer": "<p>Gut microbiome restoration is gradual. Most customers begin noticing changes in digestive comfort and energy within 2–3 weeks. Hormonal symptom changes — reduced hot flash frequency, more stable mood, improved sleep — typically become more apparent after 4–6 weeks of consistent use. We recommend at least 90 days for meaningful, sustained results. The 30-day guarantee covers you while you assess whether Origin is right for your biology.</p>"
+          }
+        },
+        "faq-3": {
+          "type": "question",
+          "settings": {
+            "question": "Can I take Origin alongside HRT or bioidentical hormones?",
+            "answer": "<p>Yes. Origin is a dietary supplement and does not interact with hormone replacement therapy or bioidentical hormone preparations. Many customers use Origin alongside existing hormone protocols — the goal is to support the gut ecosystem so your body can process hormones more effectively, whether those hormones are endogenous or supplemented. Always inform your healthcare provider about any new supplements you're taking.</p>"
+          }
+        },
+        "faq-4": {
+          "type": "question",
+          "settings": {
+            "question": "Is Origin suitable during perimenopause and menopause?",
+            "answer": "<p>Yes. Origin is designed for adults experiencing the hormonal shifts associated with perimenopause and menopause, as well as younger women dealing with cycle irregularities, PMS, or estrogen dominance symptoms. The estrobolome plays a role in estrogen metabolism across all stages of reproductive life. Because estrogen levels shift significantly during perimenopause, supporting the gut's capacity to regulate remaining estrogen becomes particularly important.</p>"
+          }
+        },
+        "faq-5": {
+          "type": "question",
+          "settings": {
+            "question": "What's in Origin and why those specific strains?",
+            "answer": "<p>Origin contains 40 billion CFU across four strains: L. acidophilus (gut barrier, beta-glucuronidase support), B. lactis (immune function, gut integrity), L. plantarum (anti-inflammatory, broad cross-cultural fermented food strain), and L. paracasei (immune modulation, gut-brain axis). Each strain was selected based on biological diversity research and published clinical documentation. MAKTREK Bi-Pass marine polysaccharide delivery protects strains through stomach acid. FOS prebiotic feeds the bacteria on arrival. HPMC veggie capsule — no gelatin. Made in the USA in a cGMP-certified facility.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq-1",
+        "faq-2",
+        "faq-3",
+        "faq-4",
+        "faq-5"
+      ]
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "Get the free estrobolome research report",
+        "heading_level": "h2",
+        "heading_size": "h2",
+        "text": "Learn what published research says about your gut's role in hormone regulation. Free with your email.",
+        "button_text": "Send Me the Report",
+        "button_style": "white",
+        "form_layout": "stacked",
+        "show_name_field": false,
+        "success_heading": "You're in.",
+        "success_text": "Check your inbox — the estrobolome report is on its way.",
+        "bg_color": "#1C2E23",
+        "bg_opacity": 100,
+        "text_color": "#F5F2EC",
+        "content_width": "narrow",
+        "text_align": "center",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "enable_animation": true
+      }
     }
   },
   "order": [
-    "landing"
+    "hero",
+    "features-banner",
+    "agitate",
+    "bridge",
+    "pathways",
+    "benefits",
+    "cta-banner",
+    "testimonials",
+    "faq",
+    "newsletter"
   ]
 }
