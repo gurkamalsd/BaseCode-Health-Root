@@ -10,9 +10,26 @@
 {                                                                                                                     
     "sections": {                                                                                                       
       "hero": {                                                                                                         
-        "type": "hero",
+        "type": "hero",                                                                                               
+        "settings": {                                                                                                   
+          "heading": "Your biology is unique.",                                                                         
+          "button_text": "Discover Now"                                                                                 
+        }                                                                                                               
+      },                                                                                                                
+      "trust-badges": {                                                                                                 
+        "type": "trust-badges",                                                                                         
         "settings": {}                                                                                                  
-      }                                                                                                               
+      },                                                                                                                
+      "newsletter": {                                                                                                   
+        "type": "newsletter",                                                                                           
+        "settings": {
+          "heading": "Stay in the loop"                                                                                 
+        }                                                                                                               
+      }
     },                                                                                                                  
-    "order": ["hero"]
-  }      
+    "order": [                                                                                                        
+      "hero",
+      "trust-badges",
+      "newsletter"                                                                                                      
+    ]                                                                                                                   
+  }
