@@ -1,41 +1,36 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "hero",
       "settings": {
+        "overlay_opacity": 60,
+        "show_social_proof": true,
+        "social_proof_text": "Backed by biological diversity research",
         "subtitle": "Energy, Strength & Your Microbiome",
         "heading": "Your testosterone isn't low because you're aging. Your gut stopped making the compounds that fuel it.",
         "text": "Your gut bacteria produce short-chain fatty acids that regulate the hypothalamic-pituitary-gonadal axis — the master switch for testosterone. When ancestral bacterial populations crash after dietary westernization, SCFA production collapses and your hormonal signaling breaks down from the inside out.",
         "button_text": "Reclaim Your Edge — $34/mo",
         "button_link": "/products/origin",
         "guarantee_text": "30-Day Money-Back Guarantee",
-        "show_social_proof": true,
-        "social_proof_text": "Backed by biological diversity research",
-        "text_color": "#FFFFFF",
-        "overlay_opacity": 60,
-        "height": 100,
-        "mobile_height": 85,
         "text_align": "center",
         "vertical_align": "center",
-        "content_width": 750
+        "height": 100,
+        "mobile_height": 85,
+        "content_width": 750,
+        "text_color": "#FFFFFF"
       }
     },
     "features_banner": {
       "type": "features-banner",
-      "settings": {
-        "bg_color": "#F5F2EC",
-        "text_color": "#1C2E23",
-        "icon_color": "#C4783A",
-        "layout": "stacked",
-        "desktop_columns": "4",
-        "mobile_layout": "grid",
-        "show_dividers": true,
-        "icon_size": 28,
-        "text_size": "medium",
-        "padding_top": 28,
-        "padding_bottom": 28,
-        "enable_animation": true
-      },
       "blocks": {
         "badge_cgmp": {
           "type": "feature",
@@ -75,20 +70,24 @@
         "badge_vegan",
         "badge_maktrek",
         "badge_tested"
-      ]
+      ],
+      "settings": {
+        "layout": "stacked",
+        "desktop_columns": "4",
+        "mobile_layout": "grid",
+        "show_dividers": true,
+        "padding_top": 28,
+        "padding_bottom": 28,
+        "bg_color": "#F5F2EC",
+        "text_color": "#1C2E23",
+        "icon_color": "#C4783A",
+        "text_size": "medium",
+        "icon_size": 28,
+        "enable_animation": true
+      }
     },
     "rich_text_agitate": {
       "type": "rich-text",
-      "settings": {
-        "bg_color": "#FFFFFF",
-        "text_color": "#1C2E23",
-        "bg_opacity": 100,
-        "content_width": "medium",
-        "text_align": "center",
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "enable_animation": true
-      },
       "blocks": {
         "agitate_eyebrow": {
           "type": "subheading",
@@ -133,24 +132,20 @@
         "agitate_text_1",
         "agitate_text_2",
         "agitate_text_3"
-      ]
+      ],
+      "settings": {
+        "content_width": "medium",
+        "text_align": "center",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "bg_color": "#FFFFFF",
+        "bg_opacity": 100,
+        "text_color": "#1C2E23",
+        "enable_animation": true
+      }
     },
     "image_with_text_bridge": {
       "type": "image-with-text",
-      "settings": {
-        "layout": "text_first",
-        "image_width_pct": 50,
-        "height_mode": "adapt",
-        "image_ratio": "4/5",
-        "vertical_align": "center",
-        "text_align": "left",
-        "bg_color": "#F5F2EC",
-        "text_color": "#1C2E23",
-        "full_width": false,
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "enable_animation": true
-      },
       "blocks": {
         "bridge_subheading": {
           "type": "subheading",
@@ -178,18 +173,14 @@
         "bridge_text_2": {
           "type": "text",
           "settings": {
-            "text": "<p>When butyrate-producing species like L. plantarum deplete, gut barrier integrity fails, endotoxins leak into the bloodstream, inflammatory cytokines spike, cortisol rises, and testosterone production downregulates. It's not aging. It's a bacterial deficit with a hormonal consequence.</p><p style=\"font-size:0.85em;opacity:0.65;\">Shin et al., Gut Microbes, 2019 · Tremellen &amp; Pearce, Medical Hypotheses, 2012 · Org et al., Genome Biology, 2016</p>",
+            "text": "<p>When butyrate-producing species like L. plantarum deplete, gut barrier integrity fails, endotoxins leak into the bloodstream, inflammatory cytokines spike, cortisol rises, and testosterone production downregulates. It's not aging. It's a bacterial deficit with a hormonal consequence.</p><p><em>Shin et al., Gut Microbes, 2019 · Tremellen &amp; Pearce, Medical Hypotheses, 2012 · Org et al., Genome Biology, 2016</em></p>",
             "text_color": "#444444",
             "text_size": "var(--text-base, 1rem)"
           }
         },
         "bridge_cta": {
           "type": "button",
-          "settings": {
-            "button_text": "Get Origin — $34/mo",
-            "button_link": "/products/origin",
-            "button_style": "primary"
-          }
+          "settings": {}
         }
       },
       "block_order": [
@@ -198,27 +189,24 @@
         "bridge_text_1",
         "bridge_text_2",
         "bridge_cta"
-      ]
-    },
-    "research_highlight": {
-      "type": "research-highlight",
+      ],
       "settings": {
-        "subtitle": "How Origin Supports Testosterone",
-        "heading": "How Origin Supports Testosterone",
-        "heading_size": "text-3xl",
-        "heading_level": "h2",
-        "columns": "3",
-        "card_style": "vertical",
-        "bg_color": "#1C2E23",
-        "text_color": "#F5F2EC",
-        "accent_color": "#C4783A",
-        "card_bg_color": "#243D2E",
-        "icon_bg_color": "#C4783A",
+        "layout": "text_first",
+        "image_width_pct": 50,
+        "height_mode": "adapt",
+        "image_ratio": "4/5",
+        "vertical_align": "center",
+        "text_align": "left",
+        "bg_color": "#F5F2EC",
+        "text_color": "#1C2E23",
         "full_width": false,
         "padding_top": 80,
         "padding_bottom": 80,
         "enable_animation": true
-      },
+      }
+    },
+    "research_highlight": {
+      "type": "research-highlight",
       "blocks": {
         "pathway_1": {
           "type": "stat",
@@ -255,27 +243,27 @@
         "pathway_1",
         "pathway_2",
         "pathway_3"
-      ]
-    },
-    "benefits_product": {
-      "type": "benefits-product",
+      ],
       "settings": {
-        "heading": "Everything You Get With Origin",
-        "subheading": "Origin — $34/mo Subscribe",
-        "button_text": "Get Origin — $34/mo",
-        "button_link": "/products/origin",
-        "button_style": "primary",
-        "quick_buy": false,
-        "desktop_image_width": 40,
-        "desktop_image_max_width": 400,
-        "bg_color": "#C4783A",
-        "text_color": "#FFFFFF",
-        "accent_color": "#1C2E23",
+        "subtitle": "How Origin Supports Testosterone",
+        "heading": "How Origin Supports Testosterone",
+        "heading_size": "text-3xl",
+        "heading_level": "h2",
+        "columns": "3",
+        "card_style": "vertical",
         "full_width": false,
+        "bg_color": "#1C2E23",
+        "text_color": "#F5F2EC",
+        "accent_color": "#C4783A",
+        "card_bg_color": "#243D2E",
+        "icon_bg_color": "#C4783A",
         "padding_top": 80,
         "padding_bottom": 80,
         "enable_animation": true
-      },
+      }
+    },
+    "benefits_product": {
+      "type": "benefits-product",
       "blocks": {
         "benefit_1": {
           "type": "benefit",
@@ -339,7 +327,24 @@
         "benefit_4",
         "benefit_5",
         "benefit_6"
-      ]
+      ],
+      "settings": {
+        "heading": "Everything You Get With Origin",
+        "subheading": "Origin — $34/mo Subscribe",
+        "desktop_image_width": 40,
+        "desktop_image_max_width": 400,
+        "button_text": "Get Origin — $34/mo",
+        "button_link": "/products/origin",
+        "button_style": "primary",
+        "quick_buy": false,
+        "full_width": false,
+        "bg_color": "#C4783A",
+        "text_color": "#FFFFFF",
+        "accent_color": "#1C2E23",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "enable_animation": true
+      }
     },
     "image_banner_cta": {
       "type": "image-banner",
@@ -350,35 +355,20 @@
         "button_text": "Get Origin — $34/mo",
         "button_link": "/products/origin",
         "button_style": "white",
-        "overlay_color": "#1C2E23",
-        "overlay_opacity": 65,
-        "text_color": "#FFFFFF",
         "text_align": "center",
         "vertical_align": "center",
         "content_width": "narrow",
+        "full_width": true,
+        "overlay_color": "#1C2E23",
+        "overlay_opacity": 65,
+        "text_color": "#FFFFFF",
         "height": 450,
         "mobile_height": 350,
-        "full_width": true,
         "enable_animation": true
       }
     },
     "testimonials": {
       "type": "testimonials",
-      "settings": {
-        "subheading": "Real Results",
-        "heading": "What Our Customers Say",
-        "heading_size": "text-3xl",
-        "layout": "carousel",
-        "card_style": "minimal",
-        "show_stars": true,
-        "accent_color": "#f59e0b",
-        "auto_play": true,
-        "auto_play_speed": 6,
-        "bg_color": "#FFFFFF",
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "enable_animation": true
-      },
       "blocks": {
         "review_1": {
           "type": "testimonial",
@@ -422,24 +412,25 @@
         "review_2",
         "review_3",
         "review_4"
-      ]
-    },
-    "faq_accordion": {
-      "type": "faq-accordion",
+      ],
       "settings": {
-        "heading": "Common Questions",
+        "subheading": "Real Results",
+        "heading": "What Our Customers Say",
         "heading_size": "text-3xl",
-        "heading_align": "center",
-        "accordion_style": "bordered",
-        "icon_style": "plus",
-        "open_first": true,
-        "content_width": "narrow",
-        "bg_color": "#F5F2EC",
-        "accent_color": "#C4783A",
+        "layout": "carousel",
+        "card_style": "minimal",
+        "show_stars": true,
+        "accent_color": "#f59e0b",
+        "auto_play": true,
+        "auto_play_speed": 6,
+        "bg_color": "#FFFFFF",
         "padding_top": 80,
         "padding_bottom": 80,
         "enable_animation": true
-      },
+      }
+    },
+    "faq_accordion": {
+      "type": "faq-accordion",
       "blocks": {
         "faq_1": {
           "type": "question",
@@ -483,7 +474,21 @@
         "faq_3",
         "faq_4",
         "faq_5"
-      ]
+      ],
+      "settings": {
+        "heading": "Common Questions",
+        "heading_size": "text-3xl",
+        "heading_align": "center",
+        "accordion_style": "bordered",
+        "icon_style": "plus",
+        "open_first": true,
+        "content_width": "narrow",
+        "bg_color": "#F5F2EC",
+        "accent_color": "#C4783A",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "enable_animation": true
+      }
     },
     "newsletter": {
       "type": "newsletter",
@@ -500,11 +505,11 @@
         "success_text": "Check your inbox — the gut-testosterone research is on its way.",
         "content_width": "narrow",
         "text_align": "center",
-        "bg_color": "#1C2E23",
-        "text_color": "#F5F2EC",
-        "bg_opacity": 100,
         "padding_top": 80,
         "padding_bottom": 80,
+        "bg_color": "#1C2E23",
+        "bg_opacity": 100,
+        "text_color": "#F5F2EC",
         "enable_animation": true
       }
     }
