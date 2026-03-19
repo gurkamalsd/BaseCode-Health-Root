@@ -20,7 +20,6 @@
     "cart_type": "drawer",
     "cart_show_recommendations": true,
     "discount_code": "FOUNDER20",
-    "discount_description": "20% off your first order",
-    "content_for_index": {}
+    "discount_description": "20% off your first order"
   }
 }
