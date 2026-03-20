@@ -24,9 +24,9 @@
         "guarantee_text": "30-Day Money-Back Guarantee",
         "text_align": "left",
         "vertical_align": "center",
-        "height": 90,
-        "mobile_height": 85,
-        "content_width": 700,
+        "height": 100,
+        "mobile_height": 100,
+        "content_width": 550,
         "text_color": "#ffffff"
       }
     },
