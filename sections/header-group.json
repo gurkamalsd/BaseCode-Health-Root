@@ -43,8 +43,8 @@
       ],
       "settings": {
         "enable": true,
-        "dismissible": false,
-        "bg_color": "#1c2e23",
+        "dismissible": true,
+        "bg_color": "#c4783a",
         "text_color": "#f5f2ec",
         "animation_speed": "normal",
         "separator": "·"
