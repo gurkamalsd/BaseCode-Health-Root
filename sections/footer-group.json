@@ -13,7 +13,6 @@
   "sections": {
     "footer": {
       "type": "footer",
-      "settings": {},
       "blocks": {
         "col1": {
           "type": "menu_column",
@@ -40,12 +39,37 @@
           "type": "newsletter_column",
           "settings": {
             "heading": "Stay in the loop",
-            "subtext": "Research, updates, and early access — no filler."
+            "subtext": "Research, updates, and early access — no filler.",
+            "email_placeholder": "Your email address",
+            "button_label": "Subscribe"
           }
         }
       },
-      "block_order": ["col1", "col2", "col3", "col4"]
+      "block_order": [
+        "col1",
+        "col2",
+        "col3",
+        "col4"
+      ],
+      "settings": {
+        "bg_color": "#1c2e23",
+        "text_color": "#f5f2ec",
+        "logo_width": 120,
+        "column_count": "4",
+        "mobile_accordion": true,
+        "show_separator": false,
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "show_newsletter": true,
+        "copyright_text": "BaseCode Health",
+        "address_line": "Toronto, ON, Canada",
+        "show_policy_links": true,
+        "show_social_icons": true,
+        "show_payment_icons": true
+      }
     }
   },
-  "order": ["footer"]
+  "order": [
+    "footer"
+  ]
 }
