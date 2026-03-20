@@ -11,27 +11,7 @@
   "sections": {
     "quiz": {
       "type": "quiz-page",
-      "settings": {},
-      "blocks": {
-        "c1": { "type": "citation", "settings": { "text": "Gut, 2020" } },
-        "c2": { "type": "citation", "settings": { "text": "Cell, 2018" } },
-        "c3": { "type": "citation", "settings": { "text": "PLOS Biology, 2018" } },
-        "o1": { "type": "outcome", "settings": { "icon": "fire", "label": "End Bloating" } },
-        "o2": { "type": "outcome", "settings": { "icon": "bolt", "label": "More Energy" } },
-        "o3": { "type": "outcome", "settings": { "icon": "bulb", "label": "Clear Thinking" } },
-        "o4": { "type": "outcome", "settings": { "icon": "moon", "label": "Better Sleep" } },
-        "o5": { "type": "outcome", "settings": { "icon": "heart", "label": "Mood Support" } },
-        "o6": { "type": "outcome", "settings": { "icon": "shield", "label": "Immune Strength" } },
-        "sb1": { "type": "stat_badge", "settings": { "value": "40\u201360%", "description": "butyrate-producer decline after westernisation" } },
-        "sb2": { "type": "stat_badge", "settings": { "value": "5\u201310yr", "description": "earlier metabolic onset in diaspora populations" } },
-        "sb3": { "type": "stat_badge", "settings": { "value": "2,084", "description": "subjects in the HELIUS multi-ethnic cohort study" } },
-        "v1": { "type": "value_item", "settings": { "text": "40 Billion CFU — 4 targeted strains for diaspora biology" } },
-        "v2": { "type": "value_item", "settings": { "text": "MAKTREK Bi-Pass — acid-protected delivery (most probiotics can't survive without it)" } },
-        "v3": { "type": "value_item", "settings": { "text": "FOS prebiotic — feeds the bacteria on arrival, not just on the label" } },
-        "v4": { "type": "value_item", "settings": { "text": "Free research report delivered with your order" } },
-        "v5": { "type": "value_item", "settings": { "text": "Cancel anytime — no contracts, no commitment" } }
-      },
-      "block_order": ["c1", "c2", "c3", "o1", "o2", "o3", "o4", "o5", "o6", "sb1", "sb2", "sb3", "v1", "v2", "v3", "v4", "v5"]
+      "settings": {}
     }
   },
   "order": ["quiz"]

@@ -110,48 +110,8 @@
      ═══════════════════════════════════════════════ */
 
   function initNavbar() {
-    var nav = document.querySelector('.navbar');
-    if (!nav) return;
-
-    function onScroll() {
-      if (window.scrollY > 40) {
-        nav.classList.add('navbar--scrolled');
-      } else {
-        nav.classList.remove('navbar--scrolled');
-      }
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-
-    // Mobile menu toggle
-    var toggle = document.querySelector('.navbar__mobile-toggle');
-    var menu = document.querySelector('.navbar__mobile-menu');
-    if (toggle && menu) {
-      toggle.addEventListener('click', function() {
-        var isOpen = menu.classList.toggle('navbar__mobile-menu--open');
-        toggle.setAttribute('aria-expanded', isOpen);
-        toggle.innerHTML = isOpen
-          ? '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>'
-          : '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>';
-      });
-
-      // Close on Escape
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && menu.classList.contains('navbar__mobile-menu--open')) {
-          menu.classList.remove('navbar__mobile-menu--open');
-          toggle.setAttribute('aria-expanded', 'false');
-          toggle.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>';
-        }
-      });
-
-      // Close on link click
-      menu.querySelectorAll('a').forEach(function(link) {
-        link.addEventListener('click', function() {
-          menu.classList.remove('navbar__mobile-menu--open');
-          toggle.setAttribute('aria-expanded', 'false');
-        });
-      });
-    }
+    // Navbar scroll + drawer logic is now inline in navbar.liquid
+    // This function is kept as a no-op so the init() call doesn't break
   }
 
   /* ═══════════════════════════════════════════════
@@ -438,25 +398,19 @@
     document.querySelectorAll('.faq-trigger').forEach(function(btn) {
       btn.addEventListener('click', function() {
         var item = btn.closest('.faq-item');
-        var content = item.querySelector('.faq-content');
-        var isOpen = content && content.style.display === 'block';
+        var isOpen = item.classList.contains('is-open');
 
         // Close all
-        document.querySelectorAll('.faq-item').forEach(function(faqItem) {
-          var c = faqItem.querySelector('.faq-content');
+        document.querySelectorAll('.faq-item.is-open').forEach(function(faqItem) {
+          faqItem.classList.remove('is-open');
           var t = faqItem.querySelector('.faq-trigger');
-          if (c) c.style.display = 'none';
           if (t) t.setAttribute('aria-expanded', 'false');
-          var chev = faqItem.querySelector('.faq-chevron');
-          if (chev) chev.style.transform = 'rotate(0deg)';
         });
 
         // Toggle current
-        if (!isOpen && content) {
-          content.style.display = 'block';
+        if (!isOpen) {
+          item.classList.add('is-open');
           btn.setAttribute('aria-expanded', 'true');
-          var chevron = item.querySelector('.faq-chevron');
-          if (chevron) chevron.style.transform = 'rotate(180deg)';
         }
       });
     });
@@ -663,21 +617,15 @@
 
       q.options.forEach(function(opt, i) {
         var btn = document.createElement('button');
-        btn.className = 'w-full text-left px-6 py-4 rounded-xl transition-all';
-        btn.style.background = '#EDE8DF';
-        btn.style.border = '2px solid transparent';
-        btn.style.color = '#1C2E23';
+        btn.className = 'quiz-option';
         btn.innerHTML = '<span class="font-heading text-15 font-normal">' + opt.label + '</span>';
         btn.addEventListener('click', function() {
           selectedOption = i;
-          // Update visual selection
           var allBtns = optionsContainer.querySelectorAll('button');
           allBtns.forEach(function(b) {
-            b.style.background = '#EDE8DF';
-            b.style.border = '2px solid transparent';
+            b.classList.remove('quiz-option--selected');
           });
-          btn.style.background = 'rgba(196,120,58,0.10)';
-          btn.style.border = '2px solid #C4783A';
+          btn.classList.add('quiz-option--selected');
           updateNextBtn();
         });
         optionsContainer.appendChild(btn);
@@ -749,7 +697,7 @@
       // SVG ring
       var ring = resultsScreen.querySelector('[data-score-ring]');
       if (ring) {
-        var r = parseFloat(ring.getAttribute('r')) || 80;
+        var r = 72;
         var circ = 2 * Math.PI * r;
         setTimeout(function() {
           ring.style.strokeDashoffset = circ * (1 - totalScore / maxScore);
@@ -913,325 +861,16 @@
   }
 
   /* ═══════════════════════════════════════════════
-     ROOT THEME: STICKY HEADER
+     16. ANNOUNCEMENT TICKER — Pause on hover
      ═══════════════════════════════════════════════ */
 
-  function initStickyHeader() {
-    var header = document.querySelector('.header');
-    if (!header) return;
-    function onScroll() {
-      if (window.scrollY > 40) {
-        header.classList.add('header--scrolled');
-      } else {
-        header.classList.remove('header--scrolled');
-      }
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  }
-
-  /* ═══════════════════════════════════════════════
-     ROOT THEME: FAQ ACCORDION (data-faq-toggle)
-     ═══════════════════════════════════════════════ */
-
-  function initRootFAQ() {
-    document.querySelectorAll('[data-faq-toggle]').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var item = btn.closest('.faq-item');
-        if (!item) return;
-        var content = item.querySelector('[data-faq-content], .faq-item__answer');
-        if (!content) return;
-        var isOpen = content.classList.contains('is-open');
-
-        // Toggle current
-        if (isOpen) {
-          content.classList.remove('is-open');
-          btn.setAttribute('aria-expanded', 'false');
-          var icon = btn.querySelector('.faq-item__icon, svg');
-          if (icon) icon.style.transform = '';
-        } else {
-          content.classList.add('is-open');
-          btn.setAttribute('aria-expanded', 'true');
-          var icon2 = btn.querySelector('.faq-item__icon, svg');
-          if (icon2) icon2.style.transform = 'rotate(45deg)';
-        }
-      });
-    });
-  }
-
-  /* ═══════════════════════════════════════════════
-     ROOT THEME: TESTIMONIAL CAROUSEL (data-testimonial-dot/slide)
-     ═══════════════════════════════════════════════ */
-
-  function initTestimonialCarousel() {
-    document.querySelectorAll('[data-testimonial-carousel]').forEach(function(carousel) {
-      var slides = carousel.querySelectorAll('[data-testimonial-slide]');
-      var dots = carousel.querySelectorAll('[data-testimonial-dot]');
-      if (slides.length < 2) return;
-
-      function showSlide(index) {
-        slides.forEach(function(s) { s.style.display = 'none'; });
-        dots.forEach(function(d) { d.classList.remove('is-active'); });
-        if (slides[index]) slides[index].style.display = '';
-        if (dots[index]) dots[index].classList.add('is-active');
-      }
-
-      dots.forEach(function(dot) {
-        dot.addEventListener('click', function() {
-          var idx = parseInt(dot.getAttribute('data-testimonial-dot'));
-          showSlide(idx);
-        });
-      });
-
-      // Auto-play if data attribute present
-      var autoSpeed = carousel.getAttribute('data-auto-play');
-      if (autoSpeed) {
-        var current = 0;
-        setInterval(function() {
-          current = (current + 1) % slides.length;
-          showSlide(current);
-        }, parseInt(autoSpeed) * 1000);
-      }
-    });
-  }
-
-  /* ═══════════════════════════════════════════════
-     ROOT THEME: PRODUCT TABS (data-tab / data-tab-panel)
-     ═══════════════════════════════════════════════ */
-
-  function initProductTabs() {
-    document.querySelectorAll('.product-tabs').forEach(function(tabContainer) {
-      var tabs = tabContainer.querySelectorAll('.product-tabs__tab');
-      var panels = tabContainer.querySelectorAll('.product-tabs__panel');
-
-      tabs.forEach(function(tab) {
-        tab.addEventListener('click', function() {
-          var target = tab.getAttribute('data-tab');
-
-          tabs.forEach(function(t) { t.classList.remove('is-active'); });
-          panels.forEach(function(p) { p.classList.remove('is-active'); });
-
-          tab.classList.add('is-active');
-          var panel = tabContainer.querySelector('[data-tab-panel="' + target + '"]');
-          if (panel) panel.classList.add('is-active');
-        });
-      });
-    });
-  }
-
-  /* ═══════════════════════════════════════════════
-     ROOT THEME: PRODUCT CAROUSEL ARROWS
-     ═══════════════════════════════════════════════ */
-
-  function initCarouselArrows() {
-    document.querySelectorAll('[data-carousel-prev]').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var track = btn.closest('.carousel').querySelector('.carousel__track');
-        if (track) track.scrollBy({ left: -300, behavior: 'smooth' });
-      });
-    });
-    document.querySelectorAll('[data-carousel-next]').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var track = btn.closest('.carousel').querySelector('.carousel__track');
-        if (track) track.scrollBy({ left: 300, behavior: 'smooth' });
-      });
-    });
-  }
-
-  /* ═══════════════════════════════════════════════
-     ROOT THEME: THUMBNAIL GALLERY
-     ═══════════════════════════════════════════════ */
-
-  function initThumbnailGallery() {
-    document.querySelectorAll('[data-thumbnail]').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var src = btn.getAttribute('data-image-src');
-        var mainImg = document.getElementById('product-main-image');
-        if (mainImg && src) mainImg.src = src;
-        // Update active border
-        btn.closest('.product-gallery').querySelectorAll('[data-thumbnail]').forEach(function(t) {
-          t.style.borderColor = 'transparent';
-        });
-        btn.style.borderColor = 'var(--color-primary)';
-      });
-    });
-  }
-
-  /* ═══════════════════════════════════════════════
-     ROOT THEME: SELLING PLAN TOGGLE
-     ═══════════════════════════════════════════════ */
-
-  function initSellingPlanToggle() {
-    var toggle = document.getElementById('selling-plan-toggle');
-    if (!toggle) return;
-    var planInput = document.getElementById('product-selling-plan');
-
-    toggle.querySelectorAll('[data-plan]').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        toggle.querySelectorAll('[data-plan]').forEach(function(b) { b.classList.remove('is-active'); });
-        btn.classList.add('is-active');
-
-        var plan = btn.getAttribute('data-plan');
-        if (planInput) {
-          if (plan === 'one-time') {
-            planInput.disabled = true;
-            planInput.value = '';
-          } else {
-            planInput.disabled = false;
-            // Re-set to first selling plan
-            var form = document.getElementById('product-form');
-            if (form) {
-              var origVal = planInput.getAttribute('value');
-              if (origVal) planInput.value = origVal;
-            }
-          }
-        }
-      });
-    });
-  }
-
-  /* ═══════════════════════════════════════════════
-     ROOT THEME: MOBILE MENU
-     ═══════════════════════════════════════════════ */
-
-  function initMobileMenu() {
-    var menuToggle = document.querySelector('.header__menu-toggle, [id="menu-toggle"]');
-    var menu = document.querySelector('.mobile-menu');
-    var backdrop = menu && menu.querySelector('.mobile-menu__backdrop');
-    var closeBtn = menu && menu.querySelector('[data-menu-close]');
-
-    if (!menuToggle || !menu) return;
-
-    function openMenu() {
-      menu.classList.add('is-open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeMenu() {
-      menu.classList.remove('is-open');
-      document.body.style.overflow = '';
-    }
-
-    menuToggle.addEventListener('click', function() {
-      if (menu.classList.contains('is-open')) closeMenu();
-      else openMenu();
-    });
-    if (backdrop) backdrop.addEventListener('click', closeMenu);
-    if (closeBtn) closeBtn.addEventListener('click', closeMenu);
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && menu.classList.contains('is-open')) closeMenu();
-    });
-  }
-
-  /* ═══════════════════════════════════════════════
-     ROOT THEME: CART DRAWER
-     ═══════════════════════════════════════════════ */
-
-  function initCartDrawer() {
-    var cartBtn = document.querySelector('[data-cart-toggle], #cart-toggle, .header__icon--cart');
-    var drawer = document.querySelector('.cart-drawer');
-    var backdrop = document.querySelector('.cart-drawer__backdrop');
-    var closeBtn = drawer && (drawer.querySelector('[data-cart-close]') || drawer.querySelector('#cart-drawer-close'));
-
-    if (!cartBtn || !drawer) return;
-
-    function openDrawer() {
-      drawer.classList.add('is-open');
-      if (backdrop) backdrop.classList.add('is-open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeDrawer() {
-      drawer.classList.remove('is-open');
-      if (backdrop) backdrop.classList.remove('is-open');
-      document.body.style.overflow = '';
-    }
-
-    cartBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      openDrawer();
-    });
-    if (backdrop) backdrop.addEventListener('click', closeDrawer);
-    if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
-
-    // Listen for cart-drawer:refresh event
-    document.addEventListener('cart-drawer:refresh', function() {
-      fetch('/cart.js').then(function(r) { return r.json(); }).then(function(cart) {
-        var countEl = document.querySelector('[data-cart-count]');
-        if (countEl) countEl.textContent = cart.item_count;
-      });
-    });
-  }
-
-  /* ═══════════════════════════════════════════════
-     ANNOUNCEMENT BAR — Dismiss handler + ticker pause
-     ═══════════════════════════════════════════════ */
-
-  function initAnnouncementBar() {
-    // Update header offset when announcement is dismissed
-    function clearAnnouncementHeight() {
-      document.documentElement.style.setProperty('--announcement-height', '0px');
-    }
-    window.addEventListener('bch:announcement:dismissed', clearAnnouncementHeight);
-    // Check on load if already dismissed
-    var annBar = document.querySelector('.announcement-bar');
-    if (!annBar || annBar.offsetHeight === 0) {
-      clearAnnouncementHeight();
-    }
-
-    // Pause ticker on hover
-    var track = document.querySelector('.announcement-bar__track');
-    if (track && annBar) {
-      annBar.addEventListener('mouseenter', function() { track.style.animationPlayState = 'paused'; });
-      annBar.addEventListener('mouseleave', function() { track.style.animationPlayState = 'running'; });
-    }
-  }
-
-  /* ═══════════════════════════════════════════════
-     TESTIMONIAL CAROUSEL — Pause + keyboard nav
-     ═══════════════════════════════════════════════ */
-
-  function initTestimonialEnhancements() {
-    document.querySelectorAll('[data-testimonial-carousel]').forEach(function(carousel) {
-      var slides = carousel.querySelectorAll('[data-testimonial-slide]');
-      var dots = carousel.querySelectorAll('[data-testimonial-dot]');
-      if (slides.length < 2) return;
-
-      var autoSpeed = carousel.getAttribute('data-auto-play');
-      if (!autoSpeed) return;
-      var intervalMs = parseInt(autoSpeed) * 1000;
-      var current = 0;
-      var timer = null;
-
-      function showSlide(index) {
-        current = ((index % slides.length) + slides.length) % slides.length;
-        slides.forEach(function(s) { s.style.display = 'none'; });
-        dots.forEach(function(d) { d.classList.remove('is-active'); });
-        if (slides[current]) slides[current].style.display = '';
-        if (dots[current]) dots[current].classList.add('is-active');
-      }
-
-      function startAutoPlay() {
-        if (timer) return;
-        timer = setInterval(function() {
-          showSlide(current + 1);
-        }, intervalMs);
-      }
-
-      function pauseAutoPlay() {
-        if (timer) { clearInterval(timer); timer = null; }
-      }
-
-      // Pause on hover + focusin
-      carousel.addEventListener('mouseenter', pauseAutoPlay);
-      carousel.addEventListener('focusin', pauseAutoPlay);
-      carousel.addEventListener('mouseleave', startAutoPlay);
-      carousel.addEventListener('focusout', startAutoPlay);
-
-      // Arrow key navigation
-      carousel.addEventListener('keydown', function(e) {
-        if (e.key === 'ArrowLeft') { showSlide(current - 1); pauseAutoPlay(); }
-        if (e.key === 'ArrowRight') { showSlide(current + 1); pauseAutoPlay(); }
-      });
-    });
+  function initAnnouncementTicker() {
+    var track = document.querySelector('.animate-marquee');
+    if (!track) return;
+    var bar = track.closest('.fixed');
+    if (!bar) return;
+    bar.addEventListener('mouseenter', function() { track.style.animationPlayState = 'paused'; });
+    bar.addEventListener('mouseleave', function() { track.style.animationPlayState = 'running'; });
   }
 
   /* ═══════════════════════════════════════════════
@@ -1239,7 +878,6 @@
      ═══════════════════════════════════════════════ */
 
   function init() {
-    // Original functions
     initScrollReveal();
     initCountUp();
     initNavbar();
@@ -1254,19 +892,7 @@
     initHeroScoreTeaser();
     initCopyButtons();
     initWhatsAppShare();
-
-    // Root theme functions
-    initStickyHeader();
-    initRootFAQ();
-    initTestimonialCarousel();
-    initProductTabs();
-    initCarouselArrows();
-    initThumbnailGallery();
-    initSellingPlanToggle();
-    initMobileMenu();
-    initCartDrawer();
-    initAnnouncementBar();
-    initTestimonialEnhancements();
+    initAnnouncementTicker();
   }
 
   if (document.readyState === 'loading') {

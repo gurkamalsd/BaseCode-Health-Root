@@ -1,64 +1,121 @@
-<nav
-  class="navbar fixed left-0 w-full transition"
-  style="top: 30px; z-index: 1000; background: rgba(28,46,35,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.08); height: 64px;"
+{%- liquid
+  assign logo_position = section.settings.logo_position | default: 'center'
+  assign hide_on_scroll = section.settings.hide_on_scroll
+-%}
+
+<header
+  class="navbar{% if logo_position == 'center' %} navbar--center{% endif %}"
+  data-hide-on-scroll="{{ hide_on_scroll }}"
+  style="position: fixed; top: 30px; left: 0; width: 100%; z-index: 1000; background: rgba(28,46,35,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.08); height: 64px; transition: transform 0.3s ease, background 0.2s ease;"
 >
-  <div class="flex items-center justify-between h-full px-6 md:px-20" style="max-width: 1600px; margin: 0 auto;">
-    <!-- Logo -->
-    <a href="/" class="font-heading font-semibold text-13 uppercase" style="color: #F5F2EC; letter-spacing: 0.18em;">
-      BaseCode Health
-    </a>
+  {%- if logo_position == 'center' -%}
+    <!-- ═══ CENTER LAYOUT — 3-column grid: [hamburger] [logo] [icons] ═══ -->
+    <div class="navbar__inner navbar__inner--center" style="max-width: 1600px; margin: 0 auto; height: 100%; padding: 0 20px;">
 
-    <!-- Desktop nav links -->
-    <div class="hidden md:flex items-center gap-8">
-      <a href="/#science" class="font-heading text-14 font-normal transition-colors" style="color: rgba(245,242,236,0.65);">Science</a>
-      <a href="/#aging" class="font-heading text-14 font-normal transition-colors" style="color: rgba(245,242,236,0.65);">Science</a>
-      <a href="/#protocol" class="font-heading text-14 font-normal transition-colors" style="color: rgba(245,242,236,0.65);">Origin</a>
-      <a href="/#story" class="font-heading text-14 font-normal transition-colors" style="color: rgba(245,242,236,0.65);">Story</a>
-      <a href="/pages/free-report" class="font-heading text-14 font-normal transition-colors flex items-center gap-2" style="color: rgba(245,242,236,0.65);">
-        Free Report
-        <span class="font-mono-spec text-10 font-medium rounded-full" style="background: #C4783A; color: #1C2E23; padding: 3px 8px;">FREE</span>
-      </a>
-      <a href="/pages/quiz" class="font-heading text-14 font-normal transition-colors flex items-center gap-2" style="color: rgba(245,242,236,0.65);">
-        Quiz
-        <span class="font-mono-spec text-10 font-medium rounded-full" style="background: #C4783A; color: #1C2E23; padding: 3px 8px;">NEW</span>
-      </a>
+      <!-- Left: hamburger (always visible) -->
+      <div style="display: flex; align-items: center;">
+        <button
+          class="navbar__menu-toggle navbar__menu-toggle--always"
+          style="color: #F5F2EC; padding: 10px; display: flex; align-items: center; justify-content: center;"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="mobile-nav-menu"
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 12h18M3 6h18M3 18h18"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Center: logo -->
+      <div style="display: flex; align-items: center; justify-content: center;">
+        <a href="/" class="font-heading font-semibold text-13 uppercase" style="color: #F5F2EC; letter-spacing: 0.18em; white-space: nowrap;">
+          BaseCode Health
+        </a>
+      </div>
+
+      <!-- Right: search + account + cart icons -->
+      <div style="display: flex; align-items: center; justify-content: flex-end; gap: 16px;">
+        <a href="/search" style="color: rgba(245,242,236,0.65); display: flex; align-items: center; padding: 6px;" aria-label="Search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+          </svg>
+        </a>
+        <a href="/account" style="color: rgba(245,242,236,0.65); display: flex; align-items: center; padding: 6px;" aria-label="Account">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+          </svg>
+        </a>
+        <a href="/cart" style="color: rgba(245,242,236,0.65); display: flex; align-items: center; padding: 6px; position: relative;" aria-label="Cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          <span class="header__cart-count" id="cart-count" style="display: none;">0</span>
+        </a>
+      </div>
     </div>
 
-    <!-- Desktop CTA -->
-    <div class="hidden md:flex items-center gap-6">
-      <a
-        href="/products/origin"
-        class="font-heading text-14 font-medium rounded-full transition-colors"
-        style="background: #C4783A; color: #1C2E23; padding: 10px 24px;"
+  {%- else -%}
+    <!-- ═══ LEFT LAYOUT — original style ═══ -->
+    <div class="flex items-center justify-between h-full px-6 md:px-20" style="max-width: 1600px; margin: 0 auto;">
+      <!-- Logo -->
+      <a href="/" class="font-heading font-semibold text-13 uppercase" style="color: #F5F2EC; letter-spacing: 0.18em;">
+        BaseCode Health
+      </a>
+
+      <!-- Desktop nav links -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="/#science" class="font-heading text-14 font-normal transition-colors" style="color: rgba(245,242,236,0.65);">Science</a>
+        <a href="/products/origin" class="font-heading text-14 font-normal transition-colors" style="color: rgba(245,242,236,0.65);">Origin</a>
+        <a href="/#story" class="font-heading text-14 font-normal transition-colors" style="color: rgba(245,242,236,0.65);">Story</a>
+        <a href="/pages/free-report" class="font-heading text-14 font-normal transition-colors flex items-center gap-2" style="color: rgba(245,242,236,0.65);">
+          Free Report
+          <span class="font-mono-spec text-10 font-medium rounded-full" style="background: #C4783A; color: #1C2E23; padding: 3px 8px;">FREE</span>
+        </a>
+        <a href="/pages/quiz" class="font-heading text-14 font-normal transition-colors flex items-center gap-2" style="color: rgba(245,242,236,0.65);">
+          Quiz
+          <span class="font-mono-spec text-10 font-medium rounded-full" style="background: #C4783A; color: #1C2E23; padding: 3px 8px;">NEW</span>
+        </a>
+      </div>
+
+      <!-- Desktop CTA -->
+      <div class="hidden md:flex items-center gap-6">
+        <a href="/products/origin" class="font-heading text-14 font-medium rounded-full transition-colors" style="background: #C4783A; color: #1C2E23; padding: 10px 24px;">
+          Shop Origin
+        </a>
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button
+        class="navbar__menu-toggle md:hidden"
+        style="color: #F5F2EC; padding: 10px;"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-nav-menu"
       >
-        Shop Origin
-      </a>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 12h18M3 6h18M3 18h18"/>
+        </svg>
+      </button>
     </div>
+  {%- endif -%}
 
-    <!-- Mobile hamburger -->
-    <button
-      class="navbar__mobile-toggle md:hidden"
-      style="color: #F5F2EC; padding: 10px;"
-      aria-label="Open menu"
-      aria-expanded="false"
-      aria-controls="mobile-nav-menu"
-    >
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M3 12h18M3 6h18M3 18h18"/>
-      </svg>
-    </button>
-  </div>
-
-  <!-- Mobile menu -->
+  <!-- ═══ SLIDE-OUT NAV DRAWER (both layouts) ═══ -->
   <div
     id="mobile-nav-menu"
-    class="navbar__mobile-menu md:hidden px-6 pb-6"
-    style="background: #1C2E23; display: none; max-height: calc(100vh - 94px); overflow-y: auto;"
+    class="navbar__mobile-menu"
+    style="position: fixed; top: 0; right: -100%; width: 320px; height: 100vh; background: #1C2E23; z-index: 2000; padding: 80px 32px 32px; overflow-y: auto; transition: right 0.3s ease;"
     role="menu"
   >
+    <button class="navbar__menu-close" style="position: absolute; top: 24px; right: 24px; color: #F5F2EC; padding: 8px;" aria-label="Close menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M18 6L6 18M6 6l12 12"/>
+      </svg>
+    </button>
+
+    <a href="/" class="block py-3 font-heading text-16" style="color: rgba(245,242,236,0.75);">Home</a>
     <a href="/#science" class="block py-3 font-heading text-16" style="color: rgba(245,242,236,0.75);">Science</a>
-    <a href="/#aging" class="block py-3 font-heading text-16" style="color: rgba(245,242,236,0.75);">Science</a>
-    <a href="/#protocol" class="block py-3 font-heading text-16" style="color: rgba(245,242,236,0.75);">Origin</a>
+    <a href="/products/origin" class="block py-3 font-heading text-16" style="color: rgba(245,242,236,0.75);">Origin</a>
     <a href="/#story" class="block py-3 font-heading text-16" style="color: rgba(245,242,236,0.75);">Story</a>
     <a href="/pages/free-report" class="block py-3 font-heading text-16" style="color: rgba(245,242,236,0.75);">
       Free Report <span class="font-mono-spec text-11 font-medium rounded-full ml-2" style="background: #C4783A; color: #1C2E23; padding: 2px 6px;">FREE</span>
@@ -67,35 +124,170 @@
       Quiz <span class="font-mono-spec text-11 font-medium rounded-full ml-2" style="background: #C4783A; color: #1C2E23; padding: 2px 6px;">NEW</span>
     </a>
 
-    <div class="flex flex-col gap-3 mt-4">
-      <a href="/pages/free-report" class="inline-block text-center font-heading text-14 font-medium rounded-full" style="border: 1px solid #C4783A; color: #C4783A; padding: 14px 24px;">
+    <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 24px;">
+      <a href="/pages/free-report" class="font-heading text-14 font-medium rounded-full" style="display: block; text-align: center; border: 1px solid #C4783A; color: #C4783A; padding: 14px 24px;">
         Get Free Report
       </a>
-      <a href="/products/origin" class="inline-block text-center font-heading text-14 font-medium rounded-full" style="background: #C4783A; color: #1C2E23; padding: 14px 24px;">
+      <a href="/products/origin" class="font-heading text-14 font-medium rounded-full" style="display: block; text-align: center; background: #C4783A; color: #1C2E23; padding: 14px 24px;">
         Shop Origin
       </a>
     </div>
   </div>
-</nav>
+
+  <!-- Overlay backdrop -->
+  <div class="navbar__overlay" style="position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1999; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;"></div>
+</header>
 
 <style>
+  .navbar__inner--center {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+  }
   .navbar--scrolled {
-    background: rgba(28,46,35,0.95) !important;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: rgba(28,46,35,0.97) !important;
   }
+  .navbar--hidden {
+    transform: translateY(-100%) !important;
+  }
+  .navbar a:hover { color: #F5F2EC !important; }
   .navbar__mobile-menu--open {
-    display: block !important;
+    right: 0 !important;
   }
-  .navbar a:hover {
-    color: #F5F2EC !important;
+  .navbar__overlay--visible {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+  .navbar--center .navbar__mobile-menu {
+    width: 340px;
+  }
+  .navbar__mobile-menu::-webkit-scrollbar { width: 3px; }
+  .navbar__mobile-menu::-webkit-scrollbar-track { background: transparent; }
+  .navbar__mobile-menu::-webkit-scrollbar-thumb { background: rgba(245,242,236,0.20); border-radius: 9999px; }
+  .header__cart-count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 16px;
+    height: 16px;
+    border-radius: 9999px;
+    background: var(--ochre);
+    color: var(--forest);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    padding: 0 4px;
   }
 </style>
+
+<script>
+(function() {
+  var header = document.querySelector('.navbar');
+  if (!header) return;
+
+  var hideOnScroll = header.getAttribute('data-hide-on-scroll') === 'true';
+  var lastScrollY = window.scrollY;
+  var isHidden = false;
+  var DELTA = 5;
+  var HIDE_THRESHOLD = 300;
+
+  function onScroll() {
+    var currentY = window.scrollY;
+
+    if (currentY > 40) {
+      header.classList.add('navbar--scrolled');
+    } else {
+      header.classList.remove('navbar--scrolled');
+    }
+
+    if (hideOnScroll) {
+      var diff = currentY - lastScrollY;
+      if (Math.abs(diff) < DELTA) return;
+
+      if (diff > 0 && currentY > HIDE_THRESHOLD && !isHidden) {
+        header.classList.add('navbar--hidden');
+        isHidden = true;
+      } else if (diff < 0 && isHidden) {
+        header.classList.remove('navbar--hidden');
+        isHidden = false;
+      }
+    }
+
+    lastScrollY = currentY;
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Drawer toggle
+  var toggleBtns = header.querySelectorAll('.navbar__menu-toggle, .navbar__menu-toggle--always');
+  var menu = document.getElementById('mobile-nav-menu');
+  var closeBtn = header.querySelector('.navbar__menu-close');
+  var overlay = header.querySelector('.navbar__overlay');
+
+  function openMenu() {
+    if (!menu) return;
+    menu.classList.add('navbar__mobile-menu--open');
+    if (overlay) overlay.classList.add('navbar__overlay--visible');
+    document.body.style.overflow = 'hidden';
+    toggleBtns.forEach(function(b) { b.setAttribute('aria-expanded', 'true'); });
+  }
+
+  function closeMenu() {
+    if (!menu) return;
+    menu.classList.remove('navbar__mobile-menu--open');
+    if (overlay) overlay.classList.remove('navbar__overlay--visible');
+    document.body.style.overflow = '';
+    toggleBtns.forEach(function(b) { b.setAttribute('aria-expanded', 'false'); });
+  }
+
+  toggleBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var isOpen = menu && menu.classList.contains('navbar__mobile-menu--open');
+      isOpen ? closeMenu() : openMenu();
+    });
+  });
+
+  if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+  if (overlay) overlay.addEventListener('click', closeMenu);
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeMenu();
+  });
+
+  if (menu) {
+    menu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', closeMenu);
+    });
+  }
+})();
+</script>
 
 {% schema %}
 {
   "name": "Navigation",
   "class": "navbar-section",
-  "settings": []
+  "settings": [
+    {
+      "type": "select",
+      "id": "logo_position",
+      "label": "Logo position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_scroll",
+      "label": "Hide header on scroll down",
+      "default": true
+    }
+  ]
 }
 {% endschema %}

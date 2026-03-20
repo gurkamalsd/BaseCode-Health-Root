@@ -1,18 +1,4 @@
-{%- comment -%}BaseCode Root - quiz-page{%- endcomment -%}
-
-{%- liquid
-  assign bg_color        = section.settings.bg_color
-  assign primary_color   = section.settings.primary_color
-  assign accent_color    = section.settings.accent_color
-  assign text_muted      = section.settings.text_muted_color
-  assign text_body       = section.settings.text_body_color
-
-  assign pt = section.settings.padding_top
-  assign pb = section.settings.padding_bottom
--%}
-
-<section class="px-4 md:px-10"
-  style="background: {{ bg_color }}; min-height: 100vh; padding-top: {{ pt }}px; padding-bottom: {{ pb }}px;">
+<section class="px-4 md:px-10 py-12 md:py-20" style="background: #F5F2EC; min-height: 100vh;">
   <div style="max-width: 640px; margin: 0 auto;">
     <!-- Quiz container -->
     <div data-quiz-container>
@@ -24,58 +10,63 @@
         <!-- Incentive pill -->
         <div class="inline-block rounded-full px-5 py-2 mb-8"
           style="background: rgba(196,120,58,0.12); border: 1px solid rgba(196,120,58,0.25);">
-          <span class="font-heading text-13 font-medium" style="color: {{ accent_color }};">
-            {{ section.settings.incentive_text }}
+          <span class="font-heading text-13 font-medium" style="color: #C4783A;">
+            Complete the quiz for 20% off + free research report
           </span>
         </div>
 
         <!-- Eyebrow -->
         <p class="font-mono-spec text-11 uppercase mb-6"
-          style="color: {{ accent_color }}; letter-spacing: 0.2em;">
-          {{ section.settings.eyebrow }}
+          style="color: #C4783A; letter-spacing: 0.2em;">
+          2-Minute Assessment
         </p>
 
         <!-- Heading -->
         <h1 class="font-heading font-medium mb-6"
-          style="color: {{ primary_color }}; font-size: 32px; line-height: 44px;">
-          {{ section.settings.heading }}
+          style="color: #1C2E23; font-size: 32px; line-height: 44px;">
+          What's your<br>Biology Score?
         </h1>
 
         <!-- Body -->
         <p class="font-heading text-17 font-light mb-4 mx-auto"
-          style="color: {{ text_body }}; line-height: 1.7; max-width: 520px;">
-          {{ section.settings.body }}
+          style="color: #4A5550; line-height: 1.7; max-width: 520px;">
+          Find out if your bloating, fatigue, and inflammation are connected
+          to your microbiome. Seven questions backed by published
+          research from Gut, Cell, and PLOS Biology.
         </p>
 
         <!-- Sub-body -->
         <p class="font-heading text-15 font-light mb-10 mx-auto"
-          style="color: {{ text_muted }}; line-height: 1.7; max-width: 480px;">
-          {{ section.settings.sub_body }}
+          style="color: #8A9490; line-height: 1.7; max-width: 480px;">
+          Your results are instant, private, and free.
+          Most people score in the Moderate to High Risk band.
         </p>
 
         <!-- CTA -->
-        <button data-quiz-start class="btn btn--primary inline-block"
-          data-default-text="{{ section.settings.start_button_text }}"
+        <button data-quiz-start class="btn btn--primary inline-block" data-default-text="Start the Assessment"
           style="min-width: 240px;">
-          {{ section.settings.start_button_text }}
+          Start the Assessment
         </button>
 
         <!-- Privacy -->
-        <p class="font-heading text-13 mt-6" style="color: {{ text_muted }};">
-          {{ section.settings.privacy_text }}
+        <p class="font-heading text-13 mt-6" style="color: #8A9490;">
+          No email required to see your score. No spam. Ever.
         </p>
 
         <!-- Citation badges -->
         <div class="flex flex-wrap justify-center gap-4 mt-12">
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'citation' -%}
-              <span class="font-mono-spec text-11 px-4 py-2 rounded-full"
-                style="border: 1px solid #DDD6CC; color: {{ text_muted }};"
-                {{ block.shopify_attributes }}>
-                {{ block.settings.text }}
-              </span>
-            {%- endif -%}
-          {%- endfor -%}
+          <span class="font-mono-spec text-11 px-4 py-2 rounded-full"
+            style="border: 1px solid #DDD6CC; color: #8A9490;">
+            Gut, 2020
+          </span>
+          <span class="font-mono-spec text-11 px-4 py-2 rounded-full"
+            style="border: 1px solid #DDD6CC; color: #8A9490;">
+            Cell, 2018
+          </span>
+          <span class="font-mono-spec text-11 px-4 py-2 rounded-full"
+            style="border: 1px solid #DDD6CC; color: #8A9490;">
+            PLOS Biology, 2018
+          </span>
         </div>
       </div>
 
@@ -86,37 +77,35 @@
         <!-- Progress bar -->
         <div class="mb-8">
           <div class="flex justify-between items-center mb-2">
-            <p class="font-mono-spec text-11 uppercase" style="color: {{ accent_color }}; letter-spacing: 0.15em;">
-              {{ section.settings.question_prefix }} <span data-quiz-current>1</span> of 7
+            <p class="font-mono-spec text-11 uppercase" style="color: #C4783A; letter-spacing: 0.15em;">
+              Question <span data-quiz-current>1</span> of 7
             </p>
-            <p class="font-mono-spec text-11" style="color: {{ text_muted }};">
+            <p class="font-mono-spec text-11" style="color: #8A9490;">
               <span data-quiz-progress>0</span>% complete
             </p>
           </div>
           <div class="rounded-full overflow-hidden" style="height: 4px; background: rgba(28,46,35,0.10);">
-            <div data-quiz-bar class="rounded-full"
-              style="height: 100%; background: {{ accent_color }}; width: 0%; transition: width 0.5s ease-out;"></div>
+            <div data-quiz-bar class="rounded-full" style="height: 100%; background: #C4783A; width: 0%; transition: width 0.5s ease-out;"></div>
           </div>
         </div>
 
         <!-- Question heading -->
         <h2 data-quiz-question-text class="font-heading font-medium mb-3"
-          style="color: {{ primary_color }}; font-size: 24px; line-height: 1.2;"></h2>
+          style="color: #1C2E23; font-size: 24px; line-height: 1.2;"></h2>
 
         <!-- Subtext -->
         <p data-quiz-subtext class="font-heading text-15 font-light mb-8"
-          style="color: {{ text_body }}; line-height: 1.6;"></p>
+          style="color: #4A5550; line-height: 1.6;"></p>
 
         <!-- Options -->
-        <div data-quiz-options class="space-y-3"></div>
+        <div data-quiz-options></div>
 
         <!-- Next / See Results button -->
         <button data-quiz-next
-          class="w-full mt-8 font-heading text-15 font-semibold py-4 rounded-full transition-all"
-          data-default-text="{{ section.settings.next_button_text }}"
-          style="background: {{ accent_color }}; color: {{ primary_color }}; opacity: 0.4; cursor: not-allowed;"
+          class="quiz-next-btn"
+          data-default-text="Next Question"
           disabled>
-          {{ section.settings.next_button_text }}
+          Next Question
         </button>
       </div>
 
@@ -126,238 +115,266 @@
       <div data-quiz-results style="display: none;">
 
         <!-- 1. Score visualization -->
-        <div class="text-center reveal-hidden" style="margin-bottom: 32px; padding: 40px 0 24px;">
-          <p class="font-mono-spec uppercase" style="font-size: 11px; color: {{ accent_color }}; letter-spacing: 0.2em; margin-bottom: 28px;">
-            {{ section.settings.score_label }}
+        <div class="text-center mb-6 reveal-hidden">
+          <p class="font-mono-spec text-11 uppercase mb-6"
+            style="color: #C4783A; letter-spacing: 0.2em;">
+            Your Wellness Risk Score
           </p>
 
-          <!-- SVG Score Ring (200x200) -->
-          <div style="position: relative; display: inline-flex; align-items: center; justify-content: center;">
-            <svg width="200" height="200" viewBox="0 0 200 200">
-              <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(0,0,0,0.05)" stroke-width="8"/>
-              <circle data-score-ring cx="100" cy="100" r="80" fill="none" stroke="{{ accent_color }}" stroke-width="8"
+          <!-- SVG Score Ring (180x180) -->
+          <div class="inline-flex items-center justify-center" style="position: relative;">
+            <svg width="180" height="180" viewBox="0 0 180 180">
+              <circle cx="90" cy="90" r="72" fill="none" stroke="rgba(0,0,0,0.06)" stroke-width="10"/>
+              <circle data-score-ring cx="90" cy="90" r="72" fill="none" stroke="#C4783A" stroke-width="10"
                 stroke-linecap="round"
-                stroke-dasharray="502.65" stroke-dashoffset="502.65"
-                transform="rotate(-90 100 100)"
+                stroke-dasharray="452.39" stroke-dashoffset="452.39"
+                transform="rotate(-90 90 90)"
                 style="transition: stroke-dashoffset 1.2s ease-out;"/>
             </svg>
             <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-              <span data-score-number class="font-heading"
-                style="color: {{ primary_color }}; font-size: 52px; font-weight: 600; line-height: 1; text-transform: none;">0</span>
-              <span class="font-mono-spec" style="font-size: 12px; color: {{ text_muted }}; letter-spacing: 0.1em; margin-top: 4px;">/ 100</span>
+              <span data-score-number class="font-heading font-medium" style="color: #1C2E23; font-size: 42px; line-height: 1;">0</span>
+              <span class="font-mono-spec text-11" style="color: #8A9490; letter-spacing: 0.1em;">/ 100</span>
             </div>
           </div>
 
           <!-- Risk label pill -->
-          <div style="margin-top: 20px;">
+          <div class="mt-4">
             <span data-risk-pill
-              class="font-mono-spec"
-              style="display: inline-block; font-size: 12px; font-weight: 600; padding: 8px 24px; border-radius: 9999px; background: rgba(196,120,58,0.12); color: {{ accent_color }}; letter-spacing: 0.1em;">
+              class="inline-block font-mono-spec text-12 font-medium px-5 py-2 rounded-full"
+              style="background: rgba(196,120,58,0.12); color: #C4783A; letter-spacing: 0.1em;">
             </span>
           </div>
         </div>
 
-        <!-- 2. Email capture card (dark bg, elevated) -->
-        <div data-quiz-email-capture style="background: {{ primary_color }}; border-radius: 16px; padding: 32px 24px; margin-bottom: 24px; box-shadow: 0 8px 32px rgba(28,46,35,0.25);">
+        <!-- 2. Email capture card (dark bg) -->
+        <div data-quiz-email-capture class="rounded-2xl p-6 mb-6 reveal-hidden" style="background: #1C2E23;">
           <!-- Pre-submit state -->
           <div data-email-form-wrapper>
-            <p class="font-heading" style="font-size: 17px; font-weight: 600; text-align: center; color: {{ bg_color }}; margin-bottom: 4px; text-transform: none;">
-              {{ section.settings.email_heading }}
+            <p class="font-heading text-17 font-medium text-center mb-1" style="color: #F5F2EC;">
+              Get 20% off + free research report
             </p>
-            <p class="font-heading" style="font-size: 13px; text-align: center; color: rgba(245,242,236,0.50); margin-bottom: 20px;">
-              {{ section.settings.email_subtext }}
+            <p class="font-heading text-13 text-center mb-4" style="color: rgba(245,242,236,0.50);">
+              Enter your details to unlock code FOUNDER20
             </p>
 
-            <form data-lead-form data-source="quiz-results" style="display: flex; flex-direction: column; gap: 10px;">
+            <form data-lead-form data-source="quiz-results" class="space-y-2.5">
               <!-- Honeypot -->
               <input type="text" name="website" autocomplete="off" tabindex="-1" aria-hidden="true"
                 style="position: absolute; left: -9999px; opacity: 0; height: 0; width: 0;">
 
-              <!-- First name -->
-              <input type="text" name="firstName" required placeholder="First name" aria-label="First name"
-                autocomplete="given-name"
-                class="font-heading"
-                style="font-size: 14px; padding: 14px 20px; border-radius: 9999px; background: rgba(255,255,255,0.08); color: {{ bg_color }}; border: 1px solid rgba(255,255,255,0.15); outline: none; width: 100%;">
-              <!-- Email -->
-              <input type="email" name="email" required placeholder="Email" aria-label="Email address"
-                autocomplete="email"
-                class="font-heading"
-                style="font-size: 14px; padding: 14px 20px; border-radius: 9999px; background: rgba(255,255,255,0.08); color: {{ bg_color }}; border: 1px solid rgba(255,255,255,0.15); outline: none; width: 100%;">
+              <!-- First name + Email -->
+              <div class="flex flex-col sm:flex-row gap-2">
+                <input type="text" name="firstName" required placeholder="First name" aria-label="First name"
+                  autocomplete="given-name"
+                  class="flex-1 font-heading text-14 px-4 py-3 rounded-full outline-none"
+                  style="background: rgba(255,255,255,0.08); color: #F5F2EC; border: 1px solid rgba(255,255,255,0.15);">
+                <input type="email" name="email" required placeholder="Email" aria-label="Email address"
+                  autocomplete="email"
+                  class="flex-1 font-heading text-14 px-4 py-3 rounded-full outline-none"
+                  style="background: rgba(255,255,255,0.08); color: #F5F2EC; border: 1px solid rgba(255,255,255,0.15);">
+              </div>
 
               <button type="submit"
-                class="font-heading"
-                data-default-text="{{ section.settings.email_button_text }}"
-                style="width: 100%; font-size: 15px; font-weight: 600; padding: 14px 24px; border-radius: 9999px; background: {{ accent_color }}; color: {{ primary_color }}; border: none; cursor: pointer; transition: opacity 0.2s ease;">
-                {{ section.settings.email_button_text }}
+                class="w-full font-heading text-15 font-semibold px-6 py-3.5 rounded-full transition-colors"
+                data-default-text="Unlock 20% Off"
+                style="background: #C4783A; color: #1C2E23;">
+                Unlock 20% Off
               </button>
             </form>
 
-            <p class="lead-form-error font-heading" style="font-size: 13px; text-align: center; color: {{ accent_color }}; display: none; margin-top: 8px;">
+            <p class="lead-form-error font-heading text-13 mt-2 text-center" style="color: #C4783A; display: none;">
               Something went wrong. Please try again.
             </p>
 
-            <p class="font-heading" style="font-size: 11px; text-align: center; color: rgba(245,242,236,0.30); margin-top: 12px;">
+            <p class="font-heading text-11 text-center mt-3" style="color: rgba(245,242,236,0.30);">
               No spam. Unsubscribe anytime.
             </p>
           </div>
 
           <!-- Post-submit success state -->
-          <div class="lead-form-success" style="display: none; text-align: center;">
-            <p class="font-mono-spec" style="font-size: 11px; text-transform: uppercase; color: rgba(245,242,236,0.5); letter-spacing: 0.1em; margin-bottom: 8px;">
+          <div class="lead-form-success text-center" style="display: none;">
+            <p class="font-mono-spec text-11 uppercase mb-2" style="color: rgba(245,242,236,0.5); letter-spacing: 0.1em;">
               Your 20% discount code
             </p>
-            <p class="font-heading" style="font-size: 28px; font-weight: 600; color: {{ accent_color }}; letter-spacing: 0.1em; margin-bottom: 12px; text-transform: none;">
-              {{ section.settings.discount_code }}
+            <p class="font-heading text-24 font-medium mb-3" style="color: #C4783A; letter-spacing: 0.1em;">
+              FOUNDER20
             </p>
-            <p class="font-heading" style="font-size: 13px; color: rgba(245,242,236,0.60); margin-bottom: 20px;">
-              {{ section.settings.success_message }}
+            <p class="font-heading text-13 mb-4" style="color: rgba(245,242,236,0.60);">
+              Auto-applied at checkout. Research report sent to your inbox.
             </p>
-            <a href="{{ section.settings.product_link }}"
-              style="display: inline-block; font-family: var(--font-heading); font-size: 15px; font-weight: 600; padding: 14px 40px; border-radius: 9999px; background: {{ accent_color }}; color: {{ primary_color }}; box-shadow: 0 4px 20px rgba(196,120,58,0.25); text-decoration: none; transition: opacity 0.2s ease;">
-              {{ section.settings.shop_button_text }} — {{ section.settings.product_price }}
+            <a href="/products/origin"
+              class="inline-block font-heading text-15 font-semibold px-10 py-4 rounded-full transition-all"
+              style="background: #C4783A; color: #1C2E23; box-shadow: 0 4px 20px rgba(196,120,58,0.25);">
+              Shop Origin — $34/mo
             </a>
-            <p class="font-mono-spec" style="font-size: 10px; color: rgba(245,242,236,0.35); margin-top: 12px;">
+            <p class="font-mono-spec text-10 mt-3" style="color: rgba(245,242,236,0.35);">
               Free shipping · 30-day money-back guarantee
             </p>
           </div>
 
           <!-- Duplicate state -->
-          <div class="lead-form-duplicate" style="display: none; text-align: center;">
-            <p class="font-heading" style="font-size: 14px; font-weight: 500; color: rgba(245,242,236,0.70); text-transform: none;">
-              {{ section.settings.duplicate_message }}
+          <div class="lead-form-duplicate text-center" style="display: none;">
+            <p class="font-heading text-14 font-medium" style="color: rgba(245,242,236,0.70);">
+              Already on the list — check your inbox for your report.
             </p>
-            <a href="{{ section.settings.product_link }}"
-              style="display: inline-block; margin-top: 16px; font-family: var(--font-heading); font-size: 15px; font-weight: 600; padding: 14px 40px; border-radius: 9999px; background: {{ accent_color }}; color: {{ primary_color }}; text-decoration: none;">
-              {{ section.settings.shop_button_text }} — {{ section.settings.product_price }}
+            <a href="/products/origin"
+              class="inline-block font-heading text-15 font-semibold px-10 py-4 rounded-full mt-4 transition-all"
+              style="background: #C4783A; color: #1C2E23;">
+              Shop Origin — $34/mo
             </a>
           </div>
         </div>
 
         <!-- Shop CTA (visible before email submit) -->
-        <div data-quiz-shop-cta style="text-align: center; margin-bottom: 36px;">
-          <a href="{{ section.settings.product_link }}"
-            style="display: inline-block; font-family: var(--font-heading); font-size: 15px; font-weight: 600; padding: 14px 40px; border-radius: 9999px; background: {{ accent_color }}; color: {{ primary_color }}; box-shadow: 0 4px 20px rgba(196,120,58,0.25); text-decoration: none; transition: opacity 0.2s ease;">
-            {{ section.settings.shop_button_text }} — {{ section.settings.product_price }}
+        <div data-quiz-shop-cta class="text-center mb-8 reveal-hidden">
+          <a href="/products/origin"
+            class="inline-block font-heading text-15 font-semibold px-10 py-4 rounded-full transition-all"
+            style="background: #C4783A; color: #1C2E23; box-shadow: 0 4px 20px rgba(196,120,58,0.25);">
+            Shop Origin — $34/mo
           </a>
-          <p class="font-mono-spec" style="font-size: 11px; color: {{ text_muted }}; margin-top: 12px;">
+          <p class="font-mono-spec text-11 mt-3" style="color: #8A9490;">
             Free research report included · 30-day supply · Cancel anytime
           </p>
         </div>
 
         <!-- 3. Risk explanation card -->
-        <div style="background: #FFFFFF; border-radius: 16px; padding: 32px; margin-bottom: 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06);">
-          <p data-risk-headline class="font-heading"
-            style="color: {{ primary_color }}; font-size: 22px; font-weight: 600; line-height: 1.3; margin-bottom: 16px; text-transform: none;">
+        <div class="rounded-2xl p-8 mb-8 reveal-hidden" style="background: #EDE8DF;">
+          <h2 data-risk-headline class="font-heading font-medium mb-4"
+            style="color: #1C2E23; font-size: 24px; line-height: 1.2;">
+          </h2>
+          <p data-risk-body class="font-heading text-15 font-light" style="color: #4A5550; line-height: 1.75;">
           </p>
-          <p data-risk-body class="font-heading"
-            style="font-size: 15px; font-weight: 300; color: {{ text_body }}; line-height: 1.75;">
-          </p>
-          <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.06);">
-            <p data-purchase-subtext class="font-heading" style="font-size: 14px; font-weight: 300; font-style: italic; color: {{ text_muted }}; line-height: 1.7; text-align: center;">
+        </div>
+
+        <!-- 4. Dream outcome badges (SVG icons, grid of 6) -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-8 reveal-hidden">
+          <!-- End Bloating -->
+          <div class="flex flex-col items-center gap-1.5 py-3 px-2 rounded-xl" style="background: #EDE8DF;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C4783A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+            </svg>
+            <span class="font-mono-spec text-10 text-center" style="color: #4A5550; letter-spacing: 0.05em;">End Bloating</span>
+          </div>
+          <!-- More Energy -->
+          <div class="flex flex-col items-center gap-1.5 py-3 px-2 rounded-xl" style="background: #EDE8DF;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C4783A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+            <span class="font-mono-spec text-10 text-center" style="color: #4A5550; letter-spacing: 0.05em;">More Energy</span>
+          </div>
+          <!-- Clear Thinking -->
+          <div class="flex flex-col items-center gap-1.5 py-3 px-2 rounded-xl" style="background: #EDE8DF;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C4783A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9.5 2A5.5 5.5 0 0 0 4 7.5c0 1.58.67 3 1.74 4.01L7 12.76V16h4v-3.24l1.26-1.25A5.49 5.49 0 0 0 15 7.5 5.5 5.5 0 0 0 9.5 2z"/>
+              <path d="M12 16v2a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2v-2"/>
+              <path d="M9.5 2v1"/>
+              <path d="M4 7.5H3"/>
+              <path d="M16 7.5h1"/>
+              <path d="M5.28 4.28l-.71-.71"/>
+              <path d="M14.43 4.28l.71-.71"/>
+            </svg>
+            <span class="font-mono-spec text-10 text-center" style="color: #4A5550; letter-spacing: 0.05em;">Clear Thinking</span>
+          </div>
+          <!-- Better Sleep -->
+          <div class="flex flex-col items-center gap-1.5 py-3 px-2 rounded-xl" style="background: #EDE8DF;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C4783A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/>
+            </svg>
+            <span class="font-mono-spec text-10 text-center" style="color: #4A5550; letter-spacing: 0.05em;">Better Sleep</span>
+          </div>
+          <!-- Mood Support -->
+          <div class="flex flex-col items-center gap-1.5 py-3 px-2 rounded-xl" style="background: #EDE8DF;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C4783A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+            <span class="font-mono-spec text-10 text-center" style="color: #4A5550; letter-spacing: 0.05em;">Mood Support</span>
+          </div>
+          <!-- Immune Strength -->
+          <div class="flex flex-col items-center gap-1.5 py-3 px-2 rounded-xl" style="background: #EDE8DF;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C4783A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            <span class="font-mono-spec text-10 text-center" style="color: #4A5550; letter-spacing: 0.05em;">Immune Strength</span>
+          </div>
+        </div>
+
+        <!-- 5. Three stat badges -->
+        <div class="grid grid-cols-3 gap-4 mb-10 reveal-hidden">
+          <div class="text-center">
+            <p class="font-heading font-medium" style="color: #C4783A; font-size: 22px;">40–60%</p>
+            <p class="font-mono-spec text-10 mt-1" style="color: #8A9490; line-height: 1.5;">
+              butyrate-producer<br>decline after<br>westernisation
+            </p>
+          </div>
+          <div class="text-center">
+            <p class="font-heading font-medium" style="color: #C4783A; font-size: 22px;">5–10yr</p>
+            <p class="font-mono-spec text-10 mt-1" style="color: #8A9490; line-height: 1.5;">
+              earlier metabolic<br>onset in diaspora<br>populations
+            </p>
+          </div>
+          <div class="text-center">
+            <p class="font-heading font-medium" style="color: #C4783A; font-size: 22px;">2,084</p>
+            <p class="font-mono-spec text-10 mt-1" style="color: #8A9490; line-height: 1.5;">
+              subjects in the<br>HELIUS multi-ethnic<br>cohort study
             </p>
           </div>
         </div>
 
-        <!-- 4. Dream outcome badges -->
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 32px;">
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'outcome' -%}
-              <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 16px 8px; border-radius: 12px; background: #FFFFFF; box-shadow: 0 1px 4px rgba(0,0,0,0.05);"
-                {{ block.shopify_attributes }}>
-                {%- case block.settings.icon -%}
-                  {%- when 'fire' -%}
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ accent_color }}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
-                    </svg>
-                  {%- when 'bolt' -%}
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ accent_color }}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-                    </svg>
-                  {%- when 'bulb' -%}
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ accent_color }}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M9.5 2A5.5 5.5 0 0 0 4 7.5c0 1.58.67 3 1.74 4.01L7 12.76V16h4v-3.24l1.26-1.25A5.49 5.49 0 0 0 15 7.5 5.5 5.5 0 0 0 9.5 2z"/>
-                      <path d="M12 16v2a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2v-2"/>
-                    </svg>
-                  {%- when 'moon' -%}
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ accent_color }}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/>
-                    </svg>
-                  {%- when 'heart' -%}
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ accent_color }}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                    </svg>
-                  {%- when 'shield' -%}
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ accent_color }}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                    </svg>
-                {%- endcase -%}
-                <span class="font-mono-spec" style="font-size: 10px; text-align: center; color: {{ text_body }}; letter-spacing: 0.05em;">
-                  {{ block.settings.label }}
-                </span>
-              </div>
-            {%- endif -%}
-          {%- endfor -%}
-        </div>
-
-        <!-- 5. Stat badges -->
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 40px;">
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'stat_badge' -%}
-              <div style="text-align: center; padding: 16px 8px; background: #FFFFFF; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.05);" {{ block.shopify_attributes }}>
-                <p class="font-heading"
-                  style="color: {{ accent_color }}; font-size: 24px; font-weight: 600; text-transform: none;">
-                  {{ block.settings.value }}
-                </p>
-                <p class="font-mono-spec" style="font-size: 10px; color: {{ text_muted }}; line-height: 1.5; margin-top: 4px;">
-                  {{ block.settings.description }}
-                </p>
-              </div>
-            {%- endif -%}
-          {%- endfor -%}
-        </div>
-
-        <!-- 6. Value stack card -->
-        <div style="background: #FFFFFF; border-radius: 16px; padding: 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06);">
-          <p class="font-mono-spec" style="font-size: 11px; text-transform: uppercase; color: {{ accent_color }}; letter-spacing: 0.15em; margin-bottom: 12px;">
-            {{ section.settings.value_heading_eyebrow }}
+        <!-- 6. Value stack card (ochre bg, ochre border) -->
+        <div class="rounded-2xl p-8 mb-6 reveal-hidden" style="background: rgba(196,120,58,0.08); border: 1px solid rgba(196,120,58,0.20);">
+          <p class="font-mono-spec text-11 uppercase mb-3" style="color: #C4783A; letter-spacing: 0.15em;">
+            What Origin Does For You
           </p>
-          <p data-purchase-headline class="font-heading"
-            style="color: {{ primary_color }}; font-size: 20px; font-weight: 600; line-height: 1.3; margin-bottom: 16px; text-transform: none;">
-          </p>
-          <p data-purchase-body class="font-heading" style="font-size: 15px; font-weight: 300; color: {{ text_body }}; line-height: 1.75; margin-bottom: 20px;">
+          <h3 data-purchase-headline class="font-heading font-medium mb-4"
+            style="color: #1C2E23; font-size: 20px; line-height: 1.3;">
+          </h3>
+          <p data-purchase-body class="font-heading text-15 font-light mb-5"
+            style="color: #4A5550; line-height: 1.75;">
           </p>
 
-          <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
-            {%- for block in section.blocks -%}
-              {%- if block.type == 'value_item' -%}
-                <div style="display: flex; align-items: flex-start; gap: 10px;" {{ block.shopify_attributes }}>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ accent_color }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;">
-                    <polyline points="20 6 9 17 4 12"/>
-                  </svg>
-                  <span class="font-heading" style="font-size: 14px; font-weight: 400; color: {{ text_body }};">
-                    {{ block.settings.text }}
-                  </span>
-                </div>
-              {%- endif -%}
-            {%- endfor -%}
+          <div class="flex flex-col gap-2 mb-5">
+            <div class="flex items-start gap-2">
+              <span class="text-12 mt-0.5 shrink-0" style="color: #C4783A;">&#10022;</span>
+              <span class="font-heading text-14 font-light" style="color: #4A5550;">40 Billion CFU — 4 targeted strains for diaspora biology</span>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="text-12 mt-0.5 shrink-0" style="color: #C4783A;">&#10022;</span>
+              <span class="font-heading text-14 font-light" style="color: #4A5550;">MAKTREK Bi-Pass — acid-protected delivery (most probiotics can't survive without it)</span>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="text-12 mt-0.5 shrink-0" style="color: #C4783A;">&#10022;</span>
+              <span class="font-heading text-14 font-light" style="color: #4A5550;">FOS prebiotic — feeds the bacteria on arrival, not just on the label</span>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="text-12 mt-0.5 shrink-0" style="color: #C4783A;">&#10022;</span>
+              <span class="font-heading text-14 font-light" style="color: #4A5550;">Free research report delivered with your order</span>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="text-12 mt-0.5 shrink-0" style="color: #C4783A;">&#10022;</span>
+              <span class="font-heading text-14 font-light" style="color: #4A5550;">Cancel anytime — no contracts, no commitment</span>
+            </div>
           </div>
+
+          <p data-purchase-subtext class="font-heading text-14 font-light text-center italic"
+            style="color: #8A9490; line-height: 1.7;">
+          </p>
         </div>
 
         <!-- 7. Share + Retake -->
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 16px; margin-top: 32px;">
+        <div class="flex flex-col items-center gap-4 mt-8 reveal-hidden">
           {% render 'whatsapp-share', text: 'I just took the Biology Score quiz — backed by real research. Takes 2 minutes.', url: 'https://basecodehealth.com/pages/quiz' %}
           <button data-quiz-retake
-            class="font-heading"
-            style="font-size: 14px; font-weight: 400; color: {{ text_muted }}; background: none; border: none; cursor: pointer; padding: 8px 16px; transition: opacity 0.2s ease;">
+            class="font-heading text-14 font-normal transition-opacity"
+            style="color: #8A9490;">
             Retake Assessment
           </button>
         </div>
 
         <!-- 8. Back link -->
-        <div style="text-align: center; margin-top: 48px; padding-top: 32px; border-top: 1px solid #DDD6CC;">
+        <div class="text-center mt-12 pt-8 reveal-hidden" style="border-top: 1px solid #DDD6CC;">
           <a href="/"
-            class="font-heading"
-            style="font-size: 14px; font-weight: 500; color: {{ accent_color }}; text-decoration: none; transition: opacity 0.2s ease;">
+            class="font-heading text-14 font-medium transition-opacity"
+            style="color: #C4783A;">
             &larr; Back to BaseCode Health
           </a>
         </div>
@@ -371,358 +388,6 @@
 {
   "name": "Quiz Page",
   "class": "quiz-page-section",
-  "settings": [
-    {
-      "type": "header",
-      "content": "Colors"
-    },
-    {
-      "type": "color",
-      "id": "bg_color",
-      "label": "Background color",
-      "default": "#F5F2EC"
-    },
-    {
-      "type": "color",
-      "id": "primary_color",
-      "label": "Primary color",
-      "default": "#1C2E23"
-    },
-    {
-      "type": "color",
-      "id": "accent_color",
-      "label": "Accent color",
-      "default": "#C4783A"
-    },
-    {
-      "type": "color",
-      "id": "text_muted_color",
-      "label": "Muted text color",
-      "default": "#8A9490"
-    },
-    {
-      "type": "color",
-      "id": "text_body_color",
-      "label": "Body text color",
-      "default": "#4A5550"
-    },
-    {
-      "type": "header",
-      "content": "Intro Screen"
-    },
-    {
-      "type": "text",
-      "id": "incentive_text",
-      "label": "Incentive pill text",
-      "default": "Complete the quiz for 20% off + free research report"
-    },
-    {
-      "type": "text",
-      "id": "eyebrow",
-      "label": "Eyebrow",
-      "default": "2-Minute Assessment"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "What's your Biology Score?"
-    },
-    {
-      "type": "textarea",
-      "id": "body",
-      "label": "Body text",
-      "default": "Find out if your bloating, fatigue, and inflammation are connected to your microbiome. Seven questions backed by published research from Gut, Cell, and PLOS Biology."
-    },
-    {
-      "type": "textarea",
-      "id": "sub_body",
-      "label": "Sub-body text",
-      "default": "Your results are instant, private, and free. Most people score in the Moderate to High Risk band."
-    },
-    {
-      "type": "text",
-      "id": "start_button_text",
-      "label": "Start button text",
-      "default": "Start the Assessment"
-    },
-    {
-      "type": "text",
-      "id": "privacy_text",
-      "label": "Privacy note",
-      "default": "No email required to see your score. No spam. Ever."
-    },
-    {
-      "type": "header",
-      "content": "Question Screen"
-    },
-    {
-      "type": "text",
-      "id": "question_prefix",
-      "label": "Question prefix",
-      "default": "Question"
-    },
-    {
-      "type": "text",
-      "id": "next_button_text",
-      "label": "Next button text",
-      "default": "Next Question"
-    },
-    {
-      "type": "header",
-      "content": "Results Screen"
-    },
-    {
-      "type": "text",
-      "id": "score_label",
-      "label": "Score label",
-      "default": "Your Wellness Risk Score"
-    },
-    {
-      "type": "text",
-      "id": "email_heading",
-      "label": "Email capture heading",
-      "default": "Get 20% off + free research report"
-    },
-    {
-      "type": "text",
-      "id": "email_subtext",
-      "label": "Email capture subtext",
-      "default": "Enter your details to unlock code FOUNDER20"
-    },
-    {
-      "type": "text",
-      "id": "email_button_text",
-      "label": "Email submit button text",
-      "default": "Unlock 20% Off"
-    },
-    {
-      "type": "text",
-      "id": "discount_code",
-      "label": "Discount code",
-      "default": "FOUNDER20"
-    },
-    {
-      "type": "url",
-      "id": "product_link",
-      "label": "Product link"
-    },
-    {
-      "type": "text",
-      "id": "product_price",
-      "label": "Product price display",
-      "default": "$34/mo"
-    },
-    {
-      "type": "text",
-      "id": "shop_button_text",
-      "label": "Shop button text",
-      "default": "Shop Origin"
-    },
-    {
-      "type": "text",
-      "id": "success_message",
-      "label": "Success state message",
-      "default": "Auto-applied at checkout. Research report sent to your inbox."
-    },
-    {
-      "type": "text",
-      "id": "duplicate_message",
-      "label": "Duplicate email message",
-      "default": "Already on the list — check your inbox for your report."
-    },
-    {
-      "type": "header",
-      "content": "Value Stack"
-    },
-    {
-      "type": "text",
-      "id": "value_heading_eyebrow",
-      "label": "Value stack eyebrow",
-      "default": "What Origin Does For You"
-    },
-    {
-      "type": "header",
-      "content": "Padding"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "label": "Padding top",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 48
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "label": "Padding bottom",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "default": 80
-    }
-  ],
-  "blocks": [
-    {
-      "type": "citation",
-      "name": "Citation Badge",
-      "limit": 4,
-      "settings": [
-        {
-          "type": "text",
-          "id": "text",
-          "label": "Citation text",
-          "default": "Gut, 2020"
-        }
-      ]
-    },
-    {
-      "type": "outcome",
-      "name": "Dream Outcome",
-      "limit": 6,
-      "settings": [
-        {
-          "type": "select",
-          "id": "icon",
-          "label": "Icon",
-          "options": [
-            { "value": "fire",   "label": "Fire (End Bloating)" },
-            { "value": "bolt",   "label": "Bolt (Energy)" },
-            { "value": "bulb",   "label": "Bulb (Clear Thinking)" },
-            { "value": "moon",   "label": "Moon (Sleep)" },
-            { "value": "heart",  "label": "Heart (Mood)" },
-            { "value": "shield", "label": "Shield (Immune)" }
-          ],
-          "default": "fire"
-        },
-        {
-          "type": "text",
-          "id": "label",
-          "label": "Label",
-          "default": "End Bloating"
-        }
-      ]
-    },
-    {
-      "type": "stat_badge",
-      "name": "Stat Badge",
-      "limit": 3,
-      "settings": [
-        {
-          "type": "text",
-          "id": "value",
-          "label": "Stat value",
-          "default": "40–60%"
-        },
-        {
-          "type": "textarea",
-          "id": "description",
-          "label": "Stat description",
-          "default": "butyrate-producer decline after westernisation"
-        }
-      ]
-    },
-    {
-      "type": "value_item",
-      "name": "Value Item",
-      "limit": 6,
-      "settings": [
-        {
-          "type": "text",
-          "id": "text",
-          "label": "Bullet text",
-          "default": "40 Billion CFU — 4 targeted strains for diaspora biology"
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Quiz Page",
-      "blocks": [
-        {
-          "type": "citation",
-          "settings": { "text": "Gut, 2020" }
-        },
-        {
-          "type": "citation",
-          "settings": { "text": "Cell, 2018" }
-        },
-        {
-          "type": "citation",
-          "settings": { "text": "PLOS Biology, 2018" }
-        },
-        {
-          "type": "outcome",
-          "settings": { "icon": "fire",   "label": "End Bloating" }
-        },
-        {
-          "type": "outcome",
-          "settings": { "icon": "bolt",   "label": "More Energy" }
-        },
-        {
-          "type": "outcome",
-          "settings": { "icon": "bulb",   "label": "Clear Thinking" }
-        },
-        {
-          "type": "outcome",
-          "settings": { "icon": "moon",   "label": "Better Sleep" }
-        },
-        {
-          "type": "outcome",
-          "settings": { "icon": "heart",  "label": "Mood Support" }
-        },
-        {
-          "type": "outcome",
-          "settings": { "icon": "shield", "label": "Immune Strength" }
-        },
-        {
-          "type": "stat_badge",
-          "settings": {
-            "value": "40–60%",
-            "description": "butyrate-producer decline after westernisation"
-          }
-        },
-        {
-          "type": "stat_badge",
-          "settings": {
-            "value": "5–10yr",
-            "description": "earlier metabolic onset in diaspora populations"
-          }
-        },
-        {
-          "type": "stat_badge",
-          "settings": {
-            "value": "2,084",
-            "description": "subjects in the HELIUS multi-ethnic cohort study"
-          }
-        },
-        {
-          "type": "value_item",
-          "settings": { "text": "40 Billion CFU — 4 targeted strains for diaspora biology" }
-        },
-        {
-          "type": "value_item",
-          "settings": { "text": "MAKTREK Bi-Pass — acid-protected delivery (most probiotics can't survive without it)" }
-        },
-        {
-          "type": "value_item",
-          "settings": { "text": "FOS prebiotic — feeds the bacteria on arrival, not just on the label" }
-        },
-        {
-          "type": "value_item",
-          "settings": { "text": "Free research report delivered with your order" }
-        },
-        {
-          "type": "value_item",
-          "settings": { "text": "Cancel anytime — no contracts, no commitment" }
-        }
-      ]
-    }
-  ]
+  "settings": []
 }
 {% endschema %}

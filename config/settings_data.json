@@ -9,26 +9,13 @@
  */
 {
   "current": {
-    "color_primary": "#1C2E23",
-    "color_accent": "#C4783A",
     "color_cream": "#F5F2EC",
-    "color_text": "#1a1a1a",
-    "color_text_light": "#666666",
-    "heading_font": "Instrument Sans",
-    "body_font": "Inter",
     "social_instagram": "https://www.instagram.com/basecodehealth",
-    "social_tiktok": "",
-    "social_x": "https://x.com/BaseCodeHealth",
-    "social_facebook": "https://www.facebook.com/basecodehealth",
-    "social_youtube": "",
-    "social_linkedin": "",
     "meta_pixel_id": "2035002144024811",
     "ga4_id": "G-TFBY7P3B9M",
-    "supabase_url": "https://buxlhvxlffyaaojqaese.supabase.co",
-    "supabase_anon_key": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ1eGxodnhsZmZ5YWFvanFhZXNlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MTIyMjgsImV4cCI6MjA4ODM4ODIyOH0.kFaL51umWL65Yc-hqd67Q7xzNdxuRvVzSeEuh9YzxSI",
-    "cart_type": "drawer",
-    "cart_show_recommendations": true,
-    "discount_code": "FOUNDER20",
-    "discount_description": "20% off your first order"
+    "color_forest": "#1C2E23",
+    "color_ochre": "#C4783A",
+    "social_twitter": "https://x.com/BaseCodeHealth",
+    "content_for_index": []
   }
 }

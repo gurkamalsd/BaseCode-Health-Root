@@ -1,15 +1,18 @@
-{%- if template contains 'product' and product -%}
+{%- comment -%}
+  Tracking events helper — fires page-level events based on template.
+  trackEvent() is defined in theme.js and handles Meta Pixel + GA4 + CAPI.
+{%- endcomment -%}
+
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    if (typeof trackEvent === 'function') {
-      trackEvent('ViewContent', {
-        content_name: {{ product.title | json }},
-        content_ids: [{{ product.selected_or_first_available_variant.id | json }}],
-        content_type: 'product',
-        value: {{ product.price | money_without_currency | remove: ',' }},
-        currency: {{ shop.currency | json }}
-      });
-    }
-  });
+document.addEventListener('DOMContentLoaded', function() {
+  {%- if template contains 'product' -%}
+    trackEvent('ViewContent', {
+      content_name: {{ product.title | json }},
+      content_type: 'product',
+      content_ids: [{{ product.selected_or_first_available_variant.id | json }}],
+      value: {{ product.price | divided_by: 100.0 }},
+      currency: {{ shop.currency | json }}
+    });
+  {%- endif -%}
+});
 </script>
-{%- endif -%}

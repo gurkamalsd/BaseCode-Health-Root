@@ -9,12 +9,10 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "main-page",
+    "privacy": {
+      "type": "privacy-page",
       "settings": {}
     }
   },
-  "order": [
-    "main"
-  ]
+  "order": ["privacy"]
 }

@@ -9,12 +9,10 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "main-page",
+    "terms": {
+      "type": "terms-page",
       "settings": {}
     }
   },
-  "order": [
-    "main"
-  ]
+  "order": ["terms"]
 }
