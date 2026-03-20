@@ -66,7 +66,7 @@
         "hide_on_scroll": true,
         "sticky_bg_opacity": 95,
         "background_blur": false,
-        "transparent_homepage": true,
+        "transparent_homepage": false,
         "transparent_text_color": "#ffffff",
         "show_separator": true,
         "show_shadow": false
