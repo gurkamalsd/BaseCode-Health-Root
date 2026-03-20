@@ -14,7 +14,7 @@
       "settings": {
         "image_position": "center center",
         "overlay_opacity": 55,
-        "show_social_proof": true,
+        "show_social_proof": false,
         "social_proof_text": "Backed by biological diversity research",
         "subtitle": "The Future of Supplements",
         "heading": "Your biology is unique.",
