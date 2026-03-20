@@ -27,8 +27,11 @@
     "supabase_url": "https://buxlhvxlffyaaojqaese.supabase.co",
     "supabase_anon_key": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ1eGxodnhsZmZ5YWFvanFhZXNlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MTIyMjgsImV4cCI6MjA4ODM4ODIyOH0.kFaL51umWL65Yc-hqd67Q7xzNdxuRvVzSeEuh9YzxSI",
     "cart_type": "drawer",
-    "cart_show_recommendations": true,
+    "favicon": "shopify://shop_images/Generated_Image_March_09_2026_-_9_13PM.jpg",
+    "og_image": "shopify://shop_images/Generated_Image_March_09_2026_-_9_13PM.jpg",
     "discount_code": "FOUNDER20",
-    "discount_description": "20% off your first order"
+    "discount_description": "20% off your first order",
+    "cart_show_recommendations": true,
+    "content_for_index": []
   }
 }
