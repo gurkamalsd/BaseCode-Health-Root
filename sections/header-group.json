@@ -44,10 +44,10 @@
       "settings": {
         "enable": true,
         "dismissible": false,
-        "bg_color": "#1c2e23",
+        "bg_color": "#c4783a",
         "text_color": "#f5f2ec",
-        "animation_speed": "normal",
-        "separator": "·"
+        "animation_speed": "slow",
+        "separator": ""
       }
     },
     "header": {
