@@ -218,10 +218,10 @@
         "b6"
       ],
       "settings": {
-        "product": "",
+        "product": "origin",
         "heading": "The Origin Difference",
         "subheading": "Biology-First Formula",
-        "desktop_image_width": 40,
+        "desktop_image_width": 35,
         "desktop_image_max_width": 400,
         "button_text": "Shop Origin — $34/mo",
         "button_link": "/products/origin",
