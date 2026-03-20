@@ -9,10 +9,12 @@
  */
 {
   "sections": {
-    "page-404": {
-      "type": "404-page",
+    "main": {
+      "type": "404",
       "settings": {}
     }
   },
-  "order": ["page-404"]
+  "order": [
+    "main"
+  ]
 }

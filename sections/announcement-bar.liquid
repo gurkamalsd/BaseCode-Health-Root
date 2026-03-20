@@ -1,33 +1,297 @@
+{%- comment -%}BaseCode Root - announcement-bar{%- endcomment -%}
+
+{%- if section.settings.enable -%}
+  {%- assign bar_id = 'announcement-bar-' | append: section.id -%}
+  {%- assign dismissed_key = 'bch_announcement_dismissed_' | append: section.id -%}
+
+  {%- comment -%} Build the separator token {%- endcomment -%}
+  {%- assign sep = section.settings.separator -%}
+  {%- if sep == blank -%}{%- assign sep = '·' -%}{%- endif -%}
+
+  {%- comment -%} Map speed label to animation duration in seconds {%- endcomment -%}
+  {%- assign speed_setting = section.settings.animation_speed -%}
+  {%- if speed_setting == 'slow' -%}
+    {%- assign anim_duration = 50 -%}
+  {%- elsif speed_setting == 'fast' -%}
+    {%- assign anim_duration = 18 -%}
+  {%- else -%}
+    {%- assign anim_duration = 30 -%}
+  {%- endif -%}
+
+  {%- comment -%} Only render if at least one block exists {%- endcomment -%}
+  {%- if section.blocks.size > 0 -%}
+
 <div
-  class="fixed top-0 left-0 w-full overflow-hidden"
-  style="background: #1C2E23; border-bottom: 1px solid rgba(196,120,58,0.25); z-index: 1001;"
+  id="{{ bar_id }}"
+  class="announcement-bar announcement-bar--custom"
+  role="region"
+  aria-label="Announcements"
+  data-dismissible="{{ section.settings.dismissible }}"
+  data-dismiss-key="{{ dismissed_key }}"
+  style="
+    --ann-bg: {{ section.settings.bg_color }};
+    --ann-color: {{ section.settings.text_color }};
+    --ann-duration: {{ anim_duration }}s;
+    background-color: var(--ann-bg);
+    color: var(--ann-color);
+  "
 >
-  <a href="/pages/quiz" class="block py-1.5" style="text-decoration: none; padding: 6px 0;">
-    <div class="flex whitespace-nowrap animate-marquee">
-      {%- for i in (1..3) -%}
-        <span class="flex items-center shrink-0">
-          <span class="font-heading text-12 font-medium px-4" style="color: #C4783A;">
-            Launch Pricing for a Limited Time
-          </span>
-          <span class="font-heading text-12" style="color: rgba(245,242,236,0.35);">&middot;</span>
-          <span class="font-heading text-12 font-medium px-4" style="color: #F5F2EC;">
-            Made in the USA 🇺🇸
-          </span>
-          <span class="font-heading text-12" style="color: rgba(245,242,236,0.35);">&middot;</span>
-          <span class="font-heading text-12 font-medium px-4" style="color: #F5F2EC;">
-            Free Quiz — Is This for You?
-          </span>
-          <span class="font-heading text-12" style="color: rgba(245,242,236,0.35);">&middot;</span>
+
+  {%- if section.settings.dismissible -%}
+  <button
+    class="announcement-bar__close"
+    aria-label="Dismiss announcement"
+    onclick="bchDismissBar('{{ bar_id }}', '{{ dismissed_key }}')"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+  </button>
+  {%- endif -%}
+
+  <div class="announcement-bar__track" style="animation-duration: var(--ann-duration);">
+    {%- comment -%}
+      Duplicate the block set 4× so the ticker stays seamlessly filled
+      regardless of how many blocks are active. The CSS translateX(-50%)
+      trick works because two identical copies share the track.
+    {%- endcomment -%}
+    {%- for _copy in (1..4) -%}
+      {%- for block in section.blocks -%}
+        {%- assign item_url = block.settings.link -%}
+        <span
+          class="announcement-bar__item{% if item_url != blank %} announcement-bar__item--linked{% endif %}"
+          {{ block.shopify_attributes }}
+        >
+          {%- if item_url != blank -%}
+            <a href="{{ item_url }}" class="announcement-bar__link">
+              {{- block.settings.text -}}
+            </a>
+          {%- else -%}
+            {{- block.settings.text -}}
+          {%- endif -%}
+          <span class="announcement-bar__sep" aria-hidden="true">{{ sep }}</span>
         </span>
       {%- endfor -%}
-    </div>
-  </a>
+    {%- endfor -%}
+  </div>
+
 </div>
+
+<style>
+  /* ── Scoped overrides for the custom announcement bar ── */
+  #{{ bar_id }}.announcement-bar--custom {
+    position: relative;
+    /* Height stays consistent with the CSS variable from base.css */
+    height: var(--announcement-height, 40px);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Override the hardcoded 30s from base.css with the section setting */
+  #{{ bar_id }} .announcement-bar__track {
+    animation-duration: var(--ann-duration) !important;
+  }
+
+  #{{ bar_id }} .announcement-bar__link {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    transition: opacity 0.2s ease;
+  }
+
+  #{{ bar_id }} .announcement-bar__link:hover {
+    opacity: 0.75;
+  }
+
+  #{{ bar_id }} .announcement-bar__sep {
+    display: inline-block;
+    margin: 0 var(--space-6, 1.5rem);
+    opacity: 0.5;
+  }
+
+  /* Close button — absolutely positioned to the right, clear of the ticker */
+  #{{ bar_id }} .announcement-bar__close {
+    position: absolute;
+    right: var(--space-4, 1rem);
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: inherit;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  #{{ bar_id }} .announcement-bar__close:hover {
+    opacity: 1;
+  }
+
+  /* Fade out on dismiss */
+  #{{ bar_id }}.is-hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  (function () {
+    var bar = document.getElementById('{{ bar_id }}');
+    if (!bar) return;
+
+    var isDismissible = bar.dataset.dismissible === 'true';
+    var dismissKey = bar.dataset.dismissKey;
+
+    /* Check if already dismissed this session */
+    if (isDismissible && sessionStorage.getItem(dismissKey) === '1') {
+      bar.classList.add('is-hidden');
+    }
+  })();
+
+  function bchDismissBar(barId, dismissKey) {
+    var bar = document.getElementById(barId);
+    if (!bar) return;
+    sessionStorage.setItem(dismissKey, '1');
+    bar.style.transition = 'opacity 0.3s ease, height 0.3s ease';
+    bar.style.opacity = '0';
+    bar.style.height = '0';
+    setTimeout(function () {
+      bar.classList.add('is-hidden');
+      /* Notify other JS (e.g. sticky header offset) that bar height changed */
+      document.dispatchEvent(new CustomEvent('bch:announcement:dismissed'));
+    }, 320);
+  }
+</script>
+
+  {%- endif -%}
+{%- endif -%}
 
 {% schema %}
 {
   "name": "Announcement Bar",
-  "class": "announcement-bar-section",
-  "settings": []
+  "settings": [
+    {
+      "type": "header",
+      "content": "Visibility"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable",
+      "label": "Enable announcement bar",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "dismissible",
+      "label": "Allow visitors to dismiss",
+      "info": "Dismissed state is remembered for the browser session.",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#1C2E23"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#F5F2EC"
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "select",
+      "id": "animation_speed",
+      "label": "Scroll speed",
+      "options": [
+        { "value": "slow", "label": "Slow (50s)" },
+        { "value": "normal", "label": "Normal (30s)" },
+        { "value": "fast", "label": "Fast (18s)" }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "header",
+      "content": "Separator"
+    },
+    {
+      "type": "text",
+      "id": "separator",
+      "label": "Separator character between messages",
+      "info": "Single character or emoji displayed between announcements. Leave blank for · (middle dot).",
+      "default": "·"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "Announcement",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Message",
+          "default": "Free shipping on all subscriptions — Use code FOUNDER20 for 20% off"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (optional)",
+          "info": "Wraps the message text in a link."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement Bar",
+      "settings": {
+        "enable": true,
+        "dismissible": false,
+        "bg_color": "#1C2E23",
+        "text_color": "#F5F2EC",
+        "animation_speed": "normal",
+        "separator": "·"
+      },
+      "blocks": [
+        {
+          "type": "announcement",
+          "settings": {
+            "text": "Free shipping on all subscriptions — Use code FOUNDER20 for 20% off"
+          }
+        },
+        {
+          "type": "announcement",
+          "settings": {
+            "text": "The first ethnobiotic probiotic — formulated for your biology"
+          }
+        },
+        {
+          "type": "announcement",
+          "settings": {
+            "text": "30-day money-back guarantee — no questions asked"
+          }
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}

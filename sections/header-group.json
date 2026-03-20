@@ -9,16 +9,46 @@
  */
 {
   "type": "header",
-  "name": "Header Group",
+  "name": "Header group",
   "sections": {
     "announcement-bar": {
       "type": "announcement-bar",
-      "settings": {}
+      "settings": {
+        "enable": true,
+        "dismissible": false,
+        "bg_color": "#1C2E23",
+        "text_color": "#F5F2EC",
+        "animation_speed": "normal",
+        "separator": "·"
+      },
+      "blocks": {
+        "a1": {
+          "type": "announcement",
+          "settings": {
+            "text": "Free shipping on all subscriptions — Use code FOUNDER20 for 20% off"
+          }
+        },
+        "a2": {
+          "type": "announcement",
+          "settings": {
+            "text": "The first ethnobiotic probiotic — formulated for your biology"
+          }
+        },
+        "a3": {
+          "type": "announcement",
+          "settings": {
+            "text": "30-day money-back guarantee — no questions asked"
+          }
+        }
+      },
+      "block_order": ["a1", "a2", "a3"]
     },
-    "navbar": {
-      "type": "navbar",
-      "settings": {}
+    "header": {
+      "type": "header",
+      "settings": {
+        "menu": "main-menu"
+      }
     }
   },
-  "order": ["announcement-bar", "navbar"]
+  "order": ["announcement-bar", "header"]
 }

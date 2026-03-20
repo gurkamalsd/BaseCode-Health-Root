@@ -7,7 +7,7 @@
 
     <title>
       {%- if template == 'index' -%}
-        BaseCode Health — Supplements Built for Your Biology
+        BaseCode Health — Built for Your Biology
       {%- elsif template contains 'product' -%}
         {{ product.title }} — Probiotic Informed by Biological Diversity Research | BaseCode Health
       {%- elsif template == '404' -%}
@@ -32,6 +32,24 @@
         Biology Score — Free 2-Minute Quiz | BaseCode Health
       {%- elsif template.suffix == 'free-report' -%}
         The Biology Gap — Free Research Report | BaseCode Health
+      {%- elsif template.suffix == 'about' -%}
+        About BaseCode Health — Built for Your Biology
+      {%- elsif template.suffix == 'science' -%}
+        The Science — Biological Diversity Research | BaseCode Health
+      {%- elsif template.suffix == 'faq' -%}
+        Frequently Asked Questions | BaseCode Health
+      {%- elsif template.suffix == 'contact' -%}
+        Contact Us | BaseCode Health
+      {%- elsif template contains 'collection' -%}
+        {{ collection.title }} | BaseCode Health
+      {%- elsif template contains 'blog' -%}
+        {{ blog.title }} | BaseCode Health
+      {%- elsif template contains 'article' -%}
+        {{ article.title }} | BaseCode Health
+      {%- elsif template == 'cart' -%}
+        Your Cart | BaseCode Health
+      {%- elsif template == 'search' -%}
+        Search Results | BaseCode Health
       {%- else -%}
         {{ page_title }} | BaseCode Health
       {%- endif -%}
@@ -43,13 +61,13 @@
       {%- elsif template.suffix == 'landing-estrogen' -%}
         Your gut controls estrogen metabolism through the estrobolome. When key bacteria deplete, hot flashes, mood swings, and weight gain follow. Origin supports the gut foundation your hormones depend on.
       {%- elsif template.suffix == 'landing-testosterone' -%}
-        Your gut bacteria regulate testosterone through the HPG axis. When your microbiome shifts, energy, strength, and drive decline. Origin supports the gut-testosterone connection — no TRT needed.
+        Your gut bacteria regulate testosterone through the HPG axis. When your microbiome shifts, energy, strength, and drive decline. Origin supports the gut-testosterone connection.
       {%- elsif template.suffix == 'landing-joint-pain' -%}
         Joint pain isn't aging — it's gut-driven inflammation. When your intestinal barrier weakens, endotoxins trigger chronic inflammation. Origin restores barrier integrity with 4 targeted strains.
       {%- elsif template.suffix == 'landing-brain-fog' -%}
         Brain fog isn't burnout. It's your gut leaking inflammation into your brain via the gut-brain axis. Origin delivers 4 strains that support neuroinflammation reduction and mental clarity.
       {%- elsif template.suffix == 'landing-bloating' -%}
-        Chronic bloating after dietary changes? Your gut bacteria lost the enzymes to digest your food. Origin restores the bacterial community your digestion depends on. 40B CFU, MAKTREK delivery.
+        Chronic bloating after dietary changes? Your gut bacteria lost the enzymes to digest your food. Origin restores the bacterial community your digestion depends on.
       {%- elsif template.suffix == 'landing-body-odor' -%}
         Body odor is a metabolic processing problem that starts in your gut. When key bacteria deplete, volatile compounds build up. Origin supports the metabolic pathways that neutralize them.
       {%- elsif template.suffix == 'landing-food-sensitivities' -%}
@@ -78,22 +96,22 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- Google Fonts -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=JetBrains+Mono:wght@400&family=Jost:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=JetBrains+Mono:wght@400&family=Jost:wght@400;500;600&display=swap"></noscript>
+    <!-- Google Fonts: Inter (body) + Instrument Sans (headings) -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;700&display=swap"></noscript>
 
     <!-- Theme CSS -->
     {{ 'base.css' | asset_url | stylesheet_tag }}
 
-    <!-- Meta tags for SEO / social -->
+    <!-- SEO meta -->
     <meta name="author" content="BaseCode Health">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <meta name="theme-color" content="#1C2E23">
+    <meta name="theme-color" content="{{ settings.color_primary | default: '#1C2E23' }}">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="referrer" content="strict-origin-when-cross-origin">
 
     <!-- Open Graph -->
-    <meta property="og:type" content="{% if template contains 'product' %}product{% else %}website{% endif %}">
+    <meta property="og:type" content="{% if template contains 'product' %}product{% elsif template contains 'article' %}article{% else %}website{% endif %}">
     <meta property="og:url" content="{{ canonical_url }}">
     <meta property="og:site_name" content="BaseCode Health">
     <meta property="og:title" content="{{ page_title }}">
@@ -133,7 +151,7 @@
           "@id": "{{ shop.url }}/#organization",
           "name": "BaseCode Health",
           "url": "{{ shop.url }}",
-          "description": "Precision supplement company building the first probiotic formulated for your unique biology. Not generic. Not one-size-fits-all. Built from your biology outward.",
+          "description": "Supplements informed by biological diversity research. Your biology isn't one-size-fits-all.",
           "email": "hello@basecodehealth.com",
           "foundingDate": "2025",
           "sameAs": [
@@ -146,7 +164,12 @@
           "@id": "{{ shop.url }}/#website",
           "name": "BaseCode Health",
           "url": "{{ shop.url }}",
-          "publisher": { "@id": "{{ shop.url }}/#organization" }
+          "publisher": { "@id": "{{ shop.url }}/#organization" },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "{{ shop.url }}/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
         }
         {%- if template contains 'product' -%}
         ,{
@@ -172,9 +195,18 @@
     </script>
 
     {{ content_for_header }}
+
+    <noscript>
+      <style>
+        .reveal-hidden, .reveal-left, .reveal-right, .animate-fade, .stagger-children > * {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      </style>
+    </noscript>
   </head>
 
-  <body class="body" data-template="{{ template }}">
+  <body class="template-{{ template | replace: '.', '-' }}" data-template="{{ template }}">
     <!-- Meta Pixel noscript fallback -->
     {%- if settings.meta_pixel_id != blank -%}
       <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id={{ settings.meta_pixel_id }}&ev=PageView&noscript=1"></noscript>
@@ -191,18 +223,8 @@
 
     {% sections 'footer-group' %}
 
-    <!-- Snippets: popups & overlays -->
-    {% render 'shop-lead-popup' %}
-    {% render 'floating-discount-pill' %}
-    {% render 'exit-intent-popup' %}
-
-    <!-- Sticky mobile CTA (product pages only) -->
-    {%- if template contains 'product' -%}
-      {% render 'sticky-mobile-cta', product: product %}
-    {%- endif -%}
-
-    <!-- Global sticky mobile CTA (all other pages) -->
-    {% render 'sticky-mobile-cta-global' %}
+    <!-- Cart Drawer -->
+    {% render 'cart-drawer' %}
 
     <!-- Theme JS -->
     <script src="{{ 'theme.js' | asset_url }}" defer></script>

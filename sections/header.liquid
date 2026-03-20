@@ -7,6 +7,8 @@
   endif
 
   assign sticky = section.settings.sticky_header
+  assign hide_on_scroll = section.settings.hide_on_scroll
+  assign logo_position = section.settings.logo_position | default: 'left'
   assign show_search  = section.settings.show_search
   assign show_account = section.settings.show_account
   assign mobile_style = section.settings.mobile_menu_style
@@ -147,130 +149,141 @@
 {%- endstyle -%}
 
 <header
-  class="header {% if is_transparent %}header--transparent{% endif %} {% if sticky %}header--sticky{% endif %}"
+  class="header {% if is_transparent %}header--transparent{% endif %} {% if sticky %}header--sticky{% endif %} {% if logo_position == 'center' %}header--center{% endif %}"
   id="site-header"
   role="banner"
   data-transparent="{{ is_transparent }}"
   data-sticky="{{ sticky }}"
+  data-hide-on-scroll="{{ hide_on_scroll }}"
 >
-  <div class="header__inner">
+  <div class="header__inner{% if logo_position == 'center' %} header__inner--center{% endif %}">
 
-    {%- comment -%} Logo {%- endcomment -%}
-    <a href="{{ routes.root_url }}" class="header__logo" aria-label="{{ shop.name }}">
-      {%- if section.settings.logo != blank -%}
-        <img
-          src="{{ section.settings.logo | image_url: width: 400 }}"
-          alt="{{ shop.name }}"
-          class="header__logo-img header__logo-default"
-          width="{{ logo_w_d }}"
-          height="auto"
-          loading="eager"
-          fetchpriority="high"
+    {%- if logo_position == 'center' -%}
+      {%- comment -%} CENTER LAYOUT: [hamburger + nav-links] [logo] [icons] {%- endcomment -%}
+
+      {%- comment -%} Left: hamburger + desktop nav links {%- endcomment -%}
+      <div class="header__left">
+        <button
+          class="header__menu-toggle header__icon header__menu-toggle--always"
+          id="menu-toggle"
+          aria-label="{{ 'accessibility.menu_open' | t | default: 'Open menu' }}"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
         >
-        {%- if section.settings.transparent_logo != blank -%}
-          <img
-            src="{{ section.settings.transparent_logo | image_url: width: 400 }}"
-            alt="{{ shop.name }}"
-            class="header__logo-img header__logo-transparent"
-            width="{{ logo_w_d }}"
-            height="auto"
-            loading="eager"
-          >
-        {%- endif -%}
-      {%- else -%}
-        <span class="header__logo-wordmark" style="font-family: var(--font-heading); font-size: var(--text-xl); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;">
-          {{ shop.name }}
-        </span>
-      {%- endif -%}
-    </a>
-
-    {%- comment -%} Desktop navigation {%- endcomment -%}
-    <nav class="header__nav" role="navigation" aria-label="Main navigation">
-      {%- for link in section.settings.menu.links -%}
-        {%- if link.links.size > 0 -%}
-          <div class="header__nav-dropdown" style="position: relative;">
-            <button
-              class="header__nav-link"
-              style="display: flex; align-items: center; gap: 4px; background: none; border: none; cursor: pointer; padding: 0;"
-              aria-expanded="false"
-              aria-haspopup="true"
-            >
-              {{ link.title }}
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0; transition: transform 0.2s ease;"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </button>
-            <div class="header__dropdown-menu" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); min-width: 200px; background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-2) 0; box-shadow: 0 8px 30px rgba(0,0,0,0.10); display: none; z-index: var(--z-dropdown);">
-              {%- for child_link in link.links -%}
-                <a
-                  href="{{ child_link.url }}"
-                  class="header__nav-link"
-                  style="display: block; padding: var(--space-2) var(--space-5); font-size: var(--text-sm); white-space: nowrap;"
-                  {% if child_link.current %}aria-current="page"{% endif %}
-                >
-                  {{ child_link.title }}
-                </a>
-              {%- endfor -%}
-            </div>
-          </div>
-        {%- else -%}
-          <a
-            href="{{ link.url }}"
-            class="header__nav-link"
-            {% if link.current %}aria-current="page"{% endif %}
-          >
-            {{ link.title }}
-          </a>
-        {%- endif -%}
-      {%- endfor -%}
-    </nav>
-
-    {%- comment -%} Right icons {%- endcomment -%}
-    <div class="header__icons">
-
-      {%- if show_search -%}
-        <button class="header__icon hide-mobile" id="search-toggle" aria-label="{{ 'header.search' | t | default: 'Search' }}" aria-expanded="false" aria-controls="header-search-form">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          <svg id="menu-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+          <svg id="menu-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
           </svg>
         </button>
-      {%- endif -%}
 
-      {%- if show_account -%}
-        <a href="{{ routes.account_url }}" class="header__icon hide-mobile" aria-label="{{ 'header.account' | t | default: 'Account' }}">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
-          </svg>
-        </a>
-      {%- endif -%}
+        <nav class="header__nav" role="navigation" aria-label="Main navigation">
+          {%- for link in section.settings.menu.links -%}
+            {%- if link.links.size > 0 -%}
+              <div class="header__nav-dropdown" style="position: relative;">
+                <button class="header__nav-link" style="display: flex; align-items: center; gap: 4px; background: none; border: none; cursor: pointer; padding: 0;" aria-expanded="false" aria-haspopup="true">
+                  {{ link.title }}
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0; transition: transform 0.2s ease;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <div class="header__dropdown-menu" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); min-width: 200px; background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-2) 0; box-shadow: 0 8px 30px rgba(0,0,0,0.10); display: none; z-index: var(--z-dropdown);">
+                  {%- for child_link in link.links -%}
+                    <a href="{{ child_link.url }}" class="header__nav-link" style="display: block; padding: var(--space-2) var(--space-5); font-size: var(--text-sm); white-space: nowrap;" {% if child_link.current %}aria-current="page"{% endif %}>{{ child_link.title }}</a>
+                  {%- endfor -%}
+                </div>
+              </div>
+            {%- else -%}
+              <a href="{{ link.url }}" class="header__nav-link" {% if link.current %}aria-current="page"{% endif %}>{{ link.title }}</a>
+            {%- endif -%}
+          {%- endfor -%}
+        </nav>
+      </div>
 
-      {%- comment -%} Cart icon — always visible {%- endcomment -%}
-      <button class="header__icon" id="cart-toggle" aria-label="{{ 'header.cart' | t | default: 'Cart' }} ({{ cart.item_count }})" style="position: relative;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
-        </svg>
-        <span
-          id="cart-count"
-          aria-live="polite"
-          style="position: absolute; top: 2px; right: 2px; width: 16px; height: 16px; background: var(--color-accent); color: var(--color-white); font-size: 10px; font-weight: 700; border-radius: var(--radius-full); display: {% if cart.item_count > 0 %}flex{% else %}none{% endif %}; align-items: center; justify-content: center;"
-        >{{ cart.item_count }}</span>
-      </button>
+      {%- comment -%} Center: logo {%- endcomment -%}
+      <a href="{{ routes.root_url }}" class="header__logo" aria-label="{{ shop.name }}">
+        {%- if section.settings.logo != blank -%}
+          <img src="{{ section.settings.logo | image_url: width: 400 }}" alt="{{ shop.name }}" class="header__logo-img header__logo-default" width="{{ logo_w_d }}" height="auto" loading="eager" fetchpriority="high">
+          {%- if section.settings.transparent_logo != blank -%}
+            <img src="{{ section.settings.transparent_logo | image_url: width: 400 }}" alt="{{ shop.name }}" class="header__logo-img header__logo-transparent" width="{{ logo_w_d }}" height="auto" loading="eager">
+          {%- endif -%}
+        {%- else -%}
+          <span class="header__logo-wordmark" style="font-family: var(--font-heading); font-size: var(--text-xl); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;">{{ shop.name }}</span>
+        {%- endif -%}
+      </a>
 
-      {%- comment -%} Mobile hamburger {%- endcomment -%}
-      <button
-        class="header__menu-toggle header__icon"
-        id="menu-toggle"
-        aria-label="{{ 'accessibility.menu_open' | t | default: 'Open menu' }}"
-        aria-expanded="false"
-        aria-controls="mobile-menu"
-      >
-        <svg id="menu-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
-        </svg>
-        <svg id="menu-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
-          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-        </svg>
-      </button>
+      {%- comment -%} Right: icons {%- endcomment -%}
+      <div class="header__icons">
+        {%- if show_search -%}
+          <button class="header__icon" id="search-toggle" aria-label="{{ 'header.search' | t | default: 'Search' }}" aria-expanded="false" aria-controls="header-search-form">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+        {%- endif -%}
+        {%- if show_account -%}
+          <a href="{{ routes.account_url }}" class="header__icon" aria-label="{{ 'header.account' | t | default: 'Account' }}">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </a>
+        {%- endif -%}
+        <button class="header__icon" id="cart-toggle" data-cart-toggle aria-label="{{ 'header.cart' | t | default: 'Cart' }} ({{ cart.item_count }})" style="position: relative;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span id="cart-count" class="header__cart-count" aria-live="polite" style="display: {% if cart.item_count > 0 %}flex{% else %}none{% endif %};">{{ cart.item_count }}</span>
+        </button>
+      </div>
 
-    </div>
+    {%- else -%}
+      {%- comment -%} LEFT LAYOUT: original [logo] [nav] [icons] {%- endcomment -%}
+
+      <a href="{{ routes.root_url }}" class="header__logo" aria-label="{{ shop.name }}">
+        {%- if section.settings.logo != blank -%}
+          <img src="{{ section.settings.logo | image_url: width: 400 }}" alt="{{ shop.name }}" class="header__logo-img header__logo-default" width="{{ logo_w_d }}" height="auto" loading="eager" fetchpriority="high">
+          {%- if section.settings.transparent_logo != blank -%}
+            <img src="{{ section.settings.transparent_logo | image_url: width: 400 }}" alt="{{ shop.name }}" class="header__logo-img header__logo-transparent" width="{{ logo_w_d }}" height="auto" loading="eager">
+          {%- endif -%}
+        {%- else -%}
+          <span class="header__logo-wordmark" style="font-family: var(--font-heading); font-size: var(--text-xl); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;">{{ shop.name }}</span>
+        {%- endif -%}
+      </a>
+
+      <nav class="header__nav" role="navigation" aria-label="Main navigation">
+        {%- for link in section.settings.menu.links -%}
+          {%- if link.links.size > 0 -%}
+            <div class="header__nav-dropdown" style="position: relative;">
+              <button class="header__nav-link" style="display: flex; align-items: center; gap: 4px; background: none; border: none; cursor: pointer; padding: 0;" aria-expanded="false" aria-haspopup="true">
+                {{ link.title }}
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0; transition: transform 0.2s ease;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+              <div class="header__dropdown-menu" style="position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); min-width: 200px; background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-2) 0; box-shadow: 0 8px 30px rgba(0,0,0,0.10); display: none; z-index: var(--z-dropdown);">
+                {%- for child_link in link.links -%}
+                  <a href="{{ child_link.url }}" class="header__nav-link" style="display: block; padding: var(--space-2) var(--space-5); font-size: var(--text-sm); white-space: nowrap;" {% if child_link.current %}aria-current="page"{% endif %}>{{ child_link.title }}</a>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- else -%}
+            <a href="{{ link.url }}" class="header__nav-link" {% if link.current %}aria-current="page"{% endif %}>{{ link.title }}</a>
+          {%- endif -%}
+        {%- endfor -%}
+      </nav>
+
+      <div class="header__icons">
+        {%- if show_search -%}
+          <button class="header__icon hide-mobile" id="search-toggle" aria-label="{{ 'header.search' | t | default: 'Search' }}" aria-expanded="false" aria-controls="header-search-form">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+        {%- endif -%}
+        {%- if show_account -%}
+          <a href="{{ routes.account_url }}" class="header__icon hide-mobile" aria-label="{{ 'header.account' | t | default: 'Account' }}">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </a>
+        {%- endif -%}
+        <button class="header__icon" id="cart-toggle" data-cart-toggle aria-label="{{ 'header.cart' | t | default: 'Cart' }} ({{ cart.item_count }})" style="position: relative;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span id="cart-count" class="header__cart-count" aria-live="polite" style="display: {% if cart.item_count > 0 %}flex{% else %}none{% endif %};">{{ cart.item_count }}</span>
+        </button>
+        <button class="header__menu-toggle header__icon" id="menu-toggle" aria-label="{{ 'accessibility.menu_open' | t | default: 'Open menu' }}" aria-expanded="false" aria-controls="mobile-menu">
+          <svg id="menu-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          <svg id="menu-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+    {%- endif -%}
   </div>
 
   {%- comment -%} Predictive search form {%- endcomment -%}
@@ -519,6 +532,17 @@
     },
     {
       "type": "select",
+      "id": "logo_position",
+      "label": "Logo position",
+      "options": [
+        { "value": "left", "label": "Left (default)" },
+        { "value": "center", "label": "Center (like Lana Banana)" }
+      ],
+      "default": "center",
+      "info": "Center mode: hamburger + nav links left, logo centered, icons right."
+    },
+    {
+      "type": "select",
       "id": "mobile_menu_style",
       "label": "Mobile menu style",
       "options": [
@@ -558,6 +582,13 @@
       "id": "sticky_header",
       "label": "Sticky header",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_scroll",
+      "label": "Hide header on scroll down",
+      "default": true,
+      "info": "Header hides when scrolling down, reveals on scroll up. Requires sticky header."
     },
     {
       "type": "range",

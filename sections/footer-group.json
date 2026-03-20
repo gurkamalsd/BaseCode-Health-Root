@@ -9,11 +9,42 @@
  */
 {
   "type": "footer",
-  "name": "Footer Group",
+  "name": "Footer group",
   "sections": {
     "footer": {
       "type": "footer",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "col1": {
+          "type": "menu_column",
+          "settings": {
+            "heading": "Products",
+            "menu": "footer"
+          }
+        },
+        "col2": {
+          "type": "menu_column",
+          "settings": {
+            "heading": "Info",
+            "menu": "footer"
+          }
+        },
+        "col3": {
+          "type": "text_column",
+          "settings": {
+            "heading": "About BaseCode",
+            "text": "<p>Supplements informed by biological diversity research. Built in Toronto, backed by science, designed for your unique biology.</p>"
+          }
+        },
+        "col4": {
+          "type": "newsletter_column",
+          "settings": {
+            "heading": "Stay in the loop",
+            "subtext": "Research, updates, and early access — no filler."
+          }
+        }
+      },
+      "block_order": ["col1", "col2", "col3", "col4"]
     }
   },
   "order": ["footer"]
