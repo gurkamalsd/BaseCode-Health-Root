@@ -38,7 +38,6 @@
     color: {{ footer_text }};
   }
   #shopify-section-{{ section.id }} .footer__newsletter input[type="email"] {
-    background: {{ footer_bg | color_modify: 'lightness', footer_bg | color_to_hsl | split: ',' | first | append: '%' }};
     background: color-mix(in srgb, {{ footer_text }} 8%, {{ footer_bg }});
     color: {{ footer_text }};
     border-color: {{ footer_text | color_modify: 'alpha', 0.25 }};
@@ -57,7 +56,7 @@
   <div class="container">
 
     {%- comment -%} Top row: logo + optional newsletter teaser {%- endcomment -%}
-    {%- if section.settings.footer_logo != blank or section.settings.show_newsletter_top -%}
+    {%- if section.settings.footer_logo != blank -%}
       <div class="footer__top" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-6); padding-bottom: var(--space-8); border-bottom: 1px solid {{ footer_text | color_modify: 'alpha', 0.1 }}; margin-bottom: var(--space-10);">
         {%- if section.settings.footer_logo != blank -%}
           <a href="/" aria-label="{{ shop.name }}">
@@ -150,11 +149,26 @@
           {%- elsif block.type == 'support_column' -%}
             <div class="footer__column" {{ block.shopify_attributes }}>
               {%- if block.settings.heading != blank -%}
-                <h3 class="footer__heading" style="font-size: var(--text-sm); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: var(--space-5);">
+                <h3 class="footer__heading hide-mobile" style="font-size: var(--text-sm); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: var(--space-5);">
                   {{ block.settings.heading }}
                 </h3>
+                {%- if section.settings.mobile_accordion -%}
+                  <button
+                    class="footer__accordion-toggle hide-desktop"
+                    aria-expanded="false"
+                    data-accordion-toggle
+                    style="display: flex; align-items: center; justify-content: space-between; width: 100%; background: none; border: none; cursor: pointer; padding: var(--space-3) 0;"
+                  >
+                    <span class="footer__heading" style="font-size: var(--text-sm); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0;">{{ block.settings.heading }}</span>
+                    <svg class="footer__accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.25s ease; flex-shrink: 0;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                  </button>
+                {%- else -%}
+                  <h3 class="footer__heading hide-desktop" style="font-size: var(--text-sm); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: var(--space-5);">
+                    {{ block.settings.heading }}
+                  </h3>
+                {%- endif -%}
               {%- endif -%}
-              <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+              <div class="footer__accordion-content" data-accordion-content style="display: flex; flex-direction: column; gap: var(--space-2);">
                 {%- if block.settings.hours != blank -%}
                   <p style="font-size: var(--text-sm); color: {{ footer_text | color_modify: 'alpha', 0.65 }};">{{ block.settings.hours }}</p>
                 {%- endif -%}

@@ -1114,17 +1114,30 @@
     var menuToggle = document.querySelector('.header__menu-toggle, [id="menu-toggle"]');
     var menu = document.querySelector('.mobile-menu');
     var backdrop = menu && menu.querySelector('.mobile-menu__backdrop');
-    var closeBtn = menu && menu.querySelector('[data-menu-close]');
+    var closeBtn = menu && menu.querySelector('[data-menu-close], #mobile-menu-close');
+    var iconOpen = document.getElementById('menu-icon-open');
+    var iconClose = document.getElementById('menu-icon-close');
 
     if (!menuToggle || !menu) return;
 
     function openMenu() {
       menu.classList.add('is-open');
+      menu.setAttribute('aria-hidden', 'false');
+      menuToggle.setAttribute('aria-expanded', 'true');
       document.body.style.overflow = 'hidden';
+      if (iconOpen) iconOpen.style.display = 'none';
+      if (iconClose) iconClose.style.display = 'block';
+      var first = menu.querySelector('a, button');
+      if (first) setTimeout(function() { first.focus(); }, 50);
     }
     function closeMenu() {
       menu.classList.remove('is-open');
+      menu.setAttribute('aria-hidden', 'true');
+      menuToggle.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
+      if (iconOpen) iconOpen.style.display = 'block';
+      if (iconClose) iconClose.style.display = 'none';
+      menuToggle.focus();
     }
 
     menuToggle.addEventListener('click', function() {
@@ -1135,6 +1148,69 @@
     if (closeBtn) closeBtn.addEventListener('click', closeMenu);
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape' && menu.classList.contains('is-open')) closeMenu();
+    });
+
+    /* Mobile sub-menus */
+    menu.querySelectorAll('.mobile-menu__parent-toggle').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var expanded = this.getAttribute('aria-expanded') === 'true';
+        var children = this.nextElementSibling;
+        this.setAttribute('aria-expanded', !expanded);
+        var chevron = this.querySelector('svg');
+        if (chevron) chevron.style.transform = expanded ? '' : 'rotate(180deg)';
+        if (children) children.style.display = expanded ? 'none' : 'block';
+      });
+    });
+  }
+
+  /* ═══════════════════════════════════════════════
+     ROOT THEME: DESKTOP DROPDOWNS
+     ═══════════════════════════════════════════════ */
+
+  function initDesktopDropdowns() {
+    document.querySelectorAll('.header__nav-dropdown').forEach(function(dropdown) {
+      var btn  = dropdown.querySelector('button');
+      var ddMenu = dropdown.querySelector('.header__dropdown-menu');
+      if (!btn || !ddMenu) return;
+      function show() { ddMenu.style.display = 'block'; btn.setAttribute('aria-expanded', 'true'); var c = btn.querySelector('svg'); if (c) c.style.transform = 'rotate(180deg)'; }
+      function hide() { ddMenu.style.display = 'none'; btn.setAttribute('aria-expanded', 'false'); var c = btn.querySelector('svg'); if (c) c.style.transform = ''; }
+      dropdown.addEventListener('mouseenter', show);
+      dropdown.addEventListener('mouseleave', hide);
+      btn.addEventListener('click', function() { ddMenu.style.display === 'block' ? hide() : show(); });
+      btn.addEventListener('keydown', function(e) { if (e.key === 'Escape') { hide(); btn.focus(); } });
+    });
+  }
+
+  /* ═══════════════════════════════════════════════
+     ROOT THEME: SEARCH TOGGLE
+     ═══════════════════════════════════════════════ */
+
+  function initSearchToggle() {
+    var searchBtn = document.getElementById('search-toggle');
+    var searchForm = document.getElementById('header-search-form');
+    var header = document.getElementById('site-header');
+    if (!searchBtn || !searchForm) return;
+
+    searchBtn.addEventListener('click', function() {
+      var open = searchForm.classList.toggle('is-open');
+      searchBtn.setAttribute('aria-expanded', open);
+      if (open) {
+        var input = searchForm.querySelector('input');
+        if (input) setTimeout(function() { input.focus(); }, 50);
+      }
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && searchForm.classList.contains('is-open')) {
+        searchForm.classList.remove('is-open');
+        searchBtn.setAttribute('aria-expanded', 'false');
+        searchBtn.focus();
+      }
+    });
+    document.addEventListener('click', function(e) {
+      if (header && !header.contains(e.target)) {
+        searchForm.classList.remove('is-open');
+        searchBtn.setAttribute('aria-expanded', 'false');
+      }
     });
   }
 
@@ -1280,6 +1356,8 @@
     initThumbnailGallery();
     initSellingPlanToggle();
     initMobileMenu();
+    initDesktopDropdowns();
+    initSearchToggle();
     initCartDrawer();
     initAnnouncementBar();
     initTestimonialEnhancements();

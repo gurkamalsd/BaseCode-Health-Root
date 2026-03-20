@@ -459,11 +459,22 @@ small { font-size: var(--text-sm); }
   background-color: var(--color-white);
   border-bottom: 1px solid var(--color-border);
   height: var(--header-height);
-  transition: box-shadow var(--duration-base), background-color var(--duration-base);
+  transition: transform var(--duration-base), box-shadow var(--duration-base), background-color var(--duration-base), border-color var(--duration-base), backdrop-filter var(--duration-base);
 }
 
+/* When scrolled: force solid background (overrides transparent state) */
 .header--scrolled {
   box-shadow: var(--shadow-md);
+  background-color: var(--color-white) !important;
+  border-bottom-color: var(--color-border) !important;
+  color: var(--color-text) !important;
+  position: sticky !important;
+  top: 0 !important;
+}
+.header--scrolled .header__nav-link,
+.header--scrolled .header__icon,
+.header--scrolled .header__logo-wordmark {
+  color: var(--color-text) !important;
 }
 
 .header--hidden {

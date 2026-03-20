@@ -326,7 +326,7 @@
           <span style="font-family: var(--font-heading); font-size: var(--text-lg); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;">{{ shop.name }}</span>
         {%- endif -%}
       </a>
-      <button class="header__icon" id="mobile-menu-close" aria-label="{{ 'accessibility.menu_close' | t | default: 'Close menu' }}">
+      <button class="header__icon" id="mobile-menu-close" data-menu-close aria-label="{{ 'accessibility.menu_close' | t | default: 'Close menu' }}">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
         </svg>
@@ -377,115 +377,10 @@
   </div>
 </div>
 
-<script>
-(function() {
-  var header     = document.getElementById('site-header');
-  var menuToggle = document.getElementById('menu-toggle');
-  var menuClose  = document.getElementById('mobile-menu-close');
-  var mobileMenu = document.getElementById('mobile-menu');
-  var backdrop   = document.getElementById('mobile-menu-backdrop');
-  var searchBtn  = document.getElementById('search-toggle');
-  var searchForm = document.getElementById('header-search-form');
-  var iconOpen   = document.getElementById('menu-icon-open');
-  var iconClose  = document.getElementById('menu-icon-close');
-  var isTransparent = header && header.dataset.transparent === 'true';
-
-  /* Sticky + transparent scroll behaviour */
-  if (header) {
-    var scrolled = false;
-    window.addEventListener('scroll', function() {
-      var shouldScroll = window.scrollY > 40;
-      if (shouldScroll !== scrolled) {
-        scrolled = shouldScroll;
-        header.classList.toggle('header--scrolled', scrolled);
-      }
-    }, { passive: true });
-    /* Trigger once on load so refresh below-fold works */
-    if (window.scrollY > 40) {
-      header.classList.add('header--scrolled');
-      scrolled = true;
-    }
-  }
-
-  /* Mobile menu open/close */
-  function openMenu() {
-    mobileMenu.setAttribute('aria-hidden', 'false');
-    menuToggle.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
-    if (iconOpen) iconOpen.style.display = 'none';
-    if (iconClose) iconClose.style.display = 'block';
-    /* Focus first link */
-    var first = mobileMenu.querySelector('a, button');
-    if (first) setTimeout(function() { first.focus(); }, 50);
-  }
-  function closeMenu() {
-    mobileMenu.setAttribute('aria-hidden', 'true');
-    menuToggle.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-    if (iconOpen) iconOpen.style.display = 'block';
-    if (iconClose) iconClose.style.display = 'none';
-    menuToggle.focus();
-  }
-  if (menuToggle) menuToggle.addEventListener('click', function() {
-    mobileMenu.getAttribute('aria-hidden') === 'false' ? closeMenu() : openMenu();
-  });
-  if (menuClose) menuClose.addEventListener('click', closeMenu);
-  if (backdrop) backdrop.addEventListener('click', closeMenu);
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && mobileMenu && mobileMenu.getAttribute('aria-hidden') === 'false') closeMenu();
-  });
-
-  /* Mobile sub-menus */
-  document.querySelectorAll('.mobile-menu__parent-toggle').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      var expanded = this.getAttribute('aria-expanded') === 'true';
-      var children = this.nextElementSibling;
-      this.setAttribute('aria-expanded', !expanded);
-      var chevron = this.querySelector('svg');
-      if (chevron) chevron.style.transform = expanded ? '' : 'rotate(180deg)';
-      if (children) children.style.display = expanded ? 'none' : 'block';
-    });
-  });
-
-  /* Desktop dropdowns */
-  document.querySelectorAll('.header__nav-dropdown').forEach(function(dropdown) {
-    var btn  = dropdown.querySelector('button');
-    var menu = dropdown.querySelector('.header__dropdown-menu');
-    if (!btn || !menu) return;
-    function show() { menu.style.display = 'block'; btn.setAttribute('aria-expanded', 'true'); var chevron = btn.querySelector('svg'); if (chevron) chevron.style.transform = 'rotate(180deg)'; }
-    function hide() { menu.style.display = 'none';  btn.setAttribute('aria-expanded', 'false'); var chevron = btn.querySelector('svg'); if (chevron) chevron.style.transform = ''; }
-    dropdown.addEventListener('mouseenter', show);
-    dropdown.addEventListener('mouseleave', hide);
-    btn.addEventListener('click', function() { menu.style.display === 'block' ? hide() : show(); });
-    btn.addEventListener('keydown', function(e) { if (e.key === 'Escape') { hide(); btn.focus(); } });
-  });
-
-  /* Search toggle */
-  if (searchBtn && searchForm) {
-    searchBtn.addEventListener('click', function() {
-      var open = searchForm.classList.toggle('is-open');
-      searchBtn.setAttribute('aria-expanded', open);
-      if (open) {
-        var input = searchForm.querySelector('input');
-        if (input) setTimeout(function() { input.focus(); }, 50);
-      }
-    });
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && searchForm.classList.contains('is-open')) {
-        searchForm.classList.remove('is-open');
-        searchBtn.setAttribute('aria-expanded', 'false');
-        searchBtn.focus();
-      }
-    });
-    document.addEventListener('click', function(e) {
-      if (!header.contains(e.target)) {
-        searchForm.classList.remove('is-open');
-        searchBtn.setAttribute('aria-expanded', 'false');
-      }
-    });
-  }
-})();
-</script>
+{%- comment -%}
+  All header JS (scroll, mobile menu, dropdowns, search) is in theme.js.
+  No inline script needed — prevents duplicate handler conflicts.
+{%- endcomment -%}
 
 {% schema %}
 {

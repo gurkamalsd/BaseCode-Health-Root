@@ -103,6 +103,20 @@
     <!-- Theme CSS -->
     {{ 'base.css' | asset_url | stylesheet_tag }}
 
+    <!-- Theme settings → CSS custom properties bridge -->
+    <style>
+      :root {
+        {%- if settings.color_primary != blank -%}--color-primary: {{ settings.color_primary }};{%- endif -%}
+        {%- if settings.color_accent != blank -%}--color-accent: {{ settings.color_accent }};{%- endif -%}
+        {%- if settings.color_cream != blank -%}--color-cream: {{ settings.color_cream }};{%- endif -%}
+        {%- if settings.color_text != blank -%}--color-text: {{ settings.color_text }};{%- endif -%}
+        {%- if settings.color_text_light != blank -%}--color-text-light: {{ settings.color_text_light }};{%- endif -%}
+        --color-bg-primary: var(--color-primary);
+        --color-bg-cream: var(--color-cream);
+        --color-bg-accent: var(--color-accent);
+      }
+    </style>
+
     <!-- SEO meta -->
     <meta name="author" content="BaseCode Health">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
