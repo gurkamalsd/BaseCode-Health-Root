@@ -430,6 +430,7 @@ small { font-size: var(--text-sm); }
   height: var(--announcement-height);
   overflow: hidden;
   position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .announcement-bar__track {
