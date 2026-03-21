@@ -1,43 +1,151 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin language editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "general": {
     "shop_name": "BaseCode Health",
-    "tagline": "Your gut remembers."
+    "tagline": "Your biology isn't one-size-fits-all.",
+    "email": "hello@basecodehealth.com",
+    "skip_to_content": "Skip to content",
+    "loading": "Loading...",
+    "search": "Search",
+    "close": "Close",
+    "back": "Back",
+    "share": "Share",
+    "copy_link": "Copy link",
+    "copied": "Copied!",
+    "no_results": "No results found",
+    "404_title": "Page not found",
+    "404_text": "The page you're looking for doesn't exist. It may have been moved or deleted.",
+    "404_cta": "Back to homepage"
   },
-  "products": {
+  "header": {
+    "menu": "Menu",
+    "cart": "Cart",
+    "account": "Account",
+    "search": "Search",
+    "shop": "Shop",
+    "science": "Science",
+    "quiz": "Quiz",
+    "free_report": "Free Report",
+    "about": "About",
+    "faq": "FAQ",
+    "contact": "Contact"
+  },
+  "product": {
     "add_to_cart": "Add to Cart",
-    "subscribe": "Subscribe & Save 15%",
+    "sold_out": "Sold Out",
+    "unavailable": "Unavailable",
+    "subscribe_save": "Subscribe & Save 15%",
     "one_time": "One-Time Purchase",
-    "sold_out": "Sold Out"
+    "per_month": "/mo",
+    "quantity": "Quantity",
+    "description": "Description",
+    "ingredients": "Ingredients",
+    "shipping": "Shipping",
+    "reviews": "Reviews",
+    "faq": "FAQ",
+    "view_product": "View Product",
+    "quick_add": "Quick Add",
+    "free_shipping": "Free shipping on subscriptions",
+    "money_back": "30-day money-back guarantee",
+    "secure_checkout": "Secure checkout"
+  },
+  "cart": {
+    "title": "Your Cart",
+    "empty": "Your cart is empty",
+    "continue_shopping": "Continue Shopping",
+    "subtotal": "Subtotal",
+    "checkout": "Checkout",
+    "remove": "Remove",
+    "note": "Add a note",
+    "discount_code": "Discount code",
+    "apply": "Apply",
+    "taxes_shipping_notice": "Taxes and shipping calculated at checkout",
+    "free_shipping_message": "Free shipping on subscriptions"
+  },
+  "collection": {
+    "title": "All Products",
+    "filter": "Filter",
+    "sort": "Sort by",
+    "sort_featured": "Featured",
+    "sort_best_selling": "Best Selling",
+    "sort_az": "A-Z",
+    "sort_za": "Z-A",
+    "sort_price_asc": "Price: Low to High",
+    "sort_price_desc": "Price: High to Low",
+    "sort_date_new": "Newest",
+    "sort_date_old": "Oldest",
+    "no_products": "No products found in this collection.",
+    "products_count": "{{ count }} products"
+  },
+  "collections": {
+    "general": {
+      "view_all": "View All"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "read_more": "Read More",
+    "all_posts": "All Posts",
+    "by_author": "By {{ author }}",
+    "posted_on": "Posted on {{ date }}",
+    "back_to_blog": "Back to blog"
   },
   "quiz": {
     "title": "What's your Biology Score?",
+    "subtitle": "7 research-backed questions. 2 minutes. Free.",
     "start": "Start the Assessment",
-    "next": "Next Question",
+    "next": "Next",
+    "previous": "Previous",
     "see_results": "See My Results",
-    "retake": "Retake Assessment"
+    "your_score": "Your Biology Score",
+    "high_risk": "High Risk",
+    "moderate_risk": "Moderate Risk",
+    "low_risk": "Low Risk",
+    "retake": "Retake Assessment",
+    "discount_incentive": "Complete the quiz for 20% off Origin"
   },
   "forms": {
     "email_placeholder": "Your best email",
-    "name_placeholder": "Full name",
-    "submit": "Send My Free Report",
+    "name_placeholder": "First name",
+    "submit": "Submit",
     "sending": "Sending...",
-    "success": "You're in ✦ Check your inbox for the report.",
-    "duplicate": "You're already on the list.",
+    "success": "You're in! Check your email.",
     "error": "Something went wrong. Please try again.",
-    "no_spam": "No spam. Free report delivered immediately. Unsubscribe anytime."
+    "duplicate": "You're already on the list!",
+    "no_spam": "No spam. Free report delivered immediately.",
+    "message_placeholder": "Your message",
+    "subject_placeholder": "Subject"
   },
   "discount": {
     "code": "FOUNDER20",
     "label": "Your 20% discount code",
     "auto_applied": "20% off is automatically applied at checkout. No code needed."
+  },
+  "newsletter": {
+    "title": "Stay in the loop",
+    "subtitle": "Get research updates, product launches, and biology tips.",
+    "button": "Subscribe"
+  },
+  "footer": {
+    "products": "Products",
+    "info": "Info",
+    "social": "Social",
+    "about": "About BaseCode",
+    "about_text": "Supplements informed by biological diversity research. Built in Toronto, backed by science, designed for your unique biology.",
+    "copyright": "© {{ year }} BaseCode Health. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  },
+  "accessibility": {
+    "skip_to_content": "Skip to content",
+    "menu_open": "Open menu",
+    "menu_close": "Close menu",
+    "cart_open": "Open cart",
+    "cart_close": "Close cart",
+    "search_open": "Open search",
+    "search_close": "Close search",
+    "previous_slide": "Previous slide",
+    "next_slide": "Next slide",
+    "slide_of": "Slide {{ current }} of {{ total }}",
+    "menu_title": "Navigation"
   }
 }

@@ -1,0 +1,102 @@
+{%- comment -%}
+  Shop Lead Popup — shows after 5s delay, captures email for discount code.
+  JS logic in theme.js (initShopLeadPopup)
+{%- endcomment -%}
+
+<div
+  id="shop-lead-popup"
+  class="popup-overlay"
+  style="display: none;"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Get the free research report"
+  aria-hidden="true"
+>
+  <div data-lead-wrapper style="width: 100%; max-width: 440px;">
+    <div class="relative rounded-2xl p-8" style="background: #F5F2EC;">
+      <!-- Close button -->
+      <button data-popup-close class="absolute" style="top: 16px; right: 16px; padding: 4px; border-radius: 50%; color: #4A5550;" aria-label="Close">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+
+      <!-- Form view -->
+      <div data-lead-form-view>
+        <p class="font-mono-spec text-11 uppercase mb-3" style="color: #C4783A; letter-spacing: 0.15em;">Founding member offer</p>
+        <h3 class="font-heading text-24 font-medium mb-3" style="color: #1C2E23; line-height: 1.2;">Get 20% off your first order.</h3>
+        <p class="font-heading text-15 font-light mb-6" style="color: #4A5550;">
+          Enter your email to unlock an exclusive discount code — plus get our free research report on the ancestral microbiome.
+        </p>
+
+        <form data-lead-form data-source="shop-popup" class="space-y-3">
+          <!-- Honeypot -->
+          <div aria-hidden="true" style="position: absolute; left: -9999px;">
+            <input type="text" name="website" tabindex="-1" autocomplete="off">
+          </div>
+
+          <input
+            type="text"
+            data-lead-name
+            placeholder="Full name"
+            required
+            aria-label="Full name"
+            class="input font-heading text-14 rounded-full"
+            style="background: #EDE8DF; color: #1C2E23; border: 1px solid #D5CFC6; padding: 12px 16px;"
+          >
+          <input
+            type="email"
+            data-lead-email
+            placeholder="Your best email"
+            required
+            aria-label="Email address"
+            class="input font-heading text-14 rounded-full"
+            style="background: #EDE8DF; color: #1C2E23; border: 1px solid #D5CFC6; padding: 12px 16px;"
+          >
+          <button
+            type="submit"
+            data-default-text="Unlock My 20% Discount"
+            class="w-full font-heading text-14 font-semibold rounded-full transition-colors"
+            style="background: #C4783A; color: #1C2E23; padding: 14px 24px;"
+          >
+            Unlock My 20% Discount
+          </button>
+
+          <p data-lead-error class="font-heading text-13 text-center mt-3" style="color: #C4783A; display: none;" role="alert">
+            Something went wrong. Please try again.
+          </p>
+        </form>
+
+        <p class="font-heading text-12 text-center mt-4" style="color: #8A9490;">
+          No spam. Free report delivered immediately. Unsubscribe anytime.
+        </p>
+      </div>
+
+      <!-- Success view -->
+      <div data-lead-success-view style="display: none;" class="text-center py-4">
+        <p data-success-msg class="font-heading text-22 font-medium mb-2" style="color: #1C2E23;">
+          Your 20% discount is ready.
+        </p>
+        <div class="mx-auto my-4 px-6 py-3 rounded-xl text-center" style="background: #1C2E23; display: inline-block;">
+          <p class="font-mono-spec text-11 uppercase mb-1" style="color: #C4783A; letter-spacing: 0.15em;">Your code</p>
+          <p class="font-heading text-24 font-semibold" style="color: #F5F2EC; letter-spacing: 0.1em;">FOUNDER20</p>
+        </div>
+        <button
+          data-copy="FOUNDER20"
+          class="mx-auto flex items-center gap-2 font-heading text-13 font-medium rounded-full transition-colors mb-4"
+          style="background: rgba(196,120,58,0.12); color: #C4783A; border: 1px solid rgba(196,120,58,0.25); padding: 10px 20px;"
+        >
+          Copy Code
+        </button>
+        <p class="font-heading text-14 mb-5" style="color: #4A5550;">
+          Use code at checkout or click below — we'll apply it for you.
+        </p>
+        <a
+          href="/discount/FOUNDER20?redirect=/products/origin"
+          class="inline-block font-heading text-14 font-medium rounded-full"
+          style="background: #C4783A; color: #1C2E23; padding: 12px 32px;"
+        >
+          Shop Origin
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

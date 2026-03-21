@@ -1,0 +1,23 @@
+{%- comment -%}
+  Sticky mobile CTA bar — appears on scroll past product hero.
+  Requires: product variable passed in.
+  JS logic in theme.js (initStickyCTA)
+{%- endcomment -%}
+
+<div class="sticky-cta md:hidden">
+  <div class="flex items-center justify-between">
+    <div>
+      <p class="font-heading text-14 font-medium" style="color: #F5F2EC;">{{ product.title }}</p>
+      <p class="font-heading text-13" style="color: rgba(245,242,236,0.60);">
+        From {{ product.price | money }}
+      </p>
+    </div>
+    <a
+      href="#product-form"
+      class="font-heading text-14 font-semibold rounded-full"
+      style="background: #C4783A; color: #1C2E23; padding: 12px 24px;"
+    >
+      Buy Now
+    </a>
+  </div>
+</div>
