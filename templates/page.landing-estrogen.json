@@ -12,36 +12,27 @@
     "hero": {
       "type": "hero",
       "settings": {
+        "image": "shopify://shop_images/hero-landing-estrogen.jpg",
+        "image_position": "center center",
+        "overlay_opacity": 55,
+        "show_social_proof": true,
+        "social_proof_text": "Backed by biological diversity research",
         "subtitle": "Hormonal Balance & Your Microbiome",
         "heading": "Your hot flashes aren't \"just aging.\" Your gut stopped regulating your hormones.",
         "text": "Your gut contains a specialized bacterial community called the estrobolome — it controls how your body metabolizes and recycles estrogen. When these bacteria deplete, hormonal balance breaks down. The hot flashes, mood swings, and weight gain that follow aren't inevitable — they're a signal.",
         "button_text": "Support Your Hormone Balance — $34/mo",
         "button_link": "/products/origin",
         "guarantee_text": "30-Day Money-Back Guarantee",
-        "show_social_proof": true,
-        "social_proof_text": "Backed by biological diversity research",
         "text_align": "left",
+        "vertical_align": "center",
         "height": 90,
         "mobile_height": 85,
-        "overlay_opacity": 55,
-        "text_color": "#FFFFFF",
-        "content_width": 700
+        "content_width": 700,
+        "text_color": "#ffffff"
       }
     },
     "features-banner": {
       "type": "features-banner",
-      "settings": {
-        "bg_color": "#F5F2EC",
-        "text_color": "#1C2E23",
-        "icon_color": "#C4783A",
-        "layout": "inline",
-        "desktop_columns": "4",
-        "mobile_layout": "slider",
-        "show_dividers": true,
-        "padding_top": 24,
-        "padding_bottom": 24,
-        "enable_animation": true
-      },
       "blocks": {
         "badge-cgmp": {
           "type": "feature",
@@ -81,26 +72,33 @@
         "badge-vegan",
         "badge-maktrek",
         "badge-tested"
-      ]
+      ],
+      "settings": {
+        "layout": "inline",
+        "desktop_columns": "4",
+        "mobile_layout": "slider",
+        "show_dividers": true,
+        "padding_top": 24,
+        "padding_bottom": 24,
+        "bg_color": "#f5f2ec",
+        "text_color": "#1c2e23",
+        "icon_color": "#c4783a",
+        "heading": "",
+        "heading_level": "h2",
+        "heading_size": 28,
+        "text_size": "medium",
+        "icon_size": 24,
+        "enable_animation": true
+      }
     },
     "agitate": {
       "type": "rich-text",
-      "settings": {
-        "bg_color": "#FFFFFF",
-        "text_color": "#1C2E23",
-        "bg_opacity": 100,
-        "content_width": "medium",
-        "text_align": "left",
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "enable_animation": true
-      },
       "blocks": {
         "agitate-subheading": {
           "type": "subheading",
           "settings": {
             "subheading": "Why Hormone Supplements Alone Aren't Enough",
-            "subheading_color": "#C4783A"
+            "subheading_color": "#c4783a"
           }
         },
         "agitate-heading": {
@@ -114,19 +112,22 @@
         "agitate-text-1": {
           "type": "text",
           "settings": {
-            "text": "<p>You're 38 and waking up drenched at 3am. Hot flashes in meetings. A mood crash that comes out of nowhere and derails your entire afternoon. Your doctor says it's perimenopause. Take these supplements. Try this cream. Wait it out.</p>"
+            "text": "<p>You're 38 and waking up drenched at 3am. Hot flashes in meetings. A mood crash that comes out of nowhere and derails your entire afternoon. Your doctor says it's perimenopause. Take these supplements. Try this cream. Wait it out.</p>",
+            "text_color": ""
           }
         },
         "agitate-text-2": {
           "type": "text",
           "settings": {
-            "text": "<p>The supplement graveyard is growing — DIM, black cohosh, evening primrose oil, maca, vitex, magnesium. Each one helped for a week, then stopped. You're spending $150/month on a stack that keeps shifting because nothing holds. Nobody told you why.</p>"
+            "text": "<p>The supplement graveyard is growing — DIM, black cohosh, evening primrose oil, maca, vitex, magnesium. Each one helped for a week, then stopped. You're spending $150/month on a stack that keeps shifting because nothing holds. Nobody told you why.</p>",
+            "text_color": ""
           }
         },
         "agitate-text-3": {
           "type": "text",
           "settings": {
-            "text": "<p>Here's what's missing from the conversation: your gut bacteria regulate how much estrogen your body retains versus excretes. When those bacteria deplete, every hormone supplement you take clears your system too fast. You're pouring water into a bucket with a hole in the bottom. The hole is in your microbiome.</p>"
+            "text": "<p>Here's what's missing from the conversation: your gut bacteria regulate how much estrogen your body retains versus excretes. When those bacteria deplete, every hormone supplement you take clears your system too fast. You're pouring water into a bucket with a hole in the bottom. The hole is in your microbiome.</p>",
+            "text_color": ""
           }
         }
       },
@@ -136,30 +137,26 @@
         "agitate-text-1",
         "agitate-text-2",
         "agitate-text-3"
-      ]
+      ],
+      "settings": {
+        "content_width": "medium",
+        "text_align": "left",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "bg_color": "#ffffff",
+        "bg_opacity": 100,
+        "text_color": "#1c2e23",
+        "enable_animation": true
+      }
     },
     "bridge": {
       "type": "image-with-text",
-      "settings": {
-        "layout": "text_first",
-        "bg_color": "#F5F2EC",
-        "text_color": "#1C2E23",
-        "text_align": "left",
-        "image_ratio": "4/5",
-        "image_width_pct": 50,
-        "height_mode": "adapt",
-        "vertical_align": "center",
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "full_width": false,
-        "enable_animation": true
-      },
       "blocks": {
         "bridge-subheading": {
           "type": "subheading",
           "settings": {
             "text": "The Science Behind Your Symptoms",
-            "color": "#C4783A"
+            "color": "#c4783a"
           }
         },
         "bridge-heading": {
@@ -174,7 +171,8 @@
           "type": "text",
           "settings": {
             "text": "<p>Plottel and Blaser coined the term 'estrobolome' in 2011 to describe the collection of gut bacteria capable of metabolizing estrogen. These bacteria produce beta-glucuronidase — the enzyme that determines how much estrogen your body recirculates versus eliminates. Flores et al. demonstrated that gut bacterial diversity directly correlates with urinary estrogen levels. Baker et al. confirmed the clinical connection between microbiome composition and circulating estrogen in the Journal of Clinical Endocrinology &amp; Metabolism. When key bacterial populations deplete, the estrobolome loses function and hormonal symptoms follow.</p><p><em>Plottel &amp; Blaser, Cell Host &amp; Microbe, 2011 · Flores et al., mBio, 2012 · Baker et al., Journal of Clinical Endocrinology &amp; Metabolism, 2017</em></p>",
-            "text_color": "#444444"
+            "text_color": "#444444",
+            "text_size": "var(--text-base, 1rem)"
           }
         }
       },
@@ -182,25 +180,28 @@
         "bridge-subheading",
         "bridge-heading",
         "bridge-text"
-      ]
-    },
-    "pathways": {
-      "type": "research-highlight",
+      ],
       "settings": {
-        "heading": "How Origin Supports Estrogen Balance",
-        "heading_size": "text-3xl",
-        "heading_level": "h2",
-        "bg_color": "#1C2E23",
-        "text_color": "#F5F2EC",
-        "accent_color": "#C4783A",
-        "card_bg_color": "#243D2D",
-        "icon_bg_color": "#C4783A",
-        "columns": "3",
-        "card_style": "vertical",
+        "layout": "text_first",
+        "image_width_pct": 50,
+        "height_mode": "adapt",
+        "desktop_height": 500,
+        "mobile_height": 320,
+        "image_ratio": "4/5",
+        "vertical_align": "center",
+        "text_align": "left",
+        "bg_color": "#f5f2ec",
+        "text_color": "#1c2e23",
+        "text_container_bg": "#ffffff",
+        "text_container_bg_opacity": 0,
+        "full_width": false,
         "padding_top": 80,
         "padding_bottom": 80,
         "enable_animation": true
-      },
+      }
+    },
+    "pathways": {
+      "type": "research-highlight",
       "blocks": {
         "pathway-1": {
           "type": "stat",
@@ -237,27 +238,30 @@
         "pathway-1",
         "pathway-2",
         "pathway-3"
-      ]
+      ],
+      "settings": {
+        "subtitle": "The Research",
+        "heading": "How Origin Supports Estrogen Balance",
+        "heading_size": "text-3xl",
+        "heading_level": "h2",
+        "button_text": "Read the Science",
+        "button_link": "",
+        "button_style": "primary",
+        "columns": "3",
+        "card_style": "vertical",
+        "full_width": false,
+        "bg_color": "#1c2e23",
+        "text_color": "#f5f2ec",
+        "accent_color": "#c4783a",
+        "card_bg_color": "#243d2d",
+        "icon_bg_color": "#c4783a",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "enable_animation": true
+      }
     },
     "benefits": {
       "type": "benefits-product",
-      "settings": {
-        "heading": "Everything You Get With Origin",
-        "subheading": "One Formula. Complete Support.",
-        "bg_color": "#C4783A",
-        "text_color": "#FFFFFF",
-        "accent_color": "#FFFFFF",
-        "button_text": "Get Origin — $34/mo",
-        "button_link": "/products/origin",
-        "button_style": "primary",
-        "quick_buy": false,
-        "desktop_image_width": 40,
-        "desktop_image_max_width": 400,
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "full_width": false,
-        "enable_animation": true
-      },
       "blocks": {
         "benefit-1": {
           "type": "benefit",
@@ -321,24 +325,47 @@
         "benefit-4",
         "benefit-5",
         "benefit-6"
-      ]
+      ],
+      "settings": {
+        "product": "",
+        "heading": "Everything You Get With Origin",
+        "subheading": "One Formula. Complete Support.",
+        "desktop_image_width": 40,
+        "desktop_image_max_width": 400,
+        "button_text": "Get Origin — $34/mo",
+        "button_link": "/products/origin",
+        "button_style": "primary",
+        "quick_buy": false,
+        "full_width": false,
+        "bg_color": "#c4783a",
+        "text_color": "#ffffff",
+        "accent_color": "#ffffff",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "enable_animation": true
+      }
     },
     "cta-banner": {
       "type": "image-banner",
       "settings": {
+        "image_position": "center center",
+        "subheading": "",
         "heading": "Support Your Hormone Balance",
         "heading_size": "text-4xl",
         "text": "Origin is the first ethnobiotic — a probiotic informed by biological diversity research. $34/mo, free shipping on subscriptions, 30-day guarantee.",
         "button_text": "Get Origin — $34/mo",
         "button_link": "/products/origin",
         "button_style": "white",
-        "overlay_color": "#1C2E23",
-        "overlay_opacity": 65,
-        "text_color": "#FFFFFF",
+        "button_2_text": "",
+        "button_2_link": "",
+        "button_2_style": "secondary",
         "text_align": "center",
         "vertical_align": "center",
         "content_width": "narrow",
         "full_width": true,
+        "overlay_color": "#1c2e23",
+        "overlay_opacity": 65,
+        "text_color": "#ffffff",
         "height": 450,
         "mobile_height": 350,
         "enable_animation": true
@@ -346,20 +373,6 @@
     },
     "testimonials": {
       "type": "testimonials",
-      "settings": {
-        "heading": "Real People. Real Results.",
-        "heading_size": "text-3xl",
-        "bg_color": "#FFFFFF",
-        "layout": "carousel",
-        "card_style": "card",
-        "show_stars": true,
-        "accent_color": "#f59e0b",
-        "auto_play": true,
-        "auto_play_speed": 6,
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "enable_animation": true
-      },
       "blocks": {
         "review-1": {
           "type": "testimonial",
@@ -403,25 +416,27 @@
         "review-2",
         "review-3",
         "review-4"
-      ]
-    },
-    "faq": {
-      "type": "faq-accordion",
+      ],
       "settings": {
-        "heading": "Questions About Origin & Hormonal Health",
+        "subheading": "",
+        "heading": "Real People. Real Results.",
         "heading_size": "text-3xl",
-        "heading_align": "center",
-        "bg_color": "#F5F2EC",
-        "text_color": "#1C2E23",
-        "accent_color": "#C4783A",
-        "accordion_style": "bordered",
-        "icon_style": "plus",
-        "content_width": "narrow",
-        "open_first": true,
+        "layout": "carousel",
+        "columns": 3,
+        "card_style": "card",
+        "show_stars": true,
+        "accent_color": "#f59e0b",
+        "auto_play": true,
+        "auto_play_speed": 6,
+        "bg_color": "#ffffff",
+        "text_color": "",
         "padding_top": 80,
         "padding_bottom": 80,
         "enable_animation": true
-      },
+      }
+    },
+    "faq": {
+      "type": "faq-accordion",
       "blocks": {
         "faq-1": {
           "type": "question",
@@ -465,7 +480,23 @@
         "faq-3",
         "faq-4",
         "faq-5"
-      ]
+      ],
+      "settings": {
+        "subheading": "",
+        "heading": "Questions About Origin & Hormonal Health",
+        "heading_size": "text-3xl",
+        "heading_align": "center",
+        "accordion_style": "bordered",
+        "icon_style": "plus",
+        "open_first": true,
+        "content_width": "narrow",
+        "bg_color": "#f5f2ec",
+        "text_color": "#1c2e23",
+        "accent_color": "#c4783a",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "enable_animation": true
+      }
     },
     "newsletter": {
       "type": "newsletter",
@@ -474,19 +505,23 @@
         "heading_level": "h2",
         "heading_size": "h2",
         "text": "Learn what published research says about your gut's role in hormone regulation. Free with your email.",
-        "button_text": "Send Me the Report",
-        "button_style": "white",
         "form_layout": "stacked",
         "show_name_field": false,
+        "button_text": "Send Me the Report",
+        "button_style": "white",
         "success_heading": "You're in.",
         "success_text": "Check your inbox — the estrobolome report is on its way.",
-        "bg_color": "#1C2E23",
-        "bg_opacity": 100,
-        "text_color": "#F5F2EC",
         "content_width": "narrow",
         "text_align": "center",
+        "full_width": false,
         "padding_top": 80,
         "padding_bottom": 80,
+        "bg_color": "#1c2e23",
+        "bg_opacity": 100,
+        "text_color": "#f5f2ec",
+        "height_mode": "adapt",
+        "desktop_height": 480,
+        "mobile_height": 360,
         "enable_animation": true
       }
     }
