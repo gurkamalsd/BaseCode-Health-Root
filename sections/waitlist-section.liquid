@@ -1,0 +1,102 @@
+<section id="waitlist" class="px-4 md:px-10 pb-20 pt-4" style="background: #F5F2EC;">
+  <div class="mx-auto rounded-[48px] px-8 md:px-20 py-20 reveal-hidden" style="max-width: 800px; background: #EDE8DF;">
+    <div class="mx-auto text-center" style="max-width: 600px;">
+      <h2 class="font-heading text-36 md:text-48 font-medium mb-4" style="color: #1C2E23; line-height: 1.1;">
+        Your grandmother never felt this way.<br>
+        You don't have to either.
+      </h2>
+
+      <p class="font-heading text-17 font-light mb-8" style="color: #4A5550;">
+        The first probiotic informed by biological diversity research is available now. Less bloating, sharper focus, steady energy, a metabolism that actually works — or get the free research report to understand the science first.
+      </p>
+
+      <div class="flex flex-col gap-2.5 items-center mb-8 mx-auto" style="max-width: 400px;">
+        <span class="flex items-start gap-3 font-heading text-14 w-full" style="color: #4A5550;">
+          <span class="mt-0.5" style="color: #C4783A;">✦</span>
+          <span>4 clinically studied strains — bloating, energy, immunity, metabolism</span>
+        </span>
+        <span class="flex items-start gap-3 font-heading text-14 w-full" style="color: #4A5550;">
+          <span class="mt-0.5" style="color: #C4783A;">✦</span>
+          <span>MAKTREK Bi-Pass — arrives alive when most probiotics can't</span>
+        </span>
+        <span class="flex items-start gap-3 font-heading text-14 w-full" style="color: #4A5550;">
+          <span class="mt-0.5" style="color: #C4783A;">✦</span>
+          <span>FOS prebiotic feeds bacteria on arrival for faster results</span>
+        </span>
+        <span class="flex items-start gap-3 font-heading text-14 w-full" style="color: #4A5550;">
+          <span class="mt-0.5" style="color: #C4783A;">✦</span>
+          <span>Free research report + 20% off your first order</span>
+        </span>
+      </div>
+
+      <a href="/products/origin" class="btn btn--primary inline-block mb-8">
+        Start Feeling Better — $34/mo
+      </a>
+
+      <p class="font-heading text-15 font-light mb-4" style="color: #4A5550;">
+        Not ready to buy? Get the free research report first.
+      </p>
+
+      <!-- Lead capture form -->
+      <form data-lead-form data-source="waitlist" class="waitlist-form">
+        <input type="text" name="website" autocomplete="off" tabindex="-1" aria-hidden="true"
+          style="position: absolute; left: -9999px; opacity: 0; height: 0; width: 0;">
+
+        <!-- Desktop inline -->
+        <div class="hidden sm:flex overflow-hidden" style="border: 2px solid #1C2E23; border-radius: 50px;">
+          <input type="text" name="firstName" required placeholder="Full name" aria-label="Full name" autocomplete="name"
+            class="font-heading text-15 font-light px-5 py-4 outline-none"
+            style="background: #F5F2EC; color: #1A1A1A; min-width: 90px; width: 28%;">
+          <div style="width: 1px; background: #D5CFC6; align-self: stretch;"></div>
+          <input type="email" name="email" required placeholder="Your best email" aria-label="Email address" autocomplete="email"
+            class="flex-1 font-heading text-15 font-light px-7 py-4 outline-none"
+            style="background: #F5F2EC; color: #1A1A1A;">
+          <button type="submit" data-default-text="Send My Free Report"
+            class="font-heading text-14 font-medium px-7 py-4 transition"
+            style="background: #1C2E23; color: #F5F2EC; border-radius: 0 50px 50px 0;">
+            Send My Free Report
+          </button>
+        </div>
+
+        <!-- Mobile stacked -->
+        <div class="sm:hidden space-y-3">
+          <input type="text" name="firstName" required placeholder="Full name" aria-label="Full name" autocomplete="name"
+            class="w-full font-heading text-15 font-light px-6 py-4 rounded-full outline-none"
+            style="background: #F5F2EC; border: 2px solid #1C2E23; color: #1A1A1A;">
+          <input type="email" name="email" required placeholder="Your best email" aria-label="Email address" autocomplete="email"
+            class="w-full font-heading text-15 font-light px-6 py-4 rounded-full outline-none"
+            style="background: #F5F2EC; border: 2px solid #1C2E23; color: #1A1A1A;">
+          <button type="submit" data-default-text="Send My Free Report"
+            class="w-full font-heading text-14 font-medium px-6 py-4 rounded-full"
+            style="background: #1C2E23; color: #F5F2EC;">
+            Send My Free Report
+          </button>
+        </div>
+
+        <p class="lead-form-error font-heading text-14 mt-3" style="color: #C4783A; display: none;" role="alert">
+          Something went wrong. Please try again.
+        </p>
+      </form>
+
+      <div class="lead-form-success" style="display: none;">
+        <p class="font-heading text-20 font-medium" style="color: #C4783A;">You're in ✦</p>
+      </div>
+
+      <div class="lead-form-duplicate" style="display: none;">
+        <p class="font-heading text-17 font-medium" style="color: #4A5550;">You're already on the list.</p>
+      </div>
+
+      <p class="font-mono-spec text-11 mt-5" style="color: #8A9490;">
+        No spam. Unsubscribe anytime.
+      </p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Waitlist",
+  "class": "waitlist-section",
+  "settings": []
+}
+{% endschema %}

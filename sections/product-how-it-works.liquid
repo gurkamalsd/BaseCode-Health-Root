@@ -1,0 +1,66 @@
+<section class="py-16 px-6 md:px-20" style="background: #F5F2EC;">
+  <div style="max-width: 1000px; margin: 0 auto;">
+    <p class="font-mono-spec text-11 uppercase text-center mb-3" style="color: #C4783A; letter-spacing: 0.2em;">How It Works</p>
+    <h2 class="font-heading text-28 md:text-36 font-medium text-center mb-12" style="color: #1C2E23; line-height: 1.2;">
+      Two capsules. Every day. That's it.
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 reveal-hidden">
+      <!-- Step 1 -->
+      <div class="text-center">
+        <div class="mx-auto mb-4" style="width: 64px; height: 64px; border-radius: 50%; background: rgba(196,120,58,0.10); display: flex; align-items: center; justify-content: center;">
+          <span class="font-heading text-24 font-semibold" style="color: #C4783A;">1</span>
+        </div>
+        <h3 class="font-heading text-15 font-semibold mb-2" style="color: #1C2E23;">Take 2 Capsules</h3>
+        <p class="font-heading text-13 font-light" style="color: #4A5550; line-height: 1.6;">
+          Morning or evening, with or without food. MAKTREK protects bacteria through stomach acid regardless.
+        </p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="text-center">
+        <div class="mx-auto mb-4" style="width: 64px; height: 64px; border-radius: 50%; background: rgba(196,120,58,0.10); display: flex; align-items: center; justify-content: center;">
+          <span class="font-heading text-24 font-semibold" style="color: #C4783A;">2</span>
+        </div>
+        <h3 class="font-heading text-15 font-semibold mb-2" style="color: #1C2E23;">Bacteria Arrive Alive</h3>
+        <p class="font-heading text-13 font-light" style="color: #4A5550; line-height: 1.6;">
+          MAKTREK Bi-Pass releases strains in your intestine — where they work. FOS prebiotic feeds them on arrival.
+        </p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="text-center">
+        <div class="mx-auto mb-4" style="width: 64px; height: 64px; border-radius: 50%; background: rgba(196,120,58,0.10); display: flex; align-items: center; justify-content: center;">
+          <span class="font-heading text-24 font-semibold" style="color: #C4783A;">3</span>
+        </div>
+        <h3 class="font-heading text-15 font-semibold mb-2" style="color: #1C2E23;">Feel the Difference</h3>
+        <p class="font-heading text-13 font-light" style="color: #4A5550; line-height: 1.6;">
+          Bloating relief in 1–2 weeks. Energy and clarity by week 3–4. Full microbiome restoration in 60–90 days.
+        </p>
+      </div>
+    </div>
+
+    <!-- Strains breakdown -->
+    <div class="mt-12 p-6 rounded-2xl" style="background: #EDE8DF;">
+      <p class="font-mono-spec text-11 uppercase mb-4" style="color: #C4783A; letter-spacing: 0.15em;">4 Targeted Strains</p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {%- assign strain_names = "L. acidophilus|B. lactis|L. plantarum|L. paracasei" | split: "|" -%}
+        {%- assign strain_roles = "Gut barrier + lactose metabolism|Immune function + regularity|Anti-inflammatory + recovery|Immune modulation + gut-brain axis" | split: "|" -%}
+        {%- for strain in strain_names -%}
+          <div class="p-3 rounded-xl" style="background: #F5F2EC;">
+            <p class="font-heading text-14 font-semibold italic mb-1" style="color: #1C2E23;">{{ strain }}</p>
+            <p class="font-mono-spec text-10" style="color: #4A5550; letter-spacing: 0.05em;">{{ strain_roles[forloop.index0] }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "How It Works",
+  "class": "how-it-works-section",
+  "settings": []
+}
+{% endschema %}

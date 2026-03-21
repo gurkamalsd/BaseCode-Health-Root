@@ -44,18 +44,17 @@
       "settings": {
         "enable": true,
         "dismissible": false,
-        "bg_color": "#c4783a",
+        "bg_color": "#1c2e23",
         "text_color": "#f5f2ec",
-        "animation_speed": "slow",
-        "separator": ""
+        "animation_speed": "normal",
+        "separator": "·"
       }
     },
     "header": {
       "type": "header",
       "settings": {
-        "logo": "shopify://shop_images/Generated_Image_March_09_2026_-_9_13PM.jpg",
-        "logo_width_desktop": 145,
-        "logo_width_mobile": 100,
+        "logo_width_desktop": 120,
+        "logo_width_mobile": 80,
         "menu": "main-menu",
         "logo_position": "left",
         "mobile_menu_style": "slide",
@@ -65,7 +64,7 @@
         "sticky_header": true,
         "hide_on_scroll": true,
         "sticky_bg_opacity": 95,
-        "background_blur": true,
+        "background_blur": false,
         "transparent_homepage": true,
         "transparent_text_color": "#ffffff",
         "show_separator": true,

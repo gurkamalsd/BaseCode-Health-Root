@@ -1,0 +1,39 @@
+<section class="py-16 px-4 md:px-20" style="background: #EDE8DF;">
+  <div style="max-width: 1000px; margin: 0 auto;">
+    <p class="font-mono-spec text-11 uppercase text-center mb-3 reveal-hidden" style="color: #C4783A; letter-spacing: 0.15em;">
+      Real Results
+    </p>
+    <h2 class="font-heading text-28 md:text-36 font-medium text-center mb-10 reveal-hidden" style="color: #1C2E23; line-height: 1.2;">
+      People felt the difference within 2 weeks.
+    </h2>
+
+    <div class="grid sm:grid-cols-2 gap-5 stagger-children">
+      {%- assign names = "Priya M.|Carlos R.|Amira T.|David Ng" | split: "|" -%}
+      {%- assign locs = "Toronto, ON|Houston, TX|London, UK|Vancouver, BC" | split: "|" -%}
+      {%- assign quotes = "Two weeks in and the bloating I've had since moving to Canada is genuinely gone. I didn't realize how much I'd normalized it. I eat without thinking about it now — that's the difference.|The afternoon crashes are gone. I used to need two coffees after lunch — now I just don't. My energy is steady all day for the first time in years. I honestly feel 10 years younger.|I've tried Seed, Culturelle, the expensive one from Whole Foods. This is the first one where I actually noticed a difference — regular, predictable digestion within 10 days. Nothing else came close.|Subscribe and save is a no-brainer. $34/mo for something that actually works — that's about $1.13/day. My digestion hasn't felt this good since before I moved from Hong Kong." | split: "|" -%}
+
+      {%- for name in names -%}
+        <div class="reveal-hidden p-6 rounded-2xl" style="background: #F5F2EC;">
+          <div class="flex items-center gap-1 mb-3">
+            {%- for i in (1..5) -%}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="#C4783A" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            {%- endfor -%}
+          </div>
+          <p class="font-heading text-14 font-light mb-4" style="color: #1C2E23; line-height: 1.7;">
+            &ldquo;{{ quotes[forloop.index0] }}&rdquo;
+          </p>
+          <p class="font-heading text-13 font-medium" style="color: #4A5550;">{{ name }}</p>
+          <p class="font-mono-spec text-11" style="color: #8A9490;">{{ locs[forloop.index0] }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Reviews",
+  "class": "reviews-section",
+  "settings": []
+}
+{% endschema %}

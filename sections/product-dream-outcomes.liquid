@@ -1,0 +1,37 @@
+<section class="py-16 px-6 md:px-20" style="background: #1C2E23;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <p class="font-mono-spec text-11 uppercase text-center mb-3" style="color: #C4783A; letter-spacing: 0.2em;">What Origin Does For You</p>
+    <h2 class="font-heading text-28 md:text-36 font-medium text-center mb-12" style="color: #F5F2EC; line-height: 1.2;">
+      Six problems. One capsule.
+    </h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {%- assign outcomes = "End Bloating|Sustained Energy|Better Sleep|Clear Thinking|Mood Support|Immune Strength" | split: "|" -%}
+      {%- assign icons = "🔥|⚡|🌙|🧠|❤️|🛡" | split: "|" -%}
+      {%- assign descs = "L. acidophilus and L. plantarum reduce gas production and restore the digestive barrier that westernized eating slowly depleted.|When your gut stops leaking endotoxins into your blood, the chronic fatigue lifts. Most feel it by week two.|90% of serotonin is made in your gut. Fix the gut, fix the signal. Deeper sleep follows naturally.|Brain fog isn't in your head — it's in your gut. L. paracasei modulates the gut-brain axis to restore cognitive clarity.|Gut inflammation drives anxiety and low mood via the vagus nerve. Reducing it changes how you feel, not just how you digest.|70% of your immune system lives in your gut. B. lactis strengthens immune cell response and reduces chronic inflammation." | split: "|" -%}
+
+      {%- for outcome in outcomes -%}
+        <div class="glass-card rounded-xl p-5 reveal-hidden">
+          <span style="font-size: 24px; display: block; margin-bottom: 12px;">{{ icons[forloop.index0] }}</span>
+          <h3 class="font-heading text-16 font-semibold mb-2" style="color: #F5F2EC;">{{ outcome }}</h3>
+          <p class="font-heading text-13 font-light" style="color: rgba(245,242,236,0.60); line-height: 1.6;">{{ descs[forloop.index0] }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="text-center mt-10">
+      <a href="#product-form" class="btn btn--primary">Buy Origin — From $34/mo</a>
+      <p class="font-mono-spec text-11 mt-3" style="color: rgba(245,242,236,0.35);">
+        Free shipping · 30-day money-back guarantee · Cancel anytime
+      </p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Dream Outcomes",
+  "class": "dream-outcomes-section",
+  "settings": []
+}
+{% endschema %}

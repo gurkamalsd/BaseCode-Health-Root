@@ -147,7 +147,7 @@
             name="contact[name]"
             id="contact-name-{{ section.id }}"
             class="form-input"
-            placeholder="{{ 'forms.name_placeholder' | t }}"
+            placeholder="{{ 'forms.name_placeholder' | t | default: 'First name' }}"
             required
           >
         </div>
@@ -158,7 +158,7 @@
             name="contact[email]"
             id="contact-email-{{ section.id }}"
             class="form-input"
-            placeholder="{{ 'forms.email_placeholder' | t }}"
+            placeholder="{{ 'forms.email_placeholder' | t | default: 'Your best email' }}"
             required
           >
         </div>
@@ -172,7 +172,7 @@
             name="contact[subject]"
             id="contact-subject-{{ section.id }}"
             class="form-input"
-            placeholder="{{ 'forms.subject_placeholder' | t }}"
+            placeholder="{{ 'forms.subject_placeholder' | t | default: 'Subject' }}"
           >
         </div>
       {%- endif -%}
@@ -184,7 +184,7 @@
           id="contact-message-{{ section.id }}"
           class="form-input"
           rows="6"
-          placeholder="{{ 'forms.message_placeholder' | t }}"
+          placeholder="{{ 'forms.message_placeholder' | t | default: 'Your message' }}"
           required
         ></textarea>
       </div>

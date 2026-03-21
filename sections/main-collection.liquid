@@ -53,7 +53,7 @@
       {%- comment -%} Product count {%- endcomment -%}
       {%- if section.settings.show_product_count -%}
         <p style="font-size: var(--text-sm, 0.875rem); color: var(--color-text-light, #666); margin-top: var(--space-2, 0.5rem);">
-          {{ 'collection.products_count' | t: count: collection.products_count }}
+          {{ 'collection.products_count' | t: count: collection.products_count | default: collection.products_count | append: ' products' }}
         </p>
       {%- endif -%}
     </div>
@@ -75,7 +75,7 @@
       >
         {%- if section.settings.show_product_count -%}
           <span style="font-size: var(--text-sm, 0.875rem); color: var(--color-text-light, #666);">
-            {{ 'collection.products_count' | t: count: collection.products_count }}
+            {{ 'collection.products_count' | t: count: collection.products_count | default: collection.products_count | append: ' products' }}
           </span>
         {%- else -%}
           <span></span>
@@ -86,7 +86,7 @@
             for="sort-select-{{ section.id }}"
             style="font-size: var(--text-sm, 0.875rem); font-weight: 500; white-space: nowrap;"
           >
-            {{ 'collection.sort' | t }}:
+            {{ 'collection.sort' | t | default: 'Sort by' }}:
           </label>
           <select
             id="sort-select-{{ section.id }}"

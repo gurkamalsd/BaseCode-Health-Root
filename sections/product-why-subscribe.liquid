@@ -1,0 +1,43 @@
+<section class="py-16 px-6 md:px-20" style="background: #1C2E23;">
+  <div style="max-width: 800px; margin: 0 auto; text-align: center;" class="reveal-hidden">
+    <p class="font-mono-spec text-11 uppercase mb-3" style="color: #C4783A; letter-spacing: 0.2em;">Subscribe & Save</p>
+    <h2 class="font-heading text-28 md:text-36 font-medium mb-6" style="color: #F5F2EC; line-height: 1.2;">
+      Microbiome restoration is a daily practice.
+    </h2>
+    <p class="font-heading text-16 font-light mb-8" style="color: rgba(245,242,236,0.65); line-height: 1.7; max-width: 600px; margin: 0 auto;">
+      Your ancestral bacteria didn't maintain themselves in a single dose — and neither does restoration. Origin works because it's taken daily. Subscribe for the best results and the best price.
+    </p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 mb-10">
+      <div>
+        <p class="font-heading text-24 font-semibold" style="color: #C4783A;">$34</p>
+        <p class="font-mono-spec text-10 mt-1" style="color: rgba(245,242,236,0.45);">per month</p>
+      </div>
+      <div>
+        <p class="font-heading text-24 font-semibold" style="color: #F5F2EC;">$1.13</p>
+        <p class="font-mono-spec text-10 mt-1" style="color: rgba(245,242,236,0.45);">per day</p>
+      </div>
+      <div>
+        <p class="font-heading text-24 font-semibold" style="color: #F5F2EC;">$0</p>
+        <p class="font-mono-spec text-10 mt-1" style="color: rgba(245,242,236,0.45);">to cancel anytime</p>
+      </div>
+    </div>
+
+    <a href="#product-form" class="btn btn--primary">Subscribe & Save — $34/mo</a>
+
+    <div class="flex justify-center gap-6 mt-8 flex-wrap">
+      {%- assign sub_perks = "Free US Shipping|Cancel Anytime|30-Day Guarantee|Free Research Report" | split: "|" -%}
+      {%- for perk in sub_perks -%}
+        <span class="font-mono-spec text-11" style="color: rgba(245,242,236,0.40);">✦ {{ perk }}</span>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Why Subscribe",
+  "class": "why-subscribe-section",
+  "settings": []
+}
+{% endschema %}

@@ -12,11 +12,10 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "image": "shopify://shop_images/forest-wellness-moody-background.png",
         "image_position": "center center",
         "overlay_opacity": 55,
-        "show_social_proof": true,
-        "social_proof_text": "Trusted by customers, backed by biological diversity research",
+        "show_social_proof": false,
+        "social_proof_text": "Backed by biological diversity research",
         "subtitle": "",
         "heading": "Your biology is unique.",
         "text": "<p>Origin is the first probiotic informed by biological diversity research. 40 billion CFU. 4 targeted strains. MAKTREK acid-protection delivery.</p>",
@@ -218,10 +217,10 @@
         "b6"
       ],
       "settings": {
-        "product": "origin",
+        "product": "",
         "heading": "The Origin Difference",
         "subheading": "Biology-First Formula",
-        "desktop_image_width": 35,
+        "desktop_image_width": 40,
         "desktop_image_max_width": 400,
         "button_text": "Shop Origin — $34/mo",
         "button_link": "/products/origin",

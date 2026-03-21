@@ -1,0 +1,56 @@
+<section class="py-16 px-6 md:px-20" style="background: #EDE8DF;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <p class="font-mono-spec text-11 uppercase text-center mb-3" style="color: #C4783A; letter-spacing: 0.2em;">Customer Reviews</p>
+    <h2 class="font-heading text-28 md:text-36 font-medium text-center mb-2" style="color: #1C2E23; line-height: 1.2;">
+      Real results. Real people.
+    </h2>
+    <p class="font-heading text-14 text-center mb-10" style="color: #4A5550;">
+      <span class="stars">★★★★★</span> 4.9 out of 5 · Based on 23 reviews
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-4 stagger-children">
+      {%- assign review_names = "Priya M.|Carlos R.|Amira T.|David Ng|Fatima K.|Raj P.|Sofia L.|Samuel A." | split: "|" -%}
+      {%- assign review_locations = "Toronto, ON|Houston, TX|London, UK|Vancouver, BC|Chicago, IL|Brampton, ON|Miami, FL|London, UK" | split: "|" -%}
+      {%- assign review_tags = "Bloating Relief|More Energy|Better Digestion|Best Value|Less Inflammation|Bloating Relief|Better Sleep|More Energy" | split: "|" -%}
+      {%- assign review_durations = "2 weeks on Origin|3 weeks on Origin|10 days on Origin|1 month on Origin|3 weeks on Origin|2 weeks on Origin|1 month on Origin|3 weeks on Origin" | split: "|" -%}
+      {%- assign review_quotes = "Two weeks in and the bloating I've had since moving to Canada is genuinely gone. I didn't realize how much I'd normalized it until it stopped.|The afternoon crashes are gone. I used to need two coffees after lunch — now I just don't. My energy is steady all day for the first time in years.|I've tried four different probiotics. This is the first one where I actually noticed a difference — regular, predictable digestion within 10 days.|Subscribe and save is a no-brainer. $34/mo for something that actually works. My gut hasn't felt this good since before I moved from Hong Kong.|The joint pain I thought was just 'getting older' started fading by week three. My doctor said my inflammation markers actually improved. I'm 34.|My whole family deals with bloating — we just accepted it. Two weeks on Origin and I'm eating roti and dal without the discomfort. Wish I found this sooner.|I wasn't expecting a probiotic to help my sleep but here we are. I fall asleep faster and actually wake up rested. The brain fog is lifting too.|Moved from Lagos six years ago. The fatigue crept in so slowly I didn't notice. Three weeks on Origin and I feel like myself again. This is different." | split: "|" -%}
+
+      {%- for name in review_names -%}
+        <div class="reveal-hidden p-5 rounded-xl" style="background: #F5F2EC; border: 1px solid rgba(28,46,35,0.06);">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <span class="stars" style="font-size: 13px;">★★★★★</span>
+              <span class="verified-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="#4A8B6C"><path d="M9 16.2l-3.5-3.5 1.4-1.4L9 13.4l7.1-7.1 1.4 1.4z"/><circle cx="12" cy="12" r="10" fill="none" stroke="#4A8B6C" stroke-width="2"/></svg>
+                Verified Buyer
+              </span>
+            </div>
+            <span class="font-mono-spec text-10 rounded-full" style="background: rgba(196,120,58,0.10); color: #C4783A; padding: 3px 10px;">
+              {{ review_tags[forloop.index0] }}
+            </span>
+          </div>
+
+          <p class="font-heading text-14 font-light mb-3" style="color: #1C2E23; line-height: 1.6;">
+            &ldquo;{{ review_quotes[forloop.index0] }}&rdquo;
+          </p>
+
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="font-heading text-13 font-medium" style="color: #1C2E23;">{{ name }}</p>
+              <p class="font-mono-spec text-10" style="color: #8A9490;">{{ review_locations[forloop.index0] }}</p>
+            </div>
+            <span class="font-mono-spec text-10" style="color: #8A9490;">{{ review_durations[forloop.index0] }}</span>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product Reviews",
+  "class": "product-reviews-section",
+  "settings": []
+}
+{% endschema %}

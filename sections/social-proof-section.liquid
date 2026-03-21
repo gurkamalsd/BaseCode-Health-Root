@@ -1,0 +1,56 @@
+<section class="py-16 md:py-100 px-6 md:px-20" style="background: #1C2E23;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div class="text-center mb-16 reveal-hidden">
+      <h2 class="font-heading text-32 md:text-48 font-medium mb-4" style="color: #F5F2EC;">
+        Every claim we make is backed<br>by published research.
+      </h2>
+      <p class="font-heading text-18 font-light mx-auto" style="color: rgba(245,242,236,0.60); max-width: 560px;">
+        Six peer-reviewed studies. Four journals. One formula built on evidence, not marketing.
+        Click any study to verify it yourself.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 stagger-children">
+      {%- assign cit_journals = "Nature Medicine|Cell|AAPS PharmSciTech|Nutrients|British J Nutrition|Nat Rev Gastro & Hepatol" | split: "|" -%}
+      {%- assign cit_years = "2018|2018|2014|2019|2000|2020" | split: "|" -%}
+      {%- assign cit_authors = "Deschasaux et al.|Vangay et al.|Govender et al.|Huang et al.|Gill et al.|Swanson et al." | split: "|" -%}
+      {%- assign cit_cohorts = "HELIUS Cohort · n=2,084|Immigration Cohort|Probiotic Survivability Review|L. plantarum TWK10 Trial|B. lactis Immune Trial|Synbiotic Definition Panel" | split: "|" -%}
+      {%- assign cit_findings = "Your heritage contributes more to your microbiome composition than diet, age, sex, or medical history — combined. This is why generic probiotics don't work for everyone.|Ancestral microbiome disruption begins within months of a dietary shift and compounds across generations rather than stabilising. The longer you wait, the wider the gap.|Stomach acid represents the primary barrier to probiotic survival. Without protective delivery like MAKTREK, the majority of bacteria are destroyed before reaching where they work.|Measurable grip strength and endurance improvement in subjects supplemented with L. plantarum TWK10 over just 6 weeks. This is the energy strain in Origin.|B. lactis supplementation enhanced natural immune cell activity and improved systemic cellular immunity. A stronger immune system starts in the microbiome.|Synbiotic formulations (probiotic + prebiotic together) show enhanced colonisation and health outcomes compared to probiotics or prebiotics alone. Origin is a full synbiotic." | split: "|" -%}
+      {%- assign cit_dois = "https://doi.org/10.1038/s41591-018-0160-1|https://doi.org/10.1016/j.cell.2018.10.029|https://doi.org/10.1208/s12249-013-0027-1|https://doi.org/10.3390/nu11020353|https://doi.org/10.1017/S0007114500000210|https://doi.org/10.1038/s41575-020-0344-2" | split: "|" -%}
+
+      {%- for journal in cit_journals -%}
+        <div class="rounded-2xl p-7 transition reveal-hidden card-hover" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);">
+          <p class="font-mono-spec text-11 mb-1" style="color: #C4783A; letter-spacing: 0.08em;">
+            {{ journal }}, {{ cit_years[forloop.index0] }}
+          </p>
+          <p class="font-heading text-13 font-light mb-4" style="color: rgba(245,242,236,0.40);">
+            {{ cit_authors[forloop.index0] }} · {{ cit_cohorts[forloop.index0] }}
+          </p>
+          <p class="font-heading text-15 font-light mb-3" style="color: rgba(245,242,236,0.75); line-height: 1.7;">
+            {{ cit_findings[forloop.index0] }}
+          </p>
+          <a href="{{ cit_dois[forloop.index0] }}" target="_blank" rel="noopener noreferrer" class="font-mono-spec text-11 inline-block py-1.5 transition hover:underline" style="color: #C4783A;">
+            View Study →
+          </a>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="text-center mt-14 reveal-hidden">
+      <a href="/products/origin" class="btn btn--primary inline-block">
+        Start Feeling Better — $34/mo
+      </a>
+      <p class="font-heading text-13 font-light mt-3" style="color: rgba(245,242,236,0.40);">
+        30-day supply. Free research report. Cancel anytime.
+      </p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Social Proof",
+  "class": "social-proof-section",
+  "settings": []
+}
+{% endschema %}

@@ -28,11 +28,11 @@
       <div style="position:absolute;left:-9999px;" aria-hidden="true">
         <input type="text" name="website" tabindex="-1" autocomplete="off">
       </div>
-      <input type="email" name="email" class="form-input" placeholder="{{ 'forms.email_placeholder' | t }}" required style="flex:1;font-size:var(--text-sm);">
+      <input type="email" name="email" class="form-input" placeholder="{{ 'forms.email_placeholder' | t | default: 'Your email address' }}" required style="flex:1;font-size:var(--text-sm);">
       <button type="submit" class="btn btn--primary btn--sm">{{ section.settings.button_text | default: 'Get Code' }}</button>
     </form>
     <div data-form-success style="display:none;padding:var(--space-4) 0;text-align:center;">
-      <p style="font-weight:600;">{{ 'forms.success' | t }}</p>
+      <p style="font-weight:600;">{{ 'forms.success' | t | default: "You're in!" }}</p>
       {%- if settings.discount_code != blank -%}
         <p style="font-family:var(--font-mono);font-size:var(--text-xl);font-weight:700;margin-top:var(--space-2);">{{ settings.discount_code }}</p>
       {%- endif -%}

@@ -1,0 +1,122 @@
+<section id="protocol" class="py-14 md:py-20 px-6 md:px-20" style="background: #F5F2EC;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div class="text-center mb-16 reveal-hidden">
+      <p class="font-mono-spec text-11 uppercase mb-4" style="color: #C4783A; letter-spacing: 0.2em;">How It Works</p>
+      <h2 class="font-heading text-32 md:text-48 font-medium mb-4" style="color: #1A1A1A;">
+        Built from your biology outward. Not the other way around.
+      </h2>
+      <p class="font-heading text-18 font-light mt-4 mx-auto" style="color: #4A5550; max-width: 600px; line-height: 1.7;">
+        We didn't pick trending strains or chase a CFU number. We started with the specific
+        depletion patterns your biology creates — then selected the strains, delivery
+        system, and prebiotic to address them.
+      </p>
+    </div>
+
+    <!-- 01 — Four Strains (image right, text left) -->
+    <div class="flex flex-col md:flex-row-reverse gap-10 md:gap-20 items-center mb-20">
+      <div class="w-full md:w-1/2 rounded-2xl overflow-hidden reveal-right" style="aspect-ratio: 16/10; max-height: 400px;">
+        {%- if section.settings.strains_image != blank -%}
+          <img src="{{ section.settings.strains_image | image_url: width: 1024 }}" alt="Origin four strains" loading="lazy" class="w-full h-full" style="object-fit: cover;">
+        {%- else -%}
+          <div class="w-full h-full flex items-center justify-center" style="background: linear-gradient(135deg, #1C2E23, #2a4435);">
+            <div class="text-center px-6">
+              <div class="grid grid-cols-2 gap-4">
+                {%- assign s_names = "L. acidophilus,B. lactis,L. plantarum,L. paracasei" | split: "," -%}
+                {%- for s in s_names -%}
+                  <div class="p-3 rounded-lg" style="background: rgba(196,120,58,0.1); border: 1px solid rgba(196,120,58,0.2);">
+                    <p class="font-heading text-13 font-medium" style="color: #C4783A;">{{ s }}</p>
+                  </div>
+                {%- endfor -%}
+              </div>
+              <p class="font-mono-spec text-10 uppercase mt-4" style="color: rgba(245,242,236,0.35); letter-spacing: 0.15em;">40 Billion CFU · 4 Strains</p>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+      <div class="w-full md:w-1/2 reveal-left">
+        <p class="font-mono-spec text-11 uppercase mb-4" style="color: #C4783A; letter-spacing: 0.2em;">
+          01 — Four Clinically Studied Strains
+        </p>
+        <h3 class="font-heading text-28 md:text-36 font-medium mb-5" style="color: #1A1A1A; line-height: 1.15;">
+          Four strains. Four systems.
+        </h3>
+        <p class="font-heading text-17 font-light mb-5" style="color: #4A5550; line-height: 1.8;">
+          L. acidophilus for digestive barrier integrity and bloating relief. B. lactis for immune
+          function and regularity. L. plantarum for inflammation reduction and energy recovery. L. paracasei
+          for immune modulation and the microbiome-brain connection. Each strain was selected to address the
+          specific biological systems that disruption hits
+          hardest — not generic wellness, but biology-specific restoration.
+        </p>
+        <p class="font-mono-spec text-11" style="color: #8A9490;">
+          40 billion CFU · Clinically validated strains
+        </p>
+      </div>
+    </div>
+
+    <!-- 02 — MAKTREK (glassmorphism card) -->
+    <div class="reveal-hidden">
+      <div
+        class="relative rounded-2xl p-5 md:p-14 noise-overlay-light overflow-hidden"
+        style="background: linear-gradient(135deg, #0f2318, #1C2E23, #162a1e);"
+      >
+        <div class="relative" style="z-index: 2; max-width: 680px; margin: 0 auto;">
+          <div
+            class="rounded-2xl p-6 md:p-14"
+            style="background: rgba(245,242,236,0.82); backdrop-filter: blur(24px) saturate(1.3); -webkit-backdrop-filter: blur(24px) saturate(1.3); border: 1px solid rgba(255,255,255,0.85); box-shadow: 0 24px 80px rgba(0,0,0,0.30);"
+          >
+            <p class="font-mono-spec text-11 uppercase mb-6" style="color: #8A9490; letter-spacing: 0.2em;">
+              02 — MAKTREK Bi-Pass Technology
+            </p>
+            <h3 class="font-heading text-28 md:text-32 font-medium mb-3" style="color: #1A1A1A;">
+              Most probiotics weren't engineered to survive stomach acid.
+            </h3>
+            <p class="font-heading text-20 md:text-22 font-light mb-6" style="color: #C4783A;">
+              Origin arrives alive. And fed.
+            </p>
+            <p class="font-heading text-16 font-light mb-8" style="color: #4A5550; line-height: 1.8;">
+              MAKTREK uses a marine polysaccharide complex — derived from
+              brown seaweed — to form a protective secondary layer around the
+              probiotic bacteria. When the capsule dissolves in stomach acid,
+              this inner shield holds. The bacteria are released alive in your
+              small intestine, where they colonize and go to work. This is why
+              people feel a difference within 2-3 weeks — not months.
+            </p>
+
+            <div class="pt-6" style="border-top: 1px solid #DDD6CC;">
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <p class="font-mono-spec text-11 mb-1" style="color: #8A9490;">Step 1 — Protection</p>
+                  <p class="font-heading text-14 font-light" style="color: #4A5550;">
+                    Marine polysaccharide shield protects bacteria through
+                    pH 1.5 stomach acid
+                  </p>
+                </div>
+                <div>
+                  <p class="font-mono-spec text-11 mb-1" style="color: #8A9490;">Step 2 — Release & Feed</p>
+                  <p class="font-heading text-14 font-light" style="color: #4A5550;">
+                    Bacteria released alive in intestine + FOS prebiotic
+                    feeds them on arrival
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Solution",
+  "class": "solution-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "strains_image",
+      "label": "Strains Image"
+    }
+  ]
+}
+{% endschema %}

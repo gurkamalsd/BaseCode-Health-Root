@@ -1,0 +1,97 @@
+<section class="py-14 md:py-20 px-6 md:px-20" style="background: #F5F2EC;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div class="flex flex-col md:flex-row gap-12 md:gap-20 items-center">
+      <!-- Left – copy -->
+      <div class="w-full md:w-1/2 reveal-hidden">
+        <p class="font-mono-spec text-11 uppercase mb-4" style="color: #C4783A; letter-spacing: 0.2em;">Why Starting Now Matters</p>
+        <h2 class="font-heading text-32 md:text-44 font-medium mb-6" style="color: #1C2E23; line-height: 1.1;">
+          Every month you wait,<br>the gap widens.
+        </h2>
+        <div class="font-heading text-16 font-light space-y-4 mb-8" style="color: #4A5550; line-height: 1.8;">
+          <p>
+            Ancestral microbiome disruption doesn't stabilize. It compounds.
+            Every generation loses more of the bacteria that regulated digestion,
+            energy, and metabolic health. The bloating gets worse. The fatigue deepens.
+            The inflammation spreads. It gets harder to reverse the longer you wait.
+          </p>
+          <p>
+            The traditional foods that maintained your ancestral bacterial ecosystem
+            aren't coming back. And every generic probiotic on the shelf was designed
+            for Western biology — not yours. They don't survive stomach acid. They
+            don't feed bacteria after delivery. They don't address the specific
+            depletion patterns your heritage carries.
+          </p>
+          <p>
+            That's why we built a new category. Ethnobiotics — the first probiotic
+            informed by biological diversity research. MAKTREK delivers bacteria alive. FOS feeds
+            them on arrival. Two capsules a day. No diet changes. Results within weeks.
+            That's why people don't cancel.
+          </p>
+        </div>
+        <a href="/products/origin" class="btn btn--primary inline-block">
+          Start Feeling Better — $34/mo
+        </a>
+        <p class="font-mono-spec text-11 mt-4" style="color: #8A9490;">
+          Vangay et al., Cell, 2018 — Sonnenburg & Bäckhed, Nature, 2016
+        </p>
+        <div class="flex gap-4 mt-1">
+          <a href="https://doi.org/10.1016/j.cell.2018.10.029" target="_blank" rel="noopener noreferrer" class="font-mono-spec text-11 py-1.5 transition hover:underline" style="color: #C4783A;">
+            Vangay et al. →
+          </a>
+          <a href="https://doi.org/10.1038/nature18846" target="_blank" rel="noopener noreferrer" class="font-mono-spec text-11 py-1.5 transition hover:underline" style="color: #C4783A;">
+            Sonnenburg & Bäckhed →
+          </a>
+        </div>
+      </div>
+
+      <!-- Right – divergence chart -->
+      <div class="w-full md:w-1/2 reveal-hidden">
+        <div class="rounded-2xl p-8 md:p-12" style="background: #EDE8DF; border: 1px solid #DDD6CC;">
+          <svg viewBox="0 0 440 250" class="w-full" style="max-width: 100%;" aria-label="Microbiome divergence chart showing declining diversity across diaspora generations">
+            <line x1="50" y1="50" x2="370" y2="50" stroke="rgba(28,46,35,0.08)" stroke-width="1" />
+            <line x1="50" y1="100" x2="370" y2="100" stroke="rgba(28,46,35,0.08)" stroke-width="1" />
+            <line x1="50" y1="150" x2="370" y2="150" stroke="rgba(28,46,35,0.08)" stroke-width="1" />
+            <line x1="50" y1="200" x2="370" y2="200" stroke="rgba(28,46,35,0.08)" stroke-width="1" />
+
+            <!-- Ancestral baseline -->
+            <path d="M 60 180 C 120 178, 200 175, 360 170" fill="none" stroke="#1C2E23" stroke-width="2" opacity="0.35" stroke-dasharray="6 4" />
+            <text x="365" y="168" fill="#8A9490" font-size="11" font-family="JetBrains Mono, Courier New">Ancestral</text>
+
+            <!-- Diaspora trajectory -->
+            <path d="M 60 180 C 120 170, 180 140, 240 110 S 320 60, 360 40" fill="none" stroke="#C4783A" stroke-width="2.5" />
+            <text x="365" y="38" fill="#C4783A" font-size="11" font-family="JetBrains Mono, Courier New">Diaspora</text>
+
+            <!-- Divergence gap shading -->
+            <path d="M 60 180 C 120 170, 180 140, 240 110 S 320 60, 360 40 L 360 170 C 200 175, 120 178, 60 180 Z" fill="#C4783A" opacity="0.08" />
+
+            <!-- Generation markers -->
+            <line x1="110" y1="30" x2="110" y2="220" stroke="rgba(28,46,35,0.10)" stroke-width="1" stroke-dasharray="4 4" />
+            <text x="110" y="238" fill="#8A9490" font-size="11" font-family="Jost" text-anchor="middle">Gen 1</text>
+
+            <line x1="210" y1="30" x2="210" y2="220" stroke="rgba(28,46,35,0.10)" stroke-width="1" stroke-dasharray="4 4" />
+            <text x="210" y="238" fill="#8A9490" font-size="11" font-family="Jost" text-anchor="middle">Gen 2</text>
+
+            <line x1="310" y1="30" x2="310" y2="220" stroke="rgba(28,46,35,0.10)" stroke-width="1" stroke-dasharray="4 4" />
+            <text x="310" y="238" fill="#8A9490" font-size="11" font-family="Jost" text-anchor="middle">Gen 3</text>
+
+            <!-- Y-axis label -->
+            <text x="15" y="120" fill="#8A9490" font-size="11" font-family="JetBrains Mono, Courier New" transform="rotate(-90, 15, 120)" text-anchor="middle">
+              Microbiome Diversity
+            </text>
+          </svg>
+          <p class="font-mono-spec text-11 text-center mt-4" style="color: #8A9490;">
+            Illustrative model based on published immigration-microbiome research
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Risk Reversal",
+  "class": "risk-reversal-section",
+  "settings": []
+}
+{% endschema %}

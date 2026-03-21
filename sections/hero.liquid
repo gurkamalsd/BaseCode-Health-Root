@@ -82,8 +82,8 @@
     align-items: {{ section.settings.vertical_align | default: 'center' }};
     justify-content: center;
     overflow: hidden;
-    margin-top: calc(-1 * (var(--header-height) + var(--announcement-height)));
-    padding-top: calc(var(--header-height) + var(--announcement-height));
+    margin-top: calc(-1 * var(--header-height));
+    padding-top: var(--header-height);
   }
 
   .hero-fullbleed__bg {

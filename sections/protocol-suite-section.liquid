@@ -1,0 +1,47 @@
+<section class="relative" style="background: #1C2E23; border-radius: 48px 48px 0 0; margin-top: -32px;">
+  <div class="px-6 md:px-20 py-14 md:py-20" style="max-width: 1200px; margin: 0 auto;">
+    <div class="text-center mb-14 reveal-hidden">
+      <p class="font-mono-spec text-11 uppercase mb-5" style="color: #C4783A; letter-spacing: 0.2em;">What You'll Feel</p>
+      <h2 class="font-heading text-32 md:text-48 font-medium mb-5" style="color: #F5F2EC; line-height: 1.1;">
+        Four systems restored. Two capsules. Results within weeks.
+      </h2>
+      <p class="font-heading text-18 font-light mx-auto" style="color: rgba(245,242,236,0.60); max-width: 600px; line-height: 1.7;">
+        Seed was built for Silicon Valley. Generic brands were built for everyone and no one.
+        Origin was built for the biology your ancestry gave you — the biology that modern life disrupted. Here's what changes.
+      </p>
+    </div>
+
+    {%- assign outcome_titles = "Eat Without Bloating|Wake Up With Energy|Move Without Inflammation|Feel 10 Years Younger" | split: "|" -%}
+    {%- assign outcome_bodies = "Enjoy your favourite foods again without the heaviness, gas, or discomfort you've been normalizing for years. Your ancestral microbiome produced the short-chain fatty acids that kept your digestive lining intact. Origin restores the butyrate-producing bacteria your system lost — so digestion works the way it was designed to. Most people notice a difference within 2 weeks.|The fatigue that sleep doesn't fix — gone. No more afternoon crashes or needing two coffees to function. When key bacteria are disrupted, mitochondrial recycling stalls and cellular energy production drops. Origin delivers L. plantarum and B. lactis — strains clinically shown to support energy metabolism and endurance recovery. Steady, all-day energy from day one.|L. acidophilus and L. paracasei restore digestive barrier integrity, reducing the endotoxin leakage that drives chronic low-grade inflammation throughout your body. Less joint pain. Clearer thinking. Better recovery after workouts.|Your biological age diverges from your actual age when your microbiome is disrupted. Origin targets all three pathways — inflammation, energy decline, and metabolic acceleration — simultaneously. One formula. Two capsules. No diet changes needed." | split: "|" -%}
+    {%- assign outcome_stats = "40–60% decline in butyrate-producers after dietary westernisation|L. plantarum improved endurance in 6-week clinical trials|Inflammaging accelerates 5–10 years earlier in first-generation populations|T2D onset 5–10 years earlier at equivalent BMI in diaspora populations" | split: "|" -%}
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 stagger-children">
+      {%- for title in outcome_titles -%}
+        <div class="rounded-2xl p-8 transition reveal-hidden card-hover" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.10); border-left: 4px solid #C4783A;">
+          <h3 class="font-heading text-20 font-medium mb-4" style="color: #F5F2EC;">{{ title }}</h3>
+          <p class="font-heading text-15 font-light mb-5" style="color: rgba(245,242,236,0.60); line-height: 1.75;">{{ outcome_bodies[forloop.index0] }}</p>
+          <div class="pt-4" style="border-top: 1px solid rgba(255,255,255,0.08);">
+            <p class="font-mono-spec text-11" style="color: #C4783A;">{{ outcome_stats[forloop.index0] }}</p>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="text-center mt-14 reveal-hidden">
+      <a href="/products/origin" class="btn btn--primary inline-block">
+        Start Feeling Better — $34/mo
+      </a>
+      <p class="font-heading text-13 font-light mt-3" style="color: rgba(245,242,236,0.40);">
+        Free research report + 20% off your first order. Cancel anytime.
+      </p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Protocol Suite",
+  "class": "protocol-suite-section",
+  "settings": []
+}
+{% endschema %}
