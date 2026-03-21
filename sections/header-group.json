@@ -17,14 +17,14 @@
         "a1": {
           "type": "announcement",
           "settings": {
-            "text": "Free shipping on all subscriptions — Use code FOUNDER20 for 20% off",
+            "text": "Free shipping on all subscriptions — Use code EASTER15 for 15% off",
             "link": ""
           }
         },
         "a2": {
           "type": "announcement",
           "settings": {
-            "text": "The first ethnobiotic probiotic — formulated for your biology",
+            "text": "The first adaptobiotic™ — formulated for your biology",
             "link": ""
           }
         },
@@ -44,15 +44,16 @@
       "settings": {
         "enable": true,
         "dismissible": false,
-        "bg_color": "#1c2e23",
+        "bg_color": "#c4783a",
         "text_color": "#f5f2ec",
-        "animation_speed": "normal",
-        "separator": "·"
+        "animation_speed": "slow",
+        "separator": ""
       }
     },
     "header": {
       "type": "header",
       "settings": {
+        "logo": "shopify://shop_images/Generated_Image_March_09_2026_-_9_13PM.jpg",
         "logo_width_desktop": 120,
         "logo_width_mobile": 80,
         "menu": "main-menu",
