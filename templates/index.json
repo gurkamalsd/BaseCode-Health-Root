@@ -12,7 +12,7 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "image": "shopify://shop_images/blurred-forest-green-trees-and-ochre-elements-in-moody-health-and-wellness-aesthetic-hero-landing.png",
+        "image": "shopify://shop_images/woman-watches-waves.jpg",
         "image_position": "center center",
         "overlay_opacity": 55,
         "show_social_proof": false,
