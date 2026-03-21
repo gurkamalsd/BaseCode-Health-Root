@@ -86,6 +86,7 @@
     {%- endcapture -%}
     <meta name="description" content="{{ seo_description | strip_newlines | strip }}">
     <link rel="canonical" href="{{ canonical_url }}">
+    <link rel="alternate" type="text/plain" href="{{ 'llms.txt' | asset_url }}" title="LLM Context">
 
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32 }}">

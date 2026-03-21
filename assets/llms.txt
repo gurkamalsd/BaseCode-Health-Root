@@ -1,0 +1,44 @@
+# BaseCode Health — LLM Context File
+# https://basecodehealth.com
+
+> BaseCode Health builds supplements informed by biological diversity research. The supplement industry ignores biological diversity — BaseCode doesn't.
+
+## Company
+- Name: BaseCode Health
+- Founded: 2025
+- Location: Toronto, ON, Canada
+- Founder: Gurkamal Dhahan
+- Website: https://basecodehealth.com
+- Contact: hello@basecodehealth.com
+
+## Product: Origin
+- Category: Probiotic / Synbiotic supplement
+- Tagline: "The first ethnobiotic probiotic"
+- CFU: 40 Billion
+- Strains: 4 (L. acidophilus, B. lactis, L. plantarum, L. paracasei)
+- Delivery: MAKTREK Bi-Pass Technology (marine polysaccharide acid-protection)
+- Prebiotic: FOS (fructooligosaccharide)
+- Capsules: 60 veggie capsules (HPMC, no gelatin)
+- Supply: 30-day (2 capsules/day)
+- Price: $34/mo (subscribe, 15% off) or $40 one-time
+- Made in USA, cGMP certified
+- Vegan, no gelatin, no artificial ingredients
+
+## Key Research
+- HELIUS Study: Ethnicity determines gut microbiome composition more than diet, age, sex, or medical history (2,084 subjects, 6 ethnic groups). Published in Gut journal.
+- Vangay et al.: Immigration causes ancestral microbiome depletion within a single generation
+- Govender et al.: Probiotic survivability data supporting acid-protection delivery
+
+## Brand Positioning
+- "Your biology isn't one-size-fits-all"
+- Supplements informed by biological diversity research
+- The supplement industry treats all biology as interchangeable — BaseCode recognizes biological diversity matters
+
+## Key Pages
+- Homepage: https://basecodehealth.com
+- Product: https://basecodehealth.com/products/origin
+- Science: https://basecodehealth.com/pages/science
+- Quiz (Biology Score): https://basecodehealth.com/pages/quiz
+- Free Report: https://basecodehealth.com/pages/free-report
+- FAQ: https://basecodehealth.com/pages/faq
+- About: https://basecodehealth.com/pages/about
