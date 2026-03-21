@@ -12,6 +12,8 @@
     "hero": {
       "type": "hero",
       "settings": {
+        "image": "shopify://shop_images/hero-landing-testosterone.jpg",
+        "image_position": "center center",
         "overlay_opacity": 60,
         "show_social_proof": true,
         "social_proof_text": "Backed by biological diversity research",
@@ -21,12 +23,12 @@
         "button_text": "Reclaim Your Edge — $34/mo",
         "button_link": "/products/origin",
         "guarantee_text": "30-Day Money-Back Guarantee",
-        "text_align": "center",
+        "text_align": "left",
         "vertical_align": "center",
         "height": 100,
         "mobile_height": 85,
         "content_width": 750,
-        "text_color": "#FFFFFF"
+        "text_color": "#ffffff"
       }
     },
     "features_banner": {
@@ -78,9 +80,12 @@
         "show_dividers": true,
         "padding_top": 28,
         "padding_bottom": 28,
-        "bg_color": "#F5F2EC",
-        "text_color": "#1C2E23",
-        "icon_color": "#C4783A",
+        "bg_color": "#f5f2ec",
+        "text_color": "#1c2e23",
+        "icon_color": "#c4783a",
+        "heading": "",
+        "heading_level": "h2",
+        "heading_size": 28,
         "text_size": "medium",
         "icon_size": 28,
         "enable_animation": true
@@ -93,7 +98,7 @@
           "type": "subheading",
           "settings": {
             "subheading": "Why TRT Clinics Are a $20B Industry",
-            "subheading_color": "#C4783A"
+            "subheading_color": "#c4783a"
           }
         },
         "agitate_heading": {
@@ -108,21 +113,21 @@
           "type": "text",
           "settings": {
             "text": "<p>You're 32 and you feel 50. The alarm goes off and your body fights you for another hour. The gym gains that used to come easy? Gone. You're lifting the same weight you lifted two years ago — or less. Your drive for everything — work, relationships, life — flatlined. The doctor says your testosterone is \"low-normal\" and offers a prescription.</p>",
-            "text_color": "#1C2E23"
+            "text_color": "#1c2e23"
           }
         },
         "agitate_text_2": {
           "type": "text",
           "settings": {
             "text": "<p>Your friends are whispering about TRT clinics. $200/month, weekly injections, blood work every 90 days. And the part nobody mentions: once you start, your body stops producing testosterone on its own. You're 32 and they want to put you on hormone replacement for life.</p>",
-            "text_color": "#1C2E23"
+            "text_color": "#1c2e23"
           }
         },
         "agitate_text_3": {
           "type": "text",
           "settings": {
             "text": "<p>Here's what the TRT industry won't tell you: published research shows that gut microbiome composition directly modulates testosterone production through the gut-brain-gonad axis. When key bacterial populations deplete — a pattern documented in every immigrant diaspora community studied — the upstream system that drives testosterone breaks down. You don't have a hormone problem. You have a microbiome problem.</p><p><strong>TRT: $150–400/month plus blood work, plus lifetime dependency. Origin: $34/month. No needles. No shutdown.</strong></p>",
-            "text_color": "#1C2E23"
+            "text_color": "#1c2e23"
           }
         }
       },
@@ -138,9 +143,9 @@
         "text_align": "center",
         "padding_top": 80,
         "padding_bottom": 80,
-        "bg_color": "#FFFFFF",
+        "bg_color": "#ffffff",
         "bg_opacity": 100,
-        "text_color": "#1C2E23",
+        "text_color": "#1c2e23",
         "enable_animation": true
       }
     },
@@ -151,7 +156,7 @@
           "type": "subheading",
           "settings": {
             "text": "The Science",
-            "color": "#C4783A"
+            "color": "#c4783a"
           }
         },
         "bridge_heading": {
@@ -180,7 +185,14 @@
         },
         "bridge_cta": {
           "type": "button",
-          "settings": {}
+          "settings": {
+            "text": "Learn More",
+            "link": "",
+            "style": "primary",
+            "text_2": "",
+            "link_2": "",
+            "style_2": "secondary"
+          }
         }
       },
       "block_order": [
@@ -194,11 +206,15 @@
         "layout": "text_first",
         "image_width_pct": 50,
         "height_mode": "adapt",
+        "desktop_height": 500,
+        "mobile_height": 320,
         "image_ratio": "4/5",
         "vertical_align": "center",
         "text_align": "left",
-        "bg_color": "#F5F2EC",
-        "text_color": "#1C2E23",
+        "bg_color": "#f5f2ec",
+        "text_color": "#1c2e23",
+        "text_container_bg": "#ffffff",
+        "text_container_bg_opacity": 0,
         "full_width": false,
         "padding_top": 80,
         "padding_bottom": 80,
@@ -249,14 +265,17 @@
         "heading": "How Origin Supports Testosterone",
         "heading_size": "text-3xl",
         "heading_level": "h2",
+        "button_text": "Read the Science",
+        "button_link": "",
+        "button_style": "primary",
         "columns": "3",
         "card_style": "vertical",
         "full_width": false,
-        "bg_color": "#1C2E23",
-        "text_color": "#F5F2EC",
-        "accent_color": "#C4783A",
-        "card_bg_color": "#243D2E",
-        "icon_bg_color": "#C4783A",
+        "bg_color": "#1c2e23",
+        "text_color": "#f5f2ec",
+        "accent_color": "#c4783a",
+        "card_bg_color": "#243d2e",
+        "icon_bg_color": "#c4783a",
         "padding_top": 80,
         "padding_bottom": 80,
         "enable_animation": true
@@ -329,6 +348,7 @@
         "benefit_6"
       ],
       "settings": {
+        "product": "",
         "heading": "Everything You Get With Origin",
         "subheading": "Origin — $34/mo Subscribe",
         "desktop_image_width": 40,
@@ -338,9 +358,9 @@
         "button_style": "primary",
         "quick_buy": false,
         "full_width": false,
-        "bg_color": "#C4783A",
-        "text_color": "#FFFFFF",
-        "accent_color": "#1C2E23",
+        "bg_color": "#c4783a",
+        "text_color": "#ffffff",
+        "accent_color": "#1c2e23",
         "padding_top": 80,
         "padding_bottom": 80,
         "enable_animation": true
@@ -349,19 +369,24 @@
     "image_banner_cta": {
       "type": "image-banner",
       "settings": {
+        "image_position": "center center",
+        "subheading": "",
         "heading": "Reclaim Your Edge",
         "heading_size": "text-5xl",
         "text": "40 Billion CFU. 4 strains. MAKTREK acid-protection. FOS prebiotic. $34/mo subscribe or $40 one-time.",
         "button_text": "Get Origin — $34/mo",
         "button_link": "/products/origin",
         "button_style": "white",
+        "button_2_text": "",
+        "button_2_link": "",
+        "button_2_style": "secondary",
         "text_align": "center",
         "vertical_align": "center",
         "content_width": "narrow",
         "full_width": true,
-        "overlay_color": "#1C2E23",
+        "overlay_color": "#1c2e23",
         "overlay_opacity": 65,
-        "text_color": "#FFFFFF",
+        "text_color": "#ffffff",
         "height": 450,
         "mobile_height": 350,
         "enable_animation": true
@@ -418,12 +443,14 @@
         "heading": "What Our Customers Say",
         "heading_size": "text-3xl",
         "layout": "carousel",
+        "columns": 3,
         "card_style": "minimal",
         "show_stars": true,
         "accent_color": "#f59e0b",
         "auto_play": true,
         "auto_play_speed": 6,
-        "bg_color": "#FFFFFF",
+        "bg_color": "#ffffff",
+        "text_color": "",
         "padding_top": 80,
         "padding_bottom": 80,
         "enable_animation": true
@@ -476,6 +503,7 @@
         "faq_5"
       ],
       "settings": {
+        "subheading": "",
         "heading": "Common Questions",
         "heading_size": "text-3xl",
         "heading_align": "center",
@@ -483,8 +511,9 @@
         "icon_style": "plus",
         "open_first": true,
         "content_width": "narrow",
-        "bg_color": "#F5F2EC",
-        "accent_color": "#C4783A",
+        "bg_color": "#f5f2ec",
+        "text_color": "",
+        "accent_color": "#c4783a",
         "padding_top": 80,
         "padding_bottom": 80,
         "enable_animation": true
@@ -505,11 +534,15 @@
         "success_text": "Check your inbox — the gut-testosterone research is on its way.",
         "content_width": "narrow",
         "text_align": "center",
+        "full_width": false,
         "padding_top": 80,
         "padding_bottom": 80,
-        "bg_color": "#1C2E23",
+        "bg_color": "#1c2e23",
         "bg_opacity": 100,
-        "text_color": "#F5F2EC",
+        "text_color": "#f5f2ec",
+        "height_mode": "adapt",
+        "desktop_height": 480,
+        "mobile_height": 360,
         "enable_animation": true
       }
     }
