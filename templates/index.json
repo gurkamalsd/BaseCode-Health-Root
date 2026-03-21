@@ -12,11 +12,11 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "image": "shopify://shop_images/woman-watches-waves.jpg",
+        "image": "shopify://shop_images/man-hiking-in-mountains.jpg",
         "image_position": "center center",
-        "overlay_opacity": 55,
-        "show_social_proof": false,
-        "social_proof_text": "Backed by biological diversity research",
+        "overlay_opacity": 60,
+        "show_social_proof": true,
+        "social_proof_text": "Trusted by thousands of customers and backed by biological diversity research",
         "subtitle": "",
         "heading": "Your biology is unique.",
         "text": "<p>Origin is the first probiotic informed by biological diversity research. 40 billion CFU. 4 targeted strains. MAKTREK acid-protection delivery.</p>",
@@ -27,7 +27,7 @@
         "vertical_align": "center",
         "height": 100,
         "mobile_height": 100,
-        "content_width": 550,
+        "content_width": 400,
         "text_color": "#ffffff"
       }
     },
