@@ -7,7 +7,7 @@
 
   /* ── Supabase config ── */
   var SUPABASE_URL = 'https://buxlhvxlffyaaojqaese.supabase.co';
-  var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ1eGxodnhsZmZ5YWFvanFhZXNlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDE0NjI0NzMsImV4cCI6MjA1NzAzODQ3M30.LQgkR24MNrAi7MBFIIcvPjFOiojgMKzgR-3AK6TqOAs';
+  var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ1eGxodnhsZmZ5YWFvanFhZXNlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MTIyMjgsImV4cCI6MjA4ODM4ODIyOH0.kFaL51umWL65Yc-hqd67Q7xzNdxuRvVzSeEuh9YzxSI';
 
   /* ═══════════════════════════════════════════════
      1. TRACKING — Meta Pixel + GA4 + CAPI

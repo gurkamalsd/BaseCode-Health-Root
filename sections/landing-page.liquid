@@ -853,9 +853,12 @@
         if (errorEl) errorEl.style.display = 'none';
         if (btn) { btn.textContent = 'Sending...'; btn.disabled = true; }
 
-        fetch('https://ygewgpkidwkigxjgtaoj.supabase.co/functions/v1/waitlist-signup', {
+        fetch('https://buxlhvxlffyaaojqaese.supabase.co/functions/v1/waitlist-signup', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ1eGxodnhsZmZ5YWFvanFhZXNlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MTIyMjgsImV4cCI6MjA4ODM4ODIyOH0.kFaL51umWL65Yc-hqd67Q7xzNdxuRvVzSeEuh9YzxSI'
+          },
           body: JSON.stringify({ email: email, firstName: firstName, source: source })
         })
         .then(function(r) { return r.json(); })
@@ -874,6 +877,7 @@
           }
         })
         .catch(function() {
+          if (errorEl) { errorEl.style.display = 'block'; errorEl.textContent = 'Something went wrong. Please try again.'; }
           if (btn) { btn.textContent = btn.getAttribute('data-default-text') || 'Try Again'; btn.disabled = false; }
         });
       });
