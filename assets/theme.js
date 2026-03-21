@@ -1063,7 +1063,10 @@
       btn.addEventListener('click', function() {
         var src = btn.getAttribute('data-image-src');
         var mainImg = document.getElementById('product-main-image');
-        if (mainImg && src) mainImg.src = src;
+        if (mainImg && src) {
+          mainImg.src = src;
+          mainImg.srcset = src.replace('width=1200', 'width=600') + ' 600w, ' + src.replace('width=1200', 'width=900') + ' 900w, ' + src + ' 1200w';
+        }
         // Update active border
         btn.closest('.product-gallery').querySelectorAll('[data-thumbnail]').forEach(function(t) {
           t.style.borderColor = 'transparent';
