@@ -9,10 +9,67 @@
  */
 {
   "sections": {
-    "main": { "type": "main-page", "settings": {} },
-    "mission": { "type": "mission", "settings": { "subtitle": "Our Story", "heading": "Built from biology outward.", "button_text": "Read the Science", "button_link": "/pages/science" }, "blocks": { "i1": { "type": "item", "settings": { "text": "Founded in Toronto by Gurkamal Dhahan." } }, "i2": { "type": "item", "settings": { "text": "Informed by the HELIUS study and environmental adaptation science." } }, "i3": { "type": "item", "settings": { "text": "Every protocol designed for environmental adaptation, not generic formulas." } } }, "block_order": ["i1", "i2", "i3"] },
-    "cta": { "type": "rich-text", "settings": { "heading": "Ready to down-regulate the biological tax?", "text": "<p>Origin is the foundational Adaptobiotic — 40 Billion CFU, 4 targeted strains, MAKTREK acid-protection delivery. Start your protocol today.</p>", "button_text": "Start Your Protocol", "button_link": "/products/origin", "bg_color": "#1C2E23", "text_color": "#F5F2EC", "padding_top": 60, "padding_bottom": 60 } },
-    "newsletter": { "type": "newsletter", "settings": { "heading": "Join the protocol", "text": "Research updates, new protocols, and clinical insights.", "bg_color": "#1C2E23", "text_color": "#F5F2EC" } }
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "mission": {
+      "type": "mission",
+      "blocks": {
+        "i1": {
+          "type": "item",
+          "settings": {
+            "text": "Founded in Toronto by Gurkamal Dhahan."
+          }
+        },
+        "i2": {
+          "type": "item",
+          "settings": {
+            "text": "Informed by the HELIUS study and environmental adaptation science."
+          }
+        },
+        "i3": {
+          "type": "item",
+          "settings": {
+            "text": "Every protocol designed for environmental adaptation, not generic formulas."
+          }
+        }
+      },
+      "block_order": [
+        "i1",
+        "i2",
+        "i3"
+      ],
+      "settings": {
+        "subtitle": "Our Story",
+        "heading": "Built from biology outward.",
+        "button_text": "Read the Science",
+        "button_link": "/pages/science"
+      }
+    },
+    "cta": {
+      "type": "rich-text",
+      "settings": {
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "bg_color": "#1C2E23",
+        "text_color": "#F5F2EC"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "Join the protocol",
+        "text": "Research updates, new protocols, and clinical insights.",
+        "bg_color": "#1C2E23",
+        "text_color": "#F5F2EC"
+      }
+    }
   },
-  "order": ["main", "mission", "cta", "newsletter"]
+  "order": [
+    "main",
+    "mission",
+    "cta",
+    "newsletter"
+  ]
 }

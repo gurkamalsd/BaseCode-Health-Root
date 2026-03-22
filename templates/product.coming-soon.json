@@ -16,28 +16,23 @@
     "description": {
       "type": "rich-text",
       "settings": {
-        "heading": "Coming Soon",
-        "text": "<p>This protocol is currently in development. Join the waitlist to be notified when it launches — and lock in founding member pricing.</p>",
-        "button_text": "Join the Waitlist",
-        "button_link": "/pages/free-report",
-        "bg_color": "#1C2E23",
-        "text_color": "#F5F2EC",
         "padding_top": 48,
-        "padding_bottom": 48
+        "padding_bottom": 48,
+        "bg_color": "#1C2E23",
+        "text_color": "#F5F2EC"
       }
     },
     "origin-cta": {
       "type": "rich-text",
       "settings": {
-        "subheading": "Available Now",
-        "heading": "Start with Origin — the foundational protocol.",
-        "text": "<p>Every Biology Stack starts with Origin. Restore your gut microbiome baseline first — then layer targeted protocols as they launch.</p>",
-        "button_text": "Start Origin — $34/mo",
-        "button_link": "/products/origin",
         "padding_top": 48,
         "padding_bottom": 48
       }
     }
   },
-  "order": ["main", "description", "origin-cta"]
+  "order": [
+    "main",
+    "description",
+    "origin-cta"
+  ]
 }

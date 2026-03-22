@@ -26,7 +26,7 @@
         "text_align": "left",
         "vertical_align": "center",
         "height": 100,
-        "mobile_height": 100,
+        "mobile_height": 70,
         "content_width": 500,
         "text_color": "#ffffff"
       }

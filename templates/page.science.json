@@ -44,7 +44,11 @@
           }
         }
       },
-      "block_order": ["s1", "s2", "s3"],
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
       "settings": {
         "subtitle": "The Research",
         "heading": "Three studies. One conclusion.",
@@ -55,16 +59,16 @@
     "cta": {
       "type": "rich-text",
       "settings": {
-        "heading": "The science is published. The protocol is ready.",
-        "text": "<p>Origin is the foundational Adaptobiotic — engineered to address the biological tax at the gut level. 40 Billion CFU, MAKTREK acid-protection delivery, FOS prebiotic.</p>",
-        "button_text": "Start Your Protocol — $34/mo",
-        "button_link": "/products/origin",
-        "bg_color": "#1C2E23",
-        "text_color": "#F5F2EC",
         "padding_top": 60,
-        "padding_bottom": 60
+        "padding_bottom": 60,
+        "bg_color": "#1C2E23",
+        "text_color": "#F5F2EC"
       }
     }
   },
-  "order": ["rich-text", "research", "cta"]
+  "order": [
+    "rich-text",
+    "research",
+    "cta"
+  ]
 }
