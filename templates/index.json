@@ -74,6 +74,9 @@
         "f4"
       ],
       "settings": {
+        "enable_marquee": true,
+        "marquee_speed": 20,
+        "marquee_separator": "●",
         "layout": "inline",
         "desktop_columns": "4",
         "mobile_layout": "slider",
