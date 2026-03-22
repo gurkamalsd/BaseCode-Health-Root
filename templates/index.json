@@ -76,7 +76,7 @@
       "settings": {
         "layout": "inline",
         "desktop_columns": "4",
-        "mobile_layout": "grid",
+        "mobile_layout": "slider",
         "show_dividers": false,
         "padding_top": 24,
         "padding_bottom": 24,
