@@ -1,7 +1,7 @@
 # BaseCode Health — LLM Context File
 # https://basecodehealth.com
 
-> BaseCode Health builds supplements informed by biological diversity research. The supplement industry ignores biological diversity — BaseCode doesn't.
+> BaseCode Health builds supplements engineered for the biological tax of modern life. The supplement industry ignores environmental adaptation — BaseCode doesn't.
 
 ## Company
 - Name: BaseCode Health
@@ -13,7 +13,7 @@
 
 ## Product: Origin
 - Category: Probiotic / Synbiotic supplement
-- Tagline: "The first ethnobiotic probiotic"
+- Tagline: "The foundational Adaptobiotic probiotic"
 - CFU: 40 Billion
 - Strains: 4 (L. acidophilus, B. lactis, L. plantarum, L. paracasei)
 - Delivery: MAKTREK Bi-Pass Technology (marine polysaccharide acid-protection)
@@ -26,19 +26,19 @@
 
 ## Key Research
 - HELIUS Study: Ethnicity determines gut microbiome composition more than diet, age, sex, or medical history (2,084 subjects, 6 ethnic groups). Published in Gut journal.
-- Vangay et al.: Immigration causes ancestral microbiome depletion within a single generation
+- Vangay et al.: Environmental shift causes environmental microbiome disruption within a single generation
 - Govender et al.: Probiotic survivability data supporting acid-protection delivery
 
 ## Brand Positioning
-- "Your biology isn't one-size-fits-all"
-- Supplements informed by biological diversity research
-- The supplement industry treats all biology as interchangeable — BaseCode recognizes biological diversity matters
+- "Your biology is paying a tax you never agreed to"
+- Supplements engineered for the biological tax of modern life
+- The supplement industry treats all biology as interchangeable — BaseCode recognizes environmental adaptation matters
 
 ## Key Pages
 - Homepage: https://basecodehealth.com
 - Product: https://basecodehealth.com/products/origin
 - Science: https://basecodehealth.com/pages/science
-- Quiz (Biology Score): https://basecodehealth.com/pages/quiz
+- Quiz (Environmental Impact Score): https://basecodehealth.com/pages/quiz
 - Free Report: https://basecodehealth.com/pages/free-report
 - FAQ: https://basecodehealth.com/pages/faq
 - About: https://basecodehealth.com/pages/about

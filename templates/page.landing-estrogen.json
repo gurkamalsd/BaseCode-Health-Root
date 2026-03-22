@@ -16,7 +16,7 @@
         "image_position": "center center",
         "overlay_opacity": 55,
         "show_social_proof": true,
-        "social_proof_text": "Backed by biological diversity research",
+        "social_proof_text": "Backed by clinical research",
         "subtitle": "Hormonal Balance & Your Microbiome",
         "heading": "Your hot flashes aren't \"just aging.\" Your gut stopped regulating your hormones.",
         "text": "Your gut contains a specialized bacterial community called the estrobolome — it controls how your body metabolizes and recycles estrogen. When these bacteria deplete, hormonal balance breaks down. The hot flashes, mood swings, and weight gain that follow aren't inevitable — they're a signal.",
@@ -352,7 +352,7 @@
         "subheading": "",
         "heading": "Support Your Hormone Balance",
         "heading_size": "text-4xl",
-        "text": "Origin is the first ethnobiotic — a probiotic informed by biological diversity research. $34/mo, free shipping on subscriptions, 30-day guarantee.",
+        "text": "Origin is the foundational Adaptobiotic — a probiotic engineered for the biological tax of modern life. $34/mo, free shipping on subscriptions, 30-day guarantee.",
         "button_text": "Get Origin — $34/mo",
         "button_link": "/products/origin",
         "button_style": "white",
@@ -470,7 +470,7 @@
           "type": "question",
           "settings": {
             "question": "What's in Origin and why those specific strains?",
-            "answer": "<p>Origin contains 40 billion CFU across four strains: L. acidophilus (gut barrier, beta-glucuronidase support), B. lactis (immune function, gut integrity), L. plantarum (anti-inflammatory, broad cross-cultural fermented food strain), and L. paracasei (immune modulation, gut-brain axis). Each strain was selected based on biological diversity research and published clinical documentation. MAKTREK Bi-Pass marine polysaccharide delivery protects strains through stomach acid. FOS prebiotic feeds the bacteria on arrival. HPMC veggie capsule — no gelatin. Made in the USA in a cGMP-certified facility.</p>"
+            "answer": "<p>Origin contains 40 billion CFU across four strains: L. acidophilus (gut barrier, beta-glucuronidase support), B. lactis (immune function, gut integrity), L. plantarum (anti-inflammatory, broad cross-cultural fermented food strain), and L. paracasei (immune modulation, gut-brain axis). Each strain was selected based on environmental adaptation science and published clinical documentation. MAKTREK Bi-Pass marine polysaccharide delivery protects strains through stomach acid. FOS prebiotic feeds the bacteria on arrival. HPMC veggie capsule — no gelatin. Made in the USA in a cGMP-certified facility.</p>"
           }
         }
       },

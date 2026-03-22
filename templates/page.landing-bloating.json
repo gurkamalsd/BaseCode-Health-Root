@@ -16,10 +16,10 @@
         "image_position": "center center",
         "overlay_opacity": 55,
         "show_social_proof": true,
-        "social_proof_text": "Backed by biological diversity research",
+        "social_proof_text": "Backed by clinical research",
         "subtitle": "Digestive Health & Your Microbiome",
         "heading": "Your bloating isn't a food problem. It's a bacterial extinction event inside your gut.",
-        "text": "You've cut dairy. Gluten. FODMAPs. Your diet gets smaller every year but the bloating never stops. That's because bloating isn't caused by what you eat — it's caused by the ancestral bacteria you lost. When those populations disappear, food that your grandmother digested effortlessly now ferments inside you like a bomb.",
+        "text": "You've cut dairy. Gluten. FODMAPs. Your diet gets smaller every year but the bloating never stops. That's because bloating isn't caused by what you eat — it's caused by the foundational bacteria you lost. When those populations disappear, food that your grandmother digested effortlessly now ferments inside you like a bomb.",
         "button_text": "End the Bloating — $34/mo",
         "button_link": "/products/origin",
         "guarantee_text": "30-Day Money-Back Guarantee",
@@ -158,7 +158,7 @@
         "head": {
           "type": "heading",
           "settings": {
-            "text": "Your gut bacteria are a digestive workforce. Immigration wiped out the crew.",
+            "text": "Your gut bacteria are a digestive workforce. Environmental shift wiped out the crew.",
             "heading_level": "h2",
             "heading_size": "h2"
           }
@@ -478,7 +478,7 @@
           "type": "question",
           "settings": {
             "question": "Why did my digestion get worse after I moved countries or changed my diet?",
-            "answer": "<p>The HELIUS study (2,084 subjects, 6 ethnic groups) documented that ethnicity determines microbiome composition more strongly than diet, age, or medical history. When you adopt a Western diet, the ancestral bacterial strains that processed your family's traditional foods deplete within one generation. Your grandmother's gut could handle fermented, spiced, high-fiber ancestral cuisine because she had the bacterial workforce to process it. That workforce depletes in a new dietary environment. Origin restores it.</p>"
+            "answer": "<p>The HELIUS study (2,084 subjects, 6 ethnic groups) documented that ethnicity determines microbiome composition more strongly than diet, age, or medical history. When you adopt a Western diet, the foundational bacterial strains that processed your family's traditional foods deplete within one generation. Your grandmother's gut could handle fermented, spiced, high-fiber ancestral cuisine because she had the bacterial workforce to process it. That workforce depletes in a new dietary environment. Origin restores it.</p>"
           }
         }
       },
@@ -509,10 +509,10 @@
     "newsletter": {
       "type": "newsletter",
       "settings": {
-        "heading": "The research that explains why your bloating started after immigration.",
+        "heading": "The research that explains why your bloating started after environmental shift.",
         "heading_level": "h2",
         "heading_size": "h2",
-        "text": "Get the free Biology Gap report — plus research updates, product news, and biology-first insights. No spam.",
+        "text": "Get the free Biological Tax Report report — plus research updates, product news, and biology-first insights. No spam.",
         "form_layout": "stacked",
         "show_name_field": false,
         "button_text": "Send Me the Report",

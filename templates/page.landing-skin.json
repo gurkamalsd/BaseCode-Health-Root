@@ -16,10 +16,10 @@
         "image_position": "center center",
         "overlay_opacity": 55,
         "show_social_proof": true,
-        "social_proof_text": "Backed by biological diversity research",
+        "social_proof_text": "Backed by clinical research",
         "subtitle": "The Gut-Skin Axis",
         "heading": "Your dermatologist is treating the wrong organ.",
-        "text": "Acne, eczema, and psoriasis are not skin diseases. They are inflammatory conditions driven by a broken gut barrier. When ancestral bacteria deplete — a documented pattern in immigrant and diaspora communities — your intestinal wall leaks endotoxins into your bloodstream. Your immune system responds. Your skin pays the price. No serum, steroid, or retinoid can fix what starts below the surface.",
+        "text": "Acne, eczema, and psoriasis are not skin diseases. They are inflammatory conditions driven by a broken gut barrier. When foundational bacteria deplete — a documented pattern in modern populations — your intestinal wall leaks endotoxins into your bloodstream. Your immune system responds. Your skin pays the price. No serum, steroid, or retinoid can fix what starts below the surface.",
         "button_text": "Clear Your Skin From the Inside — $34/mo",
         "button_link": "/products/origin",
         "guarantee_text": "30-Day Money-Back Guarantee",
@@ -217,7 +217,7 @@
             "icon_style": "number",
             "stat": "01",
             "title": "Inflammation floods your bloodstream",
-            "text": "When ancestral bacteria deplete — accelerated by immigration, westernized diets, and antibiotic exposure — intestinal tight junctions weaken. Lipopolysaccharides (endotoxins) leak through the gut wall into systemic circulation. Your immune system detects the breach and mounts a full inflammatory response. The inflammation needs an exit point. Your skin is the largest organ. It becomes the battlefield.",
+            "text": "When foundational bacteria deplete — accelerated by environmental shift, westernized diets, and antibiotic exposure — intestinal tight junctions weaken. Lipopolysaccharides (endotoxins) leak through the gut wall into systemic circulation. Your immune system detects the breach and mounts a full inflammatory response. The inflammation needs an exit point. Your skin is the largest organ. It becomes the battlefield.",
             "source": "Step 01 — Gut Barrier Breaks Down"
           }
         },
@@ -471,14 +471,14 @@
           "type": "question",
           "settings": {
             "question": "Why did my acne or eczema get worse after moving countries?",
-            "answer": "<p>Immigration and dietary westernization accelerate bacterial depletion — specifically the strains that maintain gut barrier integrity. This is a documented pattern in diaspora communities. When the gut barrier weakens, inflammatory triggers that previously stayed in your intestines begin entering systemic circulation. Your skin — as the body's largest detoxification organ — absorbs this inflammatory load. Skin conditions that were absent or mild in your home country worsening after migration is a direct signal of microbiome disruption.</p>"
+            "answer": "<p>Environmental shift and dietary westernization accelerate bacterial depletion — specifically the strains that maintain gut barrier integrity. This is a documented pattern in modern populations. When the gut barrier weakens, inflammatory triggers that previously stayed in your intestines begin entering systemic circulation. Your skin — as the body's largest detoxification organ — absorbs this inflammatory load. Skin conditions that were absent or mild in your home country worsening after migration is a direct signal of microbiome disruption.</p>"
           }
         },
         "faq-5": {
           "type": "question",
           "settings": {
             "question": "Is the gut-skin connection scientifically established?",
-            "answer": "<p>Yes. The gut-skin axis is well-documented in peer-reviewed research. Salem et al. (Journal of Dermatological Science, 2019) demonstrated altered gut microbiome in acne patients. Bowe and Logan (Gut Pathogens, 2011) documented the gut-acne connection specifically in diaspora and immigrant populations. De Pessemier et al. (Microorganisms, 2021) reviewed the evidence across acne, eczema, and psoriasis, confirming that gut microbiome disruption precedes and drives all three conditions through shared inflammatory mechanisms.</p>"
+            "answer": "<p>Yes. The gut-skin axis is well-documented in peer-reviewed research. Salem et al. (Journal of Dermatological Science, 2019) demonstrated altered gut microbiome in acne patients. Bowe and Logan (Gut Pathogens, 2011) documented the gut-acne connection specifically in high-stress Western populations. De Pessemier et al. (Microorganisms, 2021) reviewed the evidence across acne, eczema, and psoriasis, confirming that gut microbiome disruption precedes and drives all three conditions through shared inflammatory mechanisms.</p>"
           }
         }
       },
@@ -512,7 +512,7 @@
         "heading": "The gut-skin axis research your dermatologist hasn't read yet.",
         "heading_level": "h2",
         "heading_size": "h2",
-        "text": "Get the free Biology Gap report — plus research updates, product news, and biology-first insights. No spam.",
+        "text": "Get the free Biological Tax Report report — plus research updates, product news, and biology-first insights. No spam.",
         "form_layout": "stacked",
         "show_name_field": false,
         "button_text": "Send Me the Report",

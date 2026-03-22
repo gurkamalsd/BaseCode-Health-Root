@@ -16,10 +16,10 @@
         "image_position": "center center",
         "overlay_opacity": 55,
         "show_social_proof": true,
-        "social_proof_text": "Backed by biological diversity research",
+        "social_proof_text": "Backed by clinical research",
         "subtitle": "Joint Pain & Your Microbiome",
         "heading": "Your joints aren't aging. They're inflamed from the inside.",
-        "text": "Glucosamine treats cartilage. Turmeric masks signals. Fish oil dampens response. None of them ask why your joints are inflamed in the first place. The answer is in your gut: when ancestral bacteria deplete, endotoxins leak through your intestinal wall, enter circulation, and settle in your joints. Origin seals the barrier. The inflammation stops where it starts.",
+        "text": "Glucosamine treats cartilage. Turmeric masks signals. Fish oil dampens response. None of them ask why your joints are inflamed in the first place. The answer is in your gut: when foundational bacteria deplete, endotoxins leak through your intestinal wall, enter circulation, and settle in your joints. Origin seals the barrier. The inflammation stops where it starts.",
         "button_text": "End the Inflammation — $34/mo",
         "button_link": "/products/origin",
         "guarantee_text": "30-Day Money-Back Guarantee",
@@ -470,7 +470,7 @@
         "faq-4": {
           "type": "question",
           "settings": {
-            "question": "Why does joint pain get worse after immigration or dietary change?",
+            "question": "Why does joint pain get worse after environmental shift or dietary change?",
             "answer": "<p>The HELIUS study (2,084 subjects, 6 ethnic groups) demonstrated that ethnicity determines microbiome composition more than diet, age, or medical history. When you adopt a Western diet, the specific bacterial populations that produce tight-junction proteins — the compounds that seal your gut barrier — deplete within one generation. That barrier breach is the mechanism behind the inflammatory conditions that emerge years after migration, including joint inflammation that didn't exist in your parents at your age.</p>"
           }
         },
@@ -512,7 +512,7 @@
         "heading": "The endotoxin research connecting your gut to your joint pain.",
         "heading_level": "h2",
         "heading_size": "h2",
-        "text": "Get the free Biology Gap report — plus research updates, product news, and biology-first insights. No spam.",
+        "text": "Get the free Biological Tax Report report — plus research updates, product news, and biology-first insights. No spam.",
         "form_layout": "stacked",
         "show_name_field": false,
         "button_text": "Send Me the Report",

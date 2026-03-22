@@ -16,10 +16,10 @@
         "image_position": "center center",
         "overlay_opacity": 55,
         "show_social_proof": true,
-        "social_proof_text": "Backed by biological diversity research",
+        "social_proof_text": "Backed by clinical research",
         "subtitle": "Cognitive Function & Your Microbiome",
         "heading": "Brain fog isn't burnout. It's your gut leaking inflammation into your brain.",
-        "text": "Your gut produces 90% of your body's serotonin and communicates directly with your brain through the vagus nerve. When ancestral bacteria deplete, bacterial endotoxins leak through a weakened gut barrier, cross the blood-brain barrier, and trigger neuroinflammation. That mental haze, the word-finding failures, the inability to hold a thought — it's not stress. It's a disrupted gut-brain axis. Origin restores the connection.",
+        "text": "Your gut produces 90% of your body's serotonin and communicates directly with your brain through the vagus nerve. When foundational bacteria deplete, bacterial endotoxins leak through a weakened gut barrier, cross the blood-brain barrier, and trigger neuroinflammation. That mental haze, the word-finding failures, the inability to hold a thought — it's not stress. It's a disrupted gut-brain axis. Origin restores the connection.",
         "button_text": "Get Your Mind Back — $34/mo",
         "button_link": "/products/origin",
         "guarantee_text": "30-Day Money-Back Guarantee",
@@ -217,7 +217,7 @@
             "icon_style": "number",
             "stat": "01",
             "title": "Your gut wall breaks down and endotoxins enter circulation",
-            "text": "When ancestral bacteria deplete, the intestinal tight junctions weaken. Bacterial lipopolysaccharides (LPS) leak through the gut wall into your bloodstream. Your immune system launches a systemic inflammatory response. That inflammation doesn't stay in your gut. It travels.",
+            "text": "When foundational bacteria deplete, the intestinal tight junctions weaken. Bacterial lipopolysaccharides (LPS) leak through the gut wall into your bloodstream. Your immune system launches a systemic inflammatory response. That inflammation doesn't stay in your gut. It travels.",
             "source": "Step 01 — Barrier Breach"
           }
         },
@@ -471,7 +471,7 @@
           "type": "question",
           "settings": {
             "question": "Why did my brain fog get worse after moving to a new country?",
-            "answer": "<p>Immigration and dietary westernization deplete the specific bacterial populations that regulate gut barrier integrity and neurotransmitter production. The HELIUS study documented this pattern across 2,084 subjects from six ethnic groups: ethnicity — not diet or lifestyle — determines microbiome composition. When these populations collapse, the inflammatory cascade they were suppressing reaches the brain. Brain fog that worsens after immigration is a documented pattern with a documented biological cause.</p>"
+            "answer": "<p>Environmental shift and dietary westernization deplete the specific bacterial populations that regulate gut barrier integrity and neurotransmitter production. The HELIUS study documented this pattern across 2,084 subjects from six ethnic groups: ethnicity — not diet or lifestyle — determines microbiome composition. When these populations collapse, the inflammatory cascade they were suppressing reaches the brain. Brain fog that worsens after environmental shift is a documented pattern with a documented biological cause.</p>"
           }
         },
         "faq-5": {
@@ -512,7 +512,7 @@
         "heading": "The gut-brain research that explains why you can't think straight anymore.",
         "heading_level": "h2",
         "heading_size": "h2",
-        "text": "Get the free Biology Gap report — plus research updates, product news, and biology-first insights. No spam.",
+        "text": "Get the free Biological Tax Report report — plus research updates, product news, and biology-first insights. No spam.",
         "form_layout": "stacked",
         "show_name_field": false,
         "button_text": "Send Me the Report",

@@ -1,7 +1,7 @@
 {
   "general": {
     "shop_name": "BaseCode Health",
-    "tagline": "Your biology isn't one-size-fits-all.",
+    "tagline": "Your biology is paying a tax you never agreed to.",
     "email": "hello@basecodehealth.com",
     "skip_to_content": "Skip to content",
     "loading": "Loading...",
@@ -22,35 +22,36 @@
     "account": "Account",
     "search": "Search",
     "shop": "Shop",
+    "protocols": "Protocols",
     "science": "Science",
-    "quiz": "Quiz",
+    "quiz": "Assessment",
     "free_report": "Free Report",
     "about": "About",
     "faq": "FAQ",
     "contact": "Contact"
   },
   "product": {
-    "add_to_cart": "Add to Cart",
+    "add_to_cart": "Add to Protocol",
     "sold_out": "Sold Out",
     "unavailable": "Unavailable",
     "subscribe_save": "Subscribe & Save 15%",
     "one_time": "One-Time Purchase",
     "per_month": "/mo",
     "quantity": "Quantity",
-    "description": "Description",
+    "description": "Protocol",
     "ingredients": "Ingredients",
     "shipping": "Shipping",
     "reviews": "Reviews",
     "faq": "FAQ",
-    "view_product": "View Product",
+    "view_product": "View Protocol",
     "quick_add": "Quick Add",
     "free_shipping": "Free shipping on subscriptions",
     "money_back": "30-day money-back guarantee",
     "secure_checkout": "Secure checkout"
   },
   "cart": {
-    "title": "Your Cart",
-    "empty": "Your cart is empty",
+    "title": "Your Protocol",
+    "empty": "Your protocol is empty",
     "continue_shopping": "Continue Shopping",
     "subtotal": "Subtotal",
     "checkout": "Checkout",
@@ -62,7 +63,7 @@
     "free_shipping_message": "Free shipping on subscriptions"
   },
   "collection": {
-    "title": "All Products",
+    "title": "The Protocol Suite",
     "filter": "Filter",
     "sort": "Sort by",
     "sort_featured": "Featured",
@@ -73,44 +74,44 @@
     "sort_price_desc": "Price: High to Low",
     "sort_date_new": "Newest",
     "sort_date_old": "Oldest",
-    "no_products": "No products found in this collection.",
-    "products_count": "{{ count }} products"
+    "no_products": "No protocols found in this collection.",
+    "products_count": "{{ count }} protocols"
   },
   "collections": {
     "general": {
-      "view_all": "View All"
+      "view_all": "View All Protocols"
     }
   },
   "blog": {
-    "title": "Blog",
+    "title": "Journal",
     "read_more": "Read More",
     "all_posts": "All Posts",
     "by_author": "By {{ author }}",
     "posted_on": "Posted on {{ date }}",
-    "back_to_blog": "Back to blog"
+    "back_to_blog": "Back to journal"
   },
   "quiz": {
-    "title": "What's your Biology Score?",
-    "subtitle": "7 research-backed questions. 2 minutes. Free.",
+    "title": "What's your Environmental Impact Score?",
+    "subtitle": "5 clinical questions. 90 seconds. Free.",
     "start": "Start the Assessment",
     "next": "Next",
     "previous": "Previous",
     "see_results": "See My Results",
-    "your_score": "Your Biology Score",
-    "high_risk": "High Risk",
-    "moderate_risk": "Moderate Risk",
-    "low_risk": "Low Risk",
+    "your_score": "Your Environmental Impact Score",
+    "high_risk": "High Biological Tax",
+    "moderate_risk": "Moderate Biological Tax",
+    "low_risk": "Low Biological Tax",
     "retake": "Retake Assessment",
-    "discount_incentive": "Complete the quiz for 20% off Origin"
+    "discount_incentive": "Complete the assessment for 20% off your first protocol"
   },
   "forms": {
     "email_placeholder": "Your best email",
     "name_placeholder": "First name",
     "submit": "Submit",
     "sending": "Sending...",
-    "success": "You're in! Check your email.",
+    "success": "You're in. Check your email.",
     "error": "Something went wrong. Please try again.",
-    "duplicate": "You're already on the list!",
+    "duplicate": "You're already on the list.",
     "no_spam": "No spam. Free report delivered immediately.",
     "message_placeholder": "Your message",
     "subject_placeholder": "Subject"
@@ -121,16 +122,16 @@
     "auto_applied": "20% off is automatically applied at checkout. No code needed."
   },
   "newsletter": {
-    "title": "Stay in the loop",
-    "subtitle": "Get research updates, product launches, and biology tips.",
+    "title": "Join the protocol",
+    "subtitle": "Research updates, new protocols, and clinical insights.",
     "button": "Subscribe"
   },
   "footer": {
-    "products": "Products",
+    "products": "Protocols",
     "info": "Info",
     "social": "Social",
     "about": "About BaseCode",
-    "about_text": "Supplements informed by biological diversity research. Built in Toronto, backed by science, designed for your unique biology.",
+    "about_text": "Clinical-grade supplements for the biological tax of modern life. Built in Toronto, backed by research, engineered for systemic adaptation.",
     "copyright": "© {{ year }} BaseCode Health. All rights reserved.",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service"

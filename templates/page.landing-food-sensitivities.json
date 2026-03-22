@@ -16,10 +16,10 @@
         "image_position": "center center",
         "overlay_opacity": 55,
         "show_social_proof": true,
-        "social_proof_text": "Backed by biological diversity research",
+        "social_proof_text": "Backed by clinical research",
         "subtitle": "Food Intolerance & Your Microbiome",
         "heading": "You flew 8,000 miles and lost the ability to eat your mother's food. That's not genetics. That's a bacterial collapse.",
-        "text": "Lactose intolerance, legume sensitivity, wheat reactions, onion bloating — these aren't random food allergies. Your gut bacteria produce the enzymes that digest these foods. L. acidophilus makes lactase. L. plantarum breaks down plant fibers. When you lose ancestral bacterial populations after immigration and dietary westernisation, you don't lose a preference — you lose the enzymatic machinery your family's cuisine was built on. Origin restores it.",
+        "text": "Lactose intolerance, legume sensitivity, wheat reactions, onion bloating — these aren't random food allergies. Your gut bacteria produce the enzymes that digest these foods. L. acidophilus makes lactase. L. plantarum breaks down plant fibers. When you lose foundational bacterial populations after environmental shift and dietary westernisation, you don't lose a preference — you lose the enzymatic machinery your family's cuisine was built on. Origin restores it.",
         "button_text": "Eat Your Family's Food Again — $34/mo",
         "button_link": "/products/origin",
         "guarantee_text": "30-Day Money-Back Guarantee",
@@ -112,7 +112,7 @@
         "body": {
           "type": "text",
           "settings": {
-            "text": "<p>Your mother's kitchen smelled like ghee, fermenting dahi, simmering dal. You ate everything she made — two plates, no hesitation. Roti with butter. Rice and rajma. Lassi after every meal. Then you left. University. A new country. A different grocery store. And somewhere between the frozen meals and the fast food, your gut changed. Now her cooking hurts you. She makes your favourite dish when you visit. You take three bites and excuse yourself.</p><p>You went to a doctor. Lactose intolerant. IBS. Fructan sensitivity. They gave you enzyme pills and a list of foods to avoid — half of which are the staples your culture is built on. Nobody asked the real question: why can your mother eat everything she cooks, but you can't? Why could you eat it ten years ago but not now?</p><p>The answer isn't genetics — your DNA didn't change at the airport. The answer is bacterial. Your microbiome produces lactase (digests dairy), alpha-galactosidase (digests legumes and beans), and fructan-processing enzymes (digests wheat, onions, garlic). Immigration and dietary westernisation deplete these specific populations. The food didn't change. Your bacterial capacity to process it did.</p>",
+            "text": "<p>Your mother's kitchen smelled like ghee, fermenting dahi, simmering dal. You ate everything she made — two plates, no hesitation. Roti with butter. Rice and rajma. Lassi after every meal. Then you left. University. A new country. A different grocery store. And somewhere between the frozen meals and the fast food, your gut changed. Now her cooking hurts you. She makes your favourite dish when you visit. You take three bites and excuse yourself.</p><p>You went to a doctor. Lactose intolerant. IBS. Fructan sensitivity. They gave you enzyme pills and a list of foods to avoid — half of which are the staples your culture is built on. Nobody asked the real question: why can your mother eat everything she cooks, but you can't? Why could you eat it ten years ago but not now?</p><p>The answer isn't genetics — your DNA didn't change at the airport. The answer is bacterial. Your microbiome produces lactase (digests dairy), alpha-galactosidase (digests legumes and beans), and fructan-processing enzymes (digests wheat, onions, garlic). Environmental shift and dietary westernisation deplete these specific populations. The food didn't change. Your bacterial capacity to process it did.</p>",
             "text_color": ""
           }
         },
@@ -217,7 +217,7 @@
             "icon_style": "number",
             "stat": "01",
             "title": "Your ancestral digestive workforce disappears",
-            "text": "L. acidophilus (your lactase producer), L. plantarum (your fiber processor), and other enzyme-producing bacteria decline after dietary westernisation. Within a single generation, your gut loses the machinery that made your family's cuisine digestible. Vangay et al. documented this: immigration depletes ancestral bacterial strains measurably and predictably.",
+            "text": "L. acidophilus (your lactase producer), L. plantarum (your fiber processor), and other enzyme-producing bacteria decline after dietary westernisation. Within a single generation, your gut loses the machinery that made your family's cuisine digestible. Vangay et al. documented this: environmental shift depletes foundational bacterial strains measurably and predictably.",
             "source": "Step 01 — Bacterial Enzyme Loss"
           }
         },
@@ -450,7 +450,7 @@
           "type": "question",
           "settings": {
             "question": "Why did I develop food sensitivities after moving countries?",
-            "answer": "<p>Your gut bacteria produce the enzymes that digest the foods your ancestors ate for generations. L. acidophilus produces lactase for dairy. L. plantarum produces the enzymes that break down legumes, onions, and garlic. When you adopt a Western diet that your ancestral microbiome wasn't evolved for, these specific bacterial populations deplete within one generation (documented by Vangay et al., 2018). The foods didn't become a problem. The bacteria that processed them disappeared.</p>"
+            "answer": "<p>Your gut bacteria produce the enzymes that digest the foods your ancestors ate for generations. L. acidophilus produces lactase for dairy. L. plantarum produces the enzymes that break down legumes, onions, and garlic. When you adopt a Western diet that your foundational microbiome wasn't evolved for, these specific bacterial populations deplete within one generation (documented by Vangay et al., 2018). The foods didn't become a problem. The bacteria that processed them disappeared.</p>"
           }
         },
         "faq-2": {
@@ -509,10 +509,10 @@
     "newsletter": {
       "type": "newsletter",
       "settings": {
-        "heading": "The research that explains why immigration changes what you can eat.",
+        "heading": "The research that explains why environmental shift changes what you can eat.",
         "heading_level": "h2",
         "heading_size": "h2",
-        "text": "Get the free Biology Gap report — plus research updates, product news, and biology-first insights. No spam.",
+        "text": "Get the free Biological Tax Report report — plus research updates, product news, and biology-first insights. No spam.",
         "form_layout": "stacked",
         "show_name_field": false,
         "button_text": "Send Me the Report",

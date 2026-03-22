@@ -16,10 +16,10 @@
         "image_position": "center center",
         "overlay_opacity": 60,
         "show_social_proof": true,
-        "social_proof_text": "Backed by biological diversity research",
+        "social_proof_text": "Backed by clinical research",
         "subtitle": "Energy, Strength & Your Microbiome",
         "heading": "Your testosterone isn't low because you're aging. Your gut stopped making the compounds that fuel it.",
-        "text": "Your gut bacteria produce short-chain fatty acids that regulate the hypothalamic-pituitary-gonadal axis — the master switch for testosterone. When ancestral bacterial populations crash after dietary westernization, SCFA production collapses and your hormonal signaling breaks down from the inside out.",
+        "text": "Your gut bacteria produce short-chain fatty acids that regulate the hypothalamic-pituitary-gonadal axis — the master switch for testosterone. When foundational bacterial populations crash after dietary westernization, SCFA production collapses and your hormonal signaling breaks down from the inside out.",
         "button_text": "Reclaim Your Edge — $34/mo",
         "button_link": "/products/origin",
         "guarantee_text": "30-Day Money-Back Guarantee",
@@ -126,7 +126,7 @@
         "agitate_text_3": {
           "type": "text",
           "settings": {
-            "text": "<p>Here's what the TRT industry won't tell you: published research shows that gut microbiome composition directly modulates testosterone production through the gut-brain-gonad axis. When key bacterial populations deplete — a pattern documented in every immigrant diaspora community studied — the upstream system that drives testosterone breaks down. You don't have a hormone problem. You have a microbiome problem.</p><p><strong>TRT: $150–400/month plus blood work, plus lifetime dependency. Origin: $34/month. No needles. No shutdown.</strong></p>",
+            "text": "<p>Here's what the TRT industry won't tell you: published research shows that gut microbiome composition directly modulates testosterone production through the gut-brain-gonad axis. When key bacterial populations deplete — a pattern documented in populations under environmental stress — the upstream system that drives testosterone breaks down. You don't have a hormone problem. You have a microbiome problem.</p><p><strong>TRT: $150–400/month plus blood work, plus lifetime dependency. Origin: $34/month. No needles. No shutdown.</strong></p>",
             "text_color": "#1c2e23"
           }
         }

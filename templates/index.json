@@ -19,7 +19,7 @@
         "social_proof_text": "Trusted by thousands",
         "subtitle": "",
         "heading": "Your biology is unique.",
-        "text": "<p>Origin is the first probiotic informed by biological diversity research. 40 billion CFU. 4 targeted strains. MAKTREK acid-protection delivery.</p>",
+        "text": "<p>Origin is the first probiotic engineered for the biological tax of modern life. 40 billion CFU. 4 targeted strains. MAKTREK acid-protection delivery.</p>",
         "button_text": "Discover Origin",
         "button_link": "/products/origin",
         "guarantee_text": "30-Day Money-Back Guarantee",
@@ -110,7 +110,7 @@
             "icon_style": "number",
             "stat": "02",
             "title": "Microbiome shifts within one generation",
-            "text": "Immigration and environmental changes cause ancestral microbiome depletion — replacing diverse bacteria with Western strains.",
+            "text": "Environmental shift and environmental changes cause environmental microbiome disruption — replacing diverse bacteria with Western strains.",
             "source": "Vangay et al., 2018 — Cell"
           }
         },
@@ -248,7 +248,7 @@
         "c2": {
           "type": "item",
           "settings": {
-            "text": "Strains selected for biological diversity, not generic formulas"
+            "text": "Strains selected for environmental adaptation, not generic formulas"
           }
         },
         "c3": {
@@ -288,7 +288,7 @@
         "subtitle": "Our Mission",
         "heading_level": "h2",
         "heading_size": "large",
-        "heading": "Supplements informed by biological diversity research.",
+        "heading": "Supplements engineered for the biological tax of modern life.",
         "body_text": "",
         "text_align_desktop": "left",
         "button_text": "Learn More",
@@ -312,10 +312,10 @@
         "image_size": "medium",
         "image_shape": "circle",
         "subheading": "Our Story",
-        "heading": "Your biology isn't one-size-fits-all. Your supplements shouldn't be either.",
+        "heading": "Your biology is paying a tax you never agreed to. Your supplements shouldn't be either.",
         "heading_level": "h2",
         "heading_size": "medium",
-        "text": "<p>At BaseCode Health, we build supplements informed by biological diversity research. The supplement industry ignores the fact that biology differs from person to person. We do not. Origin is our first product — and it will not be the last.</p>",
+        "text": "<p>At BaseCode Health, we build supplements engineered for the biological tax of modern life. The supplement industry ignores the fact that biology differs from person to person. We do not. Origin is our first product — and it will not be the last.</p>",
         "button_text": "About Us",
         "button_link": "/pages/about",
         "button_style": "primary",
@@ -409,7 +409,7 @@
           "type": "question",
           "settings": {
             "question": "What is Origin?",
-            "answer": "<p>Origin is the first ethnobiotic — a probiotic informed by biological diversity research. 40 billion CFU, 4 targeted strains, MAKTREK Bi-Pass delivery, FOS prebiotic. 60 veggie capsules per bottle (30-day supply).</p>"
+            "answer": "<p>Origin is the foundational Adaptobiotic — a probiotic engineered for the biological tax of modern life. 40 billion CFU, 4 targeted strains, MAKTREK Bi-Pass delivery, FOS prebiotic. 60 veggie capsules per bottle (30-day supply).</p>"
           }
         },
         "q2": {

@@ -39,7 +39,7 @@
       {%- if section.settings.show_social_proof -%}
         <div class="hero-fullbleed__proof reveal-hidden">
           <span class="stars">★★★★★</span>
-          <span>{{ section.settings.social_proof_text | default: 'Backed by biological diversity research' }}</span>
+          <span>{{ section.settings.social_proof_text | default: 'Backed by clinical research' }}</span>
         </div>
       {%- endif -%}
 
@@ -48,7 +48,7 @@
       {%- endif -%}
 
       <h1 class="hero-fullbleed__heading reveal-hidden reveal-delay-2">
-        {{ section.settings.heading | default: 'Built for Your Biology.' }}
+        {{ section.settings.heading | default: 'Engineered for Modern Biology.' }}
       </h1>
 
       {%- if section.settings.text != blank -%}
@@ -255,7 +255,7 @@
       "type": "text",
       "id": "social_proof_text",
       "label": "Social proof text",
-      "default": "Backed by biological diversity research"
+      "default": "Backed by clinical research"
     },
     {
       "type": "text",
@@ -267,13 +267,13 @@
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Built for Your Biology."
+      "default": "Engineered for Modern Biology."
     },
     {
       "type": "textarea",
       "id": "text",
       "label": "Body text",
-      "default": "Origin is the first probiotic informed by biological diversity research."
+      "default": "Origin is the first probiotic engineered for the biological tax of modern life."
     },
     {
       "type": "text",
