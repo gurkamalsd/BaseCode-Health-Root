@@ -54,7 +54,7 @@
           "type": "feature",
           "settings": {
             "icon": "leaf",
-            "text": "Vegan & Clean Formula",
+            "text": "Vegan, Clean Formula",
             "subtext": ""
           }
         },
@@ -78,16 +78,16 @@
         "desktop_columns": "4",
         "mobile_layout": "grid",
         "show_dividers": false,
-        "padding_top": 20,
-        "padding_bottom": 20,
+        "padding_top": 24,
+        "padding_bottom": 24,
         "bg_color": "#f5f2ec",
         "text_color": "#1c2e23",
         "icon_color": "#c4783a",
         "heading": "",
         "heading_level": "h2",
         "heading_size": 28,
-        "text_size": "medium",
-        "icon_size": 24,
+        "text_size": "small",
+        "icon_size": 26,
         "enable_animation": true
       }
     },
