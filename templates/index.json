@@ -74,7 +74,7 @@
         "f4"
       ],
       "settings": {
-        "layout": "stacked",
+        "layout": "inline",
         "desktop_columns": "4",
         "mobile_layout": "grid",
         "show_dividers": false,
