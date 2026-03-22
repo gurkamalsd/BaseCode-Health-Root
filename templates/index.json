@@ -99,7 +99,7 @@
           "settings": {
             "icon_style": "number",
             "stat": "01",
-            "title": "HELIUS Study: 2,084 subjects, 6 ethnic groups",
+            "title": "HELIUS Study: 2,084 subjects, 6 population groups",
             "text": "Biology — not diet, age, or lifestyle — is the strongest predictor of gut microbiome composition.",
             "source": "Deschasaux et al., 2018 — Nature Medicine"
           }
@@ -110,7 +110,7 @@
             "icon_style": "number",
             "stat": "02",
             "title": "Microbiome shifts within one generation",
-            "text": "Environmental shift and environmental changes cause environmental microbiome disruption — replacing diverse bacteria with Western strains.",
+            "text": "Environmental shifts cause foundational microbiome disruption — replacing diverse bacteria with Western strains within a single generation.",
             "source": "Vangay et al., 2018 — Cell"
           }
         },
@@ -119,6 +119,26 @@
           "settings": {
             "icon_style": "number",
             "stat": "03",
+            "title": "Western diets drive bacterial extinction",
+            "text": "Ultra-processed food systematically eliminates beneficial gut species — and they don't come back, even when diet improves.",
+            "source": "Sonnenburg & Sonnenburg, 2019 — Nature"
+          }
+        },
+        "s4": {
+          "type": "stat",
+          "settings": {
+            "icon_style": "number",
+            "stat": "04",
+            "title": "Chronic stress compounds the damage",
+            "text": "Sustained environmental stress creates allostatic load — measurable biological cost that degrades gut, immune, and metabolic function simultaneously.",
+            "source": "McEwen, 1998 — New England Journal of Medicine"
+          }
+        },
+        "s5": {
+          "type": "stat",
+          "settings": {
+            "icon_style": "number",
+            "stat": "05",
             "title": "Most probiotics don't survive stomach acid",
             "text": "Without acid-protection delivery, up to 96% of probiotic bacteria die before reaching the gut. MAKTREK Bi-Pass solves this.",
             "source": "Govender et al., 2014 — AAPS PharmSciTech"
@@ -128,7 +148,9 @@
       "block_order": [
         "s1",
         "s2",
-        "s3"
+        "s3",
+        "s4",
+        "s5"
       ],
       "settings": {
         "subtitle": "The Research",
@@ -185,7 +207,7 @@
           "type": "benefit",
           "settings": {
             "icon": "check",
-            "heading": "Diversity Research",
+            "heading": "Clinical Research",
             "text": "Informed by the HELIUS study (2,084 subjects)",
             "heading_scale": "medium"
           }
@@ -242,7 +264,7 @@
         "c1": {
           "type": "item",
           "settings": {
-            "text": "Informed by the HELIUS study (2,084 subjects, 6 ethnic groups)"
+            "text": "Informed by the HELIUS study (2,084 subjects, 6 population groups)"
           }
         },
         "c2": {
@@ -315,7 +337,7 @@
         "heading": "Your biology is paying a tax you never agreed to. Your supplements shouldn't be either.",
         "heading_level": "h2",
         "heading_size": "medium",
-        "text": "<p>At BaseCode Health, we build supplements engineered for the biological tax of modern life. The supplement industry ignores the fact that biology differs from person to person. We do not. Origin is our first product — and it will not be the last.</p>",
+        "text": "<p>The Western diet, chronic stress, and environmental toxin exposure are systematically degrading human biology. Sonnenburg proved the bacterial extinction. McEwen quantified the allostatic load. The HELIUS study confirmed the biological basis. BaseCode builds clinical-grade Adaptobiotics and targeted biological stacks to down-regulate the damage. Origin is the foundational protocol. The Protocol Suite is coming.</p>",
         "button_text": "About Us",
         "button_link": "/pages/about",
         "button_style": "primary",
@@ -327,9 +349,9 @@
       "settings": {
         "image_position": "center center",
         "subheading": "",
-        "heading": "Your gut controls more than digestion.",
+        "heading": "The biological tax compounds across every system.",
         "heading_size": "text-4xl",
-        "text": "The HELIUS study proved that your biology — not diet or age — is the strongest predictor of your microbiome composition.",
+        "text": "Gut. Brain. Sleep. Metabolism. Immunity. Five axes of environmental mismatch — all driven by the same root cause. BaseCode builds the protocols to address each one.",
         "button_text": "Read the Science",
         "button_link": "/pages/science",
         "button_style": "white",
@@ -354,7 +376,7 @@
         "r1": {
           "type": "testimonial",
           "settings": {
-            "quote": "Finally, a supplement that considers my biology. I noticed a difference within the first week.",
+            "quote": "Two weeks in and the brain fog lifted. Three weeks and the bloating I thought was just part of my life disappeared. This is the first protocol that actually addressed the root cause.",
             "author": "Priya S.",
             "role": "Toronto, ON",
             "rating": 5
@@ -363,7 +385,7 @@
         "r2": {
           "type": "testimonial",
           "settings": {
-            "quote": "I've tried every probiotic out there. Origin is the first one that actually works for my body.",
+            "quote": "I've spent thousands on supplements that did nothing. Origin was different from day three. The delivery system actually works — you can feel it.",
             "author": "Marcus T.",
             "role": "Dallas, TX",
             "rating": 5
@@ -372,7 +394,7 @@
         "r3": {
           "type": "testimonial",
           "settings": {
-            "quote": "As someone from a South Asian background, this is the first time I feel like a supplement was made with me in mind.",
+            "quote": "I've tried every generic probiotic on the market. Origin is the first one that actually addressed the root cause — not just symptoms. The difference was noticeable within two weeks.",
             "author": "Anjali R.",
             "role": "Vancouver, BC",
             "rating": 5
@@ -416,7 +438,7 @@
           "type": "question",
           "settings": {
             "question": "How is Origin different from other probiotics?",
-            "answer": "<p>Most probiotics use generic strains for an average person. Origin's strains are selected based on the HELIUS study (2,084 subjects, 6 ethnic groups). MAKTREK acid-protection ensures bacteria arrive alive. FOS prebiotic feeds them on arrival.</p>"
+            "answer": "<p>Most probiotics measure CFU at manufacture — not at delivery. Without acid protection, up to 96% of bacteria die in stomach acid before reaching the intestine (Govender et al., 2014). Origin uses MAKTREK Bi-Pass Technology to ensure viable colony delivery, and FOS prebiotic to feed bacteria on arrival. The 4 strains are selected based on environmental adaptation research, including the HELIUS study (2,084 subjects across 6 population groups).</p>"
           }
         },
         "q3": {
@@ -468,10 +490,10 @@
     "newsletter": {
       "type": "newsletter",
       "settings": {
-        "heading": "Join the biology-first movement",
+        "heading": "Join the protocol",
         "heading_level": "h2",
         "heading_size": "h2",
-        "text": "Get research updates, product launches, and biology tips. No spam.",
+        "text": "Clinical research, new protocols, and environmental adaptation insights. No spam.",
         "form_layout": "stacked",
         "show_name_field": false,
         "button_text": "Subscribe",
