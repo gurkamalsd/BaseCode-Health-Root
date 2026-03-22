@@ -12,7 +12,7 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "image": "shopify://shop_images/hero-landing-bloating.jpg",
+        "image": "shopify://shop_images/Generated_Image_March_22_2026_-_1_13PM.jpg",
         "image_position": "center center",
         "overlay_opacity": 60,
         "show_social_proof": true,
@@ -77,7 +77,7 @@
         "enable_marquee": true,
         "marquee_speed": 20,
         "marquee_separator": "●",
-        "enable_icon_badges": true,
+        "enable_icon_badges": false,
         "layout": "inline",
         "desktop_columns": "4",
         "mobile_layout": "slider",
