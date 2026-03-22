@@ -1177,6 +1177,7 @@ main { overflow-x: clip; }
   gap: var(--space-10);
   padding: var(--space-8) 0;
 }
+.product-main > * { min-width: 0; }
 
 @media (min-width: 768px) {
   .product-main { grid-template-columns: 1fr 1fr; }
