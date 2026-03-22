@@ -24,7 +24,7 @@
         "o6": { "type": "outcome", "settings": { "icon": "shield", "label": "Immune Strength" } },
         "sb1": { "type": "stat_badge", "settings": { "value": "40\u201360%", "description": "butyrate-producer decline after westernisation" } },
         "sb2": { "type": "stat_badge", "settings": { "value": "5\u201310yr", "description": "earlier metabolic onset in modern populations" } },
-        "sb3": { "type": "stat_badge", "settings": { "value": "2,084", "description": "subjects in the HELIUS multi-ethnic cohort study" } },
+        "sb3": { "type": "stat_badge", "settings": { "value": "2,084", "description": "subjects in the HELIUS multi-population cohort study" } },
         "v1": { "type": "value_item", "settings": { "text": "40 Billion CFU — 4 targeted strains for modern biology" } },
         "v2": { "type": "value_item", "settings": { "text": "MAKTREK Bi-Pass — acid-protected delivery (most probiotics can't survive without it)" } },
         "v3": { "type": "value_item", "settings": { "text": "FOS prebiotic — feeds the bacteria on arrival, not just on the label" } },

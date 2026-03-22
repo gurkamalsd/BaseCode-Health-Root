@@ -470,8 +470,8 @@
         "faq-4": {
           "type": "question",
           "settings": {
-            "question": "Why does joint pain get worse after environmental shift or dietary change?",
-            "answer": "<p>The HELIUS study (2,084 subjects, 6 ethnic groups) demonstrated that ethnicity determines microbiome composition more than diet, age, or medical history. When you adopt a Western diet, the specific bacterial populations that produce tight-junction proteins — the compounds that seal your gut barrier — deplete within one generation. That barrier breach is the mechanism behind the inflammatory conditions that emerge years after migration, including joint inflammation that didn't exist in your parents at your age.</p>"
+            "question": "Why does joint pain get worse under Western environmental stress or dietary change?",
+            "answer": "<p>The HELIUS study (2,084 subjects, 6 population groups) demonstrated that biology determines microbiome composition more than diet, age, or medical history. When you adopt a Western diet, the specific bacterial populations that produce tight-junction proteins — the compounds that seal your gut barrier — deplete within one generation. That barrier breach is the mechanism behind the inflammatory conditions that emerge years under environmental stress, including joint inflammation that didn't exist in your parents at your age.</p>"
           }
         },
         "faq-5": {

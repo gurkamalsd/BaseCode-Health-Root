@@ -19,7 +19,7 @@
         "social_proof_text": "Backed by clinical research",
         "subtitle": "Energy, Strength & Your Microbiome",
         "heading": "Your testosterone isn't low because you're aging. Your gut stopped making the compounds that fuel it.",
-        "text": "Your gut bacteria produce short-chain fatty acids that regulate the hypothalamic-pituitary-gonadal axis — the master switch for testosterone. When foundational bacterial populations crash after dietary westernization, SCFA production collapses and your hormonal signaling breaks down from the inside out.",
+        "text": "Your gut bacteria produce short-chain fatty acids that regulate the hypothalamic-pituitary-gonadal axis — the master switch for testosterone. When foundational bacterial populations crash after Western dietary exposure, SCFA production collapses and your hormonal signaling breaks down from the inside out.",
         "button_text": "Reclaim Your Edge — $34/mo",
         "button_link": "/products/origin",
         "guarantee_text": "30-Day Money-Back Guarantee",
@@ -230,7 +230,7 @@
             "icon_style": "number",
             "stat": "01",
             "title": "SCFA Collapse",
-            "text": "Butyrate-producing bacteria — L. plantarum and related species — deplete after dietary westernization. Without short-chain fatty acids, your gut barrier weakens, endotoxins leak into the bloodstream, and the HPG axis loses the microbial signaling it depends on to drive testosterone production.",
+            "text": "Butyrate-producing bacteria — L. plantarum and related species — deplete after Western dietary exposure. Without short-chain fatty acids, your gut barrier weakens, endotoxins leak into the bloodstream, and the HPG axis loses the microbial signaling it depends on to drive testosterone production.",
             "source": "Shin et al., Gut Microbes, 2019"
           }
         },
@@ -483,8 +483,8 @@
         "faq_4": {
           "type": "question",
           "settings": {
-            "question": "Why does ethnicity matter for gut health and hormones?",
-            "answer": "<p>The HELIUS study — 2,084 subjects across 6 ethnic groups — proved that biological heritage is the strongest predictor of gut microbiome composition, stronger than diet, age, sex, or medical history. Ancestral bacterial populations that supported hormonal regulation for generations can deplete within a single generation of Western dietary exposure (Vangay et al., 2018). This isn't a lifestyle problem — it's a biological one with a biological solution.</p>"
+            "question": "Why does biology matter for gut health and hormones?",
+            "answer": "<p>The HELIUS study — 2,084 subjects across 6 population groups — proved that biological baseline is the strongest predictor of gut microbiome composition, stronger than diet, age, sex, or medical history. Foundational bacterial populations that supported hormonal regulation for generations can deplete within a single generation of Western dietary exposure (Vangay et al., 2018). This isn't a lifestyle problem — it's a biological one with a biological solution.</p>"
           }
         },
         "faq_5": {

@@ -112,7 +112,7 @@
         "body": {
           "type": "text",
           "settings": {
-            "text": "<p>You wake up flat. By noon you look four months pregnant. You unbutton your jeans at your desk. You skip dinner plans because you know what's coming. You've googled 'why am I always bloated' so many times your phone autocompletes it. You carry Gas-X like it's chapstick. You eat a salad and bloat. You eat rice and bloat. You eat nothing and somehow still bloat.</p><p>You've done the elimination diets. The food sensitivity tests. The $300 functional medicine panels. You've cut dairy, gluten, onions, garlic, beans, cruciferous vegetables — half the foods your mother raised you on. Your gastroenterologist shrugged and said 'IBS.' Your dietitian handed you a FODMAP chart. Nobody asked the obvious question: why can your grandmother eat everything you can't?</p><p>The answer is bacterial. Research on 2,084 people across six ethnic groups proved that ethnicity shapes your microbiome more than diet, age, or medical history. When you immigrate — or grow up eating a Western diet your ancestors never touched — the bacterial populations that digest your ancestral foods collapse. You're not intolerant. You're depleted.</p>",
+            "text": "<p>You wake up flat. By noon you look four months pregnant. You unbutton your jeans at your desk. You skip dinner plans because you know what's coming. You've googled 'why am I always bloated' so many times your phone autocompletes it. You carry Gas-X like it's chapstick. You eat a salad and bloat. You eat rice and bloat. You eat nothing and somehow still bloat.</p><p>You've done the elimination diets. The food sensitivity tests. The $300 functional medicine panels. You've cut dairy, gluten, onions, garlic, beans, cruciferous vegetables — half the foods your mother raised you on. Your gastroenterologist shrugged and said 'IBS.' Your dietitian handed you a FODMAP chart. Nobody asked the obvious question: why does your digestion fail on foods that never caused problems before't?</p><p>The answer is bacterial. Research on 2,084 people across six population groups proved that biology shapes your microbiome more than diet, age, or medical history. When your environment shifts — or grow up eating a Western diet your ancestors never touched — the bacterial populations that digest your whole foods collapse. You're not intolerant. You're depleted.</p>",
             "text_color": ""
           }
         },
@@ -217,7 +217,7 @@
             "icon_style": "number",
             "stat": "01",
             "title": "Your ancestral digestive crew disappears",
-            "text": "Within one generation of Western diet exposure, the bacterial strains that produce digestive enzymes — lactase, bile salt hydrolase, fiber-fermenting enzymes — collapse. Your gut loses the machinery to break down the foods your family has eaten for thousands of years. The HELIUS study proved this across 2,084 people from six ethnic groups.",
+            "text": "Within one generation of Western diet exposure, the bacterial strains that produce digestive enzymes — lactase, bile salt hydrolase, fiber-fermenting enzymes — collapse. Your gut loses the machinery to break down the foods your family has eaten for thousands of years. The HELIUS study proved this across 2,084 people from six population groups.",
             "source": "Step 01 — Bacterial Extinction"
           }
         },
@@ -478,7 +478,7 @@
           "type": "question",
           "settings": {
             "question": "Why did my digestion get worse after I moved countries or changed my diet?",
-            "answer": "<p>The HELIUS study (2,084 subjects, 6 ethnic groups) documented that ethnicity determines microbiome composition more strongly than diet, age, or medical history. When you adopt a Western diet, the foundational bacterial strains that processed your family's traditional foods deplete within one generation. Your grandmother's gut could handle fermented, spiced, high-fiber ancestral cuisine because she had the bacterial workforce to process it. That workforce depletes in a new dietary environment. Origin restores it.</p>"
+            "answer": "<p>The HELIUS study (2,084 subjects, 6 population groups) documented that biology determines microbiome composition more strongly than diet, age, or medical history. When you adopt a Western diet, the foundational bacterial strains that processed your family's traditional foods deplete within one generation. Your grandmother's gut could handle fermented, spiced, high-fiber traditional cuisine because she had the bacterial workforce to process it. That workforce depletes in a new dietary environment. Origin restores it.</p>"
           }
         }
       },
@@ -509,7 +509,7 @@
     "newsletter": {
       "type": "newsletter",
       "settings": {
-        "heading": "The research that explains why your bloating started after environmental shift.",
+        "heading": "The research that explains why your bloating started under Western environmental stress.",
         "heading_level": "h2",
         "heading_size": "h2",
         "text": "Get the free Biological Tax Report report — plus research updates, product news, and biology-first insights. No spam.",

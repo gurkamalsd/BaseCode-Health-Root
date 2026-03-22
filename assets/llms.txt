@@ -53,7 +53,7 @@ BaseCode creates clinical-grade supplements designed for systemic adaptation. Ea
 - The Defense Stack: Origin + Shield (gut + immune fortification)
 
 ## Key Research
-- HELIUS Study (Gut, 2019): Biology is the strongest predictor of gut microbiome composition — more than diet, age, sex, or lifestyle (2,084 subjects, 6 ethnic groups)
+- HELIUS Study (Gut, 2019): Biology is the strongest predictor of gut microbiome composition — more than diet, age, sex, or lifestyle (2,084 subjects, 6 population groups)
 - Vangay et al. (Cell, 2018): Environmental shifts cause foundational microbiome disruption within a single generation
 - Sonnenburg & Sonnenburg (Nature, 2019): Ultra-processed Western diets drive systematic extinction of beneficial gut bacteria
 - McEwen (NEJM, 1998): Chronic stress allostatic load — biological cost of sustained environmental demands

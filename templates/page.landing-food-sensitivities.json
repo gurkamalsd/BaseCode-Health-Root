@@ -19,7 +19,7 @@
         "social_proof_text": "Backed by clinical research",
         "subtitle": "Food Intolerance & Your Microbiome",
         "heading": "You flew 8,000 miles and lost the ability to eat your mother's food. That's not genetics. That's a bacterial collapse.",
-        "text": "Lactose intolerance, legume sensitivity, wheat reactions, onion bloating — these aren't random food allergies. Your gut bacteria produce the enzymes that digest these foods. L. acidophilus makes lactase. L. plantarum breaks down plant fibers. When you lose foundational bacterial populations after environmental shift and dietary westernisation, you don't lose a preference — you lose the enzymatic machinery your family's cuisine was built on. Origin restores it.",
+        "text": "Lactose intolerance, legume sensitivity, wheat reactions, onion bloating — these aren't random food allergies. Your gut bacteria produce the enzymes that digest these foods. L. acidophilus makes lactase. L. plantarum breaks down plant fibers. When you lose foundational bacterial populations under Western environmental stress and dietary westernisation, you don't lose a preference — you lose the enzymatic machinery your family's cuisine was built on. Origin restores it.",
         "button_text": "Eat Your Family's Food Again — $34/mo",
         "button_link": "/products/origin",
         "guarantee_text": "30-Day Money-Back Guarantee",
@@ -249,7 +249,7 @@
       ],
       "settings": {
         "subtitle": "How It Works",
-        "heading": "Three steps from bacterial enzyme loss to ancestral cuisine reclaimed.",
+        "heading": "Three steps from bacterial enzyme loss to traditional cuisine reclaimed.",
         "heading_size": "text-3xl",
         "heading_level": "h2",
         "button_text": "Get Origin — $34/mo",
@@ -294,7 +294,7 @@
           "settings": {
             "icon": "star",
             "heading": "Travel and eat without fear",
-            "text": "Street food in Delhi. Night markets in Taipei. A grandmother's kitchen in Lagos. When your gut can handle ancestral cuisine again, travel stops being a digestive minefield and becomes the homecoming it should be.",
+            "text": "Street food in Delhi. Night markets in Taipei. A grandmother's kitchen in Lagos. When your gut can handle traditional cuisine again, travel stops being a digestive minefield and becomes the homecoming it should be.",
             "heading_scale": "medium"
           }
         },
