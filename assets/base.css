@@ -161,7 +161,6 @@ small { font-size: var(--text-sm); }
 .container--wide { max-width: var(--container-wide); }
 
 main { overflow-x: hidden; }
-section { max-width: 100%; overflow-x: hidden; }
 
 .section {
   padding-top: var(--space-16);
