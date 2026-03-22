@@ -568,35 +568,26 @@
     if (!quizContainer) return;
 
     var questions = [
-      { text: "What best describes your ethnic heritage?", subtext: "Your microbiome composition is shaped more by ethnicity than diet, age, or sex.", options: [
-        { label: "South Asian (Indian, Pakistani, Bangladeshi, Sri Lankan)", score: 17 }, { label: "East African", score: 16 }, { label: "Caribbean", score: 15 },
-        { label: "East / Southeast Asian", score: 14 }, { label: "Middle Eastern / North African", score: 13 },
-        { label: "Other / Mixed", score: 11 }, { label: "European descent", score: 7 }
+      { text: "How would you rate your daily stress load?", subtext: "Chronic cortisol elevation drives systemic inflammation, gut barrier breakdown, and accelerated biological aging. McEwen's allostatic load research quantified this as measurable biological cost.", options: [
+        { label: "Severe — I'm constantly overwhelmed", score: 17 }, { label: "High — I manage but never fully recover", score: 14 },
+        { label: "Moderate — some stressful periods", score: 8 }, { label: "Low — I feel balanced", score: 3 }
       ]},
-      { text: "How often do you experience bloating or digestive discomfort?", subtext: "Chronic bloating is a hallmark of butyrate-producer depletion in diaspora populations.", options: [
-        { label: "Daily — it's become my normal", score: 14 }, { label: "Several times a week", score: 11 },
-        { label: "A few times a month", score: 7 }, { label: "Rarely", score: 3 }
+      { text: "What does your typical diet look like?", subtext: "Sonnenburg et al. documented that ultra-processed Western diets systematically extinguish beneficial gut bacteria within a single generation. Your diet directly determines your microbial baseline.", options: [
+        { label: "Mostly processed/fast food and takeout", score: 17 }, { label: "Mixed — some whole foods, some processed", score: 11 },
+        { label: "Mostly whole foods, occasional processed", score: 6 }, { label: "Primarily whole, unprocessed foods", score: 2 }
       ]},
-      { text: "Has your energy noticeably declined in the last 3–5 years?", subtext: "Mitochondrial decline — accelerated when key bacteria deplete — shows up as fatigue that doesn't respond to sleep or caffeine.", options: [
-        { label: "Yes — I feel decades older than I am", score: 14 }, { label: "Somewhat — I notice the decline", score: 9 },
-        { label: "Not really — I feel my age", score: 4 }
+      { text: "How would you describe your sleep quality?", subtext: "Circadian disruption down-regulates melatonin synthesis and elevates cortisol, creating a compounding biological tax that accelerates gut permeability and cognitive decline.", options: [
+        { label: "Poor — I wake up exhausted most days", score: 17 }, { label: "Inconsistent — good nights and bad nights", score: 11 },
+        { label: "Decent — usually 6-7 hours of solid sleep", score: 6 }, { label: "Excellent — consistent deep sleep", score: 2 }
       ]},
-      { text: "Have you taken a generic probiotic in the past 2 years?", subtext: "Most commercial probiotics use generic strains that ignore how your microbiome differs from the populations they were studied in.", options: [
-        { label: "Yes — and I didn't notice lasting results", score: 14 }, { label: "Yes — and it helped somewhat", score: 7 },
-        { label: "No — I haven't tried probiotics", score: 5 }
+      { text: "How many rounds of antibiotics have you taken in the last 5 years?", subtext: "Each antibiotic course eliminates entire bacterial populations. Research shows microbiome recovery can take 6-12 months per round — and some species never return without targeted reintroduction.", options: [
+        { label: "3 or more rounds", score: 17 }, { label: "1-2 rounds", score: 11 },
+        { label: "None in the last 5 years", score: 4 }
       ]},
-      { text: "Does anyone in your family have diabetes, high blood pressure, or metabolic conditions?", subtext: "Diaspora communities develop metabolic conditions 5–10 years earlier and at lower BMIs than the global average.", options: [
-        { label: "Yes — multiple family members", score: 14 }, { label: "Yes — one family member", score: 9 },
-        { label: "I'm not sure", score: 6 }, { label: "No family history", score: 2 }
-      ]},
-      { text: "How often do you eat traditionally fermented foods (dahi, injera, kimchi, kefir, miso, achaar)?", subtext: "Store-bought fermented foods aren't the same as traditional preparations. The bacteria that maintained your biological ecosystem depend on specific methods passed through generations.", options: [
-        { label: "Rarely or never", score: 14 }, { label: "Occasionally (a few times a month)", score: 9 },
-        { label: "Regularly (several times a week)", score: 5 }, { label: "Daily — from traditional preparation", score: 2 }
-      ]},
-      { text: "Which of these have you noticed appearing earlier than expected?", subtext: "These are markers of Biological Age Divergence — the gap between your chronological age and how old your body acts.", options: [
-        { label: "Joint pain, brain fog, or chronic inflammation", score: 13 },
-        { label: "Slower recovery, persistent fatigue", score: 11 },
-        { label: "Weight that's harder to manage", score: 9 }, { label: "None of the above", score: 2 }
+      { text: "Which symptoms do you experience regularly?", subtext: "These are clinical markers of the biological tax — signs that your body's foundational systems are operating below baseline due to environmental mismatch.", options: [
+        { label: "Brain fog, fatigue, and digestive issues", score: 17 },
+        { label: "Low energy and poor recovery", score: 13 },
+        { label: "Occasional bloating or sluggishness", score: 8 }, { label: "None — I feel optimized", score: 2 }
       ]}
     ];
 
@@ -699,28 +690,28 @@
 
       var riskConfig = {
         high: {
-          label: 'High Risk', color: '#C4783A', bgColor: 'rgba(196,120,58,0.12)',
-          headline: 'Your biology is working against you — but it doesn\'t have to.',
-          body: 'Based on your answers, you show multiple markers of microbiome depletion and accelerated biological aging. The bloating, the fatigue, the inflammation — they\'re connected. The research shows this pattern compounds across generations, but it\'s also the most responsive to targeted restoration. Origin was built specifically for this profile.',
-          purchaseHeadline: 'Your score confirms what you\'ve been feeling.',
-          purchaseBody: 'The bloating, the fatigue, the inflammation — they\'re not random. They\'re the predictable result of microbiome depletion. Origin targets all three. Most users report noticeable changes in digestion within the first 2–3 weeks.',
-          purchaseSubtext: 'Origin works because it\'s taken daily. Your gut bacteria didn\'t maintain themselves in a single dose — and neither does restoration. This is a daily practice, like the food traditions it replaces.'
+          label: 'High Biological Tax', color: '#C4783A', bgColor: 'rgba(196,120,58,0.12)',
+          headline: 'Your environment is taxing your biology hard — but it\'s reversible.',
+          body: 'Your assessment reveals significant environmental load across multiple systems. The chronic stress, dietary disruption, and bacterial depletion you\'re experiencing are compounding — creating a biological tax that shows up as fatigue, brain fog, and digestive dysfunction. Origin was engineered as the foundational protocol for exactly this profile.',
+          purchaseHeadline: 'Your score confirms what your body has been signaling.',
+          purchaseBody: 'The fatigue, the brain fog, the gut dysfunction — they\'re not separate problems. They\'re the predictable output of a system under environmental overload. Origin\'s four targeted strains begin restoring foundational bacterial populations from day one. Most users report measurable changes in 2–3 weeks.',
+          purchaseSubtext: 'Systemic adaptation requires daily protocol adherence. Your bacterial baseline didn\'t erode in a day — and restoration is a continuous process, not a one-time fix.'
         },
         moderate: {
-          label: 'Moderate Risk', color: '#D4925A', bgColor: 'rgba(212,146,90,0.10)',
-          headline: 'The depletion pattern is present — and it\'s the best time to act.',
-          body: 'Your results suggest early-to-moderate signs of microbiome depletion. You may not feel the full impact yet, but the research shows these patterns accelerate with time.',
-          purchaseHeadline: 'You\'re catching this early — the best time to act.',
-          purchaseBody: 'Origin\'s four strains begin restoring barrier integrity and butyrate production from day one. Most users at your risk level notice improved digestion and energy within 3–4 weeks.',
-          purchaseSubtext: 'Microbiome restoration is a daily practice. The strains need time to colonize and the prebiotic needs to feed them continuously. One capsule, every day.'
+          label: 'Moderate Biological Tax', color: '#D4925A', bgColor: 'rgba(212,146,90,0.10)',
+          headline: 'The environmental load is building — this is the optimal intervention window.',
+          body: 'Your results indicate early-to-moderate signs of environmental mismatch. The biological tax hasn\'t fully compounded yet, which means intervention now yields the highest ROI on your health outcomes.',
+          purchaseHeadline: 'You\'re in the optimal window for systemic adaptation.',
+          purchaseBody: 'Origin\'s four strains restore barrier integrity and butyrate production from day one. At your tax level, most users notice improved digestion and sustained energy within 3–4 weeks.',
+          purchaseSubtext: 'Environmental adaptation is a daily protocol. The strains colonize progressively and the prebiotic sustains them continuously.'
         },
         low: {
-          label: 'Low Risk', color: '#4A5550', bgColor: 'rgba(74,85,80,0.08)',
-          headline: 'Your baseline looks strong.',
-          body: 'Your answers suggest your microbiome diversity is relatively intact. Understanding your baseline now helps you protect it.',
-          purchaseHeadline: 'Your baseline is strong. Origin keeps it that way.',
-          purchaseBody: 'The research shows depletion is generational — what\'s intact now can erode over time. Origin maintains the bacterial diversity you still have.',
-          purchaseSubtext: 'Prevention is easier than restoration. One capsule daily maintains what your ancestry gave you.'
+          label: 'Low Biological Tax', color: '#4A5550', bgColor: 'rgba(74,85,80,0.08)',
+          headline: 'Your biological baseline is strong.',
+          body: 'Your assessment suggests your foundational systems are operating near baseline. Understanding your environmental impact score now helps you protect what\'s intact.',
+          purchaseHeadline: 'Your baseline is strong. Origin maintains it.',
+          purchaseBody: 'The research shows environmental disruption is cumulative — what\'s intact now can erode under sustained modern stress. Origin maintains the bacterial diversity you still have.',
+          purchaseSubtext: 'Prevention is more efficient than restoration. One daily protocol maintains your foundational baseline.'
         }
       };
       var risk = riskConfig[riskLevel];
