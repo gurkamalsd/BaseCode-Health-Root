@@ -58,7 +58,7 @@
         "logo_width_mobile": 80,
         "menu": "main-menu",
         "logo_position": "left",
-        "mobile_menu_style": "slide",
+        "mobile_menu_style": "fullscreen",
         "show_search": true,
         "search_placeholder": "Search products…",
         "show_account": true,
