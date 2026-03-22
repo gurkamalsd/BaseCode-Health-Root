@@ -21,8 +21,8 @@
           "settings": {
             "stat": "01",
             "title": "HELIUS Study",
-            "text": "2,084 people across 6 ethnic groups. Biology is the strongest predictor of gut microbiome composition.",
-            "source": "Deschasaux et al., 2018 — The BMJ"
+            "text": "2,084 people across 6 population groups. Biology is the strongest predictor of gut microbiome composition.",
+            "source": "Deschasaux et al., 2018 — Nature Medicine"
           }
         },
         "s2": {
@@ -30,8 +30,8 @@
           "settings": {
             "stat": "02",
             "title": "Vangay Study",
-            "text": "Environmental shift causes environmental microbiome disruption within a single generation.",
-            "source": "Vangay et al., 2018 — Cell Host & Microbe"
+            "text": "Environmental shifts cause foundational microbiome disruption — replacing diverse bacteria with Western strains within a single generation.",
+            "source": "Vangay et al., 2018 — Cell"
           }
         },
         "s3": {
@@ -40,25 +40,31 @@
             "stat": "03",
             "title": "Govender Study",
             "text": "Without acid-protection delivery, up to 96% of probiotic bacteria die before reaching the gut.",
-            "source": "Govender et al., 2014 — Journal of Functional Foods"
+            "source": "Govender et al., 2014 — AAPS PharmSciTech"
           }
         }
       },
-      "block_order": [
-        "s1",
-        "s2",
-        "s3"
-      ],
+      "block_order": ["s1", "s2", "s3"],
       "settings": {
-        "subtitle": "Key Studies",
+        "subtitle": "The Research",
         "heading": "Three studies. One conclusion.",
-        "button_text": "Download the Free Report",
+        "button_text": "Download the Biological Tax Report",
         "button_link": "/pages/free-report"
+      }
+    },
+    "cta": {
+      "type": "rich-text",
+      "settings": {
+        "heading": "The science is published. The protocol is ready.",
+        "text": "<p>Origin is the foundational Adaptobiotic — engineered to address the biological tax at the gut level. 40 Billion CFU, MAKTREK acid-protection delivery, FOS prebiotic.</p>",
+        "button_text": "Start Your Protocol — $34/mo",
+        "button_link": "/products/origin",
+        "bg_color": "#1C2E23",
+        "text_color": "#F5F2EC",
+        "padding_top": 60,
+        "padding_bottom": 60
       }
     }
   },
-  "order": [
-    "rich-text",
-    "research"
-  ]
+  "order": ["rich-text", "research", "cta"]
 }
