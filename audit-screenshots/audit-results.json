@@ -1,0 +1,581 @@
+[
+  {
+    "page": "homepage",
+    "viewport": "desktop",
+    "status": "ISSUES",
+    "issues": [
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "collection",
+    "viewport": "desktop",
+    "status": "ISSUES",
+    "issues": [
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "product",
+    "viewport": "desktop",
+    "status": "ISSUES",
+    "issues": [
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep",
+      "Add to Cart button not visible"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "quiz",
+    "viewport": "desktop",
+    "status": "ISSUES",
+    "issues": [
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "free-report",
+    "viewport": "desktop",
+    "status": "ISSUES",
+    "issues": [
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep",
+      "Lead capture form not visible"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "landing-estrogen",
+    "viewport": "desktop",
+    "status": "ISSUES",
+    "issues": [
+      "HTTP 404",
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 404
+  },
+  {
+    "page": "landing-bloating",
+    "viewport": "desktop",
+    "status": "ISSUES",
+    "issues": [
+      "HTTP 404",
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 404
+  },
+  {
+    "page": "landing-brain-fog",
+    "viewport": "desktop",
+    "status": "ISSUES",
+    "issues": [
+      "HTTP 404",
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 404
+  },
+  {
+    "page": "cart",
+    "viewport": "desktop",
+    "status": "ISSUES",
+    "issues": [
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "search",
+    "viewport": "desktop",
+    "status": "ISSUES",
+    "issues": [
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "blog",
+    "viewport": "desktop",
+    "status": "ISSUES",
+    "issues": [
+      "HTTP 404",
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 404
+  },
+  {
+    "page": "about",
+    "viewport": "desktop",
+    "status": "ISSUES",
+    "issues": [
+      "HTTP 404",
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 404
+  },
+  {
+    "page": "contact",
+    "viewport": "desktop",
+    "status": "ISSUES",
+    "issues": [
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "faq",
+    "viewport": "desktop",
+    "status": "ISSUES",
+    "issues": [
+      "HTTP 404",
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 404
+  },
+  {
+    "page": "science",
+    "viewport": "desktop",
+    "status": "ISSUES",
+    "issues": [
+      "HTTP 404",
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 404
+  },
+  {
+    "page": "privacy",
+    "viewport": "desktop",
+    "status": "ISSUES",
+    "issues": [
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "terms",
+    "viewport": "desktop",
+    "status": "ISSUES",
+    "issues": [
+      "HTTP 404",
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 404
+  },
+  {
+    "page": "404",
+    "viewport": "desktop",
+    "status": "ISSUES",
+    "issues": [
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 404
+  },
+  {
+    "page": "homepage",
+    "viewport": "tablet",
+    "status": "ISSUES",
+    "issues": [
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "collection",
+    "viewport": "tablet",
+    "status": "ISSUES",
+    "issues": [
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "product",
+    "viewport": "tablet",
+    "status": "ISSUES",
+    "issues": [
+      "Horizontal overflow detected",
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep",
+      "Add to Cart button not visible"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "quiz",
+    "viewport": "tablet",
+    "status": "ISSUES",
+    "issues": [
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "free-report",
+    "viewport": "tablet",
+    "status": "ISSUES",
+    "issues": [
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep",
+      "Lead capture form not visible"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "landing-estrogen",
+    "viewport": "tablet",
+    "status": "ISSUES",
+    "issues": [
+      "HTTP 404",
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 404
+  },
+  {
+    "page": "landing-bloating",
+    "viewport": "tablet",
+    "status": "ISSUES",
+    "issues": [
+      "HTTP 404",
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 404
+  },
+  {
+    "page": "landing-brain-fog",
+    "viewport": "tablet",
+    "status": "ISSUES",
+    "issues": [
+      "HTTP 404",
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 404
+  },
+  {
+    "page": "cart",
+    "viewport": "tablet",
+    "status": "ISSUES",
+    "issues": [
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "search",
+    "viewport": "tablet",
+    "status": "ISSUES",
+    "issues": [
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "blog",
+    "viewport": "tablet",
+    "status": "ISSUES",
+    "issues": [
+      "HTTP 404",
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 404
+  },
+  {
+    "page": "about",
+    "viewport": "tablet",
+    "status": "ISSUES",
+    "issues": [
+      "HTTP 404",
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 404
+  },
+  {
+    "page": "contact",
+    "viewport": "tablet",
+    "status": "ISSUES",
+    "issues": [
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "faq",
+    "viewport": "tablet",
+    "status": "ISSUES",
+    "issues": [
+      "HTTP 404",
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 404
+  },
+  {
+    "page": "science",
+    "viewport": "tablet",
+    "status": "ISSUES",
+    "issues": [
+      "HTTP 404",
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 404
+  },
+  {
+    "page": "privacy",
+    "viewport": "tablet",
+    "status": "ISSUES",
+    "issues": [
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "terms",
+    "viewport": "tablet",
+    "status": "ISSUES",
+    "issues": [
+      "HTTP 404",
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 404
+  },
+  {
+    "page": "404",
+    "viewport": "tablet",
+    "status": "ISSUES",
+    "issues": [
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 404
+  },
+  {
+    "page": "homepage",
+    "viewport": "mobile",
+    "status": "ISSUES",
+    "issues": [
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "collection",
+    "viewport": "mobile",
+    "status": "ISSUES",
+    "issues": [
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "product",
+    "viewport": "mobile",
+    "status": "ISSUES",
+    "issues": [
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "quiz",
+    "viewport": "mobile",
+    "status": "ISSUES",
+    "issues": [
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "free-report",
+    "viewport": "mobile",
+    "status": "ISSUES",
+    "issues": [
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep",
+      "Lead capture form not visible"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "landing-estrogen",
+    "viewport": "mobile",
+    "status": "ISSUES",
+    "issues": [
+      "HTTP 404",
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 404
+  },
+  {
+    "page": "landing-bloating",
+    "viewport": "mobile",
+    "status": "ISSUES",
+    "issues": [
+      "HTTP 404",
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 404
+  },
+  {
+    "page": "landing-brain-fog",
+    "viewport": "mobile",
+    "status": "ISSUES",
+    "issues": [
+      "HTTP 404",
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 404
+  },
+  {
+    "page": "cart",
+    "viewport": "mobile",
+    "status": "ISSUES",
+    "issues": [
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "search",
+    "viewport": "mobile",
+    "status": "ISSUES",
+    "issues": [
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "blog",
+    "viewport": "mobile",
+    "status": "ISSUES",
+    "issues": [
+      "HTTP 404",
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 404
+  },
+  {
+    "page": "about",
+    "viewport": "mobile",
+    "status": "ISSUES",
+    "issues": [
+      "HTTP 404",
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 404
+  },
+  {
+    "page": "contact",
+    "viewport": "mobile",
+    "status": "ISSUES",
+    "issues": [
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "faq",
+    "viewport": "mobile",
+    "status": "ISSUES",
+    "issues": [
+      "HTTP 404",
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 404
+  },
+  {
+    "page": "science",
+    "viewport": "mobile",
+    "status": "ISSUES",
+    "issues": [
+      "HTTP 404",
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 404
+  },
+  {
+    "page": "privacy",
+    "viewport": "mobile",
+    "status": "ISSUES",
+    "issues": [
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "terms",
+    "viewport": "mobile",
+    "status": "ISSUES",
+    "issues": [
+      "HTTP 404",
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 404
+  },
+  {
+    "page": "404",
+    "viewport": "mobile",
+    "status": "ISSUES",
+    "issues": [
+      "Overflow elements: DIV.announcement-bar__track, SPAN.announcement-bar__item, SPAN.announcement-bar__sep"
+    ],
+    "httpStatus": 404
+  },
+  {
+    "page": "interaction",
+    "viewport": "mobile",
+    "status": "PASS",
+    "issues": [
+      "Mobile menu opens correctly"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "interaction",
+    "viewport": "mobile",
+    "status": "PASS",
+    "issues": [
+      "Mobile menu closes correctly"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "interaction",
+    "viewport": "desktop",
+    "status": "PASS",
+    "issues": [
+      "Hide-on-scroll works: hides down, reveals up"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "interaction",
+    "viewport": "desktop",
+    "status": "PASS",
+    "issues": [
+      "Header adds --scrolled class on scroll"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "quiz-interaction",
+    "viewport": "desktop",
+    "status": "PASS",
+    "issues": [
+      "Quiz options render (7 found with .quiz-option class)"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "quiz-interaction",
+    "viewport": "desktop",
+    "status": "PASS",
+    "issues": [
+      "Quiz option selection works (.quiz-option--selected applied)"
+    ],
+    "httpStatus": 200
+  },
+  {
+    "page": "interaction",
+    "viewport": "desktop",
+    "status": "PASS",
+    "issues": [
+      "Cart drawer opens"
+    ],
+    "httpStatus": 200
+  }
+]
