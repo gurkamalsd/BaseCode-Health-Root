@@ -77,7 +77,7 @@
         "enable_marquee": true,
         "marquee_speed": 20,
         "marquee_separator": "●",
-        "enable_icon_badges": false,
+        "enable_icon_badges": true,
         "layout": "inline",
         "desktop_columns": "4",
         "mobile_layout": "slider",
