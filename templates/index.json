@@ -146,8 +146,8 @@
         "accent_color": "#1c2e23",
         "card_bg_color": "#f5f2ec",
         "icon_bg_color": "#1c2e23",
-        "padding_top": 80,
-        "padding_bottom": 80,
+        "padding_top": 48,
+        "padding_bottom": 48,
         "enable_animation": true
       }
     },
@@ -231,8 +231,8 @@
         "bg_color": "#1c2e23",
         "text_color": "#f5f2ec",
         "accent_color": "#c4783a",
-        "padding_top": 80,
-        "padding_bottom": 80,
+        "padding_top": 48,
+        "padding_bottom": 48,
         "enable_animation": true
       }
     },
@@ -273,8 +273,8 @@
       "settings": {
         "layout": "image_left",
         "full_width": false,
-        "padding_top": 80,
-        "padding_bottom": 80,
+        "padding_top": 48,
+        "padding_bottom": 48,
         "bg_color": "#f5f2ec",
         "text_color": "#1c2e23",
         "subheading_color": "#c4783a",
@@ -304,8 +304,8 @@
         "full_width": false,
         "content_width": "medium",
         "text_align": "center",
-        "padding_top": 80,
-        "padding_bottom": 80,
+        "padding_top": 48,
+        "padding_bottom": 48,
         "bg_color": "#ffffff",
         "bg_opacity": 100,
         "text_color": "#1c2e23",
@@ -397,8 +397,8 @@
         "auto_play_speed": 5,
         "bg_color": "#f5f2ec",
         "text_color": "",
-        "padding_top": 80,
-        "padding_bottom": 80,
+        "padding_top": 48,
+        "padding_bottom": 48,
         "enable_animation": true
       }
     },
@@ -460,8 +460,8 @@
         "bg_color": "#ffffff",
         "text_color": "",
         "accent_color": "",
-        "padding_top": 80,
-        "padding_bottom": 80,
+        "padding_top": 48,
+        "padding_bottom": 48,
         "enable_animation": true
       }
     },
@@ -481,8 +481,8 @@
         "content_width": "narrow",
         "text_align": "center",
         "full_width": false,
-        "padding_top": 80,
-        "padding_bottom": 80,
+        "padding_top": 48,
+        "padding_bottom": 48,
         "bg_color": "#1c2e23",
         "bg_opacity": 100,
         "text_color": "#f5f2ec",
