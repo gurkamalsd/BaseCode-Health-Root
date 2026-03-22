@@ -302,6 +302,7 @@
         "text_color": "#1c2e23",
         "subheading_color": "#c4783a",
         "accent_color": "#c4783a",
+        "image": "shopify://shop_images/pomelli-image-3_copy.png",
         "fallback_asset": "origin-bottle.webp",
         "image_width_pct": 50,
         "image_ratio": "adapt",
@@ -377,6 +378,7 @@
         "r1": {
           "type": "testimonial",
           "settings": {
+            "avatar": "shopify://shop_images/pomelli-image-2_235f846c-3d80-45e1-ae49-865e57967311.png",
             "quote": "Two weeks in and the brain fog lifted. Three weeks and the bloating I thought was just part of my life disappeared. This is the first protocol that actually addressed the root cause.",
             "author": "Priya S.",
             "role": "Toronto, ON",
