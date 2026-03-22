@@ -17,6 +17,7 @@
   assign enable_marquee = section.settings.enable_marquee
   assign marquee_speed = section.settings.marquee_speed
   assign marquee_separator = section.settings.marquee_separator
+  assign enable_icon_badges = section.settings.enable_icon_badges
 
   case text_size
     when 'small'
@@ -140,7 +141,7 @@
 
 <section
   id="{{ section_id }}"
-  class="features-banner{% if enable_animation and enable_marquee == false %} features-banner--animate{% endif %}{% if enable_marquee %} features-banner--marquee{% endif %}"
+  class="features-banner{% if enable_animation and enable_marquee == false %} features-banner--animate{% endif %}{% if enable_marquee %} features-banner--marquee{% endif %}{% if enable_icon_badges %} features-banner--badges{% endif %}"
   style="
     background: {{ section.settings.bg_color }};
     color: {{ section.settings.text_color }};
@@ -381,6 +382,28 @@
     align-items: center;
   }
 
+  /* ── Icon badges (colored circles) ─────────────────── */
+  .features-banner--badges .features-banner__icon {
+    border-radius: 50%;
+    padding: 8px;
+    width: calc(var(--fb-icon-size) + 16px);
+    height: calc(var(--fb-icon-size) + 16px);
+    color: #F5F2EC;
+  }
+
+  .features-banner--badges .features-banner__item:nth-child(4n+1) .features-banner__icon {
+    background-color: #C4783A;
+  }
+  .features-banner--badges .features-banner__item:nth-child(4n+2) .features-banner__icon {
+    background-color: #1C2E23;
+  }
+  .features-banner--badges .features-banner__item:nth-child(4n+3) .features-banner__icon {
+    background-color: #3D5A45;
+  }
+  .features-banner--badges .features-banner__item:nth-child(4n+4) .features-banner__icon {
+    background-color: #A8613A;
+  }
+
   @keyframes fb-marquee {
     0% {
       transform: translateX(0);
@@ -455,6 +478,13 @@
       "label": "Item separator",
       "default": "●",
       "info": "Character between items. Leave blank for no separator."
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_icon_badges",
+      "label": "Colorful icon badges",
+      "default": false,
+      "info": "Puts icons in colored circles cycling through brand colors (ochre, forest green, sage, clay)."
     },
     {
       "type": "header",

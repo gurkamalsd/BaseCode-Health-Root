@@ -7,16 +7,10 @@
   assign enable_anim = section.settings.enable_animation
   assign img_width_pct = section.settings.desktop_image_width | default: 40
   assign img_max_w = section.settings.desktop_image_max_width | default: 400
-  assign left_side_count = 0
-  assign right_side_count = 0
-
-  for block in section.blocks
-    if forloop.index0 < 3
-      assign left_side_count = left_side_count | plus: 1
-    else
-      assign right_side_count = right_side_count | plus: 1
-    endif
-  endfor
+  assign total_blocks = section.blocks.size
+  assign half = total_blocks | divided_by: 2
+  assign left_side_count = half
+  assign right_side_count = total_blocks | minus: half
 
   assign product = section.settings.product
   assign product_img = section.settings.desktop_image
@@ -90,7 +84,7 @@
       {%- comment -%}---- Left column — first 3 blocks ----{%- endcomment -%}
       <div class="benefits-product__col benefits-product__col--left">
         {%- for block in section.blocks -%}
-          {%- if forloop.index0 < 3 -%}
+          {%- if forloop.index0 < half -%}
 
             {%- comment -%} Heading scale {%- endcomment -%}
             {%- if block.settings.heading_scale == 'small' -%}
@@ -252,7 +246,7 @@
       {%- comment -%}---- Right column — blocks 4-6 ----{%- endcomment -%}
       <div class="benefits-product__col benefits-product__col--right">
         {%- for block in section.blocks -%}
-          {%- if forloop.index0 >= 3 -%}
+          {%- if forloop.index0 >= half -%}
 
             {%- if block.settings.heading_scale == 'small' -%}
               {%- assign b_h_fs = 'var(--text-sm, 0.875rem)' -%}
@@ -523,7 +517,7 @@
 {% schema %}
 {
   "name": "Benefits — Product",
-  "max_blocks": 6,
+  "max_blocks": 8,
   "settings": [
     {
       "type": "header",

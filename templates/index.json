@@ -77,6 +77,7 @@
         "enable_marquee": true,
         "marquee_speed": 20,
         "marquee_separator": "●",
+        "enable_icon_badges": true,
         "layout": "inline",
         "desktop_columns": "4",
         "mobile_layout": "slider",
@@ -232,6 +233,24 @@
             "text": "Full refund if it doesn't work for you",
             "heading_scale": "medium"
           }
+        },
+        "b7": {
+          "type": "benefit",
+          "settings": {
+            "icon": "flask",
+            "heading": "cGMP Certified",
+            "text": "Manufactured under pharmaceutical-grade quality controls",
+            "heading_scale": "medium"
+          }
+        },
+        "b8": {
+          "type": "benefit",
+          "settings": {
+            "icon": "truck",
+            "heading": "Free Shipping",
+            "text": "Every subscription ships free, cancel anytime",
+            "heading_scale": "medium"
+          }
         }
       },
       "block_order": [
@@ -240,7 +259,9 @@
         "b3",
         "b4",
         "b5",
-        "b6"
+        "b6",
+        "b7",
+        "b8"
       ],
       "settings": {
         "product": "origin",
