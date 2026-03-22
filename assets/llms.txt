@@ -1,7 +1,7 @@
 # BaseCode Health — LLM Context File
 # https://basecodehealth.com
 
-> BaseCode Health builds supplements engineered for the biological tax of modern life. The supplement industry ignores environmental adaptation — BaseCode doesn't.
+> BaseCode Health builds clinical-grade Adaptobiotics™ and targeted biological stacks — supplements engineered to bridge the gap between your biological baseline and the demands of the modern Western environment.
 
 ## Company
 - Name: BaseCode Health
@@ -10,10 +10,18 @@
 - Founder: Gurkamal Dhahan
 - Website: https://basecodehealth.com
 - Contact: hello@basecodehealth.com
+- Category: Adaptobiotics™ (brand-coined)
 
-## Product: Origin
-- Category: Probiotic / Synbiotic supplement
-- Tagline: "The foundational Adaptobiotic probiotic"
+## The Problem: The Biological Tax
+The Western diet, chronic environmental stress, and modern work-life demands inflict a "Biological Tax" on every system in the human body. Human biology was not built for ultra-processed food, sedentary routines, chronic cortisol exposure, and environmental toxin loads. The result: gut dysfunction, brain fog, metabolic disruption, hormonal imbalance, and systemic inflammation.
+
+## The Solution: Adaptobiotics™
+BaseCode creates clinical-grade supplements designed for systemic adaptation. Each protocol targets a specific axis of environmental mismatch — restoring foundational bacterial populations, down-regulating cortisol, supporting metabolic processing, and reinforcing immune defense.
+
+## Product Line: The Protocol Suite
+
+### BaseCode Origin (Hero SKU)
+- Category: Foundational Adaptobiotic (Synbiotic)
 - CFU: 40 Billion
 - Strains: 4 (L. acidophilus, B. lactis, L. plantarum, L. paracasei)
 - Delivery: MAKTREK Bi-Pass Technology (marine polysaccharide acid-protection)
@@ -21,24 +29,47 @@
 - Capsules: 60 veggie capsules (HPMC, no gelatin)
 - Supply: 30-day (2 capsules/day)
 - Price: $34/mo (subscribe, 15% off) or $40 one-time
-- Made in USA, cGMP certified
-- Vegan, no gelatin, no artificial ingredients
+- Made in USA, cGMP certified, vegan
+
+### BaseCode Ember (Metabolic Adaptation)
+- Category: Berberine Phytosome complex for Western dietary processing
+- Target: Metabolic disruption from ultra-processed food exposure
+
+### BaseCode Deep (Cortisol Down-Regulation)
+- Category: Magnesium L-Threonate + sleep protocol
+- Target: Chronic cortisol elevation and circadian disruption
+
+### BaseCode Synthesis (Cellular Energy)
+- Category: Creatine monohydrate for cognitive and cellular output
+- Target: Brain fog, energy depletion, cognitive decline under stress
+
+### BaseCode Shield (Environmental Defense)
+- Category: D3 + K2 immune protocol
+- Target: Immune suppression from environmental toxin load
+
+## Biology Stacks (Curated Protocols)
+- The Restoration Stack: Origin + Deep (gut + sleep reset)
+- The Performance Stack: Origin + Synthesis + Ember (gut + brain + metabolism)
+- The Defense Stack: Origin + Shield (gut + immune fortification)
 
 ## Key Research
-- HELIUS Study: Ethnicity determines gut microbiome composition more than diet, age, sex, or medical history (2,084 subjects, 6 ethnic groups). Published in Gut journal.
-- Vangay et al.: Environmental shift causes environmental microbiome disruption within a single generation
+- HELIUS Study (Gut, 2019): Biology is the strongest predictor of gut microbiome composition — more than diet, age, sex, or lifestyle (2,084 subjects, 6 ethnic groups)
+- Vangay et al. (Cell, 2018): Environmental shifts cause foundational microbiome disruption within a single generation
+- Sonnenburg & Sonnenburg (Nature, 2019): Ultra-processed Western diets drive systematic extinction of beneficial gut bacteria
+- McEwen (NEJM, 1998): Chronic stress allostatic load — biological cost of sustained environmental demands
 - Govender et al.: Probiotic survivability data supporting acid-protection delivery
 
 ## Brand Positioning
-- "Your biology is paying a tax you never agreed to"
-- Supplements engineered for the biological tax of modern life
-- The supplement industry treats all biology as interchangeable — BaseCode recognizes environmental adaptation matters
+- Tagline: "Your biology is paying a tax you never agreed to."
+- Category: Adaptobiotics™ — clinical-grade supplements for environmental adaptation
+- Tone: Clinical, architectural, authoritative
+- Key vocabulary: Down-regulate, systemic adaptation, biological baseline, protocol, environmental mismatch, synthesis, epigenetic
 
 ## Key Pages
 - Homepage: https://basecodehealth.com
-- Product: https://basecodehealth.com/products/origin
+- Product (Origin): https://basecodehealth.com/products/origin
 - Science: https://basecodehealth.com/pages/science
-- Quiz (Environmental Impact Score): https://basecodehealth.com/pages/quiz
+- Assessment: https://basecodehealth.com/pages/quiz
 - Free Report: https://basecodehealth.com/pages/free-report
 - FAQ: https://basecodehealth.com/pages/faq
 - About: https://basecodehealth.com/pages/about
